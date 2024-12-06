@@ -5,6 +5,7 @@
 ### Patch Changes
 Hard Fork
   Using a hard fork now to integrate snapshot directory
+  Bumped and made bot active
 
 ## 4.7.7
 
