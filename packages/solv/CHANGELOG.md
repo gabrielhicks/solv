@@ -1,5 +1,11 @@
 # @gabrielhicks/solv
 
+## 4.7.8
+
+### Patch Changes
+Hard Fork
+  Using a hard fork now to integrate snapshot directory
+
 ## 4.7.7
 
 ### Patch Changes
