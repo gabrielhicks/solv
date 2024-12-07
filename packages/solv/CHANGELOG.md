@@ -1,5 +1,10 @@
 # @gabrielhicks/solv
 
+## 4.8.0
+
+### Patch Changes
+FIX upstream to modified repositories
+
 ## 4.7.9
 
 ### Patch Changes
