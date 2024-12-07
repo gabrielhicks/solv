@@ -29,7 +29,7 @@ export const installCommands = (config: DefaultConfigType) => {
       const isJito = config.VALIDATOR_TYPE === ValidatorType.JITO
       if (isJito) {
         const jitoVersion = options.version || VERSION_JITO_MAINNET
-        const jitoTag = `v${jitoVersion}-jito`
+        const jitoTag = `v${jitoVersion}-mod`
         jitoUpdate(jitoTag)
         return
       }

@@ -6,7 +6,7 @@ dotenv.config()
 const REPO_NAME = 'gabrielhicks/solv'
 
 const run = async () => {
-  const langs = ['en', 'ja']
+  const langs = ['en']
   const token = process.env.DISCORD_TOKEN || ''
   const channelIdEN = '1314659425319125013'
   const channelIdJA = '1314659425319125013'

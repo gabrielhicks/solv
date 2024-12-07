@@ -137,7 +137,7 @@ export const updateCommands = (config: DefaultConfigType) => {
             : VERSION_JITO_MAINNET
           await updateJitoSolvConfig({
             version: jitoVersion,
-            tag: `v${jitoVersion}-jito`,
+            tag: `v${jitoVersion}-mod`,
           })
         }
         console.log(
@@ -161,7 +161,7 @@ export const updateCommands = (config: DefaultConfigType) => {
 
         if (isJito) {
           jitoUpdate()
-          await updateJitoSolvConfig({ version, tag: `v${version}-jito` })
+          await updateJitoSolvConfig({ version, tag: `v${version}-mod` })
           await monitorUpdate(deliquentStake, true)
           return
         }

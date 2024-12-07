@@ -9,7 +9,7 @@ export const setupJitoMev = () => {
       `sudo apt-get install -y libssl-dev libudev-dev pkg-config zlib1g-dev llvm clang cmake make libprotobuf-dev protobuf-compiler`,
       { shell: true, stdio: 'inherit' },
     )
-    spawnSync(`sh -c "$(curl -sSfL https://release.jito.wtf/${TAG}/install)"`, {
+    spawnSync(`sh -c "$(curl -sSfL https://raw.githubusercontent.com/gabrielhicks/jito-solana/${TAG}/installer)"`, {
       shell: true,
       stdio: 'inherit',
     })
