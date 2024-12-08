@@ -1,5 +1,11 @@
 # @gabrielhicks/solv
 
+## 4.8.1
+
+### Patch Changes
+Update get snapshots
+  Added avirio as an optional flag, and when using avirio, snapshot will be renamed correctly
+
 ## 4.8.0
 
 ### Patch Changes

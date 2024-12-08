@@ -60,7 +60,7 @@ export const getCommands = (config: DefaultConfigType) => {
     .option(
       '-m, --minDownloadSpeed <minDownloadSpeed>',
       'Minimum download speed',
-      '45',
+      '100',
     )
     .option('-l, --ledgerPath <ledgerPath>', 'Ledger Path', config.LEDGER_PATH)
     .option(
@@ -69,6 +69,8 @@ export const getCommands = (config: DefaultConfigType) => {
       config.SNAPSHOTS_PATH,
     )
     .option('-v, --version <version>', 'Specific Version Node', version)
+    .option('-r, --rpcUrl <rpcUrl>', 'RPC URL', isTest ? 'https://api.testnet.solana.com' : 'https://api.mainnet-beta.solana.com')
+    .option('-a, --avorio <version>', 'Use Avorio Network (Testnet only)', false)
     .description(`Download the latest snapshot`)
     .action(
       (options: {
@@ -76,12 +78,16 @@ export const getCommands = (config: DefaultConfigType) => {
         ledgerPath: string
         snapshotPath: string
         version: string
+        rpcUrl: string
+        avorio: boolean
       }) => {
         const minDownloadSpeed = options.minDownloadSpeed
         const ledgerPath = options.ledgerPath
         const snapshotPath = options.snapshotPath
         const version = options.version
-        getSnapshot(isTest, minDownloadSpeed, ledgerPath, snapshotPath, version)
+        const rpcUrl = options.rpcUrl
+        const useAvorio = options.avorio
+        getSnapshot(isTest, minDownloadSpeed, ledgerPath, snapshotPath, version, rpcUrl, useAvorio)
       },
     )
 
