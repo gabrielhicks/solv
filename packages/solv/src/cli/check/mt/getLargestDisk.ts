@@ -44,17 +44,17 @@ function getPreferredDisks(): GetPreferredDisksResult {
     const size = parseInt(sizeStr, 10)
     if (isNaN(size)) continue // Skip lines where size is not a number
     const isMounted = mountpoint !== undefined && mountpoint !== ''
-    if (mountpoint === '/') rootDiskName = name.replace(/[0-9]*$/, '') // Remove any trailing digits
-    console.log('rootDiskName:', rootDiskName)
+    if (mountpoint === '/') rootDiskName = name.replace(/p?\d*$/, '') // Remove any trailing digits
+
     const hasPartition = allDiskNames.some(
       (diskName) => diskName !== name && diskName.startsWith(name),
     )
 
+
     // Soft check if a drive is an NVMe based on its name
     const isNVMe = name.startsWith('nvme')
-    const isNotDefaultNVMe = name.startsWith('nvme0n1')
     const diskType = isNVMe ? 'NVMe' : 'SATA'
-    if (size >= 400 * 1024 * 1024 * 1024 && !isNotDefaultNVMe) {
+    if (size >= 400 * 1024 * 1024 * 1024) {
       disks.push({
         name,
         size,
@@ -65,11 +65,14 @@ function getPreferredDisks(): GetPreferredDisksResult {
       })
     }
   }
+  console.log("Found root disk name: ", rootDiskName)
 
   // Collect partitions of the root disk
   const rootDiskPartitions = allDiskNames.filter((diskName) =>
     diskName.startsWith(rootDiskName),
   )
+
+  rootDiskPartitions.forEach((partition) => console.log("Found root disk partition: ", partition))
 
   // Remove root disk and its partitions from the list of disks
   const checkedDisks = disks.filter(
@@ -119,6 +122,8 @@ function getPreferredDisks(): GetPreferredDisksResult {
       }
     }
   }
+
+  prioritizedDisks.forEach((disk, index) => console.log(`Prioritized Disk ${index + 1}: ${disk.name} ${disk.size}`))
 
   return { disks: prioritizedDisks, has850GB, has400GB, hasUsed1250GB, hasThirdDisk400GB }
 }
