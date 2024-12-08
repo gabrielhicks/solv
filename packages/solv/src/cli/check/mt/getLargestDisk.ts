@@ -45,14 +45,16 @@ function getPreferredDisks(): GetPreferredDisksResult {
     if (isNaN(size)) continue // Skip lines where size is not a number
     const isMounted = mountpoint !== undefined && mountpoint !== ''
     if (mountpoint === '/') rootDiskName = name.replace(/[0-9]*$/, '') // Remove any trailing digits
+    console.log('rootDiskName:', rootDiskName)
     const hasPartition = allDiskNames.some(
       (diskName) => diskName !== name && diskName.startsWith(name),
     )
 
     // Soft check if a drive is an NVMe based on its name
     const isNVMe = name.startsWith('nvme')
+    const isNotDefaultNVMe = name.startsWith('nvme0n1')
     const diskType = isNVMe ? 'NVMe' : 'SATA'
-    if (size >= 400 * 1024 * 1024 * 1024) {
+    if (size >= 400 * 1024 * 1024 * 1024 && !isNotDefaultNVMe) {
       disks.push({
         name,
         size,
