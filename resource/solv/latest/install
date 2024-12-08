@@ -93,6 +93,7 @@ install_pnpm_and_packages() {
         export PATH
         echo 'export PNPM_HOME="\$HOME/.local/share/pnpm"' >> ~/.profile
         echo 'export PATH="\$PNPM_HOME:\$PATH"' >> ~/.profile
+        echo 'export PATH="/home/solv/.local/share/solana/install/active_release/bin:$PATH"' >> ~/.profile
 
         echo "Sourcing ~/.bashrc in case it's needed..."
         if [ -f ~/.bashrc ]; then source ~/.bashrc; fi
