@@ -105,7 +105,7 @@ export const getCommands = (config: DefaultConfigType) => {
     .description('Show Solv Config')
     .alias('c')
     .action(async () => {
-      showConfig()
+      showConfig(config)
     })
 
   get

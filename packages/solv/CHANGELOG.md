@@ -1,5 +1,11 @@
 # @gabrielhicks/solv
 
+## 4.8.2
+
+### Patch Changes
+Change config output
+  Root cause analysis for solv config changes and misconfigurations
+
 ## 4.8.1
 
 ### Patch Changes

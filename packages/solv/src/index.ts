@@ -117,7 +117,7 @@ async function main() {
       .command('config')
       .description('Show Solv Config')
       .action(() => {
-        showConfig()
+        showConfig(config)
       })
 
     program
