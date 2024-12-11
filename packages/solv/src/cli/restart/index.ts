@@ -1,7 +1,6 @@
 import { program } from '@/index'
 import { spawnSync } from 'node:child_process'
 import chalk from 'chalk'
-import { LEDGER_PATH } from '@/config/constants'
 import { DefaultConfigType } from '@/config/types'
 import getSolanaCLI from '@/config/getSolanaCLI'
 
@@ -23,7 +22,7 @@ export const restartCommand = (config: DefaultConfigType) => {
         console.log(chalk.green('✔︎ Successfully Restarted Validator'))
         process.exit(0)
       }
-      const cmd = `${solanaValidatorClient} --ledger ${LEDGER_PATH} exit --max-delinquent-stake ${config.MAINNET_DELINQUENT_STAKE}`
+      const cmd = `${solanaValidatorClient} --ledger ${config.LEDGER_PATH} exit --max-delinquent-stake ${config.MAINNET_DELINQUENT_STAKE}`
       spawnSync(cmd, { shell: true, stdio: 'inherit' })
       process.exit(0)
     })

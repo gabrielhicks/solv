@@ -1,5 +1,11 @@
 # @gabrielhicks/solv
 
+## 4.8.3
+
+### Patch Changes
+Update for testnet restart
+  Updating createSnapshot function for testnet restart
+
 ## 4.8.2
 
 ### Patch Changes

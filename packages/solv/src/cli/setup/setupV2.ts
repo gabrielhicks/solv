@@ -73,7 +73,7 @@ export const setupV2 = async (skipInitConfig = false, skipMount = false) => {
       // Enable Solv Service
       enableSolv()
       // Download Snapshot
-      getSnapshot(isTest, `100`, latestConfig.LEDGER_PATH, latestConfig.SNAPSHOTS_PATH)
+      getSnapshot(isTest, `100`, latestConfig.SNAPSHOTS_PATH)
     }
     // Start Solana
     startSolana(latestConfig)

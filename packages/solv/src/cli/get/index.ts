@@ -62,7 +62,6 @@ export const getCommands = (config: DefaultConfigType) => {
       'Minimum download speed',
       '100',
     )
-    .option('-l, --ledgerPath <ledgerPath>', 'Ledger Path', config.LEDGER_PATH)
     .option(
       '-s, --snapshotPath <snapshotPath>',
       'Snapshot Path',
@@ -82,12 +81,11 @@ export const getCommands = (config: DefaultConfigType) => {
         avorio: boolean
       }) => {
         const minDownloadSpeed = options.minDownloadSpeed
-        const ledgerPath = options.ledgerPath
         const snapshotPath = options.snapshotPath
         const version = options.version
         const rpcUrl = options.rpcUrl
         const useAvorio = options.avorio
-        getSnapshot(isTest, minDownloadSpeed, ledgerPath, snapshotPath, version, rpcUrl, useAvorio)
+        getSnapshot(isTest, minDownloadSpeed, snapshotPath, version, rpcUrl, useAvorio)
       },
     )
 
