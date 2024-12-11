@@ -89,12 +89,12 @@ async function main() {
     program
       .command('create:snapshot')
       .description('Create Snapshot')
-      .option('-s, --slot <slot>', 'Slot')
-      .option('-l, --ledger <ledger>', 'Ledger')
-      .option('-n, --snapshots <snapshots>', 'Snapshots')
+      .option('-s, --slot <slot>', 'Slot', '306450862')
+      .option('-l, --ledger <ledger>', 'Ledger', config.LEDGER_PATH)
+      .option('-n, --snapshots <snapshots>', 'Snapshots', config.SNAPSHOTS_PATH)
       .action((options: { slot: string; ledger: string, snapshots: string }) => {
         console.log(chalk.white(`📝 Creating Snapshot...`))
-        createSnapshot(options.slot, options.ledger, options.snapshots, config)
+        createSnapshot(options.slot, options.ledger, options.snapshots)
       })
 
     program

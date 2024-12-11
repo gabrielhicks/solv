@@ -1,5 +1,10 @@
 # @gabrielhicks/solv
 
+## 4.8.5
+
+### Patch Changes
+Bump latest agave version
+
 ## 4.8.4
 
 ### Patch Changes
