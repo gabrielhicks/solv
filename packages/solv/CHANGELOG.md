@@ -1,5 +1,10 @@
 # @gabrielhicks/solv
 
+## 4.8.6
+
+### Patch Changes
+Troubleshooting createSnapshot
+
 ## 4.8.5
 
 ### Patch Changes

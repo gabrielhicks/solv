@@ -5,9 +5,11 @@ const createSnapshot = (slot = '306450862', ledgerPath = LEDGER_PATH, snapshotPa
   try {
     const cmd = `agave-ledger-tool --ledger ${ledgerPath} create-snapshot \
 --incremental \
---snapshot-archive-path  ${snapshotPath} \
+--snapshot-archive-path ${snapshotPath} \
 --hard-fork ${slot} \
---  ${slot} ${ledgerPath}`
+-- ${slot} ${ledgerPath}`
+    console.log('Parameters to createSnapshot:', slot, ledgerPath, snapshotPath)
+    console.log('Command:', cmd)
     const result = spawnSync(cmd, {
       shell: true,
       stdio: 'pipe',
