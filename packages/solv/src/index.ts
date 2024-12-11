@@ -91,9 +91,10 @@ async function main() {
       .description('Create Snapshot')
       .option('-s, --slot <slot>', 'Slot')
       .option('-l, --ledger <ledger>', 'Ledger')
-      .action((options: { slot: string; ledger: string }) => {
+      .option('-n, --snapshots <snapshots>', 'Snapshots')
+      .action((options: { slot: string; ledger: string, snapshots: string }) => {
         console.log(chalk.white(`📝 Creating Snapshot...`))
-        createSnapshot(options.slot, options.ledger, config)
+        createSnapshot(options.slot, options.ledger, options.snapshots, config)
       })
 
     program
