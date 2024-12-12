@@ -82,7 +82,7 @@ export const switchCommand = async (
           return
         }
 
-        const result = checkSSHConnection(ip)
+        const result = checkSSHConnection(ip, user)
         if (!result) {
           console.log('SSH Connection Failed')
           return
