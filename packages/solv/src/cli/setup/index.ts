@@ -21,6 +21,7 @@ type SetupOptions = {
   firedancer: boolean
   skipInitConfig: boolean
   skipMount: boolean
+  pivot: boolean
 }
 
 export const setupCommands = (config: DefaultConfigType) => {
@@ -35,6 +36,7 @@ export const setupCommands = (config: DefaultConfigType) => {
     .option('--firedancer', 'Setup Firedancer', false)
     .option('--skip-init-config', 'Skip Initial Config', false)
     .option('--skip-mount', 'Skip Mount', false)
+    .option('--pivot', 'Pivot install', false)
     .action(async (options: SetupOptions) => {
       try {
         if (options.vote) {
@@ -74,7 +76,7 @@ export const setupCommands = (config: DefaultConfigType) => {
           await setupFiredancer()
           return
         }
-        await setupV2(options.skipInitConfig, options.skipMount)
+        await setupV2(options.skipInitConfig, options.skipMount, options.pivot)
       } catch (error: any) {
         if (
           error.message.includes('User force closed the prompt') ||

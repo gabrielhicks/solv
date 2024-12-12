@@ -20,7 +20,7 @@ import { createSymLink } from './createSymLink'
 import rpcLog from '@/utils/rpcLog'
 import setupFiredancer from './firedancer/setupFiredancer'
 
-export const setupV2 = async (skipInitConfig = false, skipMount = false) => {
+export const setupV2 = async (skipInitConfig = false, skipMount = false, pivot = false) => {
   try {
     if (!skipInitConfig) {
       console.log(chalk.white(`🟢 Initializing Setup`))
@@ -33,7 +33,7 @@ export const setupV2 = async (skipInitConfig = false, skipMount = false) => {
     const isTest = latestConfig.NETWORK === Network.TESTNET
     // Generate /mnt/ledger, /mnt/accounts and /mnt/snapshots if third disk is available
     setupDirs()
-    if (!skipMount) {
+    if (!skipMount || !pivot) {
       // Mount /mnt/ledger, /mnt/accounts and /mnt/snapshots if third disk is available
       mountDirs()
     }
@@ -65,18 +65,24 @@ export const setupV2 = async (skipInitConfig = false, skipMount = false) => {
       default:
         throw new Error('Unknown Node Type')
     }
-    // Setup Permissions
-    setupPermissions()
+    if(!pivot) {
+      // Setup Permissions
+      setupPermissions()
+    }
     // Reload Daemon
     daemonReload()
     if (latestConfig.VALIDATOR_TYPE !== ValidatorType.FRANKENDANCER) {
-      // Enable Solv Service
-      enableSolv()
-      // Download Snapshot
-      getSnapshot(isTest, `100`, latestConfig.SNAPSHOTS_PATH)
+      if(!pivot) {
+        // Enable Solv Service
+        enableSolv()
+        // Download Snapshot
+        getSnapshot(isTest, `100`, latestConfig.SNAPSHOTS_PATH, isTest ? latestConfig.TESTNET_SOLANA_VERSION : latestConfig.MAINNET_SOLANA_VERSION)
+      }
     }
-    // Start Solana
-    startSolana(latestConfig)
+    if(!pivot) {
+      // Start Solana
+      startSolana(latestConfig)
+    }
     console.log(chalk.white(`🟢 Setup Completed`))
     rpcLog()
   } catch (error: any) {

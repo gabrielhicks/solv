@@ -34,6 +34,9 @@ exec ${solanaCLI} \\
 --use-snapshot-archives-at-startup when-newest \\
 --limit-ledger-size \\
 --block-production-method central-scheduler \\
+--block-verification-method unified-scheduler \\
+--snapshot-interval-slots 0 \\
+--private-rpc \\
 `
   return script
 }

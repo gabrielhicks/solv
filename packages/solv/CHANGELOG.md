@@ -1,5 +1,10 @@
 # @gabrielhicks/solv
 
+## 4.8.7
+
+### Patch Changes
+Add pivot option
+
 ## 4.8.6
 
 ### Patch Changes
