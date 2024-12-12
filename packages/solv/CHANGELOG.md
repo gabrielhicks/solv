@@ -1,5 +1,10 @@
 # @gabrielhicks/solv
 
+## 4.8.11
+
+### Patch Changes
+Switch user option 4
+
 ## 4.8.10
 
 ### Patch Changes

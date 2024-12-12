@@ -32,7 +32,7 @@ export const switchCommand = async (
     .option('--ip <ip>', 'IP Address of the New Validator', '')
     .option('--switchType <switchType>', 'Switch Type', '')
     .option('--v2-migrate-incoming', 'Switch V1 to V2 Incoming', false)
-    .option('--user <user>', 'SSH User', 'solv')
+    .option('--user <user>', 'SSH User', '')
     .description('Switch Validator Identity with No Downtime')
     .action(async (options: SwitchOptions) => {
       try {
@@ -45,15 +45,16 @@ export const switchCommand = async (
         if (isRPC) {
           keyPath = TESTNET_VALIDATOR_KEY_PATH
         }
-        const user = options.user;
-
+        
+        let user = options.user;
         const pubkey = getSolanaAddress(keyPath)
         let switchType = options.switchType
         let ip = options.ip
-        if (switchType === '' || ip === '') {
+        if (switchType === '' || ip === '' || user === '') {
           const answer = await inquirer.prompt<{
             switchType: SwitchType
             ip: string
+            user: string
           }>([
             {
               name: 'switchType',
@@ -69,9 +70,16 @@ export const switchCommand = async (
                 return '1.1.1.1'
               },
             },
+            {
+              name: 'user',
+              type: 'list',
+              message: 'Which user would you want to SSH as?',
+              choices: ['solv', 'solana'],
+            },
           ])
           switchType = answer.switchType
           ip = answer.ip
+          user = answer.user
         }
         if (!SWITCH_TYPES.includes(switchType)) {
           console.log(
