@@ -2,7 +2,7 @@ import { getSolanaAddress } from '@/lib/getSolanaAddress'
 import scpSSH from '@/lib/scpSSH'
 import chalk from 'chalk'
 
-const checkValidatorKey = (validatorKeyPath: string, ip: string, user = 'solv') => {
+const checkValidatorKey = (validatorKeyPath: string, ip: string, user: string) => {
   console.log(
     chalk.white('🔍 Checking If Destination Validator Key is the same...'),
   )

@@ -24,7 +24,7 @@ export const changeIdentityOutgoing = async (
   ip: string,
   pubkey: string,
   config: DefaultConfigType,
-  user = 'solv',
+  user: string,
 ) => {
   const isTestnet = config.NETWORK === Network.TESTNET
   const isRPC = config.NODE_TYPE === NodeType.RPC

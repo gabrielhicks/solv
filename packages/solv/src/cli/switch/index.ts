@@ -102,7 +102,7 @@ export const switchCommand = async (
               process.exit(0)
             }
             console.log(chalk.white('🟢 Migrating V1 to V2 Incoming...'))
-            await changeIdentityIncomingV1toV2(ip, pubkey, config)
+            await changeIdentityIncomingV1toV2(ip, pubkey, config, user)
             return
           }
           await changeIdentityIncoming(ip, pubkey, config, user)
