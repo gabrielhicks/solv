@@ -93,10 +93,9 @@ export const updateCommands = (config: DefaultConfigType) => {
         const newConfigBody: DefaultConfigType = {
           NETWORK: isTestnetOld ? Network.TESTNET : Network.MAINNET,
           NODE_TYPE: isRPCOld ? NodeType.RPC : NodeType.VALIDATOR,
-          MNT_DISK_TYPE:
-            oldConfig.DISK_TYPES === 0
-              ? MNT_DISK_TYPE.DOUBLE
-              : MNT_DISK_TYPE.SINGLE,
+          MNT_DISK_TYPE: oldConfig.DISK_TYPES === 0
+            ? MNT_DISK_TYPE.DOUBLE
+            : MNT_DISK_TYPE.SINGLE,
           RPC_TYPE: isRPCOld ? RpcType.JITO : RpcType.NONE,
           VALIDATOR_TYPE: isJitoOld
             ? ValidatorType.JITO
@@ -109,8 +108,7 @@ export const updateCommands = (config: DefaultConfigType) => {
           TESTNET_DELINQUENT_STAKE: oldConfig.TESTNET_DELINQUENT_STAKE,
           MAINNET_DELINQUENT_STAKE: oldConfig.MAINNET_DELINQUENT_STAKE,
           COMMISSION: oldConfig.COMMISSION,
-          DEFAULT_VALIDATOR_VOTE_ACCOUNT_PUBKEY:
-            oldConfig.DEFAULT_VALIDATOR_VOTE_ACCOUNT_PUBKEY,
+          DEFAULT_VALIDATOR_VOTE_ACCOUNT_PUBKEY: oldConfig.DEFAULT_VALIDATOR_VOTE_ACCOUNT_PUBKEY,
           STAKE_ACCOUNTS: oldConfig.STAKE_ACCOUNT,
           HARVEST_ACCOUNT: oldConfig.HARVEST_ACCOUNT,
           IS_MEV_MODE: oldConfig.IS_MEV_MODE,
@@ -121,6 +119,9 @@ export const updateCommands = (config: DefaultConfigType) => {
           AUTO_RESTART: oldConfig.AUTO_RESTART,
           IS_DUMMY: false,
           API_KEY: '',
+          LEDGER_PATH: oldConfig.LEDGER_PATH,
+          ACCOUNTS_PATH: '/mnt/accounts',
+          SNAPSHOTS_PATH: oldConfig.LEDGER_PATH,
         }
 
         await updateDefaultConfig(newConfigBody)

@@ -20,6 +20,7 @@ type SwitchOptions = {
   switchType: SwitchType
   ip: string
   v2MigrateIncoming: boolean
+  user: string
 }
 
 export const switchCommand = async (
@@ -31,6 +32,7 @@ export const switchCommand = async (
     .option('--ip <ip>', 'IP Address of the New Validator', '')
     .option('--switchType <switchType>', 'Switch Type', '')
     .option('--v2-migrate-incoming', 'Switch V1 to V2 Incoming', false)
+    .option('--user <user>', 'SSH User', 'solv')
     .description('Switch Validator Identity with No Downtime')
     .action(async (options: SwitchOptions) => {
       try {
@@ -43,6 +45,7 @@ export const switchCommand = async (
         if (isRPC) {
           keyPath = TESTNET_VALIDATOR_KEY_PATH
         }
+        const user = options.user;
 
         const pubkey = getSolanaAddress(keyPath)
         let switchType = options.switchType
@@ -102,9 +105,9 @@ export const switchCommand = async (
             await changeIdentityIncomingV1toV2(ip, pubkey, config)
             return
           }
-          await changeIdentityIncoming(ip, pubkey, config)
+          await changeIdentityIncoming(ip, pubkey, config, user)
         } else {
-          await changeIdentityOutgoing(ip, pubkey, config)
+          await changeIdentityOutgoing(ip, pubkey, config, user)
         }
         process.exit(0)
       } catch (error: any) {

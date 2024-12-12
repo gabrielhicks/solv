@@ -24,6 +24,7 @@ export const changeIdentityOutgoing = async (
   ip: string,
   pubkey: string,
   config: DefaultConfigType,
+  user = 'solv',
 ) => {
   const isTestnet = config.NETWORK === Network.TESTNET
   const isRPC = config.NODE_TYPE === NodeType.RPC
@@ -35,7 +36,7 @@ export const changeIdentityOutgoing = async (
   }
   let solanaClient = getSolanaCLI()
 
-  const isKeyOkay = checkValidatorKey(validatorKeyPath, ip)
+  const isKeyOkay = checkValidatorKey(validatorKeyPath, ip, user)
   if (!isKeyOkay) {
     return
   }
@@ -44,7 +45,7 @@ export const changeIdentityOutgoing = async (
   const step1 = `${solanaClient} -l ${LEDGER_PATH} wait-for-restart-window --min-idle-time 2 --skip-new-snapshot-check`
   const step2 = `${solanaClient} -l ${LEDGER_PATH} set-identity ${unstakedKeyPath}`
   const step3 = `ln -sf ${unstakedKeyPath} ${identityKeyPath}`
-  const step4 = `scp ${LEDGER_PATH}/tower-1_9-${pubkey}.bin solv@${ip}:${LEDGER_PATH}`
+  const step4 = `scp ${LEDGER_PATH}/tower-1_9-${pubkey}.bin ${user}@${ip}:${LEDGER_PATH}`
 
   // SCP Command to run on the destination validator - scpSSH
   const step5 = `${solanaClient} -l ${LEDGER_PATH} set-identity --require-tower ${validatorKeyPath}`
@@ -103,12 +104,12 @@ export const changeIdentityOutgoing = async (
 
   // Set the identity on the identity key
   console.log(chalk.white('🟢 Setting identity on the new validator...'))
-  const cmd5 = `ssh -i ${sshKeyPath} -o StrictHostKeyChecking=no solv@${ip} -p 22 'cd ~ && source ~/.profile && ${step5}'`
+  const cmd5 = `ssh -i ${sshKeyPath} -o StrictHostKeyChecking=no ${user}@${ip} -p 22 'cd ~ && source ~/.profile && ${step5}'`
   const result5 = spawnSync(cmd5, { shell: true, stdio: 'inherit' })
   if (result5.status !== 0) {
     console.log(
       chalk.yellow(
-        `⚠️ set-identity Failed. Please check your Validator\n$ ssh solv@${ip}\n\nFailed Cmd: ${step5}`,
+        `⚠️ set-identity Failed. Please check your Validator\n$ ssh ${user}@${ip}\n\nFailed Cmd: ${step5}`,
       ),
     )
     //return
@@ -118,7 +119,7 @@ export const changeIdentityOutgoing = async (
   console.log(
     chalk.white('🟢 Changing the Symlink to the new validator keypair...'),
   )
-  const cmd6 = `ssh -i ${sshKeyPath} -o StrictHostKeyChecking=no solv@${ip} -p 22 'cd ~ && source ~/.profile && ${step6}'`
+  const cmd6 = `ssh -i ${sshKeyPath} -o StrictHostKeyChecking=no ${user}@${ip} -p 22 'cd ~ && source ~/.profile && ${step6}'`
   const result6 = spawnSync(cmd6, { shell: true, stdio: 'inherit' })
   if (result6.status !== 0) {
     console.log(
