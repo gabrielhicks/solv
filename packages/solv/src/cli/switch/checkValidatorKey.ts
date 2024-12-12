@@ -11,6 +11,7 @@ const checkValidatorKey = (validatorKeyPath: string, ip: string, user: string) =
   const destinationValidatorIdentityAddress = scpSSH(
     ip,
     `solana-keygen pubkey ${validatorKeyPath}`,
+    user
   )
     .stdout.toString()
     .trim()
