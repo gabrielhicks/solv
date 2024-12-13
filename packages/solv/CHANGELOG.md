@@ -1,5 +1,10 @@
 # @gabrielhicks/solv
 
+## 4.8.13
+
+### Patch Changes
+Latest snapshot paths and install
+
 ## 4.8.12
 
 ### Patch Changes

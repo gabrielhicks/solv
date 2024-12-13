@@ -121,7 +121,7 @@ export const updateCommands = (config: DefaultConfigType) => {
           API_KEY: '',
           LEDGER_PATH: oldConfig.LEDGER_PATH,
           ACCOUNTS_PATH: '/mnt/accounts',
-          SNAPSHOTS_PATH: oldConfig.LEDGER_PATH,
+          SNAPSHOTS_PATH: '/mnt/snapshots',
         }
 
         await updateDefaultConfig(newConfigBody)
