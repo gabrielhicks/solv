@@ -122,6 +122,7 @@ setup_pivot_secrets() {
         cp /home/solv/vote-account-keypair.json /home/solv/mainnet-vote-account-keypair.json
         rm /home/solv/validator-keypair.json
         mv /home/solv/vote-account-keypair.json /home/solv/.secrets/
+        rm /home/solana/.secrets/validator-keypair.json
         ln -s /home/solv/identity.json /home/solana/.secrets/validator-keypair.json
 EOF_SOLV
 }
@@ -131,80 +132,80 @@ setup_pivot_files() {
         echo "Creating solv config file..."
         touch solv4.config.json
         echo '{
-        "NETWORK": "mainnet-beta",
-        "NODE_TYPE": "validator",
-        "VALIDATOR_TYPE": "jito",
-        "RPC_TYPE": "none",
-        "MNT_DISK_TYPE": "triple",
-        "TESTNET_SOLANA_VERSION": "2.1.5",
-        "MAINNET_SOLANA_VERSION": "2.0.18",
-        "NODE_VERSION": "20.17.0",
-        "TESTNET_DELINQUENT_STAKE": 5,
-        "MAINNET_DELINQUENT_STAKE": 5,
-        "COMMISSION": 0,
-        "DEFAULT_VALIDATOR_VOTE_ACCOUNT_PUBKEY": "ELLB9W7ZCwRCV3FzWcCWoyKP6NjZJKArLyGtkqefnHcG",
-        "STAKE_ACCOUNTS": [],
-        "HARVEST_ACCOUNT": "",
-        "IS_MEV_MODE": false,
-        "RPC_URL": "https://api.mainnet-beta.solana.com",
-        "KEYPAIR_PATH": "",
-        "DISCORD_WEBHOOK_URL": "",
-        "AUTO_UPDATE": false,
-        "AUTO_RESTART": false,
-        "IS_DUMMY": false,
-        "API_KEY": "",
-        "LEDGER_PATH": "/mnt/ledger",
-        "ACCOUNTS_PATH": "/mnt/accounts",
-        "SNAPSHOTS_PATH": "/mnt/snapshots"
-        }' > solv4.config.json
+    "NETWORK": "mainnet-beta",
+    "NODE_TYPE": "validator",
+    "VALIDATOR_TYPE": "jito",
+    "RPC_TYPE": "none",
+    "MNT_DISK_TYPE": "triple",
+    "TESTNET_SOLANA_VERSION": "2.1.5",
+    "MAINNET_SOLANA_VERSION": "2.0.18",
+    "NODE_VERSION": "20.17.0",
+    "TESTNET_DELINQUENT_STAKE": 5,
+    "MAINNET_DELINQUENT_STAKE": 5,
+    "COMMISSION": 0,
+    "DEFAULT_VALIDATOR_VOTE_ACCOUNT_PUBKEY": "ELLB9W7ZCwRCV3FzWcCWoyKP6NjZJKArLyGtkqefnHcG",
+    "STAKE_ACCOUNTS": [],
+    "HARVEST_ACCOUNT": "",
+    "IS_MEV_MODE": false,
+    "RPC_URL": "https://api.mainnet-beta.solana.com",
+    "KEYPAIR_PATH": "",
+    "DISCORD_WEBHOOK_URL": "",
+    "AUTO_UPDATE": false,
+    "AUTO_RESTART": false,
+    "IS_DUMMY": false,
+    "API_KEY": "",
+    "LEDGER_PATH": "/mnt/ledger",
+    "ACCOUNTS_PATH": "/mnt/accounts",
+    "SNAPSHOTS_PATH": "/mnt/snapshots"
+}' > solv4.config.json
 
-        echo "Setting up jito environment variables..."
-        touch jito.config.json
-        echo '{
-        "version": "2.0.18",
-        "tag": "v2.0.18-mod",
-        "commissionBps": 1000,
-        "relayerUrl": "http://ny.mainnet.relayer.jito.wtf:8100",
-        "blockEngineUrl": "https://ny.mainnet.block-engine.jito.wtf",
-        "shredReceiverAddr": "141.98.216.96:1002"
-        }' > jito.config.json
+    echo "Setting up jito environment variables..."
+    touch jito.config.json
+echo '{
+"version": "2.0.18",
+"tag": "v2.0.18-mod",
+"commissionBps": 1000,
+"relayerUrl": "http://ny.mainnet.relayer.jito.wtf:8100",
+"blockEngineUrl": "https://ny.mainnet.block-engine.jito.wtf",
+"shredReceiverAddr": "141.98.216.96:1002"
+}' > jito.config.json
 
         echo "Creating startup script..."
         touch start-validator.sh
-        echo '#!/bin/bash
-        exec agave-validator \
-        --identity /home/solv/identity.json \
-        --vote-account /home/solv/mainnet-vote-account-keypair.json \
-        --authorized-voter  /home/solv/mainnet-validator-keypair.json \
-        --log /home/solv/solana-validator.log \
-        --accounts /mnt/accounts \
-        --ledger /mnt/ledger \
-        --snapshots /mnt/snapshots \
-        --entrypoint entrypoint.mainnet-beta.solana.com:8001 \
-        --entrypoint entrypoint2.mainnet-beta.solana.com:8001 \
-        --entrypoint entrypoint3.mainnet-beta.solana.com:8001 \
-        --entrypoint entrypoint4.mainnet-beta.solana.com:8001 \
-        --entrypoint entrypoint5.mainnet-beta.solana.com:8001 \
-        --known-validator Certusm1sa411sMpV9FPqU5dXAYhmmhygvxJ23S6hJ24 \
-        --known-validator 7Np41oeYqPefeNQEHSv1UDhYrehxin3NStELsSKCT4K2 \
-        --known-validator GdnSyH3YtwcxFvQrVVJMm1JhTS4QVX7MFsX56uJLUfiZ \
-        --known-validator CakcnaRDHka2gXyfbEd2d3xsvkJkqsLw2akB3zsN1D2S \
-        --expected-genesis-hash 5eykt4UsFv8P8NJdTREpY1vzqKqZKvdpKuc147dw2N9d \
-        --tip-payment-program-pubkey T1pyyaTNZsKv2WcRAB8oVnk93mLJw2XzjtVYqCsaHqt \
-        --tip-distribution-program-pubkey 4R3gSG8BpU4t19KYj8CfnbtRpnT8gtk4dvTHxVRwc2r7 \
-        --merkle-root-upload-authority GZctHpWXmsZC1YHACTGGcHhYxjdRqQvTpYkb9LMvxDib \
-        --commission-bps 1000 \
-        --rpc-bind-address 0.0.0.0 \
-        --block-engine-url https://ny.mainnet.block-engine.jito.wtf \
-        --shred-receiver-address 141.98.216.96:1002 \
-        --dynamic-port-range 8000-8020 \
-        --rpc-port 8899 \
-        --wal-recovery-mode skip_any_corrupted_record \
-        --limit-ledger-size \
-        --block-production-method central-scheduler \
-        --block-verification-method unified-scheduler \
-        --snapshot-interval-slots 0 \
-        --private-rpc \' > start-validator.sh
+echo '#!/bin/bash
+exec agave-validator \
+--identity /home/solv/identity.json \
+--vote-account /home/solv/mainnet-vote-account-keypair.json \
+--authorized-voter  /home/solv/mainnet-validator-keypair.json \
+--log /home/solv/solana-validator.log \
+--accounts /mnt/accounts \
+--ledger /mnt/ledger \
+--snapshots /mnt/snapshots \
+--entrypoint entrypoint.mainnet-beta.solana.com:8001 \
+--entrypoint entrypoint2.mainnet-beta.solana.com:8001 \
+--entrypoint entrypoint3.mainnet-beta.solana.com:8001 \
+--entrypoint entrypoint4.mainnet-beta.solana.com:8001 \
+--entrypoint entrypoint5.mainnet-beta.solana.com:8001 \
+--known-validator Certusm1sa411sMpV9FPqU5dXAYhmmhygvxJ23S6hJ24 \
+--known-validator 7Np41oeYqPefeNQEHSv1UDhYrehxin3NStELsSKCT4K2 \
+--known-validator GdnSyH3YtwcxFvQrVVJMm1JhTS4QVX7MFsX56uJLUfiZ \
+--known-validator CakcnaRDHka2gXyfbEd2d3xsvkJkqsLw2akB3zsN1D2S \
+--expected-genesis-hash 5eykt4UsFv8P8NJdTREpY1vzqKqZKvdpKuc147dw2N9d \
+--tip-payment-program-pubkey T1pyyaTNZsKv2WcRAB8oVnk93mLJw2XzjtVYqCsaHqt \
+--tip-distribution-program-pubkey 4R3gSG8BpU4t19KYj8CfnbtRpnT8gtk4dvTHxVRwc2r7 \
+--merkle-root-upload-authority GZctHpWXmsZC1YHACTGGcHhYxjdRqQvTpYkb9LMvxDib \
+--commission-bps 1000 \
+--rpc-bind-address 0.0.0.0 \
+--block-engine-url https://ny.mainnet.block-engine.jito.wtf \
+--shred-receiver-address 141.98.216.96:1002 \
+--dynamic-port-range 8000-8020 \
+--rpc-port 8899 \
+--wal-recovery-mode skip_any_corrupted_record \
+--limit-ledger-size \
+--block-production-method central-scheduler \
+--block-verification-method unified-scheduler \
+--snapshot-interval-slots 0 \
+--private-rpc \' > start-validator.sh
 EOF_SOLV
 }
 
@@ -235,17 +236,9 @@ main() {
       esac
     done
 
-    create_user
-    setup_firewall
-    setup_lib
-    install_docker
-    install_rustup
-    install_pnpm_and_packages
     setup_pivot_secrets
     setup_pivot_files
     setup_pivot_permissions
-    echo "Enter solv user password 👇"
-    su solv
 }
 
 main "$@"
