@@ -36,8 +36,8 @@ create_user() {
 install_docker() {
     echo "Installing Docker..."
     sudo apt update
-    sudo apt install libsasl2-2=2.1.27+dfsg2-3ubuntu1 libsasl2-dev -y
-    sudo apt install libudev1=249.11-0ubuntu3.7 libudev-dev -y
+    sudo apt install libsasl2-2=2.1.27+dfsg2-3ubuntu1 libsasl2-dev
+    sudo apt install libudev1=249.11-0ubuntu3.7 libudev-dev
     sudo apt install apt-transport-https ca-certificates curl software-properties-common -y
     curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
     echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null

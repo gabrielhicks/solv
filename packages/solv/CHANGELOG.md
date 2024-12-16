@@ -1,5 +1,10 @@
 # @gabrielhicks/solv
 
+## 4.8.14
+
+### Patch Changes
+Bump solana versions, and new installer
+
 ## 4.8.13
 
 ### Patch Changes
