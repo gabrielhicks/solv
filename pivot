@@ -136,7 +136,7 @@ setup_pivot_files() {
         "VALIDATOR_TYPE": "jito",
         "RPC_TYPE": "none",
         "MNT_DISK_TYPE": "triple",
-        "TESTNET_SOLANA_VERSION": "2.1.5",
+        "TESTNET_SOLANA_VERSION": "2.1.6",
         "MAINNET_SOLANA_VERSION": "2.0.18",
         "NODE_VERSION": "20.17.0",
         "TESTNET_DELINQUENT_STAKE": 5,
