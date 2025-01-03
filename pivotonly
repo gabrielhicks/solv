@@ -162,8 +162,8 @@ setup_pivot_files() {
     echo "Setting up jito environment variables..."
     touch jito.config.json
 echo '{
-"version": "2.0.19",
-"tag": "v2.0.19-mod",
+"version": "2.0.21",
+"tag": "v2.0.21-mod",
 "commissionBps": 1000,
 "relayerUrl": "http://ny.mainnet.relayer.jito.wtf:8100",
 "blockEngineUrl": "https://ny.mainnet.block-engine.jito.wtf",
