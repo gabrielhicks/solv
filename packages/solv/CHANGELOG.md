@@ -1,5 +1,10 @@
 # @gabrielhicks/solv
 
+## 4.8.17
+
+### Patch Changes
+Added firedancer mod and install
+
 ## 4.8.16
 
 ### Patch Changes

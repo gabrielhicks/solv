@@ -13,8 +13,8 @@ export const showConfig = (solvConfig: DefaultConfigType) => {
   console.log(chalk.white('sysctl.d: ') + SERVICE_PATHS.SOL_SYSTEM_CONFIG21)
   console.log(chalk.white('limits.d: ') + SERVICE_PATHS.SOL_NOFILES_CONF)
   console.log(chalk.white('system.conf: ') + SERVICE_PATHS.SOL_SYSTEM_CONF)
-  console.log(chalk.white('ledger: ') + solvConfig.LEDGER_PATH)
-  console.log(chalk.white('accounts: ') + solvConfig.ACCOUNTS_PATH)
-  console.log(chalk.white('snapshots: ') + solvConfig.SNAPSHOTS_PATH)
+  console.log(chalk.white('ledger: ') + config.ledger)
+  console.log(chalk.white('accounts: ') + config.accounts)
+  console.log(chalk.white('snapshots: ') + config.snapshots)
   console.log(chalk.white('mount type: ') + solvConfig.MNT_DISK_TYPE)
 }

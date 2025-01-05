@@ -12,6 +12,9 @@ export const setupPermissions = () => {
     `sudo mkdir -p ${MT_PATHS.LEDGER}`,
     `sudo chown -R solv:solv ${MT_PATHS.LEDGER}`,
     `sudo chmod -R 755 ${MT_PATHS.LEDGER}`,
+    `sudo mkdir -p ${MT_PATHS.SNAPSHOTS}`,
+    `sudo chown -R solv:solv ${MT_PATHS.SNAPSHOTS}`,
+    `sudo chmod -R 755 ${MT_PATHS.SNAPSHOTS}`,
   ]
 
   for (const line of cmds) {

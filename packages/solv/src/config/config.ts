@@ -1,3 +1,4 @@
+import { ACCOUNTS_PATH, LEDGER_PATH, SNAPSHOTS_PATH } from './constants'
 import { LANGS } from './langs'
 
 export enum DISK_TYPES {
@@ -84,6 +85,8 @@ export type CONFIG_TYPE = {
   DISCORD_WEBHOOK_URL: string
   AUTO_UPDATE: boolean
   AUTO_RESTART: boolean
+  ACCOUNTS_PATH: string
+  SNAPSHOTS_PATH: string
 }
 
 export type PartialConfigType = Partial<CONFIG_TYPE>
@@ -117,6 +120,8 @@ export const CONFIG: CONFIG_TYPE = {
   DISCORD_WEBHOOK_URL: '',
   AUTO_UPDATE: false,
   AUTO_RESTART: false,
+  ACCOUNTS_PATH: '/mnt/accounts',
+  SNAPSHOTS_PATH: '/mnt/snapshots',
 }
 
 export const HOME_PATHS = {
@@ -184,6 +189,7 @@ export const startupScriptPaths = (isTest = true) => {
   const log = `${HOME_PATHS.ROOT}/${FILES.LOG}`
   const accounts = MT_PATHS.ACCOUNTS
   const ledger = MT_PATHS.LEDGER
+  const snapshots = MT_PATHS.SNAPSHOTS
   const scriptPath = `${HOME_PATHS.ROOT}/${FILES.STARTUP_SCRIPT}`
   return {
     identity,
@@ -192,6 +198,7 @@ export const startupScriptPaths = (isTest = true) => {
     accounts,
     ledger,
     scriptPath,
+    snapshots,
   }
 }
 

@@ -29,7 +29,7 @@ export const setupV2 = async (skipInitConfig = false, skipMount = false, pivot =
       await initialConfigSetup()
     }
 
-    const latestConfig = await readConfig()
+    let latestConfig = await readConfig()
     const isTest = latestConfig.NETWORK === Network.TESTNET
     // Generate /mnt/ledger, /mnt/accounts and /mnt/snapshots if third disk is available
     setupDirs()
@@ -49,7 +49,7 @@ export const setupV2 = async (skipInitConfig = false, skipMount = false, pivot =
     // Generate Solana Keys
     setupKeys(latestConfig)
     createSymLink(latestConfig.IS_DUMMY, isTest)
-
+    latestConfig = await readConfig()
     // Generate Soalna Startup Script
     switch (latestConfig.NODE_TYPE) {
       case NodeType.RPC:
@@ -73,6 +73,7 @@ export const setupV2 = async (skipInitConfig = false, skipMount = false, pivot =
     daemonReload()
     if (latestConfig.VALIDATOR_TYPE !== ValidatorType.FRANKENDANCER) {
       if(!pivot) {
+        latestConfig = await readConfig()
         // Enable Solv Service
         enableSolv()
         // Download Snapshot
