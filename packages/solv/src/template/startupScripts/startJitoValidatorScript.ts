@@ -37,7 +37,7 @@ exec ${solanaCLI} \\
 --tip-distribution-program-pubkey 4R3gSG8BpU4t19KYj8CfnbtRpnT8gtk4dvTHxVRwc2r7 \\
 --merkle-root-upload-authority GZctHpWXmsZC1YHACTGGcHhYxjdRqQvTpYkb9LMvxDib \\
 --commission-bps ${commissionBps} \\
---rpc-bind-address 0.0.0.0 \\
+--rpc-bind-address 127.0.0.1 \\
 --block-engine-url ${blockEngineUrl} \\
 --shred-receiver-address ${shredReceiverAddr} \\
 --dynamic-port-range 8000-8020 \\
@@ -48,6 +48,7 @@ exec ${solanaCLI} \\
 --block-verification-method unified-scheduler \\
 --snapshot-interval-slots 0 \\
 --private-rpc \\
+--full-rpc-api \\
 `
   return script
 }

@@ -21,6 +21,7 @@ exec agave-validator \\
 --entrypoint entrypoint3.testnet.solana.com:8001 \\
 --known-validator 5D1fNXzvv5NjV1ysLjirC4WY92RNsVH18vjmcszZd8on \\
 --only-known-rpc \\
+--rpc-bind-address 127.0.0.1 \\
 --private-rpc \\
 --expected-genesis-hash 4uhcVJyU9pJkvQyS88uRDiswHXSCkY3zQawwpjk2NsNY \\
 --dynamic-port-range 8000-8020 \\
@@ -32,6 +33,7 @@ exec agave-validator \\
 --limit-ledger-size \\
 --block-production-method central-scheduler \\
 --block-verification-method unified-scheduler \\
+--full-rpc-api \\
 `
   return script
 }

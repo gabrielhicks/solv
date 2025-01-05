@@ -29,7 +29,7 @@ exec agave-validator \\
 --enable-cpi-and-log-storage \\
 --no-skip-initial-accounts-db-clean \\
 --dynamic-port-range 8000-8020 \\
---rpc-bind-address 0.0.0.0 \\
+--rpc-bind-address 127.0.0.1 \\
 --rpc-port 8899 \\
 --no-port-check \\
 --account-index program-id spl-token-mint spl-token-owner \\
