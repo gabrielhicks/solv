@@ -1,5 +1,10 @@
 # @gabrielhicks/solv
 
+## 4.8.19
+
+### Patch Changes
+Bumped some of the config for rpc bind address
+
 ## 4.8.18
 
 ### Patch Changes
