@@ -60,8 +60,7 @@ const setupFiredancer = async () => {
 
   spawnSync(`sudo systemctl daemon-reload`, { shell: true })
   const toml = configToml()
-  spawnSync(`sudo tee ${toml.filePath} > /dev/null`, {
-    input: toml.body,
+  spawnSync(`echo "${toml.body}" | sudo tee ${toml.filePath} > /dev/null`, {
     shell: true,
     stdio: 'inherit',
   })
