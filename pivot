@@ -63,6 +63,20 @@ setup_firewall() {
     sudo ufw reload
 }
 
+sudo ufw reset
+sudo ufw enable
+sudo ufw allow ssh
+sudo ufw allow 53
+sudo ufw allow 8899/udp
+sudo ufw allow 8899/tcp
+sudo ufw allow 8000:8898/udp
+sudo ufw allow 8000:8898/tcp
+sudo ufw allow 8900:9999/tcp
+sudo ufw allow 8900:9999/udp
+sudo ufw allow 10000/udp
+sudo ufw allow 10000/tcp
+sudo ufw reload
+
 setup_lib() {
     echo "Installing Packages..."
     sudo apt install fail2ban -y

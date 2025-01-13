@@ -1,6 +1,11 @@
 # @gabrielhicks/solv
 
-## 4.8.19
+## 4.8.21
+
+### Patch Changes
+Fix FD Toml
+
+## 4.8.20
 
 ### Patch Changes
 Fix FD Toml
