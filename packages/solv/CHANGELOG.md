@@ -1,5 +1,10 @@
 # @gabrielhicks/solv
 
+## 4.8.22
+
+### Testnet restart parameters
+Added correct versioning for testnet restarts
+
 ## 4.8.21
 
 ### Patch Changes
