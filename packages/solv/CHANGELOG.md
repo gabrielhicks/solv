@@ -1,5 +1,10 @@
 # @gabrielhicks/solv
 
+## 4.8.24
+
+### Testnet restart parameters
+Expected hash change
+
 ## 4.8.23
 
 ### Testnet restart parameters

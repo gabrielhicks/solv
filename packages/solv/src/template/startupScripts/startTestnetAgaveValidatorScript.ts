@@ -29,7 +29,7 @@ exec agave-validator \\
 --wal-recovery-mode skip_any_corrupted_record \\
 --wait-for-supermajority 312256121 \\
 --expected-shred-version 64475 \\
---expected-bank-hash DFiDdThKRMPhFuLoBv5UeEbw5vTVbEUBn6S9LdsDqHdH \\
+--expected-bank-hash 6A7U1X8WqnWRXWtqaxF15sSYHLT66j1ycBEyFigGwr2Z \\
 --limit-ledger-size \\
 --block-production-method central-scheduler \\
 --block-verification-method unified-scheduler \\
