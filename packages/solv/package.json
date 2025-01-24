@@ -1,6 +1,6 @@
 {
   "name": "@gabrielhicks/solv",
-  "version": "4.8.24",
+  "version": "4.8.25",
   "description": "Solana Validator CLI SOLV",
   "main": "dist/index.js",
   "type": "module",

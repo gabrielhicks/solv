@@ -1,5 +1,10 @@
 # @gabrielhicks/solv
 
+## 4.8.25
+
+### Mainnet Version Bump
+Jito Change
+
 ## 4.8.24
 
 ### Testnet restart parameters
