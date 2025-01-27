@@ -1,5 +1,10 @@
 # @gabrielhicks/solv
 
+## 4.8.27
+
+### Testnet restart parameters
+Yet another testnet restart
+
 ## 4.8.26
 
 ### Testnet restart parameters
