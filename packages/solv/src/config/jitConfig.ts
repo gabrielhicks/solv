@@ -9,8 +9,8 @@ export interface JitoConfig {
 }
 
 export const JITO_CONFIG: JitoConfig = {
-  version: '2.0.24',
-  tag: 'v2.0.24-mod',
+  version: '2.1.11',
+  tag: 'v2.1.11-mod',
   commissionBps: 1000,
   relayerUrl: 'http://amsterdam.mainnet.relayer.jito.wtf:8100',
   blockEngineUrl: 'https://amsterdam.mainnet.block-engine.jito.wtf',
