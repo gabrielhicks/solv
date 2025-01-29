@@ -1,5 +1,10 @@
 # @gabrielhicks/solv
 
+## 4.8.28
+
+### Mainnet install to 2.0.24
+Update latest Jito
+
 ## 4.8.27
 
 ### Testnet restart parameters
