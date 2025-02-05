@@ -1,5 +1,11 @@
 # @gabrielhicks/solv
 
+## 4.8.31
+
+### Limiting Ledger
+50_000_000
+
+
 ## 4.8.30
 
 ### Ttestnet install to 2.1.13

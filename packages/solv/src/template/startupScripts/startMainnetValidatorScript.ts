@@ -32,7 +32,7 @@ exec ${solanaCLI} \\
 --rpc-port 8899 \\
 --wal-recovery-mode skip_any_corrupted_record \\
 --use-snapshot-archives-at-startup when-newest \\
---limit-ledger-size \\
+--limit-ledger-size 50000000 \\
 --block-production-method central-scheduler \\
 --block-verification-method unified-scheduler \\
 --snapshot-interval-slots 0 \\
