@@ -1,5 +1,11 @@
 # @gabrielhicks/solv
 
+## 4.8.32
+
+### Frankendancer
+bump
+
+
 ## 4.8.31
 
 ### Limiting Ledger
