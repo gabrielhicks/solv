@@ -1,5 +1,10 @@
 # @gabrielhicks/solv
 
+## 4.8.34
+
+### Updated snapshots directory
+RPC updates
+
 ## 4.8.33
 
 ### Updated to latest

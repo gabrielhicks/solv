@@ -3,6 +3,7 @@ import {
   IDENTITY_KEY_PATH,
   LEDGER_PATH,
   LOG_PATH,
+  SNAPSHOTS_PATH,
 } from '@/config/constants'
 
 export const startJitoRPCScript = () => {
@@ -12,6 +13,7 @@ exec agave-validator \\
 --log ${LOG_PATH} \\
 --accounts ${ACCOUNTS_PATH} \\
 --ledger ${LEDGER_PATH} \\
+--snapshots ${SNAPSHOTS_PATH} \\
 --entrypoint entrypoint.mainnet-beta.solana.com:8001 \\
 --entrypoint entrypoint2.mainnet-beta.solana.com:8001 \\
 --entrypoint entrypoint3.mainnet-beta.solana.com:8001 \\
