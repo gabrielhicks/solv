@@ -1,5 +1,10 @@
 # @gabrielhicks/solv
 
+## 4.8.33
+
+### Updated to latest
+RPC and version bumps
+
 ## 4.8.32
 
 ### Frankendancer
