@@ -20,8 +20,10 @@ user = \"solv\"
     account_index_exclude_keys = []
     snapshot_archive_format = \"zstd\"
     require_tower = false
+    limit_size = 50_000_000
 
 [snapshots]
+    enabled = false
     incremental_snapshots = false
     path = \"/mnt/snapshots\"
 
@@ -39,9 +41,8 @@ user = \"solv\"
         \"/home/solv/testnet-validator-keypair.json\"
     ]
     expected_genesis_hash = \"4uhcVJyU9pJkvQyS88uRDiswHXSCkY3zQawwpjk2NsNY\"
-    wait_for_supermajority_at_slot = 306450862
-    expected_bank_hash = \"BiGFLfFewfTB2asBRLjwRL6z7VNfuvYraS3H7RfQNCrf\"
-    expected_shred_version = 64506
+    expected_bank_hash = \"6A7U1X8WqnWRXWtqaxF15sSYHLT66j1ycBEyFigGwr2Z\"
+    expected_shred_version = 64475
     known_validators = [
         \"5D1fNXzvv5NjV1ysLjirC4WY92RNsVH18vjmcszZd8on\", 
         \"dDzy5SR3AXdYWVqbDEkVFdvSPCtS9ihF5kJkHCtXoFs\",
@@ -62,7 +63,7 @@ user = \"solv\"
    shred_tile_count = 1
    verify_tile_count = 1
    bank_tile_count = 1
-   quic_tile_count = 1`;
+   quic_tile_count = 1`
 
   return { filePath, body }
 }
