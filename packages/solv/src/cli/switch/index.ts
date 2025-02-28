@@ -32,7 +32,7 @@ export const switchCommand = async (
     .option('--ip <ip>', 'IP Address of the New Validator', '')
     .option('--switchType <switchType>', 'Switch Type', '')
     .option('--v2-migrate-incoming', 'Switch V1 to V2 Incoming', false)
-    .option('--user <user>', 'SSH User', '')
+    .option('--user <user>', 'Service User', '')
     .description('Switch Validator Identity with No Downtime')
     .action(async (options: SwitchOptions) => {
       try {
@@ -73,8 +73,8 @@ export const switchCommand = async (
             {
               name: 'user',
               type: 'list',
-              message: 'Which user would you want to SSH as?',
-              choices: ['solv', 'solana'],
+              message: 'Which client would you like to switch with?',
+              choices: ['solv', 'fd'],
             },
           ])
           switchType = answer.switchType
@@ -110,7 +110,7 @@ export const switchCommand = async (
               process.exit(0)
             }
             console.log(chalk.white('🟢 Migrating V1 to V2 Incoming...'))
-            await changeIdentityIncomingV1toV2(ip, pubkey, config, user)
+            await changeIdentityIncomingV1toV2(ip, pubkey, config)
             return
           }
           await changeIdentityIncoming(ip, pubkey, config, user)

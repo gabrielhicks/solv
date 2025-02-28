@@ -1,5 +1,11 @@
 # @gabrielhicks/solv
 
+## 4.8.35
+
+### Frankendancer Hotswap
+Enabled fdctl usage for zero downtime updates when using Frankendancer
+
+
 ## 4.8.34
 
 ### Updated snapshots directory
