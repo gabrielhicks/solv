@@ -110,7 +110,7 @@ export const changeIdentityIncoming = async (
   console.log(chalk.white('🟢 Setting identity on the new validator...'))
   let setIdentityCmdTwo = `${solanaClient} -l ${LEDGER_PATH} set-identity --require-tower ${validatorKeyPath}`
   if (user === 'fd') {
-    setIdentityCmdTwo = `cd ~/firedancer && sudo fdctl set-identity --require-tower --config ~/firedancer/config.toml ${validatorKeyPath}'`
+    setIdentityCmdTwo = `cd ~/firedancer && sudo fdctl set-identity --require-tower --config ~/firedancer/config.toml ${validatorKeyPath}`
   }
   const result5 = spawnSync(setIdentityCmdTwo, {
     shell: true,

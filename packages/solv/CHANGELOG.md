@@ -1,5 +1,10 @@
 # @gabrielhicks/solv
 
+## 4.9.0
+
+### Frankedancer Swap
+Ready for Frankendancer Swaps
+
 ## 4.8.37
 
 ### SSH Bug
