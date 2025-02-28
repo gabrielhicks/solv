@@ -21,7 +21,6 @@ type SwitchOptions = {
   ip: string
   v2MigrateIncoming: boolean
   user: string
-  client: string
 }
 
 export const switchCommand = async (
@@ -33,8 +32,7 @@ export const switchCommand = async (
     .option('--ip <ip>', 'IP Address of the New Validator', '')
     .option('--switchType <switchType>', 'Switch Type', '')
     .option('--v2-migrate-incoming', 'Switch V1 to V2 Incoming', false)
-    .option('--user <user>', 'SSH User', 'solv')
-    .option('--client <client>', 'Client Type', 'agave')
+    .option('--user <user>', 'SSH User', '')
     .description('Switch Validator Identity with No Downtime')
     .action(async (options: SwitchOptions) => {
       try {
@@ -52,13 +50,11 @@ export const switchCommand = async (
         const pubkey = getSolanaAddress(keyPath)
         let switchType = options.switchType
         let ip = options.ip
-        let client = options.client
         if (switchType === '' || ip === '' || user === '') {
           const answer = await inquirer.prompt<{
             switchType: SwitchType
             ip: string
             user: string
-            client: string
           }>([
             {
               name: 'switchType',
@@ -78,19 +74,12 @@ export const switchCommand = async (
               name: 'user',
               type: 'list',
               message: 'Which user would you want to SSH as?',
-              choices: ['solv'],
-            },
-            {
-              name: 'client',
-              type: 'list',
-              message: 'Which client are you using on both machines?',
-              choices: ['agave', 'frankendancer'],
+              choices: ['solv', 'solana'],
             },
           ])
           switchType = answer.switchType
           ip = answer.ip
           user = answer.user
-          client = answer.client
         }
         if (!SWITCH_TYPES.includes(switchType)) {
           console.log(
@@ -124,9 +113,9 @@ export const switchCommand = async (
             await changeIdentityIncomingV1toV2(ip, pubkey, config, user)
             return
           }
-          await changeIdentityIncoming(ip, pubkey, config, user, client)
+          await changeIdentityIncoming(ip, pubkey, config, user)
         } else {
-          await changeIdentityOutgoing(ip, pubkey, config, user, client)
+          await changeIdentityOutgoing(ip, pubkey, config, user)
         }
         process.exit(0)
       } catch (error: any) {

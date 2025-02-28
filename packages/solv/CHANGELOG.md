@@ -1,4 +1,10 @@
 # @gabrielhicks/solv
+## 4.9.2
+
+### Reformat Frankendancer Swap
+Ready for Frankendancer Swaps
+
+# @gabrielhicks/solv
 ## 4.9.1
 
 ### Reformat Frankendancer Swap

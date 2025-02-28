@@ -14,8 +14,7 @@ import checkValidatorKey from './checkValidatorKey'
 import { updateDefaultConfig } from '@/config/updateDefaultConfig'
 import { DefaultConfigType } from '@/config/types'
 import { Network, NodeType } from '@/config/enums'
-import getSolanaCLIActive from '@/config/getSolanaCLIActive'
-import getSolanaCLIAgave from '@/config/getSolanaCLIAgave'
+import getSolanaCLI from '@/config/getSolanaCLI'
 
 const unstakedKeyPath = join(SOLV_HOME, UNSTAKED_KEY)
 const identityKeyPath = join(SOLV_HOME, IDENTITY_KEY)
@@ -26,7 +25,6 @@ export const changeIdentityOutgoing = async (
   pubkey: string,
   config: DefaultConfigType,
   user: string,
-  client: string,
 ) => {
   const isTestnet = config.NETWORK === Network.TESTNET
   const isRPC = config.NODE_TYPE === NodeType.RPC
@@ -36,9 +34,7 @@ export const changeIdentityOutgoing = async (
   if (isRPC) {
     validatorKeyPath = TESTNET_VALIDATOR_KEY_PATH
   }
-
-  const activeSolanaClient = getSolanaCLIActive(client)
-  const agaveSolanaClient = getSolanaCLIAgave()
+  let solanaClient = getSolanaCLI()
 
   const isKeyOkay = checkValidatorKey(validatorKeyPath, ip, user)
   if (!isKeyOkay) {
@@ -46,13 +42,13 @@ export const changeIdentityOutgoing = async (
   }
 
   // Commands to run on the source validator - SpawnSync
-  const step1 = `${agaveSolanaClient} -l ${LEDGER_PATH} wait-for-restart-window --min-idle-time 2 --skip-new-snapshot-check`
-  const step2 = `${activeSolanaClient} set-identity ${unstakedKeyPath}`
+  const step1 = `${solanaClient} -l ${LEDGER_PATH} wait-for-restart-window --min-idle-time 2 --skip-new-snapshot-check`
+  const step2 = `${solanaClient} -l ${LEDGER_PATH} set-identity ${unstakedKeyPath}`
   const step3 = `ln -sf ${unstakedKeyPath} ${identityKeyPath}`
   const step4 = `scp ${LEDGER_PATH}/tower-1_9-${pubkey}.bin ${user}@${ip}:${LEDGER_PATH}`
 
   // SCP Command to run on the destination validator - scpSSH
-  const step5 = `${activeSolanaClient} set-identity --require-tower ${validatorKeyPath}`
+  const step5 = `${solanaClient} -l ${LEDGER_PATH} set-identity --require-tower ${validatorKeyPath}`
   const step6 = `ln -sf ${validatorKeyPath} ${IDENTITY_KEY_PATH}`
 
   console.log(chalk.white('🟢 Waiting for restart window...'))

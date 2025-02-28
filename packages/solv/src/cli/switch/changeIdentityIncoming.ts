@@ -14,8 +14,7 @@ import checkValidatorKey from './checkValidatorKey'
 import { updateDefaultConfig } from '@/config/updateDefaultConfig'
 import { DefaultConfigType } from '@/config/types'
 import { Network, NodeType } from '@/config/enums'
-import getSolanaCLIActive from '@/config/getSolanaCLIActive'
-import getSolanaCLIAgave from '@/config/getSolanaCLIAgave'
+import getSolanaCLI from '@/config/getSolanaCLI'
 
 const unstakedKeyPath = join(SOLV_HOME, UNSTAKED_KEY)
 const identityKeyPath = join(SOLV_HOME, IDENTITY_KEY)
@@ -25,7 +24,6 @@ export const changeIdentityIncoming = async (
   pubkey: string,
   config: DefaultConfigType,
   user: string,
-  client: string,
 ) => {
   const isTestnet = config.NETWORK === Network.TESTNET
   const isRPC = config.NODE_TYPE === NodeType.RPC
@@ -35,8 +33,7 @@ export const changeIdentityIncoming = async (
   if (isRPC) {
     validatorKeyPath = TESTNET_VALIDATOR_KEY_PATH
   }
-  const activeSolanaClient = getSolanaCLIActive(client)
-  const agaveSolanaClient = getSolanaCLIAgave()
+  const solanaClient = getSolanaCLI()
 
   const isKeyOkay = checkValidatorKey(validatorKeyPath, ip, user)
   if (!isKeyOkay) {
@@ -44,26 +41,25 @@ export const changeIdentityIncoming = async (
   }
 
   console.log(chalk.white('🟢 Waiting for restart window...'))
-  const restartWindowCmd = `ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ${user}@${ip} -p 22 'cd ~ && source ~/.profile && ${agaveSolanaClient} wait-for-restart-window --min-idle-time 2 --skip-new-snapshot-check'`
+  const restartWindowCmd = `ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ${user}@${ip} -p 22 'cd ~ && source ~/.profile && ${solanaClient} -l ${LEDGER_PATH} wait-for-restart-window --min-idle-time 2 --skip-new-snapshot-check'`
   const result1 = spawnSync(restartWindowCmd, { shell: true, stdio: 'inherit' })
   if (result1.status !== 0) {
     console.log(
       chalk.yellow(
-        `⚠️ wait-for-restart-window Failed. Please check your Validator\n$ ssh ${user}@${ip}\n\nFailed Cmd: ${agaveSolanaClient} wait-for-restart-window --min-idle-time 2 --skip-new-snapshot-check`,
+        `⚠️ wait-for-restart-window Failed. Please check your Validator\n$ ssh ${user}@${ip}\n\nFailed Cmd: ${solanaClient} -l ${LEDGER_PATH} wait-for-restart-window --min-idle-time 2 --skip-new-snapshot-check`,
       ),
     )
     return
   }
 
-
   // Set the identity on the unstaked key
   console.log(chalk.white('🟢 Setting identity on the new validator...'))
-  const setIdentityCmd = `ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ${user}@${ip} -p 22 'cd ~ && source ~/.profile && ${activeSolanaClient} set-identity ${unstakedKeyPath}'`
+  const setIdentityCmd = `ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ${user}@${ip} -p 22 'cd ~ && source ~/.profile && ${solanaClient} -l ${LEDGER_PATH} set-identity ${unstakedKeyPath}'`
   const result2 = spawnSync(setIdentityCmd, { shell: true, stdio: 'inherit' })
   if (result2.status !== 0) {
     console.log(
       chalk.yellow(
-        `⚠️ Set Identity Failed. Please check your Validator\n$ ssh ${user}@${ip}\n\nFailed Cmd: ${activeSolanaClient} set-identity ${unstakedKeyPath}`,
+        `⚠️ Set Identity Failed. Please check your Validator\n$ ssh ${user}@${ip}\n\nFailed Cmd: ${solanaClient} -l ${LEDGER_PATH} set-identity ${unstakedKeyPath}`,
       ),
     )
     return
@@ -110,7 +106,7 @@ export const changeIdentityIncoming = async (
   // Set the identity on the new validator
   console.log(chalk.white('🟢 Setting identity on the new validator...'))
   const result5 = spawnSync(
-    `${activeSolanaClient} set-identity --require-tower ${validatorKeyPath}`,
+    `${solanaClient} -l ${LEDGER_PATH} set-identity --require-tower ${validatorKeyPath}`,
     {
       shell: true,
       stdio: 'inherit',
@@ -119,7 +115,7 @@ export const changeIdentityIncoming = async (
   if (result5.status !== 0) {
     console.log(
       chalk.yellow(
-        `⚠️ Set Identity Failed. Please check your Validator\n\nFailed Cmd: ${activeSolanaClient} set-identity ${validatorKeyPath}\nln -sf ${validatorKeyPath} ${IDENTITY_KEY_PATH}`,
+        `⚠️ Set Identity Failed. Please check your Validator\n\nFailed Cmd: ${solanaClient} -l ${LEDGER_PATH} set-identity ${validatorKeyPath}\nln -sf ${validatorKeyPath} ${IDENTITY_KEY_PATH}`,
       ),
     )
     return
