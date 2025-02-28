@@ -1,5 +1,10 @@
 # @gabrielhicks/solv
 
+## 4.8.37
+
+### SSH Bug
+Fix small SSH bug
+
 ## 4.8.36
 
 ### SSH Bug
