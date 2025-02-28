@@ -1,7 +1,6 @@
 const configToml = () => {
   const filePath = '/home/solv/firedancer/config.toml'
-  const body = `
-name = \"fd1\"
+  const body = `name = \"fd1\"
 user = \"solv\"
 
 [log]
@@ -63,8 +62,7 @@ user = \"solv\"
    shred_tile_count = 1
    verify_tile_count = 1
    bank_tile_count = 1
-   quic_tile_count = 1
-`;
+   quic_tile_count = 1`;
 
   return { filePath, body }
 }
