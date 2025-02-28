@@ -2,7 +2,11 @@ import { getSolanaAddress } from '@/lib/getSolanaAddress'
 import scpSSH from '@/lib/scpSSH'
 import chalk from 'chalk'
 
-const checkValidatorKey = (validatorKeyPath: string, ip: string, user: string) => {
+const checkValidatorKey = (
+  validatorKeyPath: string,
+  ip: string,
+  user: string,
+) => {
   console.log(
     chalk.white('🔍 Checking If Destination Validator Key is the same...'),
   )
@@ -11,7 +15,7 @@ const checkValidatorKey = (validatorKeyPath: string, ip: string, user: string) =
   const destinationValidatorIdentityAddress = scpSSH(
     ip,
     `solana-keygen pubkey ${validatorKeyPath}`,
-    user
+    user,
   )
     .stdout.toString()
     .trim()
@@ -21,7 +25,7 @@ const checkValidatorKey = (validatorKeyPath: string, ip: string, user: string) =
       chalk.yellow(
         `⚠️ Destination Identity Key is different. 
 Please check your Validator
-$ ssh solv@${ip}
+$ ssh ${user}@${ip}
 
 Local Identity Key: ${localValidatorIdentityAddress}
 Destination Identity Key: ${destinationValidatorIdentityAddress}`,
