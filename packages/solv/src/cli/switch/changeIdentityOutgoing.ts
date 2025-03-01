@@ -46,7 +46,7 @@ export const changeIdentityOutgoing = async (
   }
 
   // Commands to run on the source validator - SpawnSync
-  const step1 = `${agaveSolanaClient} -l ${LEDGER_PATH} wait-for-restart-window --min-idle-time 2 --skip-new-snapshot-check`
+  const step1 = `${agaveSolanaClient} wait-for-restart-window --min-idle-time 2 --skip-new-snapshot-check`
   const step2 = `${activeSolanaClient} set-identity ${unstakedKeyPath}`
   const step3 = `ln -sf ${unstakedKeyPath} ${identityKeyPath}`
   const step4 = `scp ${LEDGER_PATH}/tower-1_9-${pubkey}.bin ${user}@${ip}:${LEDGER_PATH}`
