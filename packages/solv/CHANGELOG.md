@@ -1,4 +1,9 @@
 # @gabrielhicks/solv
+## 5.0.0
+
+### Were going to call it 5
+Ready for Frankendancer Swaps
+
 ## 4.9.1
 
 ### Reformat Frankendancer Swap
