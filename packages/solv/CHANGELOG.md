@@ -1,4 +1,9 @@
 # @gabrielhicks/solv
+## 5.0.2
+
+### Update Jito Frankfurt
+Switches Shred Reciever IP
+
 ## 5.0.1
 
 ### Remove double ledger flag
