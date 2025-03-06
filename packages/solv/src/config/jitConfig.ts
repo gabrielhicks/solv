@@ -14,7 +14,7 @@ export const JITO_CONFIG: JitoConfig = {
   commissionBps: 1000,
   relayerUrl: 'https://frankfurt.mainnet.block-engine.jito.wtf',
   blockEngineUrl: 'http://frankfurt.mainnet.relayer.jito.wtf:8100',
-  shredReceiverAddr: '145.40.93.84:1002',
+  shredReceiverAddr: '64.130.50.14:1002',
 }
 
 export const JITO_REGIONS = {
@@ -26,7 +26,7 @@ export const JITO_REGIONS = {
   Frankfurt: {
     BLOCK_ENGINE_URL: 'https://frankfurt.mainnet.block-engine.jito.wtf',
     RELAYER_URL: 'http://frankfurt.mainnet.relayer.jito.wtf:8100',
-    SHRED_RECEIVER_ADDR: '145.40.93.84:1002',
+    SHRED_RECEIVER_ADDR: '64.130.50.14:1002',
   },
   NewYork: {
     BLOCK_ENGINE_URL: 'https://ny.mainnet.block-engine.jito.wtf',
