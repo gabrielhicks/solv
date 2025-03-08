@@ -1,4 +1,9 @@
 # @gabrielhicks/solv
+## 5.0.3
+
+### Frankendancer Update
+v0.406.21113
+
 ## 5.0.2
 
 ### Update Jito Frankfurt
