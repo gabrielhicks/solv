@@ -12,20 +12,20 @@ import { existsAsync } from '@skeet-framework/utils'
 import { writeFile } from 'fs/promises'
 import updateStartupScriptPermissions from '@/cli/setup/updateStartupScriptPermission'
 
-const setupValidatorNode = async (config: DefaultConfigType) => {
+const setupValidatorNode = async (config: DefaultConfigType, mod = false) => {
   const { NETWORK: network } = config
   if (network === Network.MAINNET) {
     console.log('Mainnet Validator Node Setup')
-    await setupMainnetValidator(config)
+    await setupMainnetValidator(config, mod)
   } else if (network === Network.TESTNET) {
     console.log('Testnet Validator Node Setup')
-    await setupTestnetValidator(config)
+    await setupTestnetValidator(config, mod)
   } else {
     console.log('Unknown Network Validator Node Setup')
   }
 }
 
-const setupMainnetValidator = async (config: DefaultConfigType) => {
+const setupMainnetValidator = async (config: DefaultConfigType, mod = false) => {
   const { VALIDATOR_TYPE: validatorType, MAINNET_SOLANA_VERSION: version } =
     config
   let startupScript = ''
@@ -40,7 +40,7 @@ const setupMainnetValidator = async (config: DefaultConfigType) => {
     case ValidatorType.JITO:
       console.log('JITO Validator Setup for Mainnet')
       const jitoConfig = await readOrCreateJitoConfig()
-      installJito(version)
+      installJito(version, mod)
       startupScript = startJitoValidatorScript(
         jitoConfig.commissionBps,
         jitoConfig.relayerUrl,
@@ -67,7 +67,7 @@ const setupMainnetValidator = async (config: DefaultConfigType) => {
   updateStartupScriptPermissions()
 }
 
-const setupTestnetValidator = async (config: DefaultConfigType) => {
+const setupTestnetValidator = async (config: DefaultConfigType, mod = false) => {
   const { VALIDATOR_TYPE: validatorType } = config
   let startupScript = ''
   switch (validatorType) {
@@ -76,13 +76,13 @@ const setupTestnetValidator = async (config: DefaultConfigType) => {
       startupScript = startTestnetAgaveValidatorScript(config)
     case ValidatorType.AGAVE:
       console.log('Agave Validator Setup for Testnet')
-      installAgave(config.TESTNET_SOLANA_VERSION)
+      installAgave(config.TESTNET_SOLANA_VERSION, mod)
       startupScript = startTestnetAgaveValidatorScript(config)
       break
     case ValidatorType.JITO:
       console.log('JITO Validator Setup for Testnet')
       const jitoConfig = await readOrCreateJitoConfig()
-      installJito(config.TESTNET_SOLANA_VERSION)
+      installJito(config.TESTNET_SOLANA_VERSION, mod)
       startupScript = startJitoValidatorScript(
         jitoConfig.commissionBps,
         jitoConfig.relayerUrl,

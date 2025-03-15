@@ -5,16 +5,28 @@ import firedancerService from '../template/firedancer/firedancerService'
 import configToml from '../template/firedancer/configToml'
 import portRelayService from '../template/firedancer/portRelayService'
 
-const setupFiredancer = async () => {
-  spawnSync(
-    `git clone --recurse-submodules https://github.com/gabrielhicks/firedancer.git`,
-    { shell: true, stdio: 'inherit' },
-  )
-  spawnSync(`git checkout v${VERSION_FIREDANCER}-mod`, {
-    shell: true,
-    stdio: 'inherit',
-    cwd: '/home/solv/firedancer',
-  })
+const setupFiredancer = async (mod = false) => {
+  if(mod) {
+    spawnSync(
+      `git clone --recurse-submodules https://github.com/gabrielhicks/firedancer.git`,
+      { shell: true, stdio: 'inherit' },
+    )
+    spawnSync(`git checkout v${VERSION_FIREDANCER}-mod`, {
+      shell: true,
+      stdio: 'inherit',
+      cwd: '/home/solv/firedancer',
+    })
+  } else {
+    spawnSync(
+      `git clone --recurse-submodules https://github.com/firedancer-io/firedancer.git`,
+      { shell: true, stdio: 'inherit' },
+    )
+    spawnSync(`git checkout v${VERSION_FIREDANCER}`, {
+      shell: true,
+      stdio: 'inherit',
+      cwd: '/home/solv/firedancer',
+    })
+  }
   spawnSync(`./deps.sh`, {
     shell: true,
     stdio: 'inherit',

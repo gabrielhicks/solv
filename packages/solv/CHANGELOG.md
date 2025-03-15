@@ -1,4 +1,10 @@
 # @gabrielhicks/solv
+## 5.0.4
+
+### Config, install, update changes
+v0.407.21113 for testnet as well as v2.2.2
+Removes assumptions for modified code (experimental)
+
 ## 5.0.3
 
 ### Frankendancer Update
