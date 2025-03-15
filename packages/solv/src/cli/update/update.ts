@@ -3,8 +3,8 @@ import { spawnSync } from 'child_process'
 import installAgave from '../install/installAgave'
 import getSolanaCLI from '@/config/getSolanaCLI'
 
-export const updateVersion = async (version: string) => {
-  installAgave(version)
+export const updateVersion = async (version: string, mod = false) => {
+  installAgave(version, mod)
   return
 }
 

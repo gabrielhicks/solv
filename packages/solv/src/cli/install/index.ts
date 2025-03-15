@@ -25,12 +25,18 @@ export const installCommands = (config: DefaultConfigType) => {
       `Solana Version e.g. ${version}`,
       version,
     )
-    .action(async (options: { version: string }) => {
+    .option(
+      '-m, --mod <version>',
+      `Use modified installer`,
+      false,
+    )
+    .action(async (options: { version: string, mod: boolean }) => {
       const isJito = config.VALIDATOR_TYPE === ValidatorType.JITO
+      const isModified = options.mod;
       if (isJito) {
         const jitoVersion = options.version || VERSION_JITO_MAINNET
         const jitoTag = `v${jitoVersion}`
-        jitoUpdate(jitoTag)
+        jitoUpdate(jitoTag, isModified)
         return
       }
       const isRPC = config.NODE_TYPE === NodeType.RPC
@@ -38,6 +44,6 @@ export const installCommands = (config: DefaultConfigType) => {
         version = VERSION_SOLANA_RPC
       }
       const solanaCLIVersion = options.version || version
-      await updateVersion(solanaCLIVersion)
+      await updateVersion(solanaCLIVersion, isModified)
     })
 }
