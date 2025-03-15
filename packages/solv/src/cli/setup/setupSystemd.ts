@@ -35,7 +35,7 @@ fs.nr_open = 1000000
 
     // Update systemd configuration
     execSync(
-      `echo "DefaultLimitNOFILE=1000000" | sudo tee -a ${SERVICE_PATHS.SOL_SYSTEM_CONF}`
+      `echo "DefaultFILE=1000000" | sudo tee -a ${SERVICE_PATHS.SOL_SYSTEM_CONF}`
     )
 
     // Write nofiles configuration

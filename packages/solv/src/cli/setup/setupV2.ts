@@ -20,7 +20,7 @@ import { createSymLink } from './createSymLink'
 import rpcLog from '@/utils/rpcLog'
 import setupFiredancer from './firedancer/setupFiredancer'
 
-export const setupV2 = async (skipInitConfig = false, skipMount = false, pivot = false) => {
+export const setupV2 = async (skipInitConfig = false, skipMount = false, pivot = false, mod = false) => {
   try {
     if (!skipInitConfig) {
       console.log(chalk.white(`🟢 Initializing Setup`))
@@ -56,10 +56,10 @@ export const setupV2 = async (skipInitConfig = false, skipMount = false, pivot =
         await setupRpcNode(latestConfig)
         break
       case NodeType.VALIDATOR:
-        await setupValidatorNode(latestConfig)
+        await setupValidatorNode(latestConfig, mod)
         // Setup Firedancer if needed
         if (latestConfig.VALIDATOR_TYPE === ValidatorType.FRANKENDANCER) {
-          await setupFiredancer()
+          await setupFiredancer(mod)
         }
         break
       default:
