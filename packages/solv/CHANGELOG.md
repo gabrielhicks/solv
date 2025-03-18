@@ -1,4 +1,9 @@
 # @gabrielhicks/solv
+## 5.1.2
+
+### Unsafe Switch
+Adds flag to switch command enabling unsafe switching
+
 ## 5.1.1
 
 ### Bump Jito

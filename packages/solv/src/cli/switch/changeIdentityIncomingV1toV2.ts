@@ -25,6 +25,7 @@ export const changeIdentityIncomingV1toV2 = async (
   pubkey: string,
   config: DefaultConfigType,
   user: string,
+  safe = true
 ) => {
   const isTestnet = config.NETWORK === Network.TESTNET
   const isRPC = config.NODE_TYPE === NodeType.RPC
@@ -48,7 +49,7 @@ export const changeIdentityIncomingV1toV2 = async (
   console.log(chalk.white('🟢 Waiting for restart window...'))
   const restartWindowCmd = `ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ${user}@${ip} -p 22 'cd ~ && source ~/.profile && ${solanaClient} -l ${LEDGER_PATH} wait-for-restart-window --min-idle-time 2 --skip-new-snapshot-check'`
   const result1 = spawnSync(restartWindowCmd, { shell: true, stdio: 'inherit' })
-  if (result1.status !== 0) {
+  if (result1.status !== 0 && safe) {
     console.log(
       chalk.yellow(
         `⚠️ wait-for-restart-window Failed. Please check your Validator\n$ ssh ${user}@${ip}\n\nFailed Cmd: ${solanaClient} -l ${LEDGER_PATH} wait-for-restart-window --min-idle-time 2 --skip-new-snapshot-check`,
