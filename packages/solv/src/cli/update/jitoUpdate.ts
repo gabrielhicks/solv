@@ -11,7 +11,7 @@ export const jitoUpdate = (tag = JITO_CONFIG.tag, mod = false) => {
       },
     )
   } else {
-    spawnSync(`sh -c "$(curl -sSfL https://release.jito.wtf/${tag}/install)"`, {
+    spawnSync(`sh -c "$(curl -sSfL https://release.jito.wtf/${tag}-jito/install)"`, {
       shell: true,
       stdio: 'inherit',
     })

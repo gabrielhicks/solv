@@ -12,7 +12,7 @@ export const installJito = (version = VERSION_JITO_TESTNET, mod = false) => {
       },
     )
   } else {
-    const tag = `v${version}`
+    const tag = `v${version}-jito`
     spawnSync(
       `sh -c "$(curl -sSfL https://raw.githubusercontent.com/jito-foundation/jito-solana/${tag}/installer)"`,
       {

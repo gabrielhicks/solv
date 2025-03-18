@@ -39,7 +39,7 @@ const setupMount = async (
       fileSystem2 = ''
       isLatitude = true
     }
-    ensureFstabEntries(fileSystem1, fileSystem2, isLatitude)
+    ensureFstabEntries(fileSystem1, fileSystem2, '', isLatitude)
   } else {
     // SINGLE
     console.log('Setting up SINGLE DISK...')
