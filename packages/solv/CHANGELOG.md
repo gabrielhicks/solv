@@ -1,4 +1,9 @@
 # @gabrielhicks/solv
+## 5.1.3
+
+### Unsafe Switch
+Default safe, wrap entire check otherwise
+
 ## 5.1.2
 
 ### Unsafe Switch
