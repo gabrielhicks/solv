@@ -4,11 +4,13 @@ import { LANGS } from './langs'
 export enum DISK_TYPES {
   DOUBLE,
   SINGLE,
+  TRIPLE,
 }
 
 export enum MOUNT_TYPES {
   SINGLE = 'single',
   DOUBLE = 'double',
+  TRIPLE = 'triple',
 }
 
 export enum NETWORK_TYPES {

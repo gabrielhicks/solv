@@ -20,6 +20,8 @@ import {
 import {
   DELINQUENT_STAKE_MAINNET,
   DELINQUENT_STAKE_TESTNET,
+  VERSION_FIREDANCER,
+  VERSION_FIREDANCER_TESTNET,
   VERSION_JITO_MAINNET,
   VERSION_JITO_RPC,
   VERSION_JITO_TESTNET,
@@ -28,7 +30,7 @@ import {
   VERSION_TESTNET,
 } from '@/config/versionConfig'
 import { readOrCreateDefaultConfig } from '@/lib/readOrCreateDefaultConfig'
-import { MAINNET_TYPES, NETWORK_TYPES, SOLV_TYPES } from '@/config/config'
+import { DISK_TYPES, MAINNET_TYPES, NETWORK_TYPES, SOLV_TYPES } from '@/config/config'
 
 export * from './update'
 
@@ -40,12 +42,14 @@ export type UpdateOptions = {
   config: boolean
   migrateConfig: boolean
   auto: boolean
+  mod: boolean
 }
 
 export const updateCommands = (config: DefaultConfigType) => {
   const isTestnet = config.NETWORK === Network.TESTNET
   const isRPC = config.NODE_TYPE === NodeType.RPC
   const isJito = config.VALIDATOR_TYPE === ValidatorType.JITO
+  const isFrankendancer = config.VALIDATOR_TYPE === ValidatorType.FRANKENDANCER
   let version = isTestnet ? VERSION_TESTNET : VERSION_MAINNET
   if (isJito) {
     version = VERSION_JITO_MAINNET
@@ -53,10 +57,16 @@ export const updateCommands = (config: DefaultConfigType) => {
       version = VERSION_JITO_TESTNET
     }
   }
+  if (isFrankendancer) {
+    version = VERSION_FIREDANCER
+    if(isTestnet) {
+      version = VERSION_FIREDANCER_TESTNET
+    }
+  }
   if (isRPC) {
     version = VERSION_SOLANA_RPC
     if (isJito) {
-      version = VERSION_JITO_RPC
+       version = VERSION_JITO_RPC
     }
   }
   program
@@ -70,6 +80,7 @@ export const updateCommands = (config: DefaultConfigType) => {
     .option('--migrate-config', 'Migrate Solv Config', false)
     .option('--config', 'Update Solv Config Default Solana Version', false)
     .option('--auto', 'Auto Update', false)
+    .option('--mod', 'Modified Versions', false)
     .action(async (options: UpdateOptions) => {
       const solvVersion = getSolvVersion()
       const deliquentStake = isTestnet
@@ -87,15 +98,22 @@ export const updateCommands = (config: DefaultConfigType) => {
         // Temporarily!!
         // Migrate solv.config.json to solv4.config.json
         const oldConfig = readOrCreateDefaultConfig().config
-        const isTestnetOld = oldConfig.SOLANA_NETWORK === NETWORK_TYPES.TESTNET
+        let diskType = MNT_DISK_TYPE.TRIPLE
+        if (oldConfig.DISK_TYPES === 0) {
+          diskType = MNT_DISK_TYPE.DOUBLE
+        } else if (oldConfig.DISK_TYPES === 1) {
+          diskType = MNT_DISK_TYPE.SINGLE
+        } else {
+          diskType = MNT_DISK_TYPE.TRIPLE
+        }
+          const isTestnetOld =
+            oldConfig.SOLANA_NETWORK === NETWORK_TYPES.TESTNET
         const isRPCOld = oldConfig.SOLV_TYPE === SOLV_TYPES.RPC_NODE
         const isJitoOld = oldConfig.MAINNET_TYPE === MAINNET_TYPES.JITO_MEV
         const newConfigBody: DefaultConfigType = {
           NETWORK: isTestnetOld ? Network.TESTNET : Network.MAINNET,
           NODE_TYPE: isRPCOld ? NodeType.RPC : NodeType.VALIDATOR,
-          MNT_DISK_TYPE: oldConfig.DISK_TYPES === 0
-            ? MNT_DISK_TYPE.DOUBLE
-            : MNT_DISK_TYPE.SINGLE,
+          MNT_DISK_TYPE: diskType,
           RPC_TYPE: isRPCOld ? RpcType.JITO : RpcType.NONE,
           VALIDATOR_TYPE: isJitoOld
             ? ValidatorType.JITO
@@ -108,7 +126,8 @@ export const updateCommands = (config: DefaultConfigType) => {
           TESTNET_DELINQUENT_STAKE: oldConfig.TESTNET_DELINQUENT_STAKE,
           MAINNET_DELINQUENT_STAKE: oldConfig.MAINNET_DELINQUENT_STAKE,
           COMMISSION: oldConfig.COMMISSION,
-          DEFAULT_VALIDATOR_VOTE_ACCOUNT_PUBKEY: oldConfig.DEFAULT_VALIDATOR_VOTE_ACCOUNT_PUBKEY,
+          DEFAULT_VALIDATOR_VOTE_ACCOUNT_PUBKEY:
+            oldConfig.DEFAULT_VALIDATOR_VOTE_ACCOUNT_PUBKEY,
           STAKE_ACCOUNTS: oldConfig.STAKE_ACCOUNT,
           HARVEST_ACCOUNT: oldConfig.HARVEST_ACCOUNT,
           IS_MEV_MODE: oldConfig.IS_MEV_MODE,
@@ -161,13 +180,13 @@ export const updateCommands = (config: DefaultConfigType) => {
         })
 
         if (isJito) {
-          jitoUpdate()
+          jitoUpdate(`v${version}`, options.mod)
           await updateJitoSolvConfig({ version, tag: `v${version}` })
           await monitorUpdate(deliquentStake, true)
           return
         }
 
-        await updateVersion(version)
+        await updateVersion(version, options.mod)
         const deliquentStakeNum = isTestnet
           ? DELINQUENT_STAKE_TESTNET
           : DELINQUENT_STAKE_MAINNET
