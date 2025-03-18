@@ -1,4 +1,9 @@
 # @gabrielhicks/solv
+## 5.1.1
+
+### Bump Jito
+Adds original jito flag back
+
 ## 5.1.0
 
 ### Config, install, update changes
