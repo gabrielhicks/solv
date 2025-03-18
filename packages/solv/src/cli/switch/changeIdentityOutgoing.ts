@@ -27,6 +27,7 @@ export const changeIdentityOutgoing = async (
   config: DefaultConfigType,
   user: string,
   client: string,
+  safe: boolean,
 ) => {
   const isTestnet = config.NETWORK === Network.TESTNET
   const isRPC = config.NODE_TYPE === NodeType.RPC
@@ -57,7 +58,7 @@ export const changeIdentityOutgoing = async (
 
   console.log(chalk.white('🟢 Waiting for restart window...'))
   const result1 = spawnSync(step1, { shell: true, stdio: 'inherit' })
-  if (result1.status !== 0) {
+  if (result1.status !== 0 && safe) {
     console.log(
       chalk.yellow(
         `⚠️ wait-for-restart-window Failed. Please check your Validator\n\nFailed Cmd: ${step1}`,

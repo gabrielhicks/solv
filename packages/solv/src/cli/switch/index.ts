@@ -22,6 +22,7 @@ type SwitchOptions = {
   v2MigrateIncoming: boolean
   user: string
   client: string
+  unsafe: boolean
 }
 
 export const switchCommand = async (
@@ -35,11 +36,13 @@ export const switchCommand = async (
     .option('--v2-migrate-incoming', 'Switch V1 to V2 Incoming', false)
     .option('--user <user>', 'SSH User', 'solv')
     .option('--client <client>', 'Client Type', 'agave')
+    .option('--unsafe', 'Switch without waiting for a restart window', false)
     .description('Switch Validator Identity with No Downtime')
     .action(async (options: SwitchOptions) => {
       try {
         const isTestnet = config.NETWORK === Network.TESTNET
         const isRPC = config.NODE_TYPE === NodeType.RPC
+        const isSafe = options.unsafe === false;
         let keyPath = isTestnet
           ? TESTNET_VALIDATOR_KEY_PATH
           : MAINNET_VALIDATOR_KEY_PATH
@@ -121,12 +124,12 @@ export const switchCommand = async (
               process.exit(0)
             }
             console.log(chalk.white('🟢 Migrating V1 to V2 Incoming...'))
-            await changeIdentityIncomingV1toV2(ip, pubkey, config, user)
+            await changeIdentityIncomingV1toV2(ip, pubkey, config, user, isSafe)
             return
           }
-          await changeIdentityIncoming(ip, pubkey, config, user, client)
+          await changeIdentityIncoming(ip, pubkey, config, user, client, isSafe)
         } else {
-          await changeIdentityOutgoing(ip, pubkey, config, user, client)
+          await changeIdentityOutgoing(ip, pubkey, config, user, client, isSafe)
         }
         process.exit(0)
       } catch (error: any) {
