@@ -27,7 +27,7 @@ export const changeIdentityOutgoing = async (
   config: DefaultConfigType,
   user: string,
   client: string,
-  safe: boolean,
+  safe = true,
 ) => {
   const isTestnet = config.NETWORK === Network.TESTNET
   const isRPC = config.NODE_TYPE === NodeType.RPC
@@ -56,15 +56,17 @@ export const changeIdentityOutgoing = async (
   const step5 = `${activeSolanaClient} set-identity --require-tower ${validatorKeyPath}`
   const step6 = `ln -sf ${validatorKeyPath} ${IDENTITY_KEY_PATH}`
 
-  console.log(chalk.white('🟢 Waiting for restart window...'))
-  const result1 = spawnSync(step1, { shell: true, stdio: 'inherit' })
-  if (result1.status !== 0 && safe) {
-    console.log(
-      chalk.yellow(
-        `⚠️ wait-for-restart-window Failed. Please check your Validator\n\nFailed Cmd: ${step1}`,
-      ),
-    )
-    return
+  if (safe) {
+    console.log(chalk.white('🟢 Waiting for restart window...'))
+    const result1 = spawnSync(step1, { shell: true, stdio: 'inherit' })
+    if (result1.status !== 0) {
+      console.log(
+        chalk.yellow(
+          `⚠️ wait-for-restart-window Failed. Please check your Validator\n\nFailed Cmd: ${step1}`,
+        ),
+      )
+      return
+    }
   }
 
   // Set the identity to the unstaked key
