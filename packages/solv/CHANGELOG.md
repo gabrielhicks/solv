@@ -1,4 +1,9 @@
 # @gabrielhicks/solv
+## 5.1.4
+
+### Mainnet version update
+Bump to 2.1.16
+
 ## 5.1.3
 
 ### Unsafe Switch
