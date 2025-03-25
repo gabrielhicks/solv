@@ -11,7 +11,13 @@ function getUUID(devicePath: string): string {
   })
 
   const uuid = blkid.stdout.trim()
-  return uuid ? `UUID=${uuid}` : devicePath // fallback to raw path if UUID missing
+
+  if (!uuid) {
+    console.warn(`[WARN] Failed to get UUID for ${devicePath}, using raw path`)
+    return devicePath
+  }
+
+  return `UUID=${uuid}`
 }
 
 export const ensureFstabEntries = (
