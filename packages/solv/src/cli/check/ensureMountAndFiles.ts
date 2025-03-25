@@ -1,38 +1,46 @@
 import { MT_PATHS } from '@/config/config'
+import sleep from '@/lib/sleep'
 import { spawnSync } from 'child_process'
 
 /**
  * Helper to get UUID for a given device path
  */
-function getUUID(devicePath: string): string {
-  console.log(`[INFO] Device Path: ${devicePath}`)
-  const blkid = spawnSync(`blkid -s UUID -o value ${devicePath}`, {
-    shell: true,
-    encoding: 'utf8',
-  })
 
-  const uuid = blkid.stdout.trim()
+export async function getUUID(devicePath: string): Promise<string> {
+  for (let attempt = 1; attempt <= 5; attempt++) {
+    const blkid = spawnSync(`blkid -s UUID -o value ${devicePath}`, {
+      shell: true,
+      encoding: 'utf8',
+    })
 
-  if (!uuid) {
-    console.warn(`[WARN] Failed to get UUID for ${devicePath}, using raw path`)
-    return devicePath
-  } else {
-    console.log(`[SUCCESS] Found UUID: ${uuid}`)
+    const uuid = blkid.stdout.trim()
+
+    if (uuid) {
+      console.log(`[SUCCESS] Found UUID for ${devicePath}: ${uuid}`)
+      return `UUID=${uuid}`
+    }
+
+    console.warn(
+      `[WARN] Attempt ${attempt}: Failed to get UUID for ${devicePath}`,
+    )
+    await sleep(5000) // wait 1 second before retrying
   }
 
-  return `UUID=${uuid}`
+  console.error(`[ERROR] Giving up: No UUID for ${devicePath}, using raw path`)
+  return devicePath
 }
 
-export const ensureFstabEntries = (
+
+export const ensureFstabEntries = async (
   fileSystem: string,
   fileSystem2 = '',
   fileSystem3 = '',
   isDouble = false,
   isTriple = false
 ) => {
-  const fs1 = getUUID(fileSystem);
-  const fs2 = getUUID(fileSystem2);
-  const fs3 = getUUID(fileSystem3);
+  const fs1 = await getUUID(fileSystem);
+  const fs2 = await getUUID(fileSystem2);
+  const fs3 = await getUUID(fileSystem3);
 
   let mtLine = `${fs1}        ${MT_PATHS.ROOT}     ext4 defaults 0 0`
 

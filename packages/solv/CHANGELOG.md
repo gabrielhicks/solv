@@ -1,4 +1,9 @@
 # @gabrielhicks/solv
+## 5.1.10
+
+### Update mounts
+Await mounting
+
 ## 5.1.9
 
 ### Update mounts

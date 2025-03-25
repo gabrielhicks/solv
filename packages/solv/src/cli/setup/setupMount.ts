@@ -39,7 +39,7 @@ const setupMount = async (
       fileSystem2 = ''
       isLatitude = true
     }
-    ensureFstabEntries(fileSystem1, fileSystem2, '', isLatitude)
+    await ensureFstabEntries(fileSystem1, fileSystem2, '', isLatitude)
   } else {
     // SINGLE
     console.log('Setting up SINGLE DISK...')
@@ -51,12 +51,12 @@ const setupMount = async (
     if (!mountPoint.includes('/mnt')) {
       const fileSystem = '/dev/' + disks.disks[0].name
       formatDisk(fileSystem)
-      ensureFstabEntries(fileSystem)
+      await ensureFstabEntries(fileSystem)
     } else {
       umount(mountPoint)
       const fileSystem = '/dev/' + disks.disks[0].name
       formatDisk(fileSystem)
-      ensureFstabEntries(fileSystem)
+      await ensureFstabEntries(fileSystem)
     }
   }
 }
