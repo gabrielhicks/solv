@@ -35,7 +35,7 @@ export const setupV2 = async (skipInitConfig = false, skipMount = false, pivot =
     setupDirs()
     if (!skipMount || !pivot) {
       // Mount /mnt/ledger, /mnt/accounts and /mnt/snapshots if third disk is available
-      mountDirs()
+      await mountDirs()
     }
 
     // Generate Systemd Service
