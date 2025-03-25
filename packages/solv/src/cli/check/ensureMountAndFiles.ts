@@ -1,6 +1,19 @@
 import { MT_PATHS } from '@/config/config'
 import { spawnSync } from 'child_process'
 
+/**
+ * Helper to get UUID for a given device path
+ */
+function getUUID(devicePath: string): string {
+  const blkid = spawnSync(`blkid -s UUID -o value ${devicePath}`, {
+    shell: true,
+    encoding: 'utf8',
+  })
+
+  const uuid = blkid.stdout.trim()
+  return uuid ? `UUID=${uuid}` : devicePath // fallback to raw path if UUID missing
+}
+
 export const ensureFstabEntries = (
   fileSystem: string,
   fileSystem2 = '',
@@ -8,17 +21,27 @@ export const ensureFstabEntries = (
   isDouble = false,
   isTriple = false
 ) => {
-  let mtLine = `${fileSystem}        ${MT_PATHS.ROOT}     ext4 auto 0 0`
+  const fs1 = fileSystem.startsWith('/dev/nvme')
+    ? getUUID(fileSystem)
+    : fileSystem
+  const fs2 = fileSystem2.startsWith('/dev/nvme')
+    ? getUUID(fileSystem2)
+    : fileSystem2
+  const fs3 = fileSystem3.startsWith('/dev/nvme')
+    ? getUUID(fileSystem3)
+    : fileSystem3
+
+  let mtLine = `${fs1}        ${MT_PATHS.ROOT}     ext4 defaults 0 0`
 
   if (isDouble) {
-    mtLine = `${fileSystem}        ${MT_PATHS.LEDGER}     ext4 auto 0 0
-${fileSystem2}        ${MT_PATHS.ACCOUNTS}     ext4 auto 0 0`
+    mtLine = `${fs1}        ${MT_PATHS.LEDGER}     ext4 defaults 0 0
+${fs2}        ${MT_PATHS.ACCOUNTS}     ext4 defaults 0 0`
   }
 
   if (isTriple) {
-    mtLine = `${fileSystem}        ${MT_PATHS.LEDGER}     ext4 auto 0 0
-${fileSystem2}        ${MT_PATHS.ACCOUNTS}     ext4 auto 0 0
-${fileSystem3}        ${MT_PATHS.SNAPSHOTS}     ext4 auto 0 0`
+    mtLine = `${fs1}        ${MT_PATHS.LEDGER}     ext4 defaults 0 0
+${fs2}        ${MT_PATHS.ACCOUNTS}     ext4 defaults 0 0
+${fs3}        ${MT_PATHS.SNAPSHOTS}     ext4 defaults 0 0`
   }
 
   const lines = [mtLine]
@@ -29,7 +52,7 @@ ${fileSystem3}        ${MT_PATHS.SNAPSHOTS}     ext4 auto 0 0`
 
   const fstabContent = output.stdout
 
-  const linesToAdd = []
+  const linesToAdd: string[] = []
 
   for (const line of lines) {
     if (!fstabContent.includes(line)) {

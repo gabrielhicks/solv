@@ -23,6 +23,11 @@ export const JITO_REGIONS = {
     RELAYER_URL: 'http://amsterdam.mainnet.relayer.jito.wtf:8100',
     SHRED_RECEIVER_ADDR: '74.118.140.240:1002',
   },
+  London: {
+    BLOCK_ENGINE_URL: 'https://london.mainnet.block-engine.jito.wtf',
+    RELAYER_URL: 'http://london.mainnet.relayer.jito.wtf:8100',
+    SHRED_RECEIVER_ADDR: '142.91.127.175:1002',
+  },
   Frankfurt: {
     BLOCK_ENGINE_URL: 'https://frankfurt.mainnet.block-engine.jito.wtf',
     RELAYER_URL: 'http://frankfurt.mainnet.relayer.jito.wtf:8100',
