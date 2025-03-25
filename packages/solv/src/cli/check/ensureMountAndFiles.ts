@@ -15,6 +15,8 @@ function getUUID(devicePath: string): string {
   if (!uuid) {
     console.warn(`[WARN] Failed to get UUID for ${devicePath}, using raw path`)
     return devicePath
+  } else {
+    console.log(`[SUCCESS] Found UUID: ${uuid}`)
   }
 
   return `UUID=${uuid}`
@@ -27,15 +29,9 @@ export const ensureFstabEntries = (
   isDouble = false,
   isTriple = false
 ) => {
-  const fs1 = fileSystem.startsWith('/dev/nvme')
-    ? getUUID(fileSystem)
-    : fileSystem
-  const fs2 = fileSystem2.startsWith('/dev/nvme')
-    ? getUUID(fileSystem2)
-    : fileSystem2
-  const fs3 = fileSystem3.startsWith('/dev/nvme')
-    ? getUUID(fileSystem3)
-    : fileSystem3
+  const fs1 = getUUID(fileSystem);
+  const fs2 = getUUID(fileSystem2);
+  const fs3 = getUUID(fileSystem3);
 
   let mtLine = `${fs1}        ${MT_PATHS.ROOT}     ext4 defaults 0 0`
 
