@@ -6,6 +6,7 @@ import { updateDefaultConfig } from '@/config/updateDefaultConfig'
 import { formatDisk } from '../formatDisk'
 import { ensureFstabEntries } from '@/cli/check/ensureMountAndFiles'
 import { umount } from '@/cli/check/mt/umount'
+import sleep from '@/lib/sleep'
 
 const mountDirs = async () => {
   // This method can be improved later - Prioritize the NVMe disks over SATA disks
@@ -32,6 +33,9 @@ const mountDirs = async () => {
     let fileSystem2 = isDisk2Formatted ? fileSystemName2 : ''
     let fileSystem3 = isDisk3Formatted ? fileSystemName3 : ''
 
+    console.log('Waiting for formatting to finish...')
+    await sleep(5000)
+    
     ensureFstabEntries(
       isDisk1Formatted ? fileSystem1 : '',
       isDisk2Formatted ? fileSystem2 : '',
