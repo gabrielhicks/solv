@@ -5,6 +5,7 @@ import { spawnSync } from 'child_process'
  * Helper to get UUID for a given device path
  */
 function getUUID(devicePath: string): string {
+  console.log(`[INFO] Device Path: ${devicePath}`)
   const blkid = spawnSync(`blkid -s UUID -o value ${devicePath}`, {
     shell: true,
     encoding: 'utf8',
@@ -58,11 +59,13 @@ ${fs3}        ${MT_PATHS.SNAPSHOTS}     ext4 defaults 0 0`
 
   for (const line of lines) {
     if (!fstabContent.includes(line)) {
+      console.log(`[INFO] Line to add: ${line}`)
       linesToAdd.push(line)
     }
   }
 
   if (linesToAdd.length) {
+    console.log(`[INFO] Lines to add all: ${linesToAdd}`)
     const addCmd = `echo "${linesToAdd.join('\n')}" | sudo tee -a /etc/fstab`
     spawnSync(addCmd, {
       shell: true,
