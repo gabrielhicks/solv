@@ -8,7 +8,7 @@ import { spawnSync } from 'child_process'
 
 export async function getUUID(devicePath: string): Promise<string> {
   for (let attempt = 1; attempt <= 5; attempt++) {
-    const blkid = spawnSync(`blkid -s UUID -o value ${devicePath}`, {
+    const blkid = spawnSync(`sudo blkid -s UUID -o value ${devicePath}`, {
       shell: true,
       encoding: 'utf8',
     })

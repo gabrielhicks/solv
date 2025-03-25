@@ -1,4 +1,9 @@
 # @gabrielhicks/solv
+## 5.1.12
+
+### Sudoer bump
+Retrigger disk via sudo
+
 ## 5.1.11
 
 ### Update mounts
