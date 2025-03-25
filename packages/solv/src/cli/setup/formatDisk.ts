@@ -11,9 +11,13 @@ export const formatDisk = (fileSystem: string) => {
   if (!checkDisk.stdout.trim()) {
     const cmd = `sudo mkfs.ext4 ${fileSystem}`
     spawnSync(cmd, { shell: true, stdio: 'inherit' })
+    spawnSync(`udevadm trigger --action=change`, { shell: true })
+    spawnSync(`udevadm settle`, { shell: true })
     console.log(`${fileSystem} has been formatted.`)
     return true
   } else {
+    spawnSync(`udevadm trigger --action=change`, { shell: true })
+    spawnSync(`udevadm settle`, { shell: true })
     console.log(`${fileSystem} is already formatted.`)
     return false
   }
