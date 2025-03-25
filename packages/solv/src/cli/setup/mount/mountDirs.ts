@@ -36,7 +36,7 @@ const mountDirs = async () => {
     console.log('Waiting for formatting to finish...')
     await sleep(5000)
     
-    ensureFstabEntries(
+    await ensureFstabEntries(
       isDisk1Formatted ? fileSystem1 : '',
       isDisk2Formatted ? fileSystem2 : '',
       isDisk3Formatted ? fileSystem3 : '',
@@ -58,7 +58,7 @@ const mountDirs = async () => {
     let fileSystem1 = isDisk1Formatted ? fileSystemName1 : ''
     let fileSystem2 = isDisk2Formatted ? fileSystemName2 : ''
 
-    ensureFstabEntries(
+    await ensureFstabEntries(
       isDisk1Formatted ? fileSystem1 : '',
       isDisk2Formatted ? fileSystem2 : '',
       '', // No third disk
@@ -74,12 +74,12 @@ const mountDirs = async () => {
     if (!mountPoint.includes('/mnt')) {
       const fileSystem = '/dev/' + disks.disks[0].name
       formatDisk(fileSystem)
-      ensureFstabEntries(fileSystem)
+      await ensureFstabEntries(fileSystem)
     } else {
       umount(mountPoint)
       const fileSystem = '/dev/' + disks.disks[0].name
       formatDisk(fileSystem)
-      ensureFstabEntries(fileSystem)
+      await ensureFstabEntries(fileSystem)
     }
   }
 }
