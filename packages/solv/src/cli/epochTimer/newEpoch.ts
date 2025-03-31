@@ -1,5 +1,5 @@
 import { EpochData } from './epochTimer'
-import { sendDiscord } from '@/lib/sendDiscord'
+// import { sendDiscord } from '@/lib/sendDiscord'
 import writeEpochDataToFile from './writeEpochDataToFile'
 import { getAllKeyPaths } from '@/config/config'
 import { getSolanaAddress } from '@/lib/getSolanaAddress'
@@ -31,7 +31,7 @@ Network: ${config.NETWORK}
 CurrentEpoch: ${currentEpoch.epoch}
 Epoch has been updated!
 Until Next Epoch: Approximately 2 days`
-  await sendDiscord(content)
+  // await sendDiscord(content)
   return 'Epoch has been updated!'
 }
 

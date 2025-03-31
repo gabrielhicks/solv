@@ -1,4 +1,9 @@
 # @gabrielhicks/solv
+## 5.1.15
+
+### Version update
+Remove 5 minute cron, setup less noisy alerts
+
 ## 5.1.14
 
 ### Version update
