@@ -1,6 +1,6 @@
-export const VERSION_TESTNET = '2.2.4'
+export const VERSION_TESTNET = '2.2.6'
 export const VERSION_MAINNET = '2.1.16'
-export const VERSION_JITO_TESTNET = '2.2.4'
+export const VERSION_JITO_TESTNET = '2.2.6'
 export const VERSION_JITO_MAINNET = '2.1.16'
 export const VERSION_JITO_RPC = '2.1.16'
 export const VERSION_SOLANA_RPC = '2.1.16'

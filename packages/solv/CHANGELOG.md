@@ -1,4 +1,9 @@
 # @gabrielhicks/solv
+## 5.1.14
+
+### Version update
+Enable auto update again
+
 ## 5.1.13
 
 ### Version update
