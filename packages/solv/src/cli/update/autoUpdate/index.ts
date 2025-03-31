@@ -1,6 +1,5 @@
 import getSolvVersion from '@/cli/epochTimer/getSolvVersion'
 import {
-  CONFIG,
   getAllKeyPaths,
   NODE_RESTART_REQUIRED_MAINNET,
   NODE_RESTART_REQUIRED_TESTNET,
@@ -30,45 +29,27 @@ const autoUpdate = async (config: DefaultConfigType) => {
     : NODE_RESTART_REQUIRED_TESTNET
   isUpdateRequired = isUpdateRequired && config.AUTO_RESTART
   const address = getSolanaAddress(validatorKey)
-  const msg = `=== ✨ solv updated to the latest version ✨ ===
-Validator Address: ${address}
-solv Version: ${getSolvVersion()}
-Solana Version: ${solanaVersion}
-Network: ${isMainnet ? 'Mainnet' : 'Testnet'}
-isNodeRestartRequired: ${isUpdateRequired}
-`
+  const msg = `**${address}** updated solv to **${getSolvVersion()}** with Solana version **${solanaVersion}**`
   await sendDiscord(msg)
 
   if (isUpdateRequired) {
     // Restart the node
-    const msg = `== ⏳ Restarting the Node ⏳ ==
-Address: ${address}
-This will take a few minutes to catch up...
-※ sometimes it may take longer than expected    
-`
+    const msg = `Restarting **${address}**`
     await sendDiscord(msg)
     try {
       spawnSync(`solv update -b`, { stdio: 'inherit', shell: true })
     } catch (error) {
-      const errorMsg = `❌ Error in restarting the node
-Address: ${address}
-Error: ${error}`
+      const errorMsg = `Error restarting **${address}**`
       await sendDiscord(errorMsg)
       return false
     }
-    const restartMsg = `== 🙆 Your Node has been restarted! ==
-Address: ${address}
-Now Catching up... 🚛💨
-`
+    const restartMsg = `**${address}** has restarted, catching up...`
     await sendDiscord(restartMsg)
     await sleep(180 * 1000)
     // Wait for the node to catch up
     const catchup = await waitCatchup(config)
     if (catchup) {
-      const msg = `== 🟢 Your Node has caught up! ==
-Address: ${address}
-✨ Auto Update Completed ✨
-`
+      const msg = `**${address}** has caught up!`
       await sendDiscord(msg)
     }
     return catchup

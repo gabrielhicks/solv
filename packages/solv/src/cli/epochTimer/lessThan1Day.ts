@@ -1,6 +1,6 @@
 import { EpochData } from './epochTimer'
 import writeEpochDataToFile from './writeEpochDataToFile'
-import alertMessage from './alertMessage'
+// import alertMessage from './alertMessage'
 import { EpochInfoCLIType } from '@/lib/getEpochInfoByRust'
 import { DefaultConfigType } from '@/config/types'
 
@@ -17,7 +17,7 @@ const isLessThan1Day = async (
   ) {
     // Update the database and send a notification
     await writeEpochDataToFile({ ...epochData, isLessThan1Day: true })
-    await alertMessage(currentEpoch, '1 Day', config)
+    // await alertMessage(currentEpoch, '1 Day', config)
   }
 }
 

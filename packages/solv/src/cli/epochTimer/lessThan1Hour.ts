@@ -1,7 +1,7 @@
 import { EpochData } from './epochTimer'
 import { spawnSync } from 'child_process'
 import writeEpochDataToFile from './writeEpochDataToFile'
-import alertMessage from './alertMessage'
+// import alertMessage from './alertMessage'
 import chalk from 'chalk'
 import randomSleep from './randomSleep'
 import { EpochInfoCLIType } from '@/lib/getEpochInfoByRust'
@@ -19,7 +19,7 @@ const lessThan1Hour = async (
   if (totalMinutes < 60 && !epochData.isLessThan1Hour) {
     // Update the database and send a notification
     await writeEpochDataToFile({ ...epochData, isLessThan1Hour: true })
-    await alertMessage(currentEpoch, '1 Hour', config)
+    // await alertMessage(currentEpoch, '1 Hour', config)
 
     // If MEV is enabled, run `solv harvest` command
     if (isMEV && isMainnet) {
