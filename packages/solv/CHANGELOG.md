@@ -2,7 +2,7 @@
 ## 5.1.16
 
 ### Version update
-Turn off health check, turn off auto update
+Turn off health check, turn off auto update, change jito repo
 
 ## 5.1.15
 
