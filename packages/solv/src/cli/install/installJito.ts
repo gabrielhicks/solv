@@ -5,7 +5,7 @@ export const installJito = (version = VERSION_JITO_TESTNET, mod = false) => {
   if(mod) {
     const tag = `v${version}-mod`
     spawnSync(
-      `sh -c "$(curl -sSfL https://raw.githubusercontent.com/gabrielhicks/jito-solana/${tag}/installer)"`,
+      `sh -c "$(curl -sSfL https://raw.githubusercontent.com/gabrielhicks/jito-solana-public/${tag}/installer)"`,
       {
         shell: true,
         stdio: 'inherit',
