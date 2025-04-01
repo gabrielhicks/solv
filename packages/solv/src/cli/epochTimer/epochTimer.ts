@@ -7,7 +7,7 @@ import initOrReadEpochFile from './initEpochFile'
 import checkBalance from './checkBalance'
 import { isValidatorActive } from './isValidatorActive'
 import { getAllKeyPaths, SOLANA_TESTNET_RPC_URL } from '@/config/config'
-import { sendDiscord } from '@/lib/sendDiscord'
+// import { sendDiscord } from '@/lib/sendDiscord'
 import isVersionSame from './isVersionSame'
 import { spawnSync } from 'child_process'
 import { getSolanaAddress } from '@/lib/getSolanaAddress'
@@ -39,11 +39,11 @@ export const epochTimer = async (config: DefaultConfigType) => {
     rpcUrl,
     getSolanaAddress(voteAccountKey),
   )
-  if (!isActive.isActive) {
-    await sendDiscord(
-      `⚠️ Validator is not active!\nVoteAccount: ${isActive.pubkey}\nReason: ${isActive.reason}\nNetwork: ${config.NETWORK}\nPlease check your validator node 👷‍♀️`,
-    )
-  }
+  // if (!isActive.isActive) {
+  //   await sendDiscord(
+  //     `⚠️ Validator is not active!\nVoteAccount: ${isActive.pubkey}\nReason: ${isActive.reason}\nNetwork: ${config.NETWORK}\nPlease check your validator node 👷‍♀️`,
+  //   )
+  // }
   console.log(`Validator is active: ${isActive.isActive}`)
   // Check Validator Account's Balance
   await checkBalance(config)
