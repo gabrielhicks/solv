@@ -1,4 +1,9 @@
 # @gabrielhicks/solv
+## 5.1.18
+
+### Snapshot fetch
+Add snapshot fetch into restart
+
 ## 5.1.17
 
 ### Testnet Downgrade
