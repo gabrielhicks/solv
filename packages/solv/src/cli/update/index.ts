@@ -30,7 +30,7 @@ import {
   VERSION_TESTNET,
 } from '@/config/versionConfig'
 import { readOrCreateDefaultConfig } from '@/lib/readOrCreateDefaultConfig'
-import { DISK_TYPES, MAINNET_TYPES, NETWORK_TYPES, SOLV_TYPES } from '@/config/config'
+import { MAINNET_TYPES, NETWORK_TYPES, SOLV_TYPES } from '@/config/config'
 import { getSnapshot } from '../get/snapshot'
 
 export * from './update'
@@ -188,7 +188,7 @@ export const updateCommands = (config: DefaultConfigType) => {
         }
 
         if(isTestnet) {
-          getSnapshot(isTestnet, '15', config.SNAPSHOTS_PATH, VERSION_TESTNET)
+          getSnapshot(isTestnet, '10', config.SNAPSHOTS_PATH, VERSION_TESTNET)
         }
 
         await updateVersion(version, options.mod)
