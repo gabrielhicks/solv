@@ -1,11 +1,12 @@
 import { SNAPSHOTS_PATH } from '@/config/constants'
+import { VERSION_MAINNET } from '@/config/versionConfig';
 import { spawnSync } from 'node:child_process'
 
 export const getSnapshot = (
   isTest = false,
   minDownloadSpeed = '45',
   snapshotPath = SNAPSHOTS_PATH,
-  version: string,
+  version = VERSION_MAINNET,
   rpcUrl = isTest ? 'https://api.testnet.solana.com' : 'https://api.mainnet-beta.solana.com',
   useAvorio = false,
 ) => {

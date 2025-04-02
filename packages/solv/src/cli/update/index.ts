@@ -31,6 +31,7 @@ import {
 } from '@/config/versionConfig'
 import { readOrCreateDefaultConfig } from '@/lib/readOrCreateDefaultConfig'
 import { DISK_TYPES, MAINNET_TYPES, NETWORK_TYPES, SOLV_TYPES } from '@/config/config'
+import { getSnapshot } from '../get/snapshot'
 
 export * from './update'
 
@@ -186,10 +187,15 @@ export const updateCommands = (config: DefaultConfigType) => {
           return
         }
 
+        if(isTestnet) {
+          getSnapshot(isTestnet, '15', config.SNAPSHOTS_PATH, VERSION_TESTNET)
+        }
+
         await updateVersion(version, options.mod)
         const deliquentStakeNum = isTestnet
           ? DELINQUENT_STAKE_TESTNET
           : DELINQUENT_STAKE_MAINNET
+
         await monitorUpdate(deliquentStakeNum, true)
         return
       } else if (options.commission) {

@@ -1,4 +1,3 @@
-import { ACCOUNTS_PATH, LEDGER_PATH, SNAPSHOTS_PATH } from './constants'
 import { LANGS } from './langs'
 
 export enum DISK_TYPES {
