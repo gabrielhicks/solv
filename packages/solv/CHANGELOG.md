@@ -1,4 +1,9 @@
 # @gabrielhicks/solv
+## 5.1.21
+
+### Auto Upgrade
+Bumping the cron
+
 ## 5.1.20
 
 ### Testnet Upgrade
