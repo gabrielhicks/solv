@@ -1,4 +1,9 @@
 # @gabrielhicks/solv
+## 5.1.20
+
+### Testnet Upgrade
+Testnet is upgrading back to 2.2.7
+
 ## 5.1.19
 
 ### Snapshot fetch
