@@ -1,4 +1,9 @@
 # @gabrielhicks/solv
+## 5.1.22
+
+### Critical Patch
+Update with critical patch
+
 ## 5.1.21
 
 ### Auto Upgrade
