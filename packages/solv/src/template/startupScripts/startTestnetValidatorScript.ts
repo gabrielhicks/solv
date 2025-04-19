@@ -20,6 +20,8 @@ exec agave-validator \\
 --entrypoint entrypoint2.testnet.solana.com:8001 \\
 --entrypoint entrypoint3.testnet.solana.com:8001 \\
 --known-validator 5D1fNXzvv5NjV1ysLjirC4WY92RNsVH18vjmcszZd8on \\
+--known-validator phz4F5mHZcZGC21GRUT6j3AqJxTUGDVAiCKiyucnyy1 \\
+--known-validator rad1u8GKZoyVWxVAKy1cjL84dqhS9mp57uAezPt4iQg \\
 --only-known-rpc \\
 --expected-genesis-hash 4uhcVJyU9pJkvQyS88uRDiswHXSCkY3zQawwpjk2NsNY \\
 --dynamic-port-range 8000-8020 \\
@@ -30,7 +32,7 @@ exec agave-validator \\
 --expected-bank-hash 6A7U1X8WqnWRXWtqaxF15sSYHLT66j1ycBEyFigGwr2Z \\
 --use-snapshot-archives-at-startup when-newest \\
 --limit-ledger-size \\
---block-production-method central-scheduler \\
+--block-production-method central-scheduler-greedy \\
 `
   return script
 }
