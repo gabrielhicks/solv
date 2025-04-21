@@ -59,7 +59,7 @@ export const setupV2 = async (skipInitConfig = false, skipMount = false, pivot =
         await setupValidatorNode(latestConfig, mod)
         // Setup Firedancer if needed
         if (latestConfig.VALIDATOR_TYPE === ValidatorType.FRANKENDANCER) {
-          await setupFiredancer(mod)
+          await setupFiredancer(mod, latestConfig)
         }
         break
       default:

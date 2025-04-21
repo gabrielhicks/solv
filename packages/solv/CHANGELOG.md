@@ -1,4 +1,9 @@
 # @gabrielhicks/solv
+## 5.1.23
+
+### SFDP patch requirement
+Update with critical patch
+
 ## 5.1.22
 
 ### Critical Patch

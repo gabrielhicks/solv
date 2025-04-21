@@ -1,17 +1,22 @@
-import { VERSION_FIREDANCER } from '@/config/versionConfig'
+import { VERSION_FIREDANCER, VERSION_FIREDANCER_TESTNET } from '@/config/versionConfig'
 import { spawnSync } from 'child_process'
+import { promises as fs } from 'fs'
 import startFiredancerScript from './startFiredancerScript'
 import firedancerService from '../template/firedancer/firedancerService'
 import configToml from '../template/firedancer/configToml'
 import portRelayService from '../template/firedancer/portRelayService'
+import { DefaultConfigType } from '@/config/types'
+import { Network } from '@/config/enums'
 
-const setupFiredancer = async (mod = false) => {
-  if(mod) {
+const setupFiredancer = async (mod = false, config?: DefaultConfigType) => {
+  const isTest = config && config.NETWORK === Network.TESTNET ? true : false
+  const latestVersion = isTest ? VERSION_FIREDANCER_TESTNET : VERSION_FIREDANCER
+  if (mod) {
     spawnSync(
       `git clone --recurse-submodules https://github.com/gabrielhicks/firedancer.git`,
       { shell: true, stdio: 'inherit' },
     )
-    spawnSync(`git checkout v${VERSION_FIREDANCER}-mod`, {
+    spawnSync(`git checkout v${latestVersion}-mod`, {
       shell: true,
       stdio: 'inherit',
       cwd: '/home/solv/firedancer',
@@ -21,7 +26,7 @@ const setupFiredancer = async (mod = false) => {
       `git clone --recurse-submodules https://github.com/firedancer-io/firedancer.git`,
       { shell: true, stdio: 'inherit' },
     )
-    spawnSync(`git checkout v${VERSION_FIREDANCER}`, {
+    spawnSync(`git checkout v${latestVersion}`, {
       shell: true,
       stdio: 'inherit',
       cwd: '/home/solv/firedancer',
@@ -71,8 +76,12 @@ const setupFiredancer = async (mod = false) => {
   )
 
   spawnSync(`sudo systemctl daemon-reload`, { shell: true })
-  const toml = configToml()
-  spawnSync(`echo "${toml.body}" | sudo tee ${toml.filePath} > /dev/null`, {
+  const toml = configToml(isTest)
+
+  await fs.writeFile(toml.filePath, toml.body, 'utf-8')
+
+  console.log(`config.toml written to ${toml.filePath}`)
+  spawnSync(`sudo chown solv:solv "${toml.filePath}"`, {
     shell: true,
     stdio: 'inherit',
   })
