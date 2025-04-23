@@ -1,4 +1,9 @@
 # @gabrielhicks/solv
+## 5.1.24
+
+### SFDP testnet update
+Update testnet to 2.2.12
+
 ## 5.1.23
 
 ### SFDP patch requirement
