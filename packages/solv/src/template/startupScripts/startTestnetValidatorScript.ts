@@ -31,7 +31,7 @@ exec agave-validator \\
 --expected-shred-version 64475 \\
 --expected-bank-hash 6A7U1X8WqnWRXWtqaxF15sSYHLT66j1ycBEyFigGwr2Z \\
 --use-snapshot-archives-at-startup when-newest \\
---limit-ledger-size \\
+--limit-ledger-size 50000000 \\
 --block-production-method central-scheduler-greedy \\
 `
   return script
