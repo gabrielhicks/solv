@@ -32,7 +32,7 @@ exec agave-validator \\
 --wait-for-supermajority 312256121 \\
 --expected-shred-version 64475 \\
 --expected-bank-hash 6A7U1X8WqnWRXWtqaxF15sSYHLT66j1ycBEyFigGwr2Z \\
---limit-ledger-size \\
+--limit-ledger-size 50000000 \\
 --block-production-method central-scheduler-greedy \\
 --block-verification-method unified-scheduler \\
 --full-rpc-api \\

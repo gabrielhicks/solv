@@ -1,4 +1,9 @@
 # @gabrielhicks/solv
+## 5.1.25
+
+### Bump installer
+fix installer
+
 ## 5.1.24
 
 ### SFDP testnet update
