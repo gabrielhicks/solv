@@ -36,7 +36,8 @@ export const changeIdentityIncoming = async (
   if (isRPC) {
     validatorKeyPath = TESTNET_VALIDATOR_KEY_PATH
   }
-  const activeSolanaClient = getSolanaCLIActive(client)
+  const [activeSolanaClient, activeSolanaClientConfig] =
+    getSolanaCLIActive(client)
   const agaveSolanaClient = getSolanaCLIAgave()
 
   const isKeyOkay = checkValidatorKey(validatorKeyPath, ip, user)
@@ -60,12 +61,12 @@ export const changeIdentityIncoming = async (
 
   // Set the identity on the unstaked key
   console.log(chalk.white('🟢 Setting identity on the new validator...'))
-  const setIdentityCmd = `ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ${user}@${ip} -p 22 'cd ~ && source ~/.profile && ${activeSolanaClient} set-identity ${unstakedKeyPath}'`
+  const setIdentityCmd = `ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ${user}@${ip} -p 22 'cd ~ && source ~/.profile && ${activeSolanaClient} set-identity ${activeSolanaClientConfig}${unstakedKeyPath}'`
   const result2 = spawnSync(setIdentityCmd, { shell: true, stdio: 'inherit' })
   if (result2.status !== 0) {
     console.log(
       chalk.yellow(
-        `⚠️ Set Identity Failed. Please check your Validator\n$ ssh ${user}@${ip}\n\nFailed Cmd: ${activeSolanaClient} set-identity ${unstakedKeyPath}`,
+        `⚠️ Set Identity Failed. Please check your Validator\n$ ssh ${user}@${ip}\n\nFailed Cmd: ${activeSolanaClient} set-identity ${activeSolanaClientConfig}${unstakedKeyPath}`,
       ),
     )
     return
@@ -112,7 +113,7 @@ export const changeIdentityIncoming = async (
   // Set the identity on the new validator
   console.log(chalk.white('🟢 Setting identity on the new validator...'))
   const result5 = spawnSync(
-    `${activeSolanaClient} set-identity --require-tower ${validatorKeyPath}`,
+    `${activeSolanaClient} set-identity ${activeSolanaClientConfig}--require-tower ${validatorKeyPath}`,
     {
       shell: true,
       stdio: 'inherit',
@@ -121,7 +122,7 @@ export const changeIdentityIncoming = async (
   if (result5.status !== 0) {
     console.log(
       chalk.yellow(
-        `⚠️ Set Identity Failed. Please check your Validator\n\nFailed Cmd: ${activeSolanaClient} set-identity ${validatorKeyPath}\nln -sf ${validatorKeyPath} ${IDENTITY_KEY_PATH}`,
+        `⚠️ Set Identity Failed. Please check your Validator\n\nFailed Cmd: ${activeSolanaClient} set-identity ${activeSolanaClientConfig}${validatorKeyPath}\nln -sf ${validatorKeyPath} ${IDENTITY_KEY_PATH}`,
       ),
     )
     return
