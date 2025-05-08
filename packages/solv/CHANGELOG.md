@@ -1,4 +1,10 @@
 # @gabrielhicks/solv
+## 5.1.26
+
+### New set-identity
+Fix FD set-identity
+
+# @gabrielhicks/solv
 ## 5.1.25
 
 ### Bump installer

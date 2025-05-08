@@ -38,7 +38,7 @@ export const changeIdentityOutgoing = async (
     validatorKeyPath = TESTNET_VALIDATOR_KEY_PATH
   }
 
-  const activeSolanaClient = getSolanaCLIActive(client)
+  const [activeSolanaClient, activeSolanaClientConfig] = getSolanaCLIActive(client)
   const agaveSolanaClient = getSolanaCLIAgave()
 
   const isKeyOkay = checkValidatorKey(validatorKeyPath, ip, user)
@@ -48,12 +48,12 @@ export const changeIdentityOutgoing = async (
 
   // Commands to run on the source validator - SpawnSync
   const step1 = `${agaveSolanaClient} wait-for-restart-window --min-idle-time 2 --skip-new-snapshot-check`
-  const step2 = `${activeSolanaClient} set-identity ${unstakedKeyPath}`
+  const step2 = `${activeSolanaClient} set-identity ${activeSolanaClientConfig}${unstakedKeyPath}`
   const step3 = `ln -sf ${unstakedKeyPath} ${identityKeyPath}`
   const step4 = `scp ${LEDGER_PATH}/tower-1_9-${pubkey}.bin ${user}@${ip}:${LEDGER_PATH}`
 
   // SCP Command to run on the destination validator - scpSSH
-  const step5 = `${activeSolanaClient} set-identity --require-tower ${validatorKeyPath}`
+  const step5 = `${activeSolanaClient} set-identity ${activeSolanaClientConfig}--require-tower ${validatorKeyPath}`
   const step6 = `ln -sf ${validatorKeyPath} ${IDENTITY_KEY_PATH}`
 
   if (safe) {
