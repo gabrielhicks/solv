@@ -1,4 +1,9 @@
 # @gabrielhicks/solv
+## 5.1.27
+
+### New testnet version
+Bump testnet
+
 ## 5.1.26
 
 ### New set-identity
