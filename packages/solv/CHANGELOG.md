@@ -1,4 +1,9 @@
 # @gabrielhicks/solv
+## 5.1.28
+
+### New solv stop check
+Stop solv stop from breaking mainnet
+
 ## 5.1.27
 
 ### New testnet version
