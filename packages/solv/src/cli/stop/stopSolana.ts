@@ -1,4 +1,4 @@
-import { ValidatorType } from '@/config/enums'
+import { Network, ValidatorType } from '@/config/enums'
 import { DefaultConfigType } from '@/config/types'
 import { spawnSync } from 'node:child_process'
 import { readlink } from 'fs/promises'
@@ -11,7 +11,7 @@ export const stopSolana = async (config: DefaultConfigType) => {
     config.VALIDATOR_TYPE === ValidatorType.FRANKENDANCER
       ? 'frankendancer'
       : 'solv'
-  const isTest = config.NETWORK === 'testnet'
+  const isTest = config.NETWORK === Network.TESTNET
 
   const symlinkPath = '/home/solv/identity.json'
   const targetPath = '/home/solv/mainnet-validator-keypair.json'
