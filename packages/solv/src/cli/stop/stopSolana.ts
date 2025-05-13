@@ -1,10 +1,12 @@
 import { ValidatorType } from '@/config/enums'
 import { DefaultConfigType } from '@/config/types'
 import { spawnSync } from 'node:child_process'
-import { readlink, access, constants } from 'fs/promises'
+import { readlink } from 'fs/promises'
+import chalk from 'chalk'
 import readline from 'readline'
 
 export const stopSolana = async (config: DefaultConfigType) => {
+  chalk.white(console.log('Starting solv stop process...'))
   const service =
     config.VALIDATOR_TYPE === ValidatorType.FRANKENDANCER
       ? 'frankendancer'
@@ -17,10 +19,9 @@ export const stopSolana = async (config: DefaultConfigType) => {
   if (!isTest) {
     let symlinkTarget = ''
     try {
-      await access(symlinkPath, constants.F_OK) // Check if file exists
       symlinkTarget = await readlink(symlinkPath)
     } catch (err) {
-      console.error(`Could not verify symlink`)
+      chalk.white(console.log(`Could not verify symlink`))
     }
 
     if (symlinkTarget === targetPath) {
@@ -28,7 +29,7 @@ export const stopSolana = async (config: DefaultConfigType) => {
         `WARNING: You are about to stop a mainnet validator using the mainnet keypair (${targetPath}).\nAre you sure? (yes/no): `,
       )
       if (!confirmed) {
-        console.log('Operation cancelled.')
+        chalk.white(console.log('Operation cancelled.'))
         return
       }
     }
