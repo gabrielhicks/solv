@@ -20,6 +20,7 @@ export const stopSolana = async (config: DefaultConfigType) => {
     let symlinkTarget = ''
     try {
       symlinkTarget = await readlink(symlinkPath)
+      chalk.white(console.log(`Confirmed symlink at: ${symlinkTarget}`))
     } catch (err) {
       chalk.white(console.log(`Could not verify symlink`))
     }
