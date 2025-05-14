@@ -1,4 +1,9 @@
 # @gabrielhicks/solv
+## 5.1.33
+
+### Testnet bump
+Upgrade testnet to 2.2.14
+
 ## 5.1.32
 
 ### Testnet bump
