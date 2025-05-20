@@ -11,7 +11,7 @@ user = \"solv\"
     level_flush = \"WARNING\"
 
 [reporting]
-    solana_metrics_config = \"host=host=https://metrics.solana.com:8086,db=mainnet-beta,u=mainnet-beta_write,p=password"
+    solana_metrics_config = \"host=https://metrics.solana.com:8086,db=mainnet-beta,u=mainnet-beta_write,p=password"
 
 [ledger]
     path = \"/mnt/ledger\"
