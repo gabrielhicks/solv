@@ -1,4 +1,9 @@
 # @gabrielhicks/solv
+## 5.1.37
+
+### FD Bump
+Upgrade testnet to 0.504.20215
+
 ## 5.1.36
 
 ### Testnet Bump
