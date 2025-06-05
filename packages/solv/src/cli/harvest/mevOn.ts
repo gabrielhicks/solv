@@ -21,7 +21,6 @@ type MevOnParam2 = {
 
 type MevOnParam3 = {
   rpcUrl: string
-  harvestAddress: string
 }
 
 const mevOn = async (config: DefaultConfigType) => {
@@ -74,10 +73,7 @@ AUTO RESTART: If you enable this, solv will restart automatically when the solan
     },
   ])
   let rpcUrl = config.RPC_URL
-  let harvestAddress =
-    config.HARVEST_ACCOUNT === ''
-      ? 'Enter your Harvest Address'
-      : config.HARVEST_ACCOUNT
+  let harvestAddress = ''
   const ask2 = await inquirer.prompt<MevOnParam2>([
     {
       type: 'input',
@@ -96,15 +92,7 @@ AUTO RESTART: If you enable this, solv will restart automatically when the solan
         message: 'Enter your RPC URL',
         default: config.RPC_URL,
       },
-      {
-        type: 'input',
-        name: 'harvestAddress',
-        message: 'Enter your Harvest Address',
-        default: harvestAddress,
-        validate: validateSolanaKey,
-      },
     ])
-    harvestAddress = ask3.harvestAddress
     rpcUrl = ask3.rpcUrl
   }
 
