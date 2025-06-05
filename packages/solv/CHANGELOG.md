@@ -1,4 +1,9 @@
 # @gabrielhicks/solv
+## 5.2.2
+
+### Mainnet Auto Restart
+Testing Auto restart parameters for Mainnet
+
 ## 5.2.1
 
 ### self-hosted

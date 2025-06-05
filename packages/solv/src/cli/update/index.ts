@@ -51,6 +51,11 @@ export const updateCommands = (config: DefaultConfigType) => {
   const isRPC = config.NODE_TYPE === NodeType.RPC
   const isJito = config.VALIDATOR_TYPE === ValidatorType.JITO
   const isFrankendancer = config.VALIDATOR_TYPE === ValidatorType.FRANKENDANCER
+  const isAutoRestart = config.AUTO_RESTART
+  let minIdleTime = 10
+  if (isAutoRestart && !isTestnet) {
+    minIdleTime = 30
+  }
   let version = isTestnet ? VERSION_TESTNET : VERSION_MAINNET
   if (isJito) {
     version = VERSION_JITO_MAINNET
@@ -183,7 +188,7 @@ export const updateCommands = (config: DefaultConfigType) => {
         if (isJito) {
           jitoUpdate(`v${version}`, options.mod)
           await updateJitoSolvConfig({ version, tag: `v${version}` })
-          await monitorUpdate(deliquentStake, true)
+          await monitorUpdate(deliquentStake, true, minIdleTime)
           return
         }
 
@@ -196,7 +201,7 @@ export const updateCommands = (config: DefaultConfigType) => {
           ? DELINQUENT_STAKE_TESTNET
           : DELINQUENT_STAKE_MAINNET
 
-        await monitorUpdate(deliquentStakeNum, true)
+        await monitorUpdate(deliquentStakeNum, true, minIdleTime)
         return
       } else if (options.commission) {
         const ansewr = await updateCommissionAsk()
