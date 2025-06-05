@@ -1,4 +1,9 @@
 # @gabrielhicks/solv
+## 5.2.1
+
+### self-hosted
+Change build to self-hosted
+
 ## 5.2.0
 
 ### FD Bump
