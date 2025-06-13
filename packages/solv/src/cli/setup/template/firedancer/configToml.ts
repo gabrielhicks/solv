@@ -1,4 +1,6 @@
-const configToml = (isTest: boolean) => {
+import { JitoConfig } from "@/config/jitConfig"
+
+const configToml = (isTest: boolean, jitoConfig: JitoConfig) => {
   const filePath = '/home/solv/firedancer/config.toml'
   const mainnetBody = `name = \"fd1\"
 user = \"solv\"
@@ -21,12 +23,15 @@ user = \"solv\"
     snapshot_archive_format = \"zstd\"
     require_tower = false
     limit_size = 50_000_000
+    disable_accounts_disk_index = true
 
 [snapshots]
-    enabled = false
-    incremental_snapshots = false
+    enabled = true
+    incremental_snapshots = true
     path = \"/mnt/snapshots\"
     incremental_path = \"/mnt/snapshots\"
+    maximum_full_snapshots_to_retain = 1
+    maximum_incremental_snapshots_to_retain = 1
 
 [gossip]
     entrypoints = [
@@ -67,7 +72,7 @@ user = \"solv\"
    shred_tile_count = 1
 [tiles.bundle]
     enabled = true
-    url = \"https://london.mainnet.block-engine.jito.wtf\"
+    url = \"${jitoConfig.blockEngineUrl}\"
     tip_distribution_program_addr = \"4R3gSG8BpU4t19KYj8CfnbtRpnT8gtk4dvTHxVRwc2r7\"
     tip_payment_program_addr = \"T1pyyaTNZsKv2WcRAB8oVnk93mLJw2XzjtVYqCsaHqt\"
     tip_distribution_authority = \"GZctHpWXmsZC1YHACTGGcHhYxjdRqQvTpYkb9LMvxDib\"
@@ -94,11 +99,14 @@ user = \"solv\"
     snapshot_archive_format = \"zstd\"
     require_tower = false
     limit_size = 50_000_000
+    disable_accounts_disk_index = true
 
 [snapshots]
-    enabled = false
-    incremental_snapshots = false
+    enabled = true
+    incremental_snapshots = true
     path = \"/mnt/snapshots\"
+    maximum_full_snapshots_to_retain = 1
+    maximum_incremental_snapshots_to_retain = 1
 
 [gossip]
     entrypoints = [

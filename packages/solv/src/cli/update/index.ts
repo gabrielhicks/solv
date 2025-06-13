@@ -198,6 +198,12 @@ export const updateCommands = (config: DefaultConfigType) => {
           getSnapshot(isTestnet, '10', config.SNAPSHOTS_PATH, VERSION_TESTNET)
         }
 
+        if (isFrankendancer) {
+          jitoUpdate(`v${version}`, options.mod || isModded)
+          await monitorUpdate(deliquentStake, true, minIdleTime)
+          return
+        }
+
         await updateVersion(version, options.mod || isModded)
         const deliquentStakeNum = isTestnet
           ? DELINQUENT_STAKE_TESTNET

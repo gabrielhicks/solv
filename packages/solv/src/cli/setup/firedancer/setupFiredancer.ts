@@ -1,4 +1,4 @@
-import { VERSION_FIREDANCER, VERSION_FIREDANCER_TESTNET } from '@/config/versionConfig'
+import { VERSION_FIREDANCER, VERSION_FIREDANCER_TESTNET, VERSION_MAINNET, VERSION_TESTNET } from '@/config/versionConfig'
 import { spawnSync } from 'child_process'
 import { promises as fs } from 'fs'
 import startFiredancerScript from './startFiredancerScript'
@@ -7,16 +7,35 @@ import configToml from '../template/firedancer/configToml'
 import portRelayService from '../template/firedancer/portRelayService'
 import { DefaultConfigType } from '@/config/types'
 import { Network } from '@/config/enums'
+import { readOrCreateJitoConfig } from '@/lib/readOrCreateJitoConfig'
+import { setupLogrotate } from '../setupLogrotate'
 
 const setupFiredancer = async (mod = false, config?: DefaultConfigType) => {
   const isTest = config && config.NETWORK === Network.TESTNET ? true : false
   const latestVersion = isTest ? VERSION_FIREDANCER_TESTNET : VERSION_FIREDANCER
+  const latestSubmoduleVersion = isTest ? VERSION_TESTNET : VERSION_MAINNET
+  
   if (mod) {
     spawnSync(
       `git clone --recurse-submodules https://github.com/gabrielhicks/firedancer.git`,
       { shell: true, stdio: 'inherit' },
     )
     spawnSync(`git checkout v${latestVersion}-mod`, {
+      shell: true,
+      stdio: 'inherit',
+      cwd: '/home/solv/firedancer',
+    })
+    spawnSync(`git checkout v${latestSubmoduleVersion}-mod`, {
+      shell: true,
+      stdio: 'inherit',
+      cwd: '/home/solv/firedancer/agave',
+    })
+    spawnSync(`git add .`, {
+      shell: true,
+      stdio: 'inherit',
+      cwd: '/home/solv/firedancer',
+    })
+    spawnSync(`git commit -m "add mods"`, {
       shell: true,
       stdio: 'inherit',
       cwd: '/home/solv/firedancer',
@@ -49,6 +68,8 @@ const setupFiredancer = async (mod = false, config?: DefaultConfigType) => {
       stdio: 'inherit',
     },
   )
+  console.log('JITO Validator Setup for Mainnet')
+  const jitoConfig = await readOrCreateJitoConfig()
   const { filePath, body } = startFiredancerScript()
   spawnSync(`echo "${body}" | sudo tee ${filePath} > /dev/null`, {
     shell: true,
@@ -76,7 +97,7 @@ const setupFiredancer = async (mod = false, config?: DefaultConfigType) => {
   )
 
   spawnSync(`sudo systemctl daemon-reload`, { shell: true })
-  const toml = configToml(isTest)
+  const toml = configToml(isTest, jitoConfig)
 
   await fs.writeFile(toml.filePath, toml.body, 'utf-8')
 
@@ -85,6 +106,7 @@ const setupFiredancer = async (mod = false, config?: DefaultConfigType) => {
     shell: true,
     stdio: 'inherit',
   })
+  setupLogrotate(true);
 }
 
 export default setupFiredancer
