@@ -56,7 +56,15 @@ const setupFiredancer = async (mod = false, config?: DefaultConfigType) => {
     stdio: 'inherit',
     cwd: '/home/solv/firedancer',
   })
-  spawnSync(`make -j fdctl`, {
+  spawnSync(
+    `cargo build --profile release-with-debug`,
+    {
+      shell: true,
+      stdio: 'inherit',
+      cwd: '/home/solv/firedanceragave',
+    },
+  )
+  spawnSync(`make -j fdctl solana`, {
     shell: true,
     stdio: 'inherit',
     cwd: '/home/solv/firedancer',
