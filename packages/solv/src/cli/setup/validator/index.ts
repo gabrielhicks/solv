@@ -13,7 +13,8 @@ import { writeFile } from 'fs/promises'
 import updateStartupScriptPermissions from '@/cli/setup/updateStartupScriptPermission'
 
 const setupValidatorNode = async (config: DefaultConfigType, mod = false) => {
-  const { NETWORK: network } = config
+  const { NETWORK: network, MOD: modConfig } = config
+  mod = modConfig
   if (network === Network.MAINNET) {
     console.log('Mainnet Validator Node Setup')
     await setupMainnetValidator(config, mod)
@@ -26,8 +27,9 @@ const setupValidatorNode = async (config: DefaultConfigType, mod = false) => {
 }
 
 const setupMainnetValidator = async (config: DefaultConfigType, mod = false) => {
-  const { VALIDATOR_TYPE: validatorType, MAINNET_SOLANA_VERSION: version } =
+  const { VALIDATOR_TYPE: validatorType, MAINNET_SOLANA_VERSION: version, MOD: modConfig } =
     config
+  mod = modConfig
   let startupScript = ''
   switch (validatorType) {
     case ValidatorType.SOLANA:
@@ -68,7 +70,8 @@ const setupMainnetValidator = async (config: DefaultConfigType, mod = false) => 
 }
 
 const setupTestnetValidator = async (config: DefaultConfigType, mod = false) => {
-  const { VALIDATOR_TYPE: validatorType } = config
+  const { VALIDATOR_TYPE: validatorType, MOD: modConfig } = config
+  mod = modConfig
   let startupScript = ''
   switch (validatorType) {
     case ValidatorType.SOLANA:

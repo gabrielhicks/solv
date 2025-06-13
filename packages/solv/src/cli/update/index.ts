@@ -52,6 +52,7 @@ export const updateCommands = (config: DefaultConfigType) => {
   const isJito = config.VALIDATOR_TYPE === ValidatorType.JITO
   const isFrankendancer = config.VALIDATOR_TYPE === ValidatorType.FRANKENDANCER
   const isAutoRestart = config.AUTO_RESTART
+  const isModded = config.MOD
   let minIdleTime = 10
   if (isAutoRestart && !isTestnet) {
     minIdleTime = 30
@@ -147,6 +148,7 @@ export const updateCommands = (config: DefaultConfigType) => {
           LEDGER_PATH: oldConfig.LEDGER_PATH,
           ACCOUNTS_PATH: '/mnt/accounts',
           SNAPSHOTS_PATH: '/mnt/snapshots',
+          MOD: false
         }
 
         await updateDefaultConfig(newConfigBody)
@@ -186,7 +188,7 @@ export const updateCommands = (config: DefaultConfigType) => {
         })
 
         if (isJito) {
-          jitoUpdate(`v${version}`, options.mod)
+          jitoUpdate(`v${version}`, options.mod || isModded)
           await updateJitoSolvConfig({ version, tag: `v${version}` })
           await monitorUpdate(deliquentStake, true, minIdleTime)
           return
@@ -196,7 +198,7 @@ export const updateCommands = (config: DefaultConfigType) => {
           getSnapshot(isTestnet, '10', config.SNAPSHOTS_PATH, VERSION_TESTNET)
         }
 
-        await updateVersion(version, options.mod)
+        await updateVersion(version, options.mod || isModded)
         const deliquentStakeNum = isTestnet
           ? DELINQUENT_STAKE_TESTNET
           : DELINQUENT_STAKE_MAINNET

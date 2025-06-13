@@ -16,6 +16,8 @@ import { DefaultConfigType } from '@/config/types'
 import { Network, NodeType } from '@/config/enums'
 import getSolanaCLIActive from '@/config/getSolanaCLIActive'
 import getSolanaCLIAgave from '@/config/getSolanaCLIAgave'
+import { getRemoteClientType } from './getRemoteClientType'
+import { getLocalClientType } from './getLocalClientType'
 
 const unstakedKeyPath = join(SOLV_HOME, UNSTAKED_KEY)
 const identityKeyPath = join(SOLV_HOME, IDENTITY_KEY)
@@ -26,7 +28,6 @@ export const changeIdentityOutgoing = async (
   pubkey: string,
   config: DefaultConfigType,
   user: string,
-  client: string,
   safe = true,
 ) => {
   const isTestnet = config.NETWORK === Network.TESTNET
@@ -38,7 +39,17 @@ export const changeIdentityOutgoing = async (
     validatorKeyPath = TESTNET_VALIDATOR_KEY_PATH
   }
 
-  const [activeSolanaClient, activeSolanaClientConfig] = getSolanaCLIActive(client)
+  // Auto-detect both local and remote client types
+  const localClientResult = await getLocalClientType()
+  const remoteClientResult = await getRemoteClientType(ip, user)
+  
+  const localClient = localClientResult.success ? localClientResult.client : 'agave'
+  const remoteClient = remoteClientResult.success ? remoteClientResult.client : 'agave'
+  
+  console.log(chalk.green(`✅ Local client: ${localClient}, Remote client: ${remoteClient}`))
+
+  const [localSolanaClient, localSolanaClientConfig] = getSolanaCLIActive(localClient)
+  const [remoteSolanaClient, remoteSolanaClientConfig] = getSolanaCLIActive(remoteClient)
   const agaveSolanaClient = getSolanaCLIAgave()
 
   const isKeyOkay = checkValidatorKey(validatorKeyPath, ip, user)
@@ -46,14 +57,14 @@ export const changeIdentityOutgoing = async (
     return
   }
 
-  // Commands to run on the source validator - SpawnSync
+  // Commands to run on the source validator (local) - SpawnSync
   const step1 = `${agaveSolanaClient} wait-for-restart-window --min-idle-time 2 --skip-new-snapshot-check`
-  const step2 = `${activeSolanaClient} set-identity ${activeSolanaClientConfig}${unstakedKeyPath}`
+  const step2 = `${localSolanaClient} set-identity ${localSolanaClientConfig}${unstakedKeyPath}`
   const step3 = `ln -sf ${unstakedKeyPath} ${identityKeyPath}`
   const step4 = `scp ${LEDGER_PATH}/tower-1_9-${pubkey}.bin ${user}@${ip}:${LEDGER_PATH}`
 
-  // SCP Command to run on the destination validator - scpSSH
-  const step5 = `${activeSolanaClient} set-identity ${activeSolanaClientConfig}--require-tower ${validatorKeyPath}`
+  // Commands to run on the destination validator (remote) - scpSSH
+  const step5 = `${remoteSolanaClient} set-identity ${remoteSolanaClientConfig}--require-tower ${validatorKeyPath}`
   const step6 = `ln -sf ${validatorKeyPath} ${IDENTITY_KEY_PATH}`
 
   if (safe) {

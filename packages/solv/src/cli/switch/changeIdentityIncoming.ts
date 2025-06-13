@@ -16,6 +16,8 @@ import { DefaultConfigType } from '@/config/types'
 import { Network, NodeType } from '@/config/enums'
 import getSolanaCLIActive from '@/config/getSolanaCLIActive'
 import getSolanaCLIAgave from '@/config/getSolanaCLIAgave'
+import { getRemoteClientType } from './getRemoteClientType'
+import { getLocalClientType } from './getLocalClientType'
 
 const unstakedKeyPath = join(SOLV_HOME, UNSTAKED_KEY)
 const identityKeyPath = join(SOLV_HOME, IDENTITY_KEY)
@@ -25,7 +27,6 @@ export const changeIdentityIncoming = async (
   pubkey: string,
   config: DefaultConfigType,
   user: string,
-  client: string,
   safe = true,
 ) => {
   const isTestnet = config.NETWORK === Network.TESTNET
@@ -36,8 +37,18 @@ export const changeIdentityIncoming = async (
   if (isRPC) {
     validatorKeyPath = TESTNET_VALIDATOR_KEY_PATH
   }
-  const [activeSolanaClient, activeSolanaClientConfig] =
-    getSolanaCLIActive(client)
+
+  // Auto-detect both local and remote client types
+  const localClientResult = await getLocalClientType()
+  const remoteClientResult = await getRemoteClientType(ip, user)
+  
+  const localClient = localClientResult.success ? localClientResult.client : 'agave'
+  const remoteClient = remoteClientResult.success ? remoteClientResult.client : 'agave'
+  
+  console.log(chalk.green(`✅ Local client: ${localClient}, Remote client: ${remoteClient}`))
+
+  const [localSolanaClient, localSolanaClientConfig] = getSolanaCLIActive(localClient)
+  const [remoteSolanaClient, remoteSolanaClientConfig] = getSolanaCLIActive(remoteClient)
   const agaveSolanaClient = getSolanaCLIAgave()
 
   const isKeyOkay = checkValidatorKey(validatorKeyPath, ip, user)
@@ -59,14 +70,14 @@ export const changeIdentityIncoming = async (
     }
   }
 
-  // Set the identity on the unstaked key
-  console.log(chalk.white('🟢 Setting identity on the new validator...'))
-  const setIdentityCmd = `ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ${user}@${ip} -p 22 'cd ~ && source ~/.profile && ${activeSolanaClient} set-identity ${activeSolanaClientConfig}${unstakedKeyPath}'`
+  // Set the identity on the unstaked key (remote)
+  console.log(chalk.white('🟢 Setting identity on the remote validator...'))
+  const setIdentityCmd = `ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ${user}@${ip} -p 22 'cd ~ && source ~/.profile && ${remoteSolanaClient} set-identity ${remoteSolanaClientConfig}${unstakedKeyPath}'`
   const result2 = spawnSync(setIdentityCmd, { shell: true, stdio: 'inherit' })
   if (result2.status !== 0) {
     console.log(
       chalk.yellow(
-        `⚠️ Set Identity Failed. Please check your Validator\n$ ssh ${user}@${ip}\n\nFailed Cmd: ${activeSolanaClient} set-identity ${activeSolanaClientConfig}${unstakedKeyPath}`,
+        `⚠️ Set Identity Failed. Please check your Validator\n$ ssh ${user}@${ip}\n\nFailed Cmd: ${remoteSolanaClient} set-identity ${remoteSolanaClientConfig}${unstakedKeyPath}`,
       ),
     )
     return
@@ -110,10 +121,10 @@ export const changeIdentityIncoming = async (
     return
   }
 
-  // Set the identity on the new validator
-  console.log(chalk.white('🟢 Setting identity on the new validator...'))
+  // Set the identity on the local validator
+  console.log(chalk.white('🟢 Setting identity on the local validator...'))
   const result5 = spawnSync(
-    `${activeSolanaClient} set-identity ${activeSolanaClientConfig}--require-tower ${validatorKeyPath}`,
+    `${localSolanaClient} set-identity ${localSolanaClientConfig}--require-tower ${validatorKeyPath}`,
     {
       shell: true,
       stdio: 'inherit',
@@ -122,7 +133,7 @@ export const changeIdentityIncoming = async (
   if (result5.status !== 0) {
     console.log(
       chalk.yellow(
-        `⚠️ Set Identity Failed. Please check your Validator\n\nFailed Cmd: ${activeSolanaClient} set-identity ${activeSolanaClientConfig}${validatorKeyPath}\nln -sf ${validatorKeyPath} ${IDENTITY_KEY_PATH}`,
+        `⚠️ Set Identity Failed. Please check your Validator\n\nFailed Cmd: ${localSolanaClient} set-identity ${localSolanaClientConfig}${validatorKeyPath}\nln -sf ${validatorKeyPath} ${IDENTITY_KEY_PATH}`,
       ),
     )
     return

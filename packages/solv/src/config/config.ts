@@ -55,7 +55,7 @@ export enum MAINNET_TYPES {
 }
 
 // ⚠️ Please DO NOT forget to turn this to false if restart is not needed
-export const NODE_RESTART_REQUIRED_MAINNET = true
+export const NODE_RESTART_REQUIRED_MAINNET = false
 export const NODE_RESTART_REQUIRED_TESTNET = false
 
 export type CONFIG_TYPE = {
@@ -88,6 +88,7 @@ export type CONFIG_TYPE = {
   AUTO_RESTART: boolean
   ACCOUNTS_PATH: string
   SNAPSHOTS_PATH: string
+  MOD: boolean
 }
 
 export type PartialConfigType = Partial<CONFIG_TYPE>
@@ -96,8 +97,8 @@ export const CONFIG: CONFIG_TYPE = {
   ID: 'solv',
   LANG: LANGS.EN,
   USERNAME: 'solv',
-  TESTNET_SOLANA_VERSION: '2.2.15',
-  MAINNET_SOLANA_VERSION: '2.2.14',
+  TESTNET_SOLANA_VERSION: '2.2.16',
+  MAINNET_SOLANA_VERSION: '2.2.16',
   NODE_VERSION: '20.17.0',
   TESTNET_DELINQUENT_STAKE: 5,
   MAINNET_DELINQUENT_STAKE: 5,
@@ -123,6 +124,7 @@ export const CONFIG: CONFIG_TYPE = {
   AUTO_RESTART: false,
   ACCOUNTS_PATH: '/mnt/accounts',
   SNAPSHOTS_PATH: '/mnt/snapshots',
+  MOD: false
 }
 
 export const HOME_PATHS = {

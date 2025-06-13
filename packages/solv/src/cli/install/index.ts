@@ -32,7 +32,7 @@ export const installCommands = (config: DefaultConfigType) => {
     )
     .action(async (options: { version: string, mod: boolean }) => {
       const isJito = config.VALIDATOR_TYPE === ValidatorType.JITO
-      const isModified = options.mod;
+      const isModified = options.mod || config.MOD;
       if (isJito) {
         const jitoVersion = options.version || VERSION_JITO_MAINNET
         const jitoTag = `v${jitoVersion}`
