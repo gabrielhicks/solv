@@ -4,7 +4,7 @@ import { spawnSync } from 'node:child_process'
 const installAgave = (version: string, mod = false) => {
   if(mod) {
     spawnSync(
-      `sh -c "$(curl -sSfL https://raw.githubusercontent.com/gabrielhicks/agave-public/v${version}-mod/installer)"`,
+      `sh -c "$(curl -sSfL https://raw.githubusercontent.com/gabrielhicks/agave/v${version}-mod/installer)"`,
       {
         shell: true,
         stdio: 'inherit',

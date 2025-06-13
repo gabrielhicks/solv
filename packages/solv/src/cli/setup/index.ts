@@ -40,6 +40,7 @@ export const setupCommands = (config: DefaultConfigType) => {
     .option('--pivot', 'Pivot install', false)
     .option('--mod', 'Modified install', false)
     .action(async (options: SetupOptions) => {
+      const isModded = config.MOD || options.mod
       try {
         if (options.vote) {
           console.log(chalk.white('🗳️ Setting up Vote Account ...'))
@@ -75,14 +76,14 @@ export const setupCommands = (config: DefaultConfigType) => {
           return
         } else if (options.firedancer) {
           console.log(chalk.white('🔥 Setting up Firedancer ...'))
-          await setupFiredancer(options.mod)
+          await setupFiredancer(isModded)
           return
         }
         await setupV2(
           options.skipInitConfig,
           options.skipMount,
           options.pivot,
-          options.mod,
+          isModded,
         )
       } catch (error: any) {
         if (

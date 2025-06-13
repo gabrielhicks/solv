@@ -32,4 +32,5 @@ export type DefaultConfigType = {
   LEDGER_PATH: string
   ACCOUNTS_PATH: string
   SNAPSHOTS_PATH: string
+  MOD: boolean
 }

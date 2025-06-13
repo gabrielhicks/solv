@@ -1,4 +1,9 @@
 # @gabrielhicks/solv
+## 5.2.4
+
+### 2.2.16 release + config
+Config change
+
 ## 5.2.3
 
 ### Mainnet Auto Restart
