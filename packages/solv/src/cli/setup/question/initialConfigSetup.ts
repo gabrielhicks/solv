@@ -97,7 +97,7 @@ const initialConfigSetup = async () => {
       ])
       commission = answer.commission
       isDummy = answer.isDummy
-      if (validatorType === ValidatorType.JITO) {
+      if (validatorType === ValidatorType.JITO || validatorType === ValidatorType.FRANKENDANCER) {
         await readOrCreateJitoConfig()
         const jitoConfig = await askJitoSetting()
         await updateJitoSolvConfig(jitoConfig)
