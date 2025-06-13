@@ -4,7 +4,7 @@ import { spawnSync } from 'node:child_process'
 const installAgave = (version: string, mod = false) => {
   if(mod) {
     spawnSync(
-      `sh -c "$(curl -sSfL https://raw.githubusercontent.com/gabrielhicks/agave/v${version}-mod/installer)"`,
+      `sh -c "$(curl --netrc-optional -sSfL https://raw.githubusercontent.com/gabrielhicks/agave/v${version}-mod/installer)"`,
       {
         shell: true,
         stdio: 'inherit',
@@ -12,7 +12,7 @@ const installAgave = (version: string, mod = false) => {
     )
   } else {
     spawnSync(
-      `sh -c "$(curl -sSfL https://release.anza.xyz/v${version}/install)"`,
+      `sh -c "$(curl --netrc-optional -sSfL https://release.anza.xyz/v${version}/install)"`,
       {
         shell: true,
         stdio: 'inherit',
