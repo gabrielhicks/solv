@@ -23,7 +23,6 @@ user = \"solv\"
     snapshot_archive_format = \"zstd\"
     require_tower = false
     limit_size = 50_000_000
-    disable_accounts_disk_index = true
 
 [snapshots]
     enabled = true
@@ -31,7 +30,7 @@ user = \"solv\"
     path = \"/mnt/snapshots\"
     incremental_path = \"/mnt/snapshots\"
     maximum_full_snapshots_to_retain = 1
-    maximum_incremental_snapshots_to_retain = 1
+    maximum_incremental_snapshots_to_retain = 2
 
 [gossip]
     entrypoints = [
