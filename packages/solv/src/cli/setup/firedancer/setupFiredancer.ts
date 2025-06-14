@@ -50,6 +50,11 @@ const setupFiredancer = async (mod = false, config?: DefaultConfigType) => {
       stdio: 'inherit',
       cwd: '/home/solv/firedancer',
     })
+    spawnSync(`git submodule update --init --recursive`, {
+      shell: true,
+      stdio: 'inherit',
+      cwd: '/home/solv/firedancer',
+    })
   }
   spawnSync(`./deps.sh`, {
     shell: true,
