@@ -1,4 +1,9 @@
 # @gabrielhicks/solv
+## 5.2.9
+
+### 2.2.16 release + config
+fix firedancer version
+
 ## 5.2.8
 
 ### 2.2.16 release + config
