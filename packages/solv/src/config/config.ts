@@ -57,6 +57,8 @@ export enum MAINNET_TYPES {
 // ⚠️ Please DO NOT forget to turn this to false if restart is not needed
 export const NODE_RESTART_REQUIRED_MAINNET = false
 export const NODE_RESTART_REQUIRED_TESTNET = false
+export const FD_RESTART_REQUIRED_MAINNET = false
+export const FD_RESTART_REQUIRED_TESTNET = false
 
 export type CONFIG_TYPE = {
   ID: string
@@ -149,6 +151,7 @@ export const FILES = {
 export const SERVICE_PATHS = {
   SOL_SERVICE: '/etc/systemd/system/solv.service',
   SOL_LOGROTATE: '/etc/logrotate.d/solana',
+  FRANKENDANCER_LOGROTATE: '/etc/logrotate.d/frankendancer',
   SOL_SYSTEM_CONFIG21: '/etc/sysctl.d/21-solana-validator.conf',
   SOL_NOFILES_CONF: '/etc/security/limits.d/90-solana-nofiles.conf',
   SOL_SYSTEM_CONF: '/etc/systemd/system.conf',

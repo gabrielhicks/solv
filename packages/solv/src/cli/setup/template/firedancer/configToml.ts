@@ -98,14 +98,13 @@ user = \"solv\"
     snapshot_archive_format = \"zstd\"
     require_tower = false
     limit_size = 50_000_000
-    disable_accounts_disk_index = true
 
 [snapshots]
     enabled = true
     incremental_snapshots = true
     path = \"/mnt/snapshots\"
     maximum_full_snapshots_to_retain = 1
-    maximum_incremental_snapshots_to_retain = 1
+    maximum_incremental_snapshots_to_retain = 2
 
 [gossip]
     entrypoints = [
@@ -128,6 +127,8 @@ user = \"solv\"
         \"dDzy5SR3AXdYWVqbDEkVFdvSPCtS9ihF5kJkHCtXoFs\",
         \"Ft5fbkqNa76vnsjYNwjDZUXoTWpP7VYm3mtsaQckQADN\",
         \"eoKpUABi59aT4rR9HGS3LcMecfut9x7zJyodWWP43YQ\",
+        \"phz4F5mHZcZGC21GRUT6j3AqJxTUGDVAiCKiyucnyy1\",
+        \"rad1u8GKZoyVWxVAKy1cjL84dqhS9mp57uAezPt4iQg\",
         \"9QxCLckBiJc783jnMvXZubK4wH86Eqqvashtrwvcsgkv\"
     ]
 

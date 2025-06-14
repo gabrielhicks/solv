@@ -10,6 +10,7 @@ export const showConfig = (solvConfig: DefaultConfigType) => {
   console.log(chalk.white('start-validator.sh: ') + config.scriptPath)
   console.log(chalk.white('solv.service: ') + SERVICE_PATHS.SOL_SERVICE)
   console.log(chalk.white('logrotate: ') + SERVICE_PATHS.SOL_LOGROTATE)
+  console.log(chalk.white('logrotate (fd): ') + SERVICE_PATHS.FRANKENDANCER_LOGROTATE)
   console.log(chalk.white('sysctl.d: ') + SERVICE_PATHS.SOL_SYSTEM_CONFIG21)
   console.log(chalk.white('limits.d: ') + SERVICE_PATHS.SOL_NOFILES_CONF)
   console.log(chalk.white('system.conf: ') + SERVICE_PATHS.SOL_SYSTEM_CONF)

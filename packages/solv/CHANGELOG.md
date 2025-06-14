@@ -1,4 +1,9 @@
 # @gabrielhicks/solv
+## 5.2.12
+
+### Frankendancer Auto Update
+Updating autoUpdate to include Frankendancer
+
 ## 5.2.11
 
 ### Recursive submodule update
