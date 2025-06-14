@@ -1,4 +1,9 @@
 # @gabrielhicks/solv
+## 5.2.10
+
+### Recursive submodule update
+fix firedancer version
+
 ## 5.2.9
 
 ### 2.2.16 release + config
