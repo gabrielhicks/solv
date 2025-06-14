@@ -56,14 +56,6 @@ const setupFiredancer = async (mod = false, config?: DefaultConfigType) => {
     stdio: 'inherit',
     cwd: '/home/solv/firedancer',
   })
-  spawnSync(
-    `cargo build --profile release-with-debug`,
-    {
-      shell: true,
-      stdio: 'inherit',
-      cwd: '/home/solv/firedanceragave',
-    },
-  )
   spawnSync(`make -j fdctl solana`, {
     shell: true,
     stdio: 'inherit',
@@ -76,7 +68,6 @@ const setupFiredancer = async (mod = false, config?: DefaultConfigType) => {
       stdio: 'inherit',
     },
   )
-  console.log('JITO Validator Setup for Mainnet')
   const jitoConfig = await readOrCreateJitoConfig()
   const { filePath, body } = startFiredancerScript()
   spawnSync(`echo "${body}" | sudo tee ${filePath} > /dev/null`, {
