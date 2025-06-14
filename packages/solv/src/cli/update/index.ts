@@ -32,6 +32,7 @@ import {
 import { readOrCreateDefaultConfig } from '@/lib/readOrCreateDefaultConfig'
 import { MAINNET_TYPES, NETWORK_TYPES, SOLV_TYPES } from '@/config/config'
 import { getSnapshot } from '../get/snapshot'
+import { frankendancerUpdate } from './frankendancerUpdate'
 
 export * from './update'
 
@@ -199,7 +200,7 @@ export const updateCommands = (config: DefaultConfigType) => {
         }
 
         if (isFrankendancer) {
-          jitoUpdate(`v${version}`, options.mod || isModded)
+          await frankendancerUpdate(config, version, options.mod || isModded)
           await monitorUpdate(deliquentStake, true, minIdleTime)
           return
         }
