@@ -1,4 +1,9 @@
 # @gabrielhicks/solv
+## 5.2.15
+
+### Add jito / singapore region
+Add Singapore Jito config
+
 ## 5.2.14
 
 ### Fix last service restart for FD
