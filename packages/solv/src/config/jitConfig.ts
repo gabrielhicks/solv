@@ -48,4 +48,9 @@ export const JITO_REGIONS = {
     RELAYER_URL: 'http://slc.mainnet.relayer.jito.wtf:8100',
     SHRED_RECEIVER_ADDR: '64.130.53.8:1002',
   },
+  Singapore: {
+    BLOCK_ENGINE_URL: 'https://singapore.mainnet.block-engine.jito.wtf/',
+    RELAYER_URL: 'http://singapore.mainnet.relayer.jito.wtf:8100',
+    SHRED_RECEIVER_ADDR: '202.8.11.224:1002',
+  },
 }
