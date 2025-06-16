@@ -1,4 +1,9 @@
 # @gabrielhicks/solv
+## 5.2.14
+
+### Fix last service restart for FD
+Updating autoUpdate to include Frankendancer
+
 ## 5.2.13
 
 ### Testnet Auto Update

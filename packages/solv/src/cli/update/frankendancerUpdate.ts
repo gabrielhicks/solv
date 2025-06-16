@@ -57,7 +57,7 @@ export const frankendancerUpdate = async (config: DefaultConfigType, version?: s
 
   // Restart services
   spawnSync(
-    `sudo systemctl restart firedancer`,
+    `sudo systemctl restart frankendancer`,
     { shell: true, stdio: 'inherit' },
   )
   spawnSync(
