@@ -14,7 +14,7 @@ const setupFiredancer = async (mod = false, config?: DefaultConfigType) => {
   const isTest = config && config.NETWORK === Network.TESTNET ? true : false
   const latestVersion = isTest ? VERSION_FIREDANCER_TESTNET : VERSION_FIREDANCER
   const latestSubmoduleVersion = isTest ? VERSION_TESTNET : VERSION_MAINNET
-  
+
   if (mod) {
     spawnSync(
       `git clone --recurse-submodules https://github.com/gabrielhicks/firedancer.git`,
@@ -56,6 +56,18 @@ const setupFiredancer = async (mod = false, config?: DefaultConfigType) => {
       cwd: '/home/solv/firedancer',
     })
   }
+  // Temp rust bug
+  spawnSync(`rustup uninstall 1.84.1-x86_64-unknown-linux-gnu`, {
+    shell: true,
+    stdio: 'inherit',
+    cwd: '/home/solv/firedancer',
+  })
+  spawnSync(`rustup install 1.84.1`, {
+    shell: true,
+    stdio: 'inherit',
+    cwd: '/home/solv/firedancer',
+  })
+
   spawnSync(
     `export FD_AUTO_INSTALL_PACKAGES=1 && ./deps.sh fetch check install`,
     {
@@ -113,7 +125,7 @@ const setupFiredancer = async (mod = false, config?: DefaultConfigType) => {
     shell: true,
     stdio: 'inherit',
   })
-  setupLogrotate(true);
+  setupLogrotate(true)
 }
 
 export default setupFiredancer

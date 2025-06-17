@@ -36,6 +36,19 @@ export const frankendancerUpdate = async (config: DefaultConfigType, version?: s
       { shell: true, stdio: 'inherit' },
     )
   }
+  
+
+  // Temp rust bug
+  spawnSync(`rustup uninstall 1.84.1-x86_64-unknown-linux-gnu`, {
+    shell: true,
+    stdio: 'inherit',
+    cwd: '/home/solv/firedancer',
+  })
+  spawnSync(`rustup install 1.84.1`, {
+    shell: true,
+    stdio: 'inherit',
+    cwd: '/home/solv/firedancer',
+  })
 
   // Rebuild Firedancer
   spawnSync(

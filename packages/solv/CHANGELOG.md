@@ -1,4 +1,9 @@
 # @gabrielhicks/solv
+## 5.2.16
+
+### 2.3.0 Upgrade
+Updating Testnet to 2.3.0
+
 ## 5.2.15
 
 ### Add jito / singapore region
