@@ -1,4 +1,11 @@
 # @gabrielhicks/solv
+## 5.2.19
+
+### 2.3.2 Upgrade
+Updating Testnet to 2.3.2
+### testnet template shred update
+Testnet feature restart shred is 9065
+
 ## 5.2.18
 
 ### 2.3.1 Upgrade
