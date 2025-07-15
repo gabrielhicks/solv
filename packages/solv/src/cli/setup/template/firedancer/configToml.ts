@@ -120,8 +120,8 @@ user = \"solv\"
         \"/home/solv/testnet-validator-keypair.json\"
     ]
     expected_genesis_hash = \"4uhcVJyU9pJkvQyS88uRDiswHXSCkY3zQawwpjk2NsNY\"
-    expected_bank_hash = \"6A7U1X8WqnWRXWtqaxF15sSYHLT66j1ycBEyFigGwr2Z\"
-    expected_shred_version = 64475
+    expected_bank_hash = \"4oMrSXsLTiCc1X7S27kxSfGVraTCZoZ7YTy2skEB9bPk\"
+    expected_shred_version = 9065
     known_validators = [
         \"5D1fNXzvv5NjV1ysLjirC4WY92RNsVH18vjmcszZd8on\", 
         \"dDzy5SR3AXdYWVqbDEkVFdvSPCtS9ihF5kJkHCtXoFs\",

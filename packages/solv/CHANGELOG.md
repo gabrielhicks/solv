@@ -1,4 +1,9 @@
 # @gabrielhicks/solv
+## 5.2.20
+
+### 2.3.4 Upgrade shred
+Updating Testnet to 2.3.4
+
 ## 5.2.19
 
 ### 2.3.4 Upgrade
