@@ -1,4 +1,9 @@
 # @gabrielhicks/solv
+## 5.2.21
+
+### 2.3.4 auto upate
+Updating Testnet to 2.3.4
+
 ## 5.2.20
 
 ### 2.3.4 Upgrade shred
