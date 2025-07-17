@@ -44,6 +44,7 @@ const initialConfigSetup = async () => {
         default: NodeType.RPC,
       },
     ])
+    let isTestnet = answer.network === Network.TESTNET
     if (answer.nodeType === NodeType.VALIDATOR) {
       const validatorChoices =
         answer.network === Network.MAINNET
@@ -99,7 +100,7 @@ const initialConfigSetup = async () => {
       isDummy = answer.isDummy
       if (validatorType === ValidatorType.JITO || validatorType === ValidatorType.FRANKENDANCER) {
         await readOrCreateJitoConfig()
-        const jitoConfig = await askJitoSetting()
+        const jitoConfig = await askJitoSetting(isTestnet)
         await updateJitoSolvConfig(jitoConfig)
       }
     }
