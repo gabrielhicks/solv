@@ -6,7 +6,7 @@ import {
 } from '@/config/constants'
 import { DefaultConfigType } from '@/config/types'
 
-export const startJitoValidatorScript = (
+export const startJitoMainnetScript = (
   commissionBps = 1000,
   relayerUrl: string,
   blockEngineUrl: string,

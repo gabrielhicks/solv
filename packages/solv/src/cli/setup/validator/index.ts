@@ -5,7 +5,8 @@ import { STARTUP_SCRIPT } from '@/config/constants'
 import { Network, ValidatorType } from '@/config/enums'
 import { DefaultConfigType } from '@/config/types'
 import { readOrCreateJitoConfig } from '@/lib/readOrCreateJitoConfig'
-import { startJitoValidatorScript } from '@/template/startupScripts/startJitoValidatorScript'
+import { startJitoMainnetScript } from '@/template/startupScripts/startJitoMainnetScript'
+import { startJitoTestnetScript } from '@/template/startupScripts/startJitoTestnetScript'
 import { startMainnetValidatorScript } from '@/template/startupScripts/startMainnetValidatorScript'
 import { startTestnetAgaveValidatorScript } from '@/template/startupScripts/startTestnetAgaveValidatorScript'
 import { existsAsync } from '@skeet-framework/utils'
@@ -43,7 +44,7 @@ const setupMainnetValidator = async (config: DefaultConfigType, mod = false) => 
       console.log('JITO Validator Setup for Mainnet')
       const jitoConfig = await readOrCreateJitoConfig()
       installJito(version, mod)
-      startupScript = startJitoValidatorScript(
+      startupScript = startJitoMainnetScript(
         jitoConfig.commissionBps,
         jitoConfig.relayerUrl,
         jitoConfig.blockEngineUrl,
@@ -86,7 +87,7 @@ const setupTestnetValidator = async (config: DefaultConfigType, mod = false) => 
       console.log('JITO Validator Setup for Testnet')
       const jitoConfig = await readOrCreateJitoConfig()
       installJito(config.TESTNET_SOLANA_VERSION, mod)
-      startupScript = startJitoValidatorScript(
+      startupScript = startJitoTestnetScript(
         jitoConfig.commissionBps,
         jitoConfig.relayerUrl,
         jitoConfig.blockEngineUrl,

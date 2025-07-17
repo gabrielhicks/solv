@@ -1,4 +1,9 @@
 # @gabrielhicks/solv
+## 5.2.22
+
+### 2.3.4 auto upate with jito
+Updating Testnet to 2.3.4
+
 ## 5.2.21
 
 ### 2.3.4 auto upate
