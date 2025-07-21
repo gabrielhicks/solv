@@ -1,4 +1,9 @@
 # @gabrielhicks/solv
+## 5.2.23
+
+### 2.3.5 and 2.2.20
+Updating Testnet and Mainnet versions
+
 ## 5.2.22
 
 ### 2.3.4 auto upate with jito
