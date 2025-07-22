@@ -1,4 +1,9 @@
 # @gabrielhicks/solv
+## 5.2.24
+
+### 2.3.5 and 2.2.20
+Push auto updarte if anyone subscribes
+
 ## 5.2.23
 
 ### 2.3.5 and 2.2.20
