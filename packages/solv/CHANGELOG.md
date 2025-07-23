@@ -1,4 +1,9 @@
 # @gabrielhicks/solv
+## 5.2.25
+
+### testnet rollback
+Roll back to 2.2.20
+
 ## 5.2.24
 
 ### 2.3.5 and 2.2.20
