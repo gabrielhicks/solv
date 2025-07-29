@@ -1,4 +1,9 @@
 # @gabrielhicks/solv
+## 5.2.26
+
+### Bum versions to 2.3.6
+Update configuration
+
 ## 5.2.25
 
 ### testnet rollback
