@@ -73,6 +73,10 @@ export const frankendancerUpdate = async (config: DefaultConfigType, version?: s
     `sudo systemctl restart frankendancer`,
     { shell: true, stdio: 'inherit' },
   )
+  spawnSync(`sudo rm -rf /mnt/accounts/snapshot`, {
+    shell: true,
+    stdio: 'inherit',
+  })
   spawnSync(
     `sudo systemctl restart port-relay`,
     { shell: true, stdio: 'inherit' },
