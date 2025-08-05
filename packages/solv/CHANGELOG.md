@@ -1,4 +1,9 @@
 # @gabrielhicks/solv
+## 5.2.27
+
+### New testnet firedancer update
+Update FD to 2.3
+
 ## 5.2.26
 
 ### Bum versions to 2.3.6
