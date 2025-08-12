@@ -1,4 +1,9 @@
 # @gabrielhicks/solv
+## 5.2.28
+
+### New testnet firedancer update
+Update FD to 0.703
+
 ## 5.2.27
 
 ### New testnet firedancer update
