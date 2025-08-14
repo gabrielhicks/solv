@@ -1,4 +1,9 @@
 # @gabrielhicks/solv
+## 5.2.29
+
+### New testnet update
+Update to 2.3.6
+
 ## 5.2.28
 
 ### New testnet firedancer update
