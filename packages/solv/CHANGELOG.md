@@ -1,4 +1,9 @@
 # @gabrielhicks/solv
+## 5.3.2
+
+### New mainnet update
+Add some known validators
+
 ## 5.3.1
 
 ### New testnet update
