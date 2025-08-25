@@ -25,6 +25,8 @@ exec ${solanaCLI} \\
 --known-validator 7Np41oeYqPefeNQEHSv1UDhYrehxin3NStELsSKCT4K2 \\
 --known-validator GdnSyH3YtwcxFvQrVVJMm1JhTS4QVX7MFsX56uJLUfiZ \\
 --known-validator CakcnaRDHka2gXyfbEd2d3xsvkJkqsLw2akB3zsN1D2S \\
+--known-validator phz1CRbEsCtFCh2Ro5tjyu588VU1WPMwW9BJS9yFNn2 \\
+--known-validator wetkjRRRDrSPAzHqfVHtFDbhNnejKm5UPfkHeccFCpo \\
 --expected-genesis-hash 5eykt4UsFv8P8NJdTREpY1vzqKqZKvdpKuc147dw2N9d \\
 --expected-shred-version 50093 \\
 --dynamic-port-range 8000-8020 \\
