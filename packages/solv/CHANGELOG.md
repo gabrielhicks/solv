@@ -1,4 +1,9 @@
 # @gabrielhicks/solv
+## 5.3.1
+
+### New testnet update
+Update to 0.706
+
 ## 5.3.0
 
 ### New testnet update
