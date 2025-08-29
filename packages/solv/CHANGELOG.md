@@ -1,4 +1,9 @@
 # @gabrielhicks/solv
+## 5.3.3
+
+### New mainnet and testnet bumps
+agave/jito to 2.3.7, fd to 0.707
+
 ## 5.3.2
 
 ### New mainnet update
