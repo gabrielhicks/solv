@@ -1,4 +1,9 @@
 # @gabrielhicks/solv
+## 5.3.6
+
+### change delinuqency status
+allow testnet more room for restart
+
 ## 5.3.5
 
 ### add auto update
