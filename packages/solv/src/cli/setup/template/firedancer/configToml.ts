@@ -23,6 +23,7 @@ user = \"solv\"
     snapshot_archive_format = \"zstd\"
     require_tower = false
     limit_size = 50_000_000
+    enable_accounts_disk_index = false
 
 [snapshots]
     enabled = true
@@ -52,7 +53,12 @@ user = \"solv\"
         \"Certusm1sa411sMpV9FPqU5dXAYhmmhygvxJ23S6hJ24\", 
         \"7Np41oeYqPefeNQEHSv1UDhYrehxin3NStELsSKCT4K2\",
         \"GdnSyH3YtwcxFvQrVVJMm1JhTS4QVX7MFsX56uJLUfiZ\",
-        \"CakcnaRDHka2gXyfbEd2d3xsvkJkqsLw2akB3zsN1D2S\"
+        \"CakcnaRDHka2gXyfbEd2d3xsvkJkqsLw2akB3zsN1D2S\",
+        \"rad1u8GKZoyVWxVAKy1cjL84dqhS9mp57uAezPt4iQg\",
+        \"phz4F5mHZcZGC21GRUT6j3AqJxTUGDVAiCKiyucnyy1\",
+        \"wetkjRRRDrSPAzHqfVHtFDbhNnejKm5UPfkHeccFCpo\",
+        \"YE11a5nVJtUNqsojkphYuWc7StqBzbCeFH6BjhAAUEV\",
+        \"dmMwc4RazLHkvDZYrWAfbHQ6cViAvNa5szCJKaiun8S\"
     ]
 
 [rpc]
@@ -69,13 +75,17 @@ user = \"solv\"
    verify_tile_count = 6
    bank_tile_count = 4
    shred_tile_count = 1
+
 [tiles.bundle]
     enabled = true
     url = \"${jitoConfig.blockEngineUrl}\"
     tip_distribution_program_addr = \"4R3gSG8BpU4t19KYj8CfnbtRpnT8gtk4dvTHxVRwc2r7\"
     tip_payment_program_addr = \"T1pyyaTNZsKv2WcRAB8oVnk93mLJw2XzjtVYqCsaHqt\"
     tip_distribution_authority = \"GZctHpWXmsZC1YHACTGGcHhYxjdRqQvTpYkb9LMvxDib\"
-    commission_bps = 1000`
+    commission_bps = 1000
+
+[tiles.pack]
+  schedule_strategy = \"balanced\"`
 
   const testnetBody = `name = \"fd1\"
 user = \"solv\"
@@ -127,8 +137,10 @@ user = \"solv\"
         \"dDzy5SR3AXdYWVqbDEkVFdvSPCtS9ihF5kJkHCtXoFs\",
         \"Ft5fbkqNa76vnsjYNwjDZUXoTWpP7VYm3mtsaQckQADN\",
         \"eoKpUABi59aT4rR9HGS3LcMecfut9x7zJyodWWP43YQ\",
-        \"phz4F5mHZcZGC21GRUT6j3AqJxTUGDVAiCKiyucnyy1\",
         \"rad1u8GKZoyVWxVAKy1cjL84dqhS9mp57uAezPt4iQg\",
+        \"phz4F5mHZcZGC21GRUT6j3AqJxTUGDVAiCKiyucnyy1\",
+        \"hxTzWqz2WMdLhbMgYfsWiWYdtx8pY582FKwQpfGL59M\",
+        \"naterTR45j7aWs16S3qx8V29CfM314dzfvtCSitiAYi\",
         \"9QxCLckBiJc783jnMvXZubK4wH86Eqqvashtrwvcsgkv\"
     ]
 
@@ -147,12 +159,15 @@ user = \"solv\"
    quic_tile_count = 1
    
 [tiles.bundle]
-    enabled = false
+    enabled = true
     url = \"https://ny.testnet.block-engine.jito.wtf\"
     tip_distribution_program_addr = \"F2Zu7QZiTYUhPd7u9ukRVwxh7B71oA3NMJcHuCHc29P2\"
     tip_payment_program_addr = \"GJHtFqM9agxPmkeKjHny6qiRKrXZALvvFGiKf11QE7hy\"
     tip_distribution_authority = \"GZctHpWXmsZC1YHACTGGcHhYxjdRqQvTpYkb9LMvxDib\"
-    commission_bps = 10000`
+    commission_bps = 10000
+
+[tiles.pack]
+  schedule_strategy = "balanced"`
 
     const body = isTest ? testnetBody : mainnetBody
 
