@@ -1,4 +1,9 @@
 # @gabrielhicks/solv
+## 5.3.16
+
+### Update to 3.0.0v9
+allow testnet more room for restart
+
 ## 5.3.15
 
 ### Update to 3.0.0v8

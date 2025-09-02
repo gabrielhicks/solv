@@ -89,6 +89,10 @@ export const jitoUpdate = (tag = JITO_CONFIG.tag, mod = false) => {
       shell: true,
       stdio: 'inherit',
     })
+    spawnSync(`solv get snapshot`, {
+      shell: true,
+      stdio: 'inherit',
+    })
   } else {
     spawnSync(`sudo apt-get update`, {
       shell: true,
@@ -173,6 +177,10 @@ export const jitoUpdate = (tag = JITO_CONFIG.tag, mod = false) => {
       stdio: 'inherit',
     })
     spawnSync(`sudo systemctl daemon-reload`, {
+      shell: true,
+      stdio: 'inherit',
+    })
+    spawnSync(`solv get snapshot`, {
       shell: true,
       stdio: 'inherit',
     })

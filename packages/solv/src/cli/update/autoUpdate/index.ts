@@ -13,7 +13,6 @@ import { getSolanaAddress } from '@/lib/getSolanaAddress'
 import sleep from '@/lib/sleep'
 import { DefaultConfigType } from '@/config/types'
 import { Network, ValidatorType } from '@/config/enums'
-import getSolanaVersion from '@/cli/epochTimer/getSolanaVersion'
 
 // NODE_RESTART_REQUIRED_MAINNET/TESTNET is a boolean
 // This is a global variable that is not defined in this file
