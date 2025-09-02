@@ -3,6 +3,23 @@ import { spawnSync } from 'node:child_process'
 // Agave Install e.g. installAgave('0.1.0')
 const installAgave = (version: string, mod = false) => {
   if(mod) {
+    spawnSync(`sudo apt-get update`, {
+      shell: true,
+      stdio: 'inherit',
+    })
+    spawnSync(`sudo apt-get install -y libclang-18-dev clang-18 llvm-18-dev`, {
+      shell: true,
+      stdio: 'inherit',
+    })
+    spawnSync(
+      `grep -qxF 'export LIBCLANG_PATH=/usr/lib/llvm-18/lib' /home/solv/.profile || echo 'export LIBCLANG_PATH=/usr/lib/llvm-18/lib' >> /home/solv/.profile`,
+      { shell: true, stdio: 'inherit' },
+    )
+    spawnSync(
+      `grep -qxF 'export CLANG_PATH=/usr/bin/clang-18' /home/solv/.profile || echo 'export CLANG_PATH=/usr/bin/clang-18' >> /home/solv/.profile`,
+      { shell: true, stdio: 'inherit' },
+    )
+    spawnSync(`source /home/solv/.profile`, { shell: true, stdio: 'inherit' })
     spawnSync(`mkdir /tmp/${version}-agave-mod`, {
       shell: true,
       stdio: 'inherit',
@@ -76,6 +93,23 @@ const installAgave = (version: string, mod = false) => {
       stdio: 'inherit',
     })
   } else {
+    spawnSync(`sudo apt-get update`, {
+      shell: true,
+      stdio: 'inherit',
+    })
+    spawnSync(`sudo apt-get install -y libclang-18-dev clang-18 llvm-18-dev`, {
+      shell: true,
+      stdio: 'inherit',
+    })
+    spawnSync(
+      `grep -qxF 'export LIBCLANG_PATH=/usr/lib/llvm-18/lib' /home/solv/.profile || echo 'export LIBCLANG_PATH=/usr/lib/llvm-18/lib' >> /home/solv/.profile`,
+      { shell: true, stdio: 'inherit' },
+    )
+    spawnSync(
+      `grep -qxF 'export CLANG_PATH=/usr/bin/clang-18' /home/solv/.profile || echo 'export CLANG_PATH=/usr/bin/clang-18' >> /home/solv/.profile`,
+      { shell: true, stdio: 'inherit' },
+    )
+    spawnSync(`source /home/solv/.profile`, { shell: true, stdio: 'inherit' })
     spawnSync(`mkdir /tmp/${version}`, {
       shell: true,
       stdio: 'inherit',
