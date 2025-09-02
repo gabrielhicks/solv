@@ -3,6 +3,23 @@ import { spawnSync } from 'child_process'
 
 export const jitoUpdate = (tag = JITO_CONFIG.tag, mod = false) => {
   if (mod) {
+    spawnSync(`sudo apt-get update`, {
+      shell: true,
+      stdio: 'inherit',
+    })
+    spawnSync(`sudo apt-get install -y libclang-18-dev clang-18 llvm-18-dev`, {
+      shell: true,
+      stdio: 'inherit',
+    })
+    spawnSync(
+      `grep -qxF 'export LIBCLANG_PATH=/usr/lib/llvm-18/lib' /home/solv/.profile || echo 'export LIBCLANG_PATH=/usr/lib/llvm-18/lib' >> /home/solv/.profile`,
+      { shell: true, stdio: 'inherit' },
+    )
+    spawnSync(
+      `grep -qxF 'export CLANG_PATH=/usr/bin/clang-18' /home/solv/.profile || echo 'export CLANG_PATH=/usr/bin/clang-18' >> /home/solv/.profile`,
+      { shell: true, stdio: 'inherit' },
+    )
+    spawnSync(`source /home/solv/.profile`, { shell: true, stdio: 'inherit' })
     spawnSync(`mkdir /tmp/${tag}-mod`, {
       shell: true,
       stdio: 'inherit',
@@ -73,6 +90,23 @@ export const jitoUpdate = (tag = JITO_CONFIG.tag, mod = false) => {
       stdio: 'inherit',
     })
   } else {
+    spawnSync(`sudo apt-get update`, {
+      shell: true,
+      stdio: 'inherit',
+    })
+    spawnSync(`sudo apt-get install -y libclang-18-dev clang-18 llvm-18-dev`, {
+      shell: true,
+      stdio: 'inherit',
+    })
+    spawnSync(
+      `grep -qxF 'export LIBCLANG_PATH=/usr/lib/llvm-18/lib' /home/solv/.profile || echo 'export LIBCLANG_PATH=/usr/lib/llvm-18/lib' >> /home/solv/.profile`,
+      { shell: true, stdio: 'inherit' },
+    )
+    spawnSync(
+      `grep -qxF 'export CLANG_PATH=/usr/bin/clang-18' /home/solv/.profile || echo 'export CLANG_PATH=/usr/bin/clang-18' >> /home/solv/.profile`,
+      { shell: true, stdio: 'inherit' },
+    )
+    spawnSync(`source /home/solv/.profile`, { shell: true, stdio: 'inherit' })
     spawnSync(`mkdir /tmp/${tag}-jito`, {
       shell: true,
       stdio: 'inherit',
