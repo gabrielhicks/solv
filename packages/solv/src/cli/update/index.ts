@@ -33,6 +33,7 @@ import { readOrCreateDefaultConfig } from '@/lib/readOrCreateDefaultConfig'
 import { MAINNET_TYPES, NETWORK_TYPES, SOLV_TYPES } from '@/config/config'
 import { getSnapshot } from '../get/snapshot'
 import { frankendancerUpdate } from './frankendancerUpdate'
+import { rmSnapshot } from '../setup/rmSnapshot'
 
 export * from './update'
 
@@ -187,7 +188,7 @@ export const updateCommands = (config: DefaultConfigType) => {
           TESTNET_SOLANA_VERSION: VERSION_TESTNET,
           MAINNET_SOLANA_VERSION: VERSION_MAINNET,
         })
-
+        rmSnapshot(config)
         if (isJito) {
           jitoUpdate(`v${version}`, options.mod || isModded)
           await updateJitoSolvConfig({ version, tag: `v${version}` })

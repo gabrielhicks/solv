@@ -1,4 +1,9 @@
 # @gabrielhicks/solv
+## 5.3.8
+
+### Update to 3.0.0
+allow testnet more room for restart
+
 ## 5.3.7
 
 ### change delinuqency status
