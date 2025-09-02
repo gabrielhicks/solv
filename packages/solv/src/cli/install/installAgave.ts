@@ -12,22 +12,25 @@ const installAgave = (version: string, mod = false) => {
       stdio: 'inherit',
     })
     spawnSync(
-      `git clone https://github.com/gabrielhicks/agave.git --recurse-submodules .`,
+      `git clone https://github.com/gabrielhicks/agave.git --recurse-submodules /tmp/${version}-agave-mod`,
       {
         shell: true,
         stdio: 'inherit',
       },
     )
-    spawnSync(`git checkout ${version}-mod`, {
-      shell: true,
-      stdio: 'inherit',
-    })
-    spawnSync(`git submodule update --init --recursive`, {
+    spawnSync(`git -C /tmp/${version}-agave-mod checkout ${version}-mod`, {
       shell: true,
       stdio: 'inherit',
     })
     spawnSync(
-      `CI_COMMIT=$(git rev-parse HEAD) /tmp/${version}-agave-mod/scripts/cargo-install-all.sh --validator-only /home/solv/.local/share/solana/install/releases/${version}-agave-mod`,
+      `git -C /tmp/${version}-agave-mod submodule update --init --recursive`,
+      {
+        shell: true,
+        stdio: 'inherit',
+      },
+    )
+    spawnSync(
+      `CI_COMMIT=$(git -C /tmp/${version}-agave-mod rev-parse HEAD) /tmp/${version}-agave-mod/scripts/cargo-install-all.sh --validator-only /home/solv/.local/share/solana/install/releases/${version}-agave-mod`,
       {
         shell: true,
         stdio: 'inherit',
@@ -81,23 +84,23 @@ const installAgave = (version: string, mod = false) => {
       shell: true,
       stdio: 'inherit',
     })
-    spawnSync(`git clone https://github.com/anza-xyz/agave.git --recurse-submodules .`, {
-      shell: true,
-      stdio: 'inherit',
-    })
     spawnSync(
-      `git checkout ${version}`,
+      `git clone https://github.com/anza-xyz/agave.git --recurse-submodules /tmp/${version}`,
       {
         shell: true,
         stdio: 'inherit',
       },
     )
-    spawnSync(`git submodule update --init --recursive`, {
+    spawnSync(`git -C /tmp/${version} checkout ${version}`, {
+      shell: true,
+      stdio: 'inherit',
+    })
+    spawnSync(`git -C /tmp/${version} submodule update --init --recursive`, {
       shell: true,
       stdio: 'inherit',
     })
     spawnSync(
-      `CI_COMMIT=$(git rev-parse HEAD) /tmp/${version}/scripts/cargo-install-all.sh --validator-only /home/solv/.local/share/solana/install/releases/${version}`,
+      `CI_COMMIT=$(git -C /tmp/${version} rev-parse HEAD) /tmp/${version}/scripts/cargo-install-all.sh --validator-only /home/solv/.local/share/solana/install/releases/${version}`,
       {
         shell: true,
         stdio: 'inherit',

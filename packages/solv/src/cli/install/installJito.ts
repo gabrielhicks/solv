@@ -13,22 +13,22 @@ export const installJito = (version = VERSION_JITO_TESTNET, mod = false) => {
       stdio: 'inherit',
     })
     spawnSync(
-      `git clone https://github.com/gabrielhicks/jito-solana.git --recurse-submodules .`,
+      `git -C /tmp/${tag} clone https://github.com/gabrielhicks/jito-solana.git --recurse-submodules .`,
       {
         shell: true,
         stdio: 'inherit',
       },
     )
-    spawnSync(`git checkout ${tag}`, {
+    spawnSync(`git -C /tmp/${tag} checkout ${tag}`, {
       shell: true,
       stdio: 'inherit',
     })
-    spawnSync(`git submodule update --init --recursive`, {
+    spawnSync(`git -C /tmp/${tag} submodule update --init --recursive`, {
       shell: true,
       stdio: 'inherit',
     })
     spawnSync(
-      `CI_COMMIT=$(git rev-parse HEAD) /tmp/${tag}/scripts/cargo-install-all.sh --validator-only /home/solv/.local/share/solana/install/releases/${tag}`,
+      `CI_COMMIT=$(git -C /tmp/${tag} rev-parse HEAD) /tmp/${tag}/scripts/cargo-install-all.sh --validator-only /home/solv/.local/share/solana/install/releases/${tag}`,
       {
         shell: true,
         stdio: 'inherit',
@@ -84,22 +84,22 @@ export const installJito = (version = VERSION_JITO_TESTNET, mod = false) => {
       stdio: 'inherit',
     })
     spawnSync(
-      `git clone https://github.com/jito-foundation/jito-solana.git --recurse-submodules .`,
+      `git -C /tmp/${tag} clone https://github.com/jito-foundation/jito-solana.git --recurse-submodules .`,
       {
         shell: true,
         stdio: 'inherit',
       },
     )
-    spawnSync(`git checkout ${tag}`, {
+    spawnSync(`git -C /tmp/${tag} checkout ${tag}`, {
       shell: true,
       stdio: 'inherit',
     })
-    spawnSync(`git submodule update --init --recursive`, {
+    spawnSync(`git -C /tmp/${tag} submodule update --init --recursive`, {
       shell: true,
       stdio: 'inherit',
     })
     spawnSync(
-      `CI_COMMIT=$(git rev-parse HEAD) /tmp/${tag}/scripts/cargo-install-all.sh --validator-only /home/solv/.local/share/solana/install/releases/${tag}`,
+      `CI_COMMIT=$(git -C /tmp/${tag} rev-parse HEAD) /tmp/${tag}/scripts/cargo-install-all.sh --validator-only /home/solv/.local/share/solana/install/releases/${tag}`,
       {
         shell: true,
         stdio: 'inherit',
