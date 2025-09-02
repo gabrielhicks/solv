@@ -52,7 +52,7 @@ export const epochTimer = async (config: DefaultConfigType) => {
   const isSolvVersionSame = await isVersionSame()
   if (!isSolvVersionSame && config.AUTO_UPDATE) {
     console.log(`Found new version of solv! Updating...`)
-    spawnSync(`solv update && solv update --auto`, {
+    spawnSync(`solv update && solv update --config && solv update --auto`, {
       stdio: 'inherit',
       shell: true,
     })
