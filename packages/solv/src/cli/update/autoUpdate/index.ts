@@ -25,7 +25,7 @@ const autoUpdate = async (config: DefaultConfigType) => {
   const isFrankendancer = config.VALIDATOR_TYPE === ValidatorType.FRANKENDANCER
   const { mainnetValidatorKey, testnetValidatorKey } = getAllKeyPaths()
   const validatorKey = isMainnet ? mainnetValidatorKey : testnetValidatorKey
-  const solanaVersion = getSolanaVersion()
+  // const solanaVersion = getSolanaVersion()
   
   // Notify the user about the update
   let isUpdateRequired = false
@@ -41,7 +41,7 @@ const autoUpdate = async (config: DefaultConfigType) => {
   isUpdateRequired = isUpdateRequired && config.AUTO_RESTART
 
   const address = getSolanaAddress(validatorKey)
-  const msg = `**${address}** updated solv to **${getSolvVersion()}** with Solana version **${solanaVersion}**`
+  const msg = `**${address}** updated solv to **${getSolvVersion()}**`
   await sendDiscord(msg)
 
   if (isUpdateRequired) {
@@ -49,7 +49,7 @@ const autoUpdate = async (config: DefaultConfigType) => {
     const msg = `Restarting **${address}**`
     await sendDiscord(msg)
     try {
-      spawnSync(`solv update && solv update ---config solv update -b`, {
+      spawnSync(`solv update && solv update --config && solv update -b`, {
         stdio: 'inherit',
         shell: true,
       })

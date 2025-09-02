@@ -1,4 +1,10 @@
 # @gabrielhicks/solv
+## 5.3.15
+
+### Update to 3.0.0v8
+allow testnet more room for restart
+
+# @gabrielhicks/solv
 ## 5.3.14
 
 ### Update to 3.0.0v7
