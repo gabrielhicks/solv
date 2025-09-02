@@ -4,7 +4,11 @@ import { spawnSync } from 'child_process'
 export const installJito = (version = VERSION_JITO_TESTNET, mod = false) => {
   if(mod) {
     const tag = `v${version}-mod`
-    spawnSync(`mkdir /tmp/${tag} && cd /tmp/${tag}`, {
+    spawnSync(`mkdir /tmp/${tag}`, {
+      shell: true,
+      stdio: 'inherit',
+    })
+    spawnSync(`cd /tmp/${tag}`, {
       shell: true,
       stdio: 'inherit',
     })
@@ -71,7 +75,11 @@ export const installJito = (version = VERSION_JITO_TESTNET, mod = false) => {
     })
   } else {
     const tag = `v${version}-jito`
-    spawnSync(`mkdir /tmp/${tag} && cd /tmp/${tag}`, {
+    spawnSync(`mkdir /tmp/${tag}`, {
+      shell: true,
+      stdio: 'inherit',
+    })
+    spawnSync(`cd /tmp/${tag}`, {
       shell: true,
       stdio: 'inherit',
     })

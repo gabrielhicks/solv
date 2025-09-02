@@ -3,7 +3,11 @@ import { spawnSync } from 'child_process'
 
 export const jitoUpdate = (tag = JITO_CONFIG.tag, mod = false) => {
   if (mod) {
-    spawnSync(`mkdir /tmp/${tag}-mod && cd /tmp/${tag}`, {
+    spawnSync(`mkdir /tmp/${tag}-mod`, {
+      shell: true,
+      stdio: 'inherit',
+    })
+    spawnSync(`cd /tmp/${tag}-mod`, {
       shell: true,
       stdio: 'inherit',
     })
@@ -69,7 +73,11 @@ export const jitoUpdate = (tag = JITO_CONFIG.tag, mod = false) => {
       stdio: 'inherit',
     })
   } else {
-    spawnSync(`mkdir /tmp/${tag}-jito && cd /tmp/${tag}-jito`, {
+    spawnSync(`mkdir /tmp/${tag}-jito`, {
+      shell: true,
+      stdio: 'inherit',
+    })
+    spawnSync(`cd /tmp/${tag}-jito`, {
       shell: true,
       stdio: 'inherit',
     })
