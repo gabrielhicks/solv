@@ -49,7 +49,10 @@ const autoUpdate = async (config: DefaultConfigType) => {
     const msg = `Restarting **${address}**`
     await sendDiscord(msg)
     try {
-      spawnSync(`solv update -b`, { stdio: 'inherit', shell: true })
+      spawnSync(`solv update && solv update ---config solv update -b`, {
+        stdio: 'inherit',
+        shell: true,
+      })
     } catch (error: any) {
       const errorMsg = `Error restarting **${address}**: ${error?.message || 'Unknown error'}`
       await sendDiscord(errorMsg)
