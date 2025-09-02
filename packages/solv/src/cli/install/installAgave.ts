@@ -3,7 +3,11 @@ import { spawnSync } from 'node:child_process'
 // Agave Install e.g. installAgave('0.1.0')
 const installAgave = (version: string, mod = false) => {
   if(mod) {
-    spawnSync(`mkdir /tmp/${version}-agave-mod && cd /tmp/${version}-agave-mod`, {
+    spawnSync(`mkdir /tmp/${version}-agave-mod`, {
+      shell: true,
+      stdio: 'inherit',
+    })
+    spawnSync(`cd /tmp/${version}-agave-mod`, {
       shell: true,
       stdio: 'inherit',
     })
@@ -69,7 +73,11 @@ const installAgave = (version: string, mod = false) => {
       stdio: 'inherit',
     })
   } else {
-    spawnSync(`mkdir /tmp/${version} && cd /tmp/${version}`, {
+    spawnSync(`mkdir /tmp/${version}`, {
+      shell: true,
+      stdio: 'inherit',
+    })
+    spawnSync(`cd /tmp/${version}`, {
       shell: true,
       stdio: 'inherit',
     })
