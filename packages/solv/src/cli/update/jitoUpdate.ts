@@ -58,7 +58,7 @@ export const jitoUpdate = (tag = JITO_CONFIG.tag, mod = false) => {
       },
     )
     spawnSync(
-      `sudo sed -i 's|^--dynamic-port-range.*$|--dynamic-port-range 8000-8025 \\|' /home/solv/start-validator.sh`,
+      "sudo sed -i 's|^--dynamic-port-range.*$|--dynamic-port-range 8000-8025 \\\\|' /home/solv/start-validator.sh",
       {
         shell: true,
         stdio: 'inherit',
@@ -128,7 +128,7 @@ export const jitoUpdate = (tag = JITO_CONFIG.tag, mod = false) => {
       },
     )
     spawnSync(
-      `sudo sed -i 's|^--dynamic-port-range.*$|--dynamic-port-range 8000-8025 \\|' /home/solv/start-validator.sh`,
+      "sudo sed -i 's|^--dynamic-port-range.*$|--dynamic-port-range 8000-8025 \\\\|' /home/solv/start-validator.sh",
       {
         shell: true,
         stdio: 'inherit',

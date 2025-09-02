@@ -61,7 +61,7 @@ const installAgave = (version: string, mod = false) => {
       },
     )
     spawnSync(
-      `sudo sed -i 's|^--dynamic-port-range.*$|--dynamic-port-range 8000-8025 \\|' /home/solv/start-validator.sh`,
+      "sudo sed -i 's|^--dynamic-port-range.*$|--dynamic-port-range 8000-8025 \\\\|' /home/solv/start-validator.sh",
       {
         shell: true,
         stdio: 'inherit',
@@ -130,13 +130,14 @@ const installAgave = (version: string, mod = false) => {
         stdio: 'inherit',
       },
     )
-    spawnSync(
-      `sudo sed -i 's|^--dynamic-port-range.*$|--dynamic-port-range 8000-8025 \\|' /home/solv/start-validator.sh`,
-      {
-        shell: true,
-        stdio: 'inherit',
-      },
-    )
+  spawnSync(
+    "sudo sed -i 's|^--dynamic-port-range.*$|--dynamic-port-range 8000-8025 \\\\|' /home/solv/start-validator.sh",
+    {
+      shell: true,
+      stdio: 'inherit',
+    },
+  )
+
     spawnSync(`sudo rm -rf /tmp/${version}`, {
       shell: true,
       stdio: 'inherit',
