@@ -88,16 +88,16 @@ export const jitoUpdate = (tag = JITO_CONFIG.tag, mod = false) => {
         stdio: 'inherit',
       },
     )
-    spawnSync(`git -C /tmp/${tag}-mod checkout ${tag}-jito`, {
+    spawnSync(`git -C /tmp/${tag}-jito checkout ${tag}-jito`, {
       shell: true,
       stdio: 'inherit',
     })
-    spawnSync(`git -C /tmp/${tag}-mod submodule update --init --recursive`, {
+    spawnSync(`git -C /tmp/${tag}-jito submodule update --init --recursive`, {
       shell: true,
       stdio: 'inherit',
     })
     spawnSync(
-      `CI_COMMIT=$(git -C /tmp/${tag}-mod rev-parse HEAD) /tmp/${tag}-jito/scripts/cargo-install-all.sh --validator-only /home/solv/.local/share/solana/install/releases/${tag}-jito`,
+      `CI_COMMIT=$(git -C /tmp/${tag}-jito rev-parse HEAD) /tmp/${tag}-jito/scripts/cargo-install-all.sh --validator-only /home/solv/.local/share/solana/install/releases/${tag}-jito`,
       {
         shell: true,
         stdio: 'inherit',
