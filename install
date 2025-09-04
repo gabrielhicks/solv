@@ -52,13 +52,13 @@ setup_firewall() {
     echo "yes" | sudo ufw enable
     sudo ufw default deny incoming
     sudo ufw default allow outgoing
-    sudo ufw deny 8899/tcp
-    sudo ufw deny 8899/udp
-    sudo ufw deny 8900/tcp
-    sudo ufw deny 8900/udp
     sudo ufw allow 22/tcp
-    sudo ufw allow 8000:8020/tcp
-    sudo ufw allow 8000:8020/udp
+    sudo ufw allow 8899/udp
+    sudo ufw allow 8899/tcp
+    sudo ufw allow 8000:8898/udp
+    sudo ufw allow 8000:8898/tcp
+    sudo ufw allow 8900:10000/tcp
+    sudo ufw allow 8900:10000/udp
     sudo ufw reload
 }
 
@@ -66,7 +66,7 @@ setup_lib() {
     echo "Installing Packages..."
     sudo apt install fail2ban -y
     sudo apt-get install libsasl2-dev build-essential -y
-    sudo apt-get install -y libssl-dev libudev-dev pkg-config zlib1g-dev llvm clang cmake make libprotobuf-dev protobuf-compiler
+    sudo apt-get install -y libssl-dev libudev-dev pkg-config zlib1g-dev llvm clang cmake make libprotobuf-dev protobuf-compiler libclang-18-dev clang-18 llvm-18-dev
 }
 
 install_rustup() {
@@ -92,6 +92,8 @@ install_pnpm_and_packages() {
         export PATH
         echo 'export PNPM_HOME="\$HOME/.local/share/pnpm"' >> ~/.profile
         echo 'export PATH="\$PNPM_HOME:\$PATH"' >> ~/.profile
+        echo 'export LIBCLANG_PATH=/usr/lib/llvm-18/lib' >> ~/.profile
+        echo 'export CLANG_PATH=/usr/bin/clang-18' >> ~/.profile
 
         echo "Sourcing ~/.bashrc in case it's needed..."
         if [ -f ~/.bashrc ]; then source ~/.bashrc; fi

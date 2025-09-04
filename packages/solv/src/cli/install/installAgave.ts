@@ -3,23 +3,6 @@ import { spawnSync } from 'node:child_process'
 // Agave Install e.g. installAgave('0.1.0')
 const installAgave = (version: string, mod = false) => {
   if(mod) {
-    spawnSync(`sudo apt-get update`, {
-      shell: true,
-      stdio: 'inherit',
-    })
-    spawnSync(`sudo apt-get install -y libclang-18-dev clang-18 llvm-18-dev`, {
-      shell: true,
-      stdio: 'inherit',
-    })
-    spawnSync(
-      `grep -qxF 'export LIBCLANG_PATH=/usr/lib/llvm-18/lib' /home/solv/.profile || echo 'export LIBCLANG_PATH=/usr/lib/llvm-18/lib' >> /home/solv/.profile`,
-      { shell: true, stdio: 'inherit' },
-    )
-    spawnSync(
-      `grep -qxF 'export CLANG_PATH=/usr/bin/clang-18' /home/solv/.profile || echo 'export CLANG_PATH=/usr/bin/clang-18' >> /home/solv/.profile`,
-      { shell: true, stdio: 'inherit' },
-    )
-    spawnSync(`source /home/solv/.profile`, { shell: true, stdio: 'inherit' })
     spawnSync(`mkdir /tmp/v${version}-agave-mod`, {
       shell: true,
       stdio: 'inherit',
@@ -47,7 +30,7 @@ const installAgave = (version: string, mod = false) => {
       },
     )
     spawnSync(
-      `CI_COMMIT=$(git -C /tmp/v${version}-agave-mod rev-parse HEAD) /tmp/v${version}-agave-mod/scripts/cargo-install-all.sh --validator-only /home/solv/.local/share/solana/install/releases/v${version}-agave-mod`,
+      `CI_COMMIT=$(git -C /tmp/v${version}-agave-mod rev-parse HEAD) /tmp/v${version}-agave-mod/scripts/cargo-install-all.sh /home/solv/.local/share/solana/install/releases/v${version}-agave-mod`,
       {
         shell: true,
         stdio: 'inherit',
@@ -67,49 +50,11 @@ const installAgave = (version: string, mod = false) => {
         stdio: 'inherit',
       },
     )
-    spawnSync(
-      `sudo sudo sed -i '/^LimitNOFILE=1000000$/{
-    n
-    /^LimitMEMLOCK=infinity$/!i LimitMEMLOCK=infinity
-}' /etc/systemd/system/solv.service`,
-      {
-        shell: true,
-        stdio: 'inherit',
-      },
-    )
-    spawnSync(
-      "sudo sed -i 's|^--dynamic-port-range.*$|--dynamic-port-range 8000-8025 \\\\|' /home/solv/start-validator.sh",
-      {
-        shell: true,
-        stdio: 'inherit',
-      },
-    )
     spawnSync(`sudo rm -rf /tmp/v${version}-agave-mod`, {
       shell: true,
       stdio: 'inherit',
     })
-    spawnSync(`sudo systemctl daemon-reload`, {
-      shell: true,
-      stdio: 'inherit',
-    })
   } else {
-    spawnSync(`sudo apt-get update`, {
-      shell: true,
-      stdio: 'inherit',
-    })
-    spawnSync(`sudo apt-get install -y libclang-18-dev clang-18 llvm-18-dev`, {
-      shell: true,
-      stdio: 'inherit',
-    })
-    spawnSync(
-      `grep -qxF 'export LIBCLANG_PATH=/usr/lib/llvm-18/lib' /home/solv/.profile || echo 'export LIBCLANG_PATH=/usr/lib/llvm-18/lib' >> /home/solv/.profile`,
-      { shell: true, stdio: 'inherit' },
-    )
-    spawnSync(
-      `grep -qxF 'export CLANG_PATH=/usr/bin/clang-18' /home/solv/.profile || echo 'export CLANG_PATH=/usr/bin/clang-18' >> /home/solv/.profile`,
-      { shell: true, stdio: 'inherit' },
-    )
-    spawnSync(`source /home/solv/.profile`, { shell: true, stdio: 'inherit' })
     spawnSync(`mkdir /tmp/v${version}-agave`, {
       shell: true,
       stdio: 'inherit',
@@ -134,7 +79,7 @@ const installAgave = (version: string, mod = false) => {
       stdio: 'inherit',
     })
     spawnSync(
-      `CI_COMMIT=$(git -C /tmp/v${version}-agave rev-parse HEAD) /tmp/v${version}-agave/scripts/cargo-install-all.sh --validator-only /home/solv/.local/share/solana/install/releases/v${version}-agave`,
+      `CI_COMMIT=$(git -C /tmp/v${version}-agave rev-parse HEAD) /tmp/v${version}-agave/scripts/cargo-install-all.sh /home/solv/.local/share/solana/install/releases/v${version}-agave`,
       {
         shell: true,
         stdio: 'inherit',
@@ -154,29 +99,7 @@ const installAgave = (version: string, mod = false) => {
         stdio: 'inherit',
       },
     )
-    spawnSync(
-      `sudo sudo sed -i '/^LimitNOFILE=1000000$/{
-    n
-    /^LimitMEMLOCK=infinity$/!i LimitMEMLOCK=infinity
-}' /etc/systemd/system/solv.service`,
-      {
-        shell: true,
-        stdio: 'inherit',
-      },
-    )
-  spawnSync(
-    "sudo sed -i 's|^--dynamic-port-range.*$|--dynamic-port-range 8000-8025 \\\\|' /home/solv/start-validator.sh",
-    {
-      shell: true,
-      stdio: 'inherit',
-    },
-  )
-
     spawnSync(`sudo rm -rf /tmp/v${version}-agave`, {
-      shell: true,
-      stdio: 'inherit',
-    })
-    spawnSync(`sudo systemctl daemon-reload`, {
       shell: true,
       stdio: 'inherit',
     })

@@ -31,7 +31,7 @@ exec agave-validator \\
 --private-rpc \\
 --enable-cpi-and-log-storage \\
 --no-skip-initial-accounts-db-clean \\
---dynamic-port-range 8000-8020 \\
+--dynamic-port-range 8000-8025 \\
 --rpc-bind-address 127.0.0.1 \\
 --rpc-port 8899 \\
 --no-port-check \\

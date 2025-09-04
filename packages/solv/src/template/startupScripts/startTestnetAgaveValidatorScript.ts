@@ -26,7 +26,7 @@ exec agave-validator \\
 --rpc-bind-address 127.0.0.1 \\
 --private-rpc \\
 --expected-genesis-hash 4uhcVJyU9pJkvQyS88uRDiswHXSCkY3zQawwpjk2NsNY \\
---dynamic-port-range 8000-8020 \\
+--dynamic-port-range 8000-8025 \\
 --rpc-port 8899 \\
 --wal-recovery-mode skip_any_corrupted_record \\
 --wait-for-supermajority 343175553 \\

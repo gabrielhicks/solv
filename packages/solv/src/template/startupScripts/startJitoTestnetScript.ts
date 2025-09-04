@@ -36,7 +36,7 @@ exec ${solanaCLI} \\
 --rpc-bind-address 127.0.0.1 \\
 --block-engine-url ${blockEngineUrl} \\
 --shred-receiver-address ${shredReceiverAddr} \\
---dynamic-port-range 8000-8020 \\
+--dynamic-port-range 8000-8025 \\
 --rpc-port 8899 \\
 --wal-recovery-mode skip_any_corrupted_record \\
 --limit-ledger-size 50000000 \\
