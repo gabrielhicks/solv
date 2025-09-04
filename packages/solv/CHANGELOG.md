@@ -1,4 +1,9 @@
 # @gabrielhicks/solv
+## 5.3.18
+
+### Bump install script
+Adds some extra stuff to service and install script for 3.0
+
 ## 5.3.17
 
 ### Patch Agave 3.0.X install

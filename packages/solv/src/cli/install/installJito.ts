@@ -4,26 +4,6 @@ import { spawnSync } from 'child_process'
 export const installJito = (version = VERSION_JITO_TESTNET, mod = false) => {
   if(mod) {
     const tag = `v${version}-mod`
-    spawnSync(`sudo apt-get update`, {
-      shell: true,
-      stdio: 'inherit',
-    })
-    spawnSync(`sudo apt-get install -y libclang-18-dev clang-18 llvm-18-dev`, {
-      shell: true,
-      stdio: 'inherit',
-    })
-    spawnSync(
-      `grep -qxF 'export LIBCLANG_PATH=/usr/lib/llvm-18/lib' /home/solv/.profile || echo 'export LIBCLANG_PATH=/usr/lib/llvm-18/lib' >> /home/solv/.profile`,
-      { shell: true, stdio: 'inherit' },
-    )
-    spawnSync(
-      `grep -qxF 'export CLANG_PATH=/usr/bin/clang-18' /home/solv/.profile || echo 'export CLANG_PATH=/usr/bin/clang-18' >> /home/solv/.profile`,
-      { shell: true, stdio: 'inherit' },
-    )
-    spawnSync(
-      `source /home/solv/.profile`,
-      { shell: true, stdio: 'inherit' },
-    )
     spawnSync(`mkdir /tmp/${tag}`, {
       shell: true,
       stdio: 'inherit',
@@ -48,7 +28,7 @@ export const installJito = (version = VERSION_JITO_TESTNET, mod = false) => {
       stdio: 'inherit',
     })
     spawnSync(
-      `CI_COMMIT=$(git -C /tmp/${tag} rev-parse HEAD) /tmp/${tag}/scripts/cargo-install-all.sh --validator-only /home/solv/.local/share/solana/install/releases/${tag}`,
+      `CI_COMMIT=$(git -C /tmp/${tag} rev-parse HEAD) /tmp/${tag}/scripts/cargo-install-all.sh /home/solv/.local/share/solana/install/releases/${tag}`,
       {
         shell: true,
         stdio: 'inherit',
@@ -68,23 +48,6 @@ export const installJito = (version = VERSION_JITO_TESTNET, mod = false) => {
         stdio: 'inherit',
       },
     )
-    spawnSync(
-      `sudo sudo sed -i '/^LimitNOFILE=1000000$/{
-    n
-    /^LimitMEMLOCK=infinity$/!i LimitMEMLOCK=infinity
-}' /etc/systemd/system/solv.service`,
-      {
-        shell: true,
-        stdio: 'inherit',
-      },
-    )
-    spawnSync(
-      "sudo sed -i 's|^--dynamic-port-range.*$|--dynamic-port-range 8000-8025 \\\\|' /home/solv/start-validator.sh",
-      {
-        shell: true,
-        stdio: 'inherit',
-      },
-    )
     spawnSync(`sudo rm -rf /tmp/${tag}`, {
       shell: true,
       stdio: 'inherit',
@@ -95,23 +58,6 @@ export const installJito = (version = VERSION_JITO_TESTNET, mod = false) => {
     })
   } else {
     const tag = `v${version}-jito`
-    spawnSync(`sudo apt-get update`, {
-      shell: true,
-      stdio: 'inherit',
-    })
-    spawnSync(`sudo apt-get install -y libclang-18-dev clang-18 llvm-18-dev`, {
-      shell: true,
-      stdio: 'inherit',
-    })
-    spawnSync(
-      `grep -qxF 'export LIBCLANG_PATH=/usr/lib/llvm-18/lib' /home/solv/.profile || echo 'export LIBCLANG_PATH=/usr/lib/llvm-18/lib' >> /home/solv/.profile`,
-      { shell: true, stdio: 'inherit' },
-    )
-    spawnSync(
-      `grep -qxF 'export CLANG_PATH=/usr/bin/clang-18' /home/solv/.profile || echo 'export CLANG_PATH=/usr/bin/clang-18' >> /home/solv/.profile`,
-      { shell: true, stdio: 'inherit' },
-    )
-    spawnSync(`source /home/solv/.profile`, { shell: true, stdio: 'inherit' })
     spawnSync(`mkdir /tmp/${tag}`, {
       shell: true,
       stdio: 'inherit',
@@ -136,7 +82,7 @@ export const installJito = (version = VERSION_JITO_TESTNET, mod = false) => {
       stdio: 'inherit',
     })
     spawnSync(
-      `CI_COMMIT=$(git -C /tmp/${tag} rev-parse HEAD) /tmp/${tag}/scripts/cargo-install-all.sh --validator-only /home/solv/.local/share/solana/install/releases/${tag}`,
+      `CI_COMMIT=$(git -C /tmp/${tag} rev-parse HEAD) /tmp/${tag}/scripts/cargo-install-all.sh /home/solv/.local/share/solana/install/releases/${tag}`,
       {
         shell: true,
         stdio: 'inherit',
@@ -151,23 +97,6 @@ export const installJito = (version = VERSION_JITO_TESTNET, mod = false) => {
     )
     spawnSync(
       `cp -r /home/solv/.local/share/solana/install/releases/${tag}/bin/ /home/solv/.local/share/solana/install/active_release/bin/`,
-      {
-        shell: true,
-        stdio: 'inherit',
-      },
-    )
-    spawnSync(
-      `sudo sudo sed -i '/^LimitNOFILE=1000000$/{
-    n
-    /^LimitMEMLOCK=infinity$/!i LimitMEMLOCK=infinity
-}' /etc/systemd/system/solv.service`,
-      {
-        shell: true,
-        stdio: 'inherit',
-      },
-    )
-    spawnSync(
-      "sudo sed -i 's|^--dynamic-port-range.*$|--dynamic-port-range 8000-8025 \\\\|' /home/solv/start-validator.sh",
       {
         shell: true,
         stdio: 'inherit',

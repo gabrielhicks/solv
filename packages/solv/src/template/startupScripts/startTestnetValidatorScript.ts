@@ -24,7 +24,7 @@ exec agave-validator \\
 --known-validator rad1u8GKZoyVWxVAKy1cjL84dqhS9mp57uAezPt4iQg \\
 --only-known-rpc \\
 --expected-genesis-hash 4uhcVJyU9pJkvQyS88uRDiswHXSCkY3zQawwpjk2NsNY \\
---dynamic-port-range 8000-8020 \\
+--dynamic-port-range 8000-8025 \\
 --rpc-port 8899 \\
 --wal-recovery-mode skip_any_corrupted_record \\
 --wait-for-supermajority 343175553 \\
