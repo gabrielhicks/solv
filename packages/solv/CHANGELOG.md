@@ -1,4 +1,9 @@
 # @gabrielhicks/solv
+## 5.3.17
+
+### Patch Agave 3.0.X install
+Fixing up build
+
 ## 5.3.16
 
 ### Update to 3.0.0v9
