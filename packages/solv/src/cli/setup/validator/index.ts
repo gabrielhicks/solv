@@ -32,6 +32,7 @@ const setupMainnetValidator = async (config: DefaultConfigType, mod = false) => 
     config
   mod = modConfig
   let startupScript = ''
+  let isMajorThree = version.startsWith("3") ? true : false;
   switch (validatorType) {
     case ValidatorType.SOLANA:
       installSolana(version)
@@ -43,7 +44,7 @@ const setupMainnetValidator = async (config: DefaultConfigType, mod = false) => 
     case ValidatorType.JITO:
       console.log('JITO Validator Setup for Mainnet')
       const jitoConfig = await readOrCreateJitoConfig()
-      installJito(version, mod)
+      installJito(version, mod, isMajorThree)
       startupScript = startJitoMainnetScript(
         jitoConfig.commissionBps,
         jitoConfig.relayerUrl,
@@ -74,19 +75,20 @@ const setupTestnetValidator = async (config: DefaultConfigType, mod = false) => 
   const { VALIDATOR_TYPE: validatorType, MOD: modConfig } = config
   mod = modConfig
   let startupScript = ''
+  let isMajorThree = config.TESTNET_SOLANA_VERSION.startsWith("3") ? true : false;
   switch (validatorType) {
     case ValidatorType.SOLANA:
       installSolana(config.TESTNET_SOLANA_VERSION)
       startupScript = startTestnetAgaveValidatorScript(config)
     case ValidatorType.AGAVE:
       console.log('Agave Validator Setup for Testnet')
-      installAgave(config.TESTNET_SOLANA_VERSION, mod)
+      installAgave(config.TESTNET_SOLANA_VERSION, mod, isMajorThree)
       startupScript = startTestnetAgaveValidatorScript(config)
       break
     case ValidatorType.JITO:
       console.log('JITO Validator Setup for Testnet')
       const jitoConfig = await readOrCreateJitoConfig()
-      installJito(config.TESTNET_SOLANA_VERSION, mod)
+      installJito(config.TESTNET_SOLANA_VERSION, mod, isMajorThree)
       startupScript = startJitoTestnetScript(
         jitoConfig.commissionBps,
         jitoConfig.relayerUrl,

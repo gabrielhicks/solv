@@ -36,7 +36,8 @@ export const installCommands = (config: DefaultConfigType) => {
       if (isJito) {
         const jitoVersion = options.version || VERSION_JITO_MAINNET
         const jitoTag = `v${jitoVersion}`
-        jitoUpdate(jitoTag, isModified)
+        const isMajorThree = jitoVersion.startsWith("3") ? true : false;
+        jitoUpdate(jitoTag, isModified, isMajorThree)
         return
       }
       const isRPC = config.NODE_TYPE === NodeType.RPC

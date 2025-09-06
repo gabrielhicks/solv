@@ -184,13 +184,14 @@ export const updateCommands = (config: DefaultConfigType) => {
 
       if (options.background) {
         let version = options.version
+        let isMajorThree = version.startsWith("3") ? true : false;
         await updateDefaultConfig({
           TESTNET_SOLANA_VERSION: VERSION_TESTNET,
           MAINNET_SOLANA_VERSION: VERSION_MAINNET,
         })
         rmSnapshot(config)
         if (isJito) {
-          jitoUpdate(`v${version}`, options.mod || isModded)
+          jitoUpdate(`v${version}`, options.mod || isModded, isMajorThree)
           await updateJitoSolvConfig({ version, tag: `v${version}` })
           await monitorUpdate(deliquentStake, true, minIdleTime)
           return
@@ -206,7 +207,7 @@ export const updateCommands = (config: DefaultConfigType) => {
           return
         }
 
-        await updateVersion(version, options.mod || isModded)
+        await updateVersion(version, options.mod || isModded, isMajorThree)
         const deliquentStakeNum = isTestnet
           ? DELINQUENT_STAKE_TESTNET
           : DELINQUENT_STAKE_MAINNET

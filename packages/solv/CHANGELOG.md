@@ -1,4 +1,9 @@
 # @gabrielhicks/solv
+## 5.3.19
+
+### Update install method per major version
+Uses tarball when major version is not 3.
+
 ## 5.3.18
 
 ### Bump install script
