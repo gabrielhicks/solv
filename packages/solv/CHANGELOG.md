@@ -1,4 +1,9 @@
 # @gabrielhicks/solv
+## 5.3.20
+
+### Minor version changes
+2.3.8, 0.708
+
 ## 5.3.19
 
 ### Update install method per major version
