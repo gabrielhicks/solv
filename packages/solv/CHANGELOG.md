@@ -1,4 +1,9 @@
 # @gabrielhicks/solv
+## 5.3.21
+
+### Override chalk
+Security update
+
 ## 5.3.20
 
 ### Minor version changes
