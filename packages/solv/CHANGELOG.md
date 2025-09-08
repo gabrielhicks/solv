@@ -1,4 +1,9 @@
 # @gabrielhicks/solv
+## 5.3.22
+
+### Bump version for jito
+2.3.8
+
 ## 5.3.21
 
 ### Override chalk
