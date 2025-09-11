@@ -1,4 +1,9 @@
 # @gabrielhicks/solv
+## 5.3.24
+
+### Testnet Update
+0.709.30000 & 3.0.1
+
 ## 5.3.23
 
 ### Bump version for FD test
