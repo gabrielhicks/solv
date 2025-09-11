@@ -167,7 +167,7 @@ user = \"solv\"
     commission_bps = 10000
 
 [tiles.pack]
-  schedule_strategy = "balanced"`
+  schedule_strategy = \"balanced\"`
 
     const body = isTest ? testnetBody : mainnetBody
 

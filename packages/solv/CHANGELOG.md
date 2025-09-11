@@ -1,4 +1,9 @@
 # @gabrielhicks/solv
+## 5.3.23
+
+### Bump version for FD test
+0.709.30000
+
 ## 5.3.22
 
 ### Bump version for jito
