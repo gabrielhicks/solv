@@ -1,4 +1,9 @@
 # @gabrielhicks/solv
+## 5.3.25
+
+### Version Update
+2.3.9 & 3.0.2
+
 ## 5.3.24
 
 ### Testnet Update
