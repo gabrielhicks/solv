@@ -1,4 +1,9 @@
 # @gabrielhicks/solv
+## 5.3.26
+
+### Version Update
+2.3.10 & 3.0.4
+
 ## 5.3.25
 
 ### Version Update
