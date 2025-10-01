@@ -1,4 +1,9 @@
 # @gabrielhicks/solv
+## 5.3.27
+
+### Testnet Halt
+2.3.11 & 3.0.4
+
 ## 5.3.26
 
 ### Version Update
