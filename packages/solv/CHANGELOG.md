@@ -1,4 +1,9 @@
 # @gabrielhicks/solv
+## 5.3.31
+
+### Testnet Halt 5 - autoupdate
+removed dumping ledger, accounts, snapshots, and fetching snaps
+
 ## 5.3.30
 
 ### Testnet Halt 4
