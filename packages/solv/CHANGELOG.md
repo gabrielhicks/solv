@@ -1,4 +1,9 @@
 # @gabrielhicks/solv
+## 5.3.30
+
+### Testnet Halt 4
+removed dumping ledger, accounts, snapshots, and fetching snaps
+
 ## 5.3.29
 
 ### Testnet Halt 3

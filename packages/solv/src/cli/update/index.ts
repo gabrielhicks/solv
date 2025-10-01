@@ -211,9 +211,9 @@ export const updateCommands = (config: DefaultConfigType) => {
 
         if (isTestnet) {
           // getSnapshot(isTestnet, '10', config.SNAPSHOTS_PATH, VERSION_TESTNET)
-          spawnSync('solv get snapshot', { stdio: 'inherit', shell: true })
+          spawnSync('solv start', { stdio: 'inherit', shell: true })
         }
-        
+
         await monitorUpdate(deliquentStakeNum, true, minIdleTime)
         return
       } else if (options.commission) {
