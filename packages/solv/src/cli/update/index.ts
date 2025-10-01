@@ -31,8 +31,9 @@ import {
 } from '@/config/versionConfig'
 import { readOrCreateDefaultConfig } from '@/lib/readOrCreateDefaultConfig'
 import { MAINNET_TYPES, NETWORK_TYPES, SOLV_TYPES } from '@/config/config'
-import { getSnapshot } from '../get/snapshot'
+// import { getSnapshot } from '../get/snapshot'
 import { frankendancerUpdate } from './frankendancerUpdate'
+import { spawnSync } from 'node:child_process'
 // import { rmSnapshot } from '../setup/rmSnapshot'
 
 export * from './update'
@@ -197,10 +198,6 @@ export const updateCommands = (config: DefaultConfigType) => {
           return
         }
 
-        if(isTestnet) {
-          getSnapshot(isTestnet, '10', config.SNAPSHOTS_PATH, VERSION_TESTNET)
-        }
-
         if (isFrankendancer) {
           await frankendancerUpdate(config, version, options.mod || isModded)
           await monitorUpdate(deliquentStake, true, minIdleTime)
@@ -212,6 +209,11 @@ export const updateCommands = (config: DefaultConfigType) => {
           ? DELINQUENT_STAKE_TESTNET
           : DELINQUENT_STAKE_MAINNET
 
+        if (isTestnet) {
+          // getSnapshot(isTestnet, '10', config.SNAPSHOTS_PATH, VERSION_TESTNET)
+          spawnSync('solv get snapshot', { stdio: 'inherit', shell: true })
+        }
+        
         await monitorUpdate(deliquentStakeNum, true, minIdleTime)
         return
       } else if (options.commission) {
