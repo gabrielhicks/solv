@@ -7,7 +7,7 @@ import {
 import { DefaultConfigType } from '@/config/types'
 
 export const startJitoTestnetScript = (
-  commissionBps = 1000,
+  commissionBps = 10000,
   relayerUrl: string,
   blockEngineUrl: string,
   shredReceiverAddr: string,

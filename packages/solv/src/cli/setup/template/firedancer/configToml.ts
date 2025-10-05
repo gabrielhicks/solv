@@ -82,10 +82,17 @@ user = \"solv\"
     tip_distribution_program_addr = \"4R3gSG8BpU4t19KYj8CfnbtRpnT8gtk4dvTHxVRwc2r7\"
     tip_payment_program_addr = \"T1pyyaTNZsKv2WcRAB8oVnk93mLJw2XzjtVYqCsaHqt\"
     tip_distribution_authority = \"GZctHpWXmsZC1YHACTGGcHhYxjdRqQvTpYkb9LMvxDib\"
-    commission_bps = 1000
+    commission_bps = 0
 
 [tiles.pack]
-  schedule_strategy = \"balanced\"`
+  schedule_strategy = \"balanced\"
+
+[net]
+  provider = \"xdp\"
+  
+[net.xdp]
+  xdp_mode = \"drv\"
+  xdp_zero_copy = true`
 
   const testnetBody = `name = \"fd1\"
 user = \"solv\"
