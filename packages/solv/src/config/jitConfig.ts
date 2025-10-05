@@ -11,7 +11,7 @@ export interface JitoConfig {
 export const JITO_CONFIG: JitoConfig = {
   version: '2.3.10',
   tag: 'v2.3.10',
-  commissionBps: 1000,
+  commissionBps: 0,
   relayerUrl: 'http://frankfurt.mainnet.relayer.jito.wtf:8100',
   blockEngineUrl: 'https://frankfurt.mainnet.block-engine.jito.wtf',
   shredReceiverAddr: '64.130.50.14:1002',

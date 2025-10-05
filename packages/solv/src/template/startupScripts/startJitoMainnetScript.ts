@@ -7,7 +7,7 @@ import {
 import { DefaultConfigType } from '@/config/types'
 
 export const startJitoMainnetScript = (
-  commissionBps = 1000,
+  commissionBps = 0,
   relayerUrl: string,
   blockEngineUrl: string,
   shredReceiverAddr: string,
