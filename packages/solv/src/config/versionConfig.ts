@@ -1,6 +1,6 @@
-export const VERSION_TESTNET = '2.3.11'
+export const VERSION_TESTNET = '3.0.6'
 export const VERSION_MAINNET = '2.3.11'
-export const VERSION_JITO_TESTNET = '2.3.11'
+export const VERSION_JITO_TESTNET = '3.0.6'
 export const VERSION_JITO_MAINNET = '2.3.11'
 export const VERSION_JITO_RPC = '2.3.11'
 export const VERSION_SOLANA_RPC = '2.3.11'
@@ -8,5 +8,5 @@ export const DELINQUENT_STAKE_TESTNET = 10
 export const DELINQUENT_STAKE_MAINNET = 5
 export const COMMISSION = 5
 export const VERSION_NODE = '20.17.0'
-export const VERSION_FIREDANCER_TESTNET = '0.708.20306'
+export const VERSION_FIREDANCER_TESTNET = '0.709.30000'
 export const VERSION_FIREDANCER = '0.708.20306'

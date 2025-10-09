@@ -1,4 +1,9 @@
 # @gabrielhicks/solv
+## 5.3.34
+
+### Testnet update
+3.0.6
+
 ## 5.3.33
 
 ### Firedancer updates
