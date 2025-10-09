@@ -88,11 +88,7 @@ user = \"solv\"
   schedule_strategy = \"balanced\"
 
 [net]
-  provider = \"xdp\"
-  
-[net.xdp]
-  xdp_mode = \"drv\"
-  xdp_zero_copy = true`
+  provider = \"socket\"`
 
   const testnetBody = `name = \"fd1\"
 user = \"solv\"

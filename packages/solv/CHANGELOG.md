@@ -1,4 +1,9 @@
 # @gabrielhicks/solv
+## 5.3.33
+
+### Firedancer updates
+Updating some configs
+
 ## 5.3.32
 
 ### Firedancer updates
