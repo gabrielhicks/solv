@@ -1,4 +1,9 @@
 # @gabrielhicks/solv
+## 5.3.38
+
+### Testnet update restart
+FD to 0.711.30006, anza,jito to 3.0.6
+
 ## 5.3.37
 
 ### FD Bug Fix
