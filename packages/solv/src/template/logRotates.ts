@@ -37,6 +37,7 @@ export const logRotates = (username = CONFIG.USERNAME, frankendancer: boolean) =
     size 4G
     rotate 1
     missingok
+    notifempty
     compress
     copytruncate
   }

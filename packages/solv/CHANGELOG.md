@@ -1,4 +1,9 @@
 # @gabrielhicks/solv
+## 5.3.37
+
+### FD Bug Fix
+Updating Logrotate to use same path, but overwrite for FD
+
 ## 5.3.36
 
 ### Testnet update restart

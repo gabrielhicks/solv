@@ -19,16 +19,16 @@ export function setupLogrotate(frankendancer = false): void {
     )
     console.log('Logrotate configuration created.')
   }
-  if (frankendancer && existsSync(SERVICE_PATHS.FRANKENDANCER_LOGROTATE)) {
-    console.log(
-      'FRANKENDANCER_LOGROTATE_PATH already exists. Skipping logrotate configuration.',
-    )
-  }
-  if (frankendancer && !existsSync(SERVICE_PATHS.SOL_LOGROTATE)) {
+  // if (frankendancer && existsSync(SERVICE_PATHS.SOL_LOGROTATE)) {
+  //   console.log(
+  //     'SOL_LOGROTATE already exists. Skipping logrotate configuration.',
+  //   )
+  // }
+  if (frankendancer) {
     const body = logRotates('solv', frankendancer)
     // Use sudo tee to write the file with superuser privileges
     execSync(
-      `echo "${body}" | sudo tee ${SERVICE_PATHS.FRANKENDANCER_LOGROTATE} > /dev/null`,
+      `echo "${body}" | sudo tee ${SERVICE_PATHS.SOL_LOGROTATE} > /dev/null`,
     )
     console.log('Logrotate configuration created.')
   }

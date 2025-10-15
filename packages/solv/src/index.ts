@@ -17,6 +17,7 @@ import {
   mountCommands,
   relayerCommands,
   dfCommands,
+  logrotateCommand,
 } from '@/cli'
 import { balanceCommands } from './cli/balance'
 import { rmLogs } from './cli/setup/rmLogs'
@@ -71,6 +72,7 @@ async function main() {
     epochTimerCommands(config)
     switchCommand(program, config)
     jupiterCommands()
+    logrotateCommand(config)
 
     program
       .command('rm:log')
