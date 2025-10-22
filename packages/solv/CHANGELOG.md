@@ -1,7 +1,12 @@
 # @gabrielhicks/solv
+## 5.4.0
+### Mainnet 3.0
+update to 3.0.6, 0.712.30006
+
 ## 5.3.39
 ### mainnet 3.0
 update to 3.0.6
+
 ## 5.3.38
 
 ### Testnet update restart
