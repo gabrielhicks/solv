@@ -1,4 +1,8 @@
 # @gabrielhicks/solv
+## 5.4.1
+### Patch jito
+Fixing 3.0.8+
+
 ## 5.4.0
 ### Mainnet 3.0
 update to 3.0.6, 0.712.30006

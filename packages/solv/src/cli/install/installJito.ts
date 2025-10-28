@@ -13,7 +13,7 @@ export const installJito = (version = VERSION_JITO_MAINNET, mod = false, isMajor
         },
       )
     } else {
-      const tag = `v${version}-jito.1`
+      const tag = `v${version}-jito`
       spawnSync(`mkdir /tmp/${tag}`, {
         shell: true,
         stdio: 'inherit',
