@@ -11,6 +11,15 @@ export const frankendancerUpdate = async (config: DefaultConfigType, version?: s
   const firedancerVersion = version || (isTestnet ? VERSION_FIREDANCER_TESTNET : VERSION_FIREDANCER)
   const isModified = mod || config.MOD
   const {filePath: modFilePath, body: modDiffContent} = modDiff();
+  // Update and restart DZ
+  spawnSync(
+    `sudo apt install --only-upgrade doublezero -y`,
+    { shell: true, stdio: 'inherit' },
+  )
+  spawnSync(
+    `sudo systemctl restart doublezerod`,
+    { shell: true, stdio: 'inherit' },
+  )
   // Update Firedancer
   if (isModified) {
     spawnSync(
