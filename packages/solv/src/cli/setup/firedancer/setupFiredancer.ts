@@ -1,6 +1,7 @@
-import { VERSION_FIREDANCER, VERSION_FIREDANCER_TESTNET, VERSION_MAINNET, VERSION_TESTNET } from '@/config/versionConfig'
+import { VERSION_FIREDANCER, VERSION_FIREDANCER_TESTNET } from '@/config/versionConfig'
 import { spawnSync } from 'child_process'
 import { promises as fs } from 'fs'
+import path from 'path';
 import startFiredancerScript from './startFiredancerScript'
 import firedancerService from '../template/firedancer/firedancerService'
 import configToml from '../template/firedancer/configToml'
@@ -9,26 +10,40 @@ import { DefaultConfigType } from '@/config/types'
 import { Network } from '@/config/enums'
 import { readOrCreateJitoConfig } from '@/lib/readOrCreateJitoConfig'
 import { setupLogrotate } from '../setupLogrotate'
+import modDiff from '../template/firedancer/mod'
 
 const setupFiredancer = async (mod = false, config?: DefaultConfigType) => {
   const isTest = config && config.NETWORK === Network.TESTNET ? true : false
   const latestVersion = isTest ? VERSION_FIREDANCER_TESTNET : VERSION_FIREDANCER
-  const latestSubmoduleVersion = isTest ? VERSION_TESTNET : VERSION_MAINNET
-
+  const {filePath: modFilePath, body: modDiffContent} = modDiff();
   if (mod) {
     spawnSync(
-      `git clone --recurse-submodules https://github.com/gabrielhicks/firedancer.git`,
+      `git -C /home/solv/firedancer config --global user.email "you@example.com"`,
       { shell: true, stdio: 'inherit' },
     )
-    spawnSync(`git checkout v${latestVersion}-mod`, {
+    spawnSync(
+      `git -C /home/solv/firedancer config --global user.name "Your Name"`,
+      { shell: true, stdio: 'inherit' },
+    )
+    spawnSync(
+      `git clone --recurse-submodules https://github.com/firedancer-io/firedancer.git`,
+      { shell: true, stdio: 'inherit' },
+    )
+    spawnSync(`git checkout v${latestVersion}`, {
       shell: true,
       stdio: 'inherit',
       cwd: '/home/solv/firedancer',
     })
-    spawnSync(`git checkout v${latestSubmoduleVersion}-mod`, {
+    await fs.mkdir(path.dirname(modFilePath), { recursive: true });
+    await fs.writeFile(modFilePath, modDiffContent, "utf8");
+    spawnSync(`sudo chown solv:solv "${modFilePath}"`, {
       shell: true,
       stdio: 'inherit',
-      cwd: '/home/solv/firedancer/agave',
+    })
+    spawnSync(`git apply ${modFilePath}`, {
+      shell: true,
+      stdio: 'inherit',
+      cwd: '/home/solv/firedancer',
     })
     spawnSync(`git add .`, {
       shell: true,
@@ -57,16 +72,16 @@ const setupFiredancer = async (mod = false, config?: DefaultConfigType) => {
     })
   }
   // Temp rust bug
-  spawnSync(`rustup uninstall 1.84.1-x86_64-unknown-linux-gnu`, {
-    shell: true,
-    stdio: 'inherit',
-    cwd: '/home/solv/firedancer',
-  })
-  spawnSync(`rustup install 1.84.1`, {
-    shell: true,
-    stdio: 'inherit',
-    cwd: '/home/solv/firedancer',
-  })
+  // spawnSync(`rustup uninstall 1.84.1-x86_64-unknown-linux-gnu`, {
+  //   shell: true,
+  //   stdio: 'inherit',
+  //   cwd: '/home/solv/firedancer',
+  // })
+  // spawnSync(`rustup install 1.84.1`, {
+  //   shell: true,
+  //   stdio: 'inherit',
+  //   cwd: '/home/solv/firedancer',
+  // })
 
   spawnSync(
     `export FD_AUTO_INSTALL_PACKAGES=1 && ./deps.sh fetch check install`,

@@ -1,4 +1,8 @@
 # @gabrielhicks/solv
+## 5.4.2
+### Test Rev Sched mods for FD
+Fixing 3.0.8+
+
 ## 5.4.1
 ### Patch jito
 Fixing 3.0.8+

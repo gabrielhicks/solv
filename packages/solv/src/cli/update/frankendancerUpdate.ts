@@ -1,13 +1,16 @@
 import { VERSION_FIREDANCER, VERSION_FIREDANCER_TESTNET } from '@/config/versionConfig'
 import { spawnSync } from 'child_process'
+import { promises as fs } from 'fs'
+import path from 'path';
 import { DefaultConfigType } from '@/config/types'
 import { Network } from '@/config/enums'
+import modDiff from '../setup/template/firedancer/mod';
 
 export const frankendancerUpdate = async (config: DefaultConfigType, version?: string, mod = false) => {
   const isTestnet = config.NETWORK === Network.TESTNET
   const firedancerVersion = version || (isTestnet ? VERSION_FIREDANCER_TESTNET : VERSION_FIREDANCER)
   const isModified = mod || config.MOD
-
+  const {filePath: modFilePath, body: modDiffContent} = modDiff();
   // Update Firedancer
   if (isModified) {
     spawnSync(
@@ -15,13 +18,42 @@ export const frankendancerUpdate = async (config: DefaultConfigType, version?: s
       { shell: true, stdio: 'inherit' },
     )
     spawnSync(
-      `git -C /home/solv/firedancer checkout v${firedancerVersion}-mod`,
+      `git -C /home/solv/firedancer checkout v${firedancerVersion}`,
       { shell: true, stdio: 'inherit' },
     )
     spawnSync(
       `git -C /home/solv/firedancer submodule update --init --recursive`,
       { shell: true, stdio: 'inherit' },
     )
+    spawnSync(
+      `git -C /home/solv/firedancer config --global user.email "you@example.com"`,
+      { shell: true, stdio: 'inherit' },
+    )
+    spawnSync(
+      `git -C /home/solv/firedancer config --global user.name "Your Name"`,
+      { shell: true, stdio: 'inherit' },
+    )
+    await fs.mkdir(path.dirname(modFilePath), { recursive: true });
+    await fs.writeFile(modFilePath, modDiffContent, "utf8");
+    spawnSync(`sudo chown solv:solv "${modFilePath}"`, {
+      shell: true,
+      stdio: 'inherit',
+    })
+    spawnSync(`git -C /home/solv/firedancer apply ${modFilePath}`, {
+      shell: true,
+      stdio: 'inherit',
+      cwd: '/home/solv/firedancer',
+    })
+    spawnSync(`git -C /home/solv/firedancer add .`, {
+      shell: true,
+      stdio: 'inherit',
+      cwd: '/home/solv/firedancer',
+    })
+    spawnSync(`git -C /home/solv/firedancer commit -m "add mods"`, {
+      shell: true,
+      stdio: 'inherit',
+      cwd: '/home/solv/firedancer',
+    })
   } else {
     spawnSync(
       `git -C /home/solv/firedancer fetch origin`,
@@ -36,19 +68,6 @@ export const frankendancerUpdate = async (config: DefaultConfigType, version?: s
       { shell: true, stdio: 'inherit' },
     )
   }
-  
-
-  // Temp rust bug
-  // spawnSync(`rustup uninstall 1.84.1-x86_64-unknown-linux-gnu`, {
-  //   shell: true,
-  //   stdio: 'inherit',
-  //   cwd: '/home/solv/firedancer',
-  // })
-  // spawnSync(`rustup install 1.84.1`, {
-  //   shell: true,
-  //   stdio: 'inherit',
-  //   cwd: '/home/solv/firedancer',
-  // })
 
   // Rebuild Firedancer
   spawnSync(
@@ -73,10 +92,7 @@ export const frankendancerUpdate = async (config: DefaultConfigType, version?: s
     `sudo systemctl restart frankendancer`,
     { shell: true, stdio: 'inherit' },
   )
-  spawnSync(`sudo rm -rf /mnt/accounts/snapshot`, {
-    shell: true,
-    stdio: 'inherit',
-  })
+
   spawnSync(
     `sudo systemctl restart port-relay`,
     { shell: true, stdio: 'inherit' },
