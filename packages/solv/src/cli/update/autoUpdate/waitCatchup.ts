@@ -6,7 +6,7 @@ import { getSolanaAddress } from '@/lib/getSolanaAddress'
 import sleep from '@/lib/sleep'
 import { sendDiscord } from '@skeet-framework/utils'
 
-const MAX_RETRIES = 10
+const MAX_RETRIES = 30
 
 const waitCatchup = async (config: DefaultConfigType) => {
   try {
