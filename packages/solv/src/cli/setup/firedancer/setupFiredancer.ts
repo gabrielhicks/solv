@@ -45,7 +45,12 @@ const setupFiredancer = async (mod = false, config?: DefaultConfigType) => {
       stdio: 'inherit',
       cwd: '/home/solv/firedancer',
     })
-    spawnSync(`git add .`, {
+    spawnSync(`git add ./src/*`, {
+      shell: true,
+      stdio: 'inherit',
+      cwd: '/home/solv/firedancer',
+    })
+    spawnSync(`git add ./book/*`, {
       shell: true,
       stdio: 'inherit',
       cwd: '/home/solv/firedancer',

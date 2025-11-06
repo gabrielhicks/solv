@@ -44,7 +44,12 @@ export const frankendancerUpdate = async (config: DefaultConfigType, version?: s
       stdio: 'inherit',
       cwd: '/home/solv/firedancer',
     })
-    spawnSync(`git -C /home/solv/firedancer add .`, {
+    spawnSync(`git -C /home/solv/firedancer add /home/solv/firedancer/src/*`, {
+      shell: true,
+      stdio: 'inherit',
+      cwd: '/home/solv/firedancer',
+    })
+    spawnSync(`git -C /home/solv/firedancer add /home/solv/firedancer/book/*`, {
       shell: true,
       stdio: 'inherit',
       cwd: '/home/solv/firedancer',
