@@ -45,7 +45,8 @@ const autoUpdate = async (config: DefaultConfigType) => {
 
   if (isUpdateRequired) {
     // Restart the node
-    const msg = `Restarting **${address}**`
+    const timestampRestart = Math.floor(Date.now() / 1000)
+    const msg = `Restarting **${address}**\n` + `at: <t:${timestampRestart}:> (${timestampRestart})\n` + `_ _`
     await sendDiscord(msg)
     try {
       spawnSync(`solv update && solv update --config && solv update -b`, {
@@ -65,7 +66,14 @@ const autoUpdate = async (config: DefaultConfigType) => {
     // Wait for the node to catch up
     const catchup = await waitCatchup(config)
     if (catchup) {
-      const msg = `**${address}** has caught up!`
+      // epoch seconds when catchup completes
+      const timestampCatchup = Math.floor(Date.now() / 1000)
+
+      const diffSeconds = timestampCatchup - timestampRestart
+      const minutes = Math.floor(diffSeconds / 60)
+      const seconds = diffSeconds % 60
+      const durationStr = minutes > 0 ? `${minutes}m ${seconds}s` : `${seconds}s`
+      const msg = `**${address}** has caught up!\n` + `at: <t:${timestampRestart}:> (${timestampRestart})\n` + `**${address}** took **${durationStr}** to catch up after restart!\n` + `_ _`
       await sendDiscord(msg)
     } else {
       const errorMsg = `**${address}** failed to catch up after update`
