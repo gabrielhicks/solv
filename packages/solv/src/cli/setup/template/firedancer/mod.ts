@@ -5784,7 +5784,8 @@ index 479e0f1829..a97f5778d4 100644
 +#include <time.h>
  
  /* FD_LOG_NOTICE(( ... printf style arguments ... )) will send a message
-    at the NOTICE level to the logger.  E.g. for a typical fd_log`
+    at the NOTICE level to the logger.  E.g. for a typical fd_log
+`
 
 
   return { filePath, body }
