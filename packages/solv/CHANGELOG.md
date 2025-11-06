@@ -1,4 +1,8 @@
 # @gabrielhicks/solv
+## 5.4.7
+### Test Mainnet Autoupdate
+3.0.10, 0.713.30008
+
 ## 5.4.6
 ### Test Mainnet Autoupdate
 3.0.10, 0.713.30008
