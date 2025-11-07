@@ -4,7 +4,7 @@ import lessThan8Hour from './lessThan8Hour'
 import lessThan1Hour from './lessThan1Hour'
 import newEpoch from './newEpoch'
 import initOrReadEpochFile from './initEpochFile'
-import checkBalance from './checkBalance'
+// import checkBalance from './checkBalance'
 import { isValidatorActive } from './isValidatorActive'
 import { getAllKeyPaths, SOLANA_TESTNET_RPC_URL } from '@/config/config'
 // import { sendDiscord } from '@/lib/sendDiscord'
@@ -46,7 +46,7 @@ export const epochTimer = async (config: DefaultConfigType) => {
   // }
   console.log(`Validator is active: ${isActive.isActive}`)
   // Check Validator Account's Balance
-  await checkBalance(config)
+  // await checkBalance(config)
 
   // Check if solv/Solana version update is required
   const isSolvVersionSame = await isVersionSame()

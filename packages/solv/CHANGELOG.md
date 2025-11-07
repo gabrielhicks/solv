@@ -1,4 +1,8 @@
 # @gabrielhicks/solv
+## 5.4.11
+### Remove autoupdate
+Remove autoupdate, remove balance check
+
 ## 5.4.10
 ### Test Mainnet Autoupdate
 3.0.10, 0.713.30008
