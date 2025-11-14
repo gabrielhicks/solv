@@ -37,12 +37,6 @@ export const setupV2 = async (skipInitConfig: boolean, skipMount: boolean, pivot
       setupDirs()
       await mountDirs()
     }
-    if (!pivot) {
-      console.log(chalk.white(`🟢 Entering Pivot Phase`))
-      // Mount /mnt/ledger, /mnt/accounts and /mnt/snapshots if third disk is available
-      setupDirs()
-      await mountDirs()
-    }
     // Generate Systemd Service
     makeServices(isTest)
     // Restart Logrotate
