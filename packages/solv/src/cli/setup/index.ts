@@ -79,6 +79,10 @@ export const setupCommands = (config: DefaultConfigType) => {
           await setupFiredancer(isModded)
           return
         }
+        console.log(chalk.white('⏳ Options: ...'))
+        console.log(chalk.white('1️⃣ --skip-mount: ', options.skipMount))
+        console.log(chalk.white('2️⃣ --skip-init-config: ', options.skipInitConfig))
+        console.log(chalk.white('3️⃣ --pivot: ', options.pivot))
         await setupV2(
           options.skipInitConfig,
           options.skipMount,

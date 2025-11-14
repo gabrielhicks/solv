@@ -19,7 +19,7 @@ import { enableSolv } from '@/lib/enableSolv'
 import { createSymLink } from './createSymLink'
 import rpcLog from '@/utils/rpcLog'
 
-export const setupV2 = async (skipInitConfig = false, skipMount = false, pivot = false, mod = false) => {
+export const setupV2 = async (skipInitConfig: boolean, skipMount: boolean, pivot: boolean, mod: boolean) => {
   try {
     if (!skipInitConfig) {
       console.log(chalk.white(`🟢 Initializing Setup`))
@@ -32,11 +32,13 @@ export const setupV2 = async (skipInitConfig = false, skipMount = false, pivot =
     const isTest = latestConfig.NETWORK === Network.TESTNET
     // Generate /mnt/ledger, /mnt/accounts and /mnt/snapshots if third disk is available
     if (!skipMount) {
+      console.log(chalk.white(`🟢 Entering Mount Phase`))
       // Mount /mnt/ledger, /mnt/accounts and /mnt/snapshots if third disk is available
       setupDirs()
       await mountDirs()
     }
     if (!pivot) {
+      console.log(chalk.white(`🟢 Entering Pivot Phase`))
       // Mount /mnt/ledger, /mnt/accounts and /mnt/snapshots if third disk is available
       setupDirs()
       await mountDirs()
