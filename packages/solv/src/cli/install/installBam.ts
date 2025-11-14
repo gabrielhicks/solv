@@ -23,7 +23,7 @@ export const installBam = (version = VERSION_JITO_MAINNET, mod = false, isMajorT
         stdio: 'inherit',
       })
       spawnSync(
-        `git -C /tmp/${tag} clone https://github.com/jito-labs/jito-bam.git --recurse-submodules .`,
+        `git -C /tmp/${tag} clone https://github.com/jito-labs/jito-client.git --recurse-submodules .`,
         {
           shell: true,
           stdio: 'inherit',

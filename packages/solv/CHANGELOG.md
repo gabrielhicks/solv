@@ -1,4 +1,8 @@
 # @gabrielhicks/solv
+## 5.4.18
+### BAM update
+Polishing up some config stuff for setup
+
 ## 5.4.17
 ### BAM update
 Polishing up some config stuff for setup

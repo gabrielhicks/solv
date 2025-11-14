@@ -44,7 +44,7 @@ ${validatorArgs}
 --tip-distribution-program-pubkey F2Zu7QZiTYUhPd7u9ukRVwxh7B71oA3NMJcHuCHc29P2 \\
 --merkle-root-upload-authority GZctHpWXmsZC1YHACTGGcHhYxjdRqQvTpYkb9LMvxDib \\
 --commission-bps ${commissionBps} \\
---rpc-bind-address 127.0.0.1 \\
+--rpc-bind-address 0.0.0.0 \\
 --block-engine-url ${blockEngineUrl} \\
 --shred-receiver-address ${shredReceiverAddr} \\
 --dynamic-port-range 8000-8025 \\
@@ -53,12 +53,11 @@ ${validatorArgs}
 --limit-ledger-size 50000000 \\
 --block-production-method central-scheduler-greedy \\
 --block-verification-method unified-scheduler \\
---private-rpc \\
---wait-for-supermajority 343175553 \\
---expected-shred-version 9065 \\
---expected-bank-hash 4oMrSXsLTiCc1X7S27kxSfGVraTCZoZ7YTy2skEB9bPk \\
+--maximum-full-snapshots-to-retain 1 \\
+--maximum-incremental-snapshots-to-retain 2 \\
+--expected-shred-version 41708 \\
+--expected-bank-hash 4NuNyboT36pwwGJvMPZLreFqYpkbpBjX82nkt4AkJ9QT \\
 --expected-genesis-hash 4uhcVJyU9pJkvQyS88uRDiswHXSCkY3zQawwpjk2NsNY \\
---full-rpc-api \\
 `
   return script
 }

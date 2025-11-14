@@ -34,21 +34,18 @@ exec agave-validator \\
 --entrypoint entrypoint3.testnet.solana.com:8001 \\
 ${validatorArgs}
 --only-known-rpc \\
---rpc-bind-address 127.0.0.1 \\
---private-rpc \\
+--rpc-bind-address 0.0.0.0 \\
+--expected-bank-hash 4NuNyboT36pwwGJvMPZLreFqYpkbpBjX82nkt4AkJ9QT \\
 --expected-genesis-hash 4uhcVJyU9pJkvQyS88uRDiswHXSCkY3zQawwpjk2NsNY \\
 --dynamic-port-range 8000-8025 \\
 --rpc-port 8899 \\
 --wal-recovery-mode skip_any_corrupted_record \\
---wait-for-supermajority 361144649 \\
 --expected-shred-version 41708 \\
---expected-bank-hash 4NuNyboT36pwwGJvMPZLreFqYpkbpBjX82nkt4AkJ9QT \\
 --limit-ledger-size 50000000 \\
 --block-production-method central-scheduler-greedy \\
 --block-verification-method unified-scheduler \\
---full-rpc-api \\
 --maximum-full-snapshots-to-retain 1 \\
---maximum-incremental-snapshots-to-retain 4 \\
+--maximum-incremental-snapshots-to-retain 2 \\
 `
   return script
 }
