@@ -45,8 +45,10 @@ export const setupV2 = async (skipInitConfig: boolean, skipMount: boolean, pivot
     setupCpuGovernor()
     // Update Sysctl Config if needed
     await updateSysctlConfig()
-    // Generate Solana Keys
-    setupKeys(latestConfig)
+    if (!skipMount) {
+      // Generate Solana Keys
+      setupKeys(latestConfig)
+    }
     createSymLink(latestConfig.IS_DUMMY, isTest)
     latestConfig = await readConfig()
     // Generate Soalna Startup Script
@@ -60,7 +62,7 @@ export const setupV2 = async (skipInitConfig: boolean, skipMount: boolean, pivot
       default:
         throw new Error('Unknown Node Type')
     }
-    if(!pivot) {
+    if(!skipMount) {
       // Setup Permissions
       setupPermissions()
     }
@@ -75,7 +77,7 @@ export const setupV2 = async (skipInitConfig: boolean, skipMount: boolean, pivot
         getSnapshot(isTest, `100`, latestConfig.SNAPSHOTS_PATH, isTest ? latestConfig.TESTNET_SOLANA_VERSION : latestConfig.MAINNET_SOLANA_VERSION)
       }
     }
-    if(!pivot) {
+    if(!skipMount) {
       // Start Solana
       startSolana(latestConfig)
     }
