@@ -12,6 +12,11 @@ import { startTestnetAgaveValidatorScript } from '@/template/startupScripts/star
 import { existsAsync } from '@skeet-framework/utils'
 import { writeFile } from 'fs/promises'
 import updateStartupScriptPermissions from '@/cli/setup/updateStartupScriptPermission'
+import { startBamMainnetScript } from '@/template/startupScripts/startBamMainnetScript'
+import { installBam } from '@/cli/install/installBam'
+import { startBamTestnetScript } from '@/template/startupScripts/startBamTestnetScript'
+import setupFiredancer from '../firedancer/setupFiredancer'
+import { getKeypairsInfo } from '@/cli/balance'
 
 const setupValidatorNode = async (config: DefaultConfigType, mod = false) => {
   const { NETWORK: network, MOD: modConfig } = config
@@ -53,9 +58,22 @@ const setupMainnetValidator = async (config: DefaultConfigType, mod = false) => 
         config
       )
       break
-    // case ValidatorType.FRANKENDANCER:
-    //   console.log('Coming soon...🌉')
-    //   break
+    case ValidatorType.BAM:
+      console.log('JITO Validator Setup for Mainnet')
+      const bamConfig = await readOrCreateJitoConfig()
+      installBam(version, mod, isMajorThree)
+      startupScript = startBamMainnetScript(
+        bamConfig.commissionBps,
+        bamConfig.relayerUrl,
+        bamConfig.blockEngineUrl,
+        bamConfig.shredReceiverAddr,
+        bamConfig.bamUrl,
+        config
+      )
+      break
+    case ValidatorType.FRANKENDANCER:
+      await setupFiredancer(mod, config)
+      break
     // case ValidatorType.FIREDANCER:
     //   console.log('Coming soon...🌉')
     //   break
@@ -63,10 +81,10 @@ const setupMainnetValidator = async (config: DefaultConfigType, mod = false) => 
       console.log('Unknown Validator Type for Mainnet')
       break
   }
-  if (await existsAsync(STARTUP_SCRIPT)) {
-    console.log('Startup script already exists. Skipping...')
-    return
-  }
+  // if (await existsAsync(STARTUP_SCRIPT)) {
+  //   console.log('Startup script already exists. Skipping...')
+  //   return
+  // }
   await writeFile(STARTUP_SCRIPT, startupScript, 'utf-8')
   updateStartupScriptPermissions()
 }
@@ -97,9 +115,23 @@ const setupTestnetValidator = async (config: DefaultConfigType, mod = false) => 
         config
       )
       break
-    // case ValidatorType.FRANKENDANCER:
-    //   console.log('Coming soon...🌉')
-    //   break
+    case ValidatorType.BAM:
+      console.log('BAM Validator Setup for Mainnet')
+      const bamConfig = await readOrCreateJitoConfig()
+      installBam(config.TESTNET_SOLANA_VERSION, mod, isMajorThree)
+      startupScript = startBamTestnetScript(
+        bamConfig.commissionBps,
+        bamConfig.relayerUrl,
+        bamConfig.blockEngineUrl,
+        bamConfig.shredReceiverAddr,
+        bamConfig.bamUrl,
+        config
+      )
+      break
+    case ValidatorType.FRANKENDANCER:
+      console.log('FRANKENDANCER Validator Setup for Mainnet')
+      await setupFiredancer(mod, config)
+      break
     // case ValidatorType.FIREDANCER:
     //   console.log('Coming soon...🌉')
     //   break
@@ -107,10 +139,10 @@ const setupTestnetValidator = async (config: DefaultConfigType, mod = false) => 
       console.log('Unknown Validator Type for Testnet')
       break
   }
-  if (await existsAsync(STARTUP_SCRIPT)) {
-    console.log('Startup script already exists. Skipping...')
-    return
-  }
+  // if (await existsAsync(STARTUP_SCRIPT)) {
+  //   console.log('Startup script already exists. Skipping...')
+  //   return
+  // }
   await writeFile(STARTUP_SCRIPT, startupScript, 'utf-8')
   updateStartupScriptPermissions()
 }

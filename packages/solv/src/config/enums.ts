@@ -26,6 +26,7 @@ export enum ValidatorType {
   JITO = 'jito',
   FRANKENDANCER = 'frankendancer',
   // FIREDANCER = 'firedancer',
+  BAM = 'bam',
   NONE = 'none',
 }
 

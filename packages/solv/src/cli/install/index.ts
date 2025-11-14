@@ -4,11 +4,14 @@ import { jitoUpdate } from '../update/jitoUpdate'
 import { DefaultConfigType } from '@/config/types'
 import { Network, NodeType, ValidatorType } from '@/config/enums'
 import {
+  VERSION_FIREDANCER,
   VERSION_JITO_MAINNET,
   VERSION_MAINNET,
   VERSION_SOLANA_RPC,
   VERSION_TESTNET,
 } from '@/config/versionConfig'
+import { bamUpdate } from '../update/bamUpdate'
+import { frankendancerUpdate } from '../update/frankendancerUpdate'
 
 export const installCommands = (config: DefaultConfigType) => {
   const isTestnet = config.NETWORK === Network.TESTNET
@@ -32,12 +35,26 @@ export const installCommands = (config: DefaultConfigType) => {
     )
     .action(async (options: { version: string, mod: boolean }) => {
       const isJito = config.VALIDATOR_TYPE === ValidatorType.JITO
+      const isJitoBam = config.VALIDATOR_TYPE === ValidatorType.BAM
+      const isFrankendancer = config.VALIDATOR_TYPE === ValidatorType.FRANKENDANCER
       const isModified = options.mod || config.MOD;
       if (isJito) {
         const jitoVersion = options.version || VERSION_JITO_MAINNET
         const jitoTag = `v${jitoVersion}`
         const isMajorThree = jitoVersion.startsWith("3") ? true : false;
         jitoUpdate(jitoTag, isModified, isMajorThree)
+        return
+      }
+      if (isJitoBam) {
+        const jitoVersion = options.version || VERSION_JITO_MAINNET
+        const jitoTag = `v${jitoVersion}`
+        const isMajorThree = jitoVersion.startsWith("3") ? true : false;
+        bamUpdate(jitoTag, isModified, isMajorThree)
+        return
+      }
+      if (isFrankendancer) {
+        const frankendancerVersion = options.version || VERSION_FIREDANCER
+        frankendancerUpdate(config, frankendancerVersion, isModified)
         return
       }
       const isRPC = config.NODE_TYPE === NodeType.RPC

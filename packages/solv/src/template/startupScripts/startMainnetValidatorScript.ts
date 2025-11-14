@@ -1,12 +1,25 @@
+import { getKeypairsInfo } from '@/cli/balance';
 import {
   IDENTITY_KEY_PATH,
   LOG_PATH,
+  MAINNET_KNOWN_VALIDATORS,
   MAINNET_VALIDATOR_KEY_PATH,
   MAINNET_VALIDATOR_VOTE_KEY_PATH,
 } from '@/config/constants'
 import { DefaultConfigType } from '@/config/types'
 
 export const startMainnetValidatorScript = (config: DefaultConfigType, solanaCLI = 'agave-validator') => {
+  const {validatorKeyAddress} = getKeypairsInfo(config)
+
+  const knownValidators = MAINNET_KNOWN_VALIDATORS;
+
+  const filteredValidators = knownValidators.filter(
+    (address) => address !== validatorKeyAddress
+  );
+
+  const validatorArgs = filteredValidators
+    .map((address) => `--known-validator ${address} \\`)
+    .join('\n');
   const script = `#!/bin/bash
 exec ${solanaCLI} \\
 --identity ${IDENTITY_KEY_PATH} \\
@@ -21,12 +34,7 @@ exec ${solanaCLI} \\
 --entrypoint entrypoint3.mainnet-beta.solana.com:8001 \\
 --entrypoint entrypoint4.mainnet-beta.solana.com:8001 \\
 --entrypoint entrypoint5.mainnet-beta.solana.com:8001 \\
---known-validator Certusm1sa411sMpV9FPqU5dXAYhmmhygvxJ23S6hJ24 \\
---known-validator 7Np41oeYqPefeNQEHSv1UDhYrehxin3NStELsSKCT4K2 \\
---known-validator GdnSyH3YtwcxFvQrVVJMm1JhTS4QVX7MFsX56uJLUfiZ \\
---known-validator CakcnaRDHka2gXyfbEd2d3xsvkJkqsLw2akB3zsN1D2S \\
---known-validator phz1CRbEsCtFCh2Ro5tjyu588VU1WPMwW9BJS9yFNn2 \\
---known-validator wetkjRRRDrSPAzHqfVHtFDbhNnejKm5UPfkHeccFCpo \\
+${validatorArgs}
 --expected-genesis-hash 5eykt4UsFv8P8NJdTREpY1vzqKqZKvdpKuc147dw2N9d \\
 --expected-shred-version 50093 \\
 --dynamic-port-range 8000-8025 \\

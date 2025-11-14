@@ -18,7 +18,6 @@ import { restartLogrotate } from '@/lib/restartLogrotate'
 import { enableSolv } from '@/lib/enableSolv'
 import { createSymLink } from './createSymLink'
 import rpcLog from '@/utils/rpcLog'
-import setupFiredancer from './firedancer/setupFiredancer'
 
 export const setupV2 = async (skipInitConfig = false, skipMount = false, pivot = false, mod = false) => {
   try {
@@ -57,10 +56,6 @@ export const setupV2 = async (skipInitConfig = false, skipMount = false, pivot =
         break
       case NodeType.VALIDATOR:
         await setupValidatorNode(latestConfig, mod)
-        // Setup Firedancer if needed
-        if (latestConfig.VALIDATOR_TYPE === ValidatorType.FRANKENDANCER) {
-          await setupFiredancer(mod, latestConfig)
-        }
         break
       default:
         throw new Error('Unknown Node Type')

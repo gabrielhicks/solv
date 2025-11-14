@@ -1,12 +1,25 @@
+import { getKeypairsInfo } from '@/cli/balance';
 import {
   IDENTITY_KEY_PATH,
   LOG_PATH,
+  TESTNET_KNOWN_VALIDATORS,
   TESTNET_VALIDATOR_KEY_PATH,
   TESTNET_VALIDATOR_VOTE_KEY_PATH,
 } from '@/config/constants'
 import { DefaultConfigType } from '@/config/types'
 
 export const startTestnetAgaveValidatorScript = (config: DefaultConfigType) => {
+  const {validatorKeyAddress} = getKeypairsInfo(config)
+
+  const knownValidators = TESTNET_KNOWN_VALIDATORS;
+
+  const filteredValidators = knownValidators.filter(
+    (address) => address !== validatorKeyAddress
+  );
+
+  const validatorArgs = filteredValidators
+    .map((address) => `--known-validator ${address} \\`)
+    .join('\n');
   const script = `#!/bin/bash
 exec agave-validator \\
 --identity ${IDENTITY_KEY_PATH} \\
@@ -19,9 +32,7 @@ exec agave-validator \\
 --entrypoint entrypoint.testnet.solana.com:8001 \\
 --entrypoint entrypoint2.testnet.solana.com:8001 \\
 --entrypoint entrypoint3.testnet.solana.com:8001 \\
---known-validator 5D1fNXzvv5NjV1ysLjirC4WY92RNsVH18vjmcszZd8on \\
---known-validator phz4F5mHZcZGC21GRUT6j3AqJxTUGDVAiCKiyucnyy1 \\
---known-validator rad1u8GKZoyVWxVAKy1cjL84dqhS9mp57uAezPt4iQg \\
+${validatorArgs}
 --only-known-rpc \\
 --rpc-bind-address 127.0.0.1 \\
 --private-rpc \\

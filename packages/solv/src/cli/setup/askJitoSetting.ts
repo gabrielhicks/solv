@@ -34,6 +34,7 @@ export const askJitoSetting = async (isTestnet: boolean) => {
     blockEngineUrl: regionArgs.BLOCK_ENGINE_URL,
     relayerUrl: regionArgs.RELAYER_URL,
     shredReceiverAddr: regionArgs.SHRED_RECEIVER_ADDR,
+    bamUrl: regionArgs.BAM_URL,
   } as JitoConfig
 
   return result

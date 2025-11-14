@@ -39,14 +39,7 @@ const installAgave = (version = VERSION_MAINNET, mod = false, isMajorThree = fal
         },
       )
       spawnSync(
-        `sudo rm -rf /home/solv/.local/share/solana/install/active_release/bin/`,
-        {
-          shell: true,
-          stdio: 'inherit',
-        },
-      )
-      spawnSync(
-        `cp -r /home/solv/.local/share/solana/install/releases/v${version}-agave-mod/bin/ /home/solv/.local/share/solana/install/active_release/bin/`,
+        `sudo ln -sfn /home/solv/.local/share/solana/install/releases/v${version}-agave-mod/bin/ /home/solv/.local/share/solana/install/active_release/bin/`,
         {
           shell: true,
           stdio: 'inherit',
@@ -88,14 +81,7 @@ const installAgave = (version = VERSION_MAINNET, mod = false, isMajorThree = fal
         },
       )
       spawnSync(
-        `sudo rm -rf /home/solv/.local/share/solana/install/active_release/bin/`,
-        {
-          shell: true,
-          stdio: 'inherit',
-        },
-      )
-      spawnSync(
-        `cp -r /home/solv/.local/share/solana/install/releases/v${version}-agave/bin/ /home/solv/.local/share/solana/install/active_release/bin/`,
+        `sudo ln -sfn /home/solv/.local/share/solana/install/releases/v${version}-agave/bin/ /home/solv/.local/share/solana/install/active_release/bin/`,
         {
           shell: true,
           stdio: 'inherit',

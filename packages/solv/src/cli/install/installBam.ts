@@ -1,19 +1,19 @@
 import { VERSION_JITO_MAINNET } from '@/config/versionConfig'
 import { spawnSync } from 'child_process'
 
-export const installJito = (version = VERSION_JITO_MAINNET, mod = false, isMajorThree = false) => {
+export const installBam = (version = VERSION_JITO_MAINNET, mod = false, isMajorThree = false) => {
   if(isMajorThree) {
     if(mod) {
       const tag = `v${version}-mod`
       spawnSync(
-        `sh -c "$(curl --netrc-optional -sSfL https://raw.githubusercontent.com/gabrielhicks/jito-solana/v${tag}/installer)"`,
+        `sh -c "$(curl --netrc-optional -sSfL https://raw.githubusercontent.com/gabrielhicks/jito-bam/v${tag}/installer)"`,
         {
           shell: true,
           stdio: 'inherit',
         },
       )
     } else {
-      const tag = `v${version}-jito`
+      const tag = `v${version}-bam`
       spawnSync(`mkdir /tmp/${tag}`, {
         shell: true,
         stdio: 'inherit',
@@ -23,7 +23,7 @@ export const installJito = (version = VERSION_JITO_MAINNET, mod = false, isMajor
         stdio: 'inherit',
       })
       spawnSync(
-        `git -C /tmp/${tag} clone https://github.com/jito-foundation/jito-solana.git --recurse-submodules .`,
+        `git -C /tmp/${tag} clone https://github.com/jito-labs/jito-bam.git --recurse-submodules .`,
         {
           shell: true,
           stdio: 'inherit',
@@ -63,7 +63,7 @@ export const installJito = (version = VERSION_JITO_MAINNET, mod = false, isMajor
   } else {
     if(mod) {
       spawnSync(
-        `sh -c "$(curl --netrc-optional -sSfL https://raw.githubusercontent.com/gabrielhicks/jito-solana/v${version}-mod/installer)"`,
+        `sh -c "$(curl --netrc-optional -sSfL https://raw.githubusercontent.com/gabrielhicks/jito-bam/v${version}-mod/installer)"`,
         {
           shell: true,
           stdio: 'inherit',
@@ -71,7 +71,7 @@ export const installJito = (version = VERSION_JITO_MAINNET, mod = false, isMajor
       )
     } else {
       spawnSync(
-        `sh -c "$(curl --netrc-optional -sSfL https://release.jito.wtf/v${version}-jito/install)"`,
+        `sh -c "$(curl --netrc-optional -sSfL https://release.jito.wtf/v${version}-bam/install)"`,
         {
           shell: true,
           stdio: 'inherit',

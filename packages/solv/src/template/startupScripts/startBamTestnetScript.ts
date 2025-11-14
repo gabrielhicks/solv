@@ -8,11 +8,12 @@ import {
 } from '@/config/constants'
 import { DefaultConfigType } from '@/config/types'
 
-export const startJitoTestnetScript = (
+export const startBamTestnetScript = (
   commissionBps = 10000,
   relayerUrl: string,
   blockEngineUrl: string,
   shredReceiverAddr: string,
+  bamUrl: string,
   config: DefaultConfigType,
   solanaCLI = 'agave-validator',
 ) => {
@@ -27,6 +28,7 @@ export const startJitoTestnetScript = (
   const validatorArgs = filteredValidators
     .map((address) => `--known-validator ${address} \\`)
     .join('\n');
+  
   const script = `#!/bin/bash
 exec ${solanaCLI} \\
 --identity ${IDENTITY_KEY_PATH} \\
@@ -47,6 +49,7 @@ ${validatorArgs}
 --rpc-bind-address 127.0.0.1 \\
 --block-engine-url ${blockEngineUrl} \\
 --shred-receiver-address ${shredReceiverAddr} \\
+--bam-url ${bamUrl} \\
 --dynamic-port-range 8000-8025 \\
 --rpc-port 8899 \\
 --wal-recovery-mode skip_any_corrupted_record \\
