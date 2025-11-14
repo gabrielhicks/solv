@@ -31,12 +31,16 @@ export const setupV2 = async (skipInitConfig = false, skipMount = false, pivot =
     let latestConfig = await readConfig()
     const isTest = latestConfig.NETWORK === Network.TESTNET
     // Generate /mnt/ledger, /mnt/accounts and /mnt/snapshots if third disk is available
-    setupDirs()
-    if (!skipMount || !pivot) {
+    if (!skipMount) {
       // Mount /mnt/ledger, /mnt/accounts and /mnt/snapshots if third disk is available
+      setupDirs()
       await mountDirs()
     }
-
+    if (!pivot) {
+      // Mount /mnt/ledger, /mnt/accounts and /mnt/snapshots if third disk is available
+      setupDirs()
+      await mountDirs()
+    }
     // Generate Systemd Service
     makeServices(isTest)
     // Restart Logrotate
