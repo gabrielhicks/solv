@@ -3,6 +3,10 @@
 ### BAM update
 Probably gonna fail first try
 
+## 5.4.12
+### BAM update
+Probably gonna fail first try
+
 ## 5.4.11
 ### Remove autoupdate
 Remove autoupdate, remove balance check

@@ -53,6 +53,7 @@ const initialConfigSetup = async () => {
               ValidatorType.AGAVE,
               ValidatorType.JITO,
               ValidatorType.FRANKENDANCER,
+              ValidatorType.BAM,
             ]
       validatorType = await inquirer
         .prompt<{ validatorType: ValidatorType }>({
