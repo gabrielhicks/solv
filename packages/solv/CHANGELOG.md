@@ -1,4 +1,8 @@
 # @gabrielhicks/solv
+## 5.5.0
+### BAM update
+Ready to ship
+
 ## 5.4.18
 ### BAM update
 Polishing up some config stuff for setup
