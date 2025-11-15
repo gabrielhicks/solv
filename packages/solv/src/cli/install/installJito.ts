@@ -52,7 +52,7 @@ export const installJito = (version = VERSION_JITO_MAINNET, mod = false, isMajor
         },
       )
       spawnSync(
-        `sudo ln -sfn /home/solv/.local/share/solana/install/releases/${tag}/ /home/solv/.local/share/solana/install/active_release/`,
+        `sudo ln -sfn /home/solv/.local/share/solana/install/releases/${tag} /home/solv/.local/share/solana/install/active_release`,
         {
           shell: true,
           stdio: 'inherit',

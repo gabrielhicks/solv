@@ -1,6 +1,10 @@
 # @gabrielhicks/solv
 ## 5.5.1
 ### BAM update
+Fix symlink removing leading /
+
+## 5.5.1
+### BAM update
 Fix symlink
 
 ## 5.5.0

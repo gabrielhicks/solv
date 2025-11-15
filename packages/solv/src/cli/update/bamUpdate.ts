@@ -59,7 +59,7 @@ export const bamUpdate = (tag = JITO_CONFIG.tag, mod = false, isMajorThree = fal
         },
       )
       spawnSync(
-        `sudo ln -sfn /home/solv/.local/share/solana/install/releases/${tag}-bam/ /home/solv/.local/share/solana/install/active_release/`,
+        `sudo ln -sfn /home/solv/.local/share/solana/install/releases/${tag}-bam /home/solv/.local/share/solana/install/active_release`,
         {
           shell: true,
           stdio: 'inherit',
