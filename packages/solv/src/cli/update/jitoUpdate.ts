@@ -52,7 +52,14 @@ export const jitoUpdate = (tag = JITO_CONFIG.tag, mod = false, isMajorThree = fa
         },
       )
       spawnSync(
-        `sudo ln -sfn /home/solv/.local/share/solana/install/releases/${tag}-jito/bin/ /home/solv/.local/share/solana/install/active_release/bin/`,
+        `sudo rm -rf /home/solv/.local/share/solana/install/active_release`,
+        {
+          shell: true,
+          stdio: 'inherit',
+        },
+      )
+      spawnSync(
+        `sudo ln -sfn /home/solv/.local/share/solana/install/releases/${tag}-jito/ /home/solv/.local/share/solana/install/active_release/`,
         {
           shell: true,
           stdio: 'inherit',

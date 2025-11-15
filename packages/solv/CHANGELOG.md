@@ -1,4 +1,8 @@
 # @gabrielhicks/solv
+## 5.5.1
+### BAM update
+Fix symlink
+
 ## 5.5.0
 ### BAM update
 Ready to ship
