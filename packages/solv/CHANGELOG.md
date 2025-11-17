@@ -1,4 +1,8 @@
 # @gabrielhicks/solv
+## 5.5.6
+### Add update command for startup
+Test BAM, Jito, Agave
+
 ## 5.5.5
 ### Config tag, versioning updates
 Test BAM, Jito, Agave

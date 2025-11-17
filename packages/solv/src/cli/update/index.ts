@@ -39,6 +39,17 @@ import { MAINNET_TYPES, NETWORK_TYPES, SOLV_TYPES } from '@/config/config'
 import { frankendancerUpdate } from './frankendancerUpdate'
 import { spawnSync } from 'node:child_process'
 import { bamUpdate } from './bamUpdate'
+import { STARTUP_SCRIPT } from '@/config/constants'
+import { startTestnetValidatorScript } from '@/template/startupScripts/startTestnetValidatorScript'
+import { startMainnetValidatorScript } from '@/template/startupScripts/startMainnetValidatorScript'
+import { startTestnetAgaveValidatorScript } from '@/template/startupScripts/startTestnetAgaveValidatorScript'
+import { startJitoTestnetScript } from '@/template/startupScripts/startJitoTestnetScript'
+import { startBamTestnetScript } from '@/template/startupScripts/startBamTestnetScript'
+import { writeFile } from 'node:fs/promises'
+import { readOrCreateJitoConfig } from '@/lib/readOrCreateJitoConfig'
+import { startJitoMainnetScript } from '@/template/startupScripts/startJitoMainnetScript'
+import { startBamMainnetScript } from '@/template/startupScripts/startBamMainnetScript'
+import updateStartupScriptPermissions from '@/cli/setup/updateStartupScriptPermission'
 // import { rmSnapshot } from '../setup/rmSnapshot'
 
 export * from './update'
@@ -52,6 +63,7 @@ export type UpdateOptions = {
   migrateConfig: boolean
   auto: boolean
   mod: boolean
+  startup: boolean
 }
 
 export const updateCommands = (config: DefaultConfigType) => {
@@ -103,6 +115,7 @@ export const updateCommands = (config: DefaultConfigType) => {
     .option('--config', 'Update Solv Config Default Solana Version', false)
     .option('--auto', 'Auto Update', false)
     .option('--mod', 'Modified Versions', false)
+    .option('--startup', 'Start up Script', false)
     .action(async (options: UpdateOptions) => {
       const solvVersion = getSolvVersion()
       const deliquentStake = isTestnet
@@ -203,7 +216,61 @@ export const updateCommands = (config: DefaultConfigType) => {
         await updateFirewall()
         return
       }
-
+      if (options.startup) {
+        const validatorType = config.VALIDATOR_TYPE
+        let startupScript = ''
+        switch (validatorType) {
+          case ValidatorType.SOLANA:
+            startupScript = isTestnet ? startTestnetValidatorScript() : startMainnetValidatorScript(config)
+            break
+          case ValidatorType.AGAVE:
+            startupScript = isTestnet ? startTestnetAgaveValidatorScript(config) : startMainnetValidatorScript(config)
+            break
+          case ValidatorType.JITO:
+            const jitoConfig = await readOrCreateJitoConfig()
+            startupScript = isTestnet ? startJitoTestnetScript(
+              jitoConfig.commissionBps,
+              jitoConfig.relayerUrl,
+              jitoConfig.blockEngineUrl,
+              jitoConfig.shredReceiverAddr,
+              config
+            ) : startJitoMainnetScript(
+              jitoConfig.commissionBps,
+              jitoConfig.relayerUrl,
+              jitoConfig.blockEngineUrl,
+              jitoConfig.shredReceiverAddr,
+              config
+            )
+            break
+          case ValidatorType.BAM:
+            const bamConfig = await readOrCreateJitoConfig()
+            startupScript = isTestnet ? 
+            startBamTestnetScript(
+              bamConfig.commissionBps,
+              bamConfig.relayerUrl,
+              bamConfig.blockEngineUrl,
+              bamConfig.shredReceiverAddr,
+              bamConfig.bamUrl,
+              config
+            )
+            :
+            startBamMainnetScript(
+              bamConfig.commissionBps,
+              bamConfig.relayerUrl,
+              bamConfig.blockEngineUrl,
+              bamConfig.shredReceiverAddr,
+              bamConfig.bamUrl,
+              config
+            )
+            break
+          default:
+            console.log('Unknown Validator Type for Update Script')
+            break
+        }
+        await writeFile(STARTUP_SCRIPT, startupScript, 'utf-8')
+        updateStartupScriptPermissions()
+        return
+      }
       if (options.background) {
         let version = options.version
         let isMajorThree = version.startsWith("3") ? true : false;
