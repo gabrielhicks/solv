@@ -4,6 +4,9 @@ import { jitoUpdate } from '../update/jitoUpdate'
 import { DefaultConfigType } from '@/config/types'
 import { Network, NodeType, ValidatorType } from '@/config/enums'
 import {
+  BAM_PATCH,
+  JITO_PATCH,
+  VERSION_BAM_MAINNET,
   VERSION_FIREDANCER,
   VERSION_JITO_MAINNET,
   VERSION_MAINNET,
@@ -40,16 +43,22 @@ export const installCommands = (config: DefaultConfigType) => {
       const isModified = options.mod || config.MOD;
       if (isJito) {
         const jitoVersion = options.version || VERSION_JITO_MAINNET
-        const jitoTag = `v${jitoVersion}`
+        const jitoPatch = JITO_PATCH;
+        const jitoTagBase = `v${jitoVersion}-jito`
+        const jitoModBase = `v${jitoVersion}-mod`
+        const jitoTag = isModified ? `${jitoModBase}${jitoPatch}` :`${jitoTagBase}${jitoPatch}`
         const isMajorThree = jitoVersion.startsWith("3") ? true : false;
         jitoUpdate(jitoTag, isModified, isMajorThree)
         return
       }
       if (isJitoBam) {
-        const jitoVersion = options.version || VERSION_JITO_MAINNET
-        const jitoTag = `v${jitoVersion}`
-        const isMajorThree = jitoVersion.startsWith("3") ? true : false;
-        bamUpdate(jitoTag, isModified, isMajorThree)
+        const bamVersion = options.version || VERSION_BAM_MAINNET
+        const bamPatch = BAM_PATCH;
+        const bamTagBase = `v${bamVersion}-bam`
+        const bamModBase = `v${bamVersion}-mod`
+        const bamTag = isModified ? `${bamModBase}${bamPatch}` :`${bamTagBase}${bamPatch}`
+        const isMajorThree = bamVersion.startsWith("3") ? true : false;
+        bamUpdate(bamTag, isModified, isMajorThree)
         return
       }
       if (isFrankendancer) {
