@@ -55,7 +55,7 @@ const autoUpdate = async (config: DefaultConfigType) => {
     const msg = `Restarting **${address}**\n` + `_ _`
     await sendDiscord(msg)
     try {
-      spawnSync(`solv update && solv update --config && solv update -b`, {
+      spawnSync(`solv update && solv update --config && solv update --startup && sudo systemctl daemon-reload && solv update -b`, {
         stdio: 'inherit',
         shell: true,
       })

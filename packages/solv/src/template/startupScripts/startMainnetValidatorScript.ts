@@ -45,8 +45,13 @@ ${validatorArgs}
 --limit-ledger-size 50000000 \\
 --block-production-method central-scheduler-greedy \\
 --block-verification-method unified-scheduler \\
---snapshot-interval-slots 0 \\
+--maximum-full-snapshots-to-retain 1 \\
+--maximum-incremental-snapshots-to-retain 2 \\
 --private-rpc \\
 `
+// To be added later for XDP
+// --experimental-retransmit-xdp-cpu-cores 2 \\
+// --experimental-retransmit-xdp-zero-copy \\
+// --experimental-poh-pinned-cpu-core 6 \\
   return script
 }

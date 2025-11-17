@@ -1,4 +1,8 @@
 # @gabrielhicks/solv
+## 5.5.7
+### Force update
+Test BAM, Jito, Agave
+
 ## 5.5.6
 ### Add update command for startup
 Test BAM, Jito, Agave
