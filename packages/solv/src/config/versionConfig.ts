@@ -1,7 +1,12 @@
 export const VERSION_TESTNET = '3.0.10'
 export const VERSION_MAINNET = '3.0.10'
+export const AGAVE_PATCH = ''
 export const VERSION_JITO_TESTNET = '3.0.10'
 export const VERSION_JITO_MAINNET = '3.0.10'
+export const JITO_PATCH = ''
+export const VERSION_BAM_TESTNET = '3.0.10'
+export const VERSION_BAM_MAINNET = '3.0.10'
+export const BAM_PATCH = '_patch1'
 export const VERSION_JITO_RPC = '3.0.10'
 export const VERSION_SOLANA_RPC = '3.0.10'
 export const DELINQUENT_STAKE_TESTNET = 10
@@ -10,3 +15,4 @@ export const COMMISSION = 5
 export const VERSION_NODE = '20.17.0'
 export const VERSION_FIREDANCER_TESTNET = '0.802.30008'
 export const VERSION_FIREDANCER = '0.802.30008'
+export const FIREDANCER_PATCH = ''

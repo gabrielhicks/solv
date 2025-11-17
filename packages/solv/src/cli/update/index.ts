@@ -18,8 +18,12 @@ import {
   ValidatorType,
 } from '@/config/enums'
 import {
+  BAM_PATCH,
   DELINQUENT_STAKE_MAINNET,
   DELINQUENT_STAKE_TESTNET,
+  JITO_PATCH,
+  VERSION_BAM_MAINNET,
+  VERSION_BAM_TESTNET,
   VERSION_FIREDANCER,
   VERSION_FIREDANCER_TESTNET,
   VERSION_JITO_MAINNET,
@@ -34,6 +38,7 @@ import { MAINNET_TYPES, NETWORK_TYPES, SOLV_TYPES } from '@/config/config'
 // import { getSnapshot } from '../get/snapshot'
 import { frankendancerUpdate } from './frankendancerUpdate'
 import { spawnSync } from 'node:child_process'
+import { bamUpdate } from './bamUpdate'
 // import { rmSnapshot } from '../setup/rmSnapshot'
 
 export * from './update'
@@ -53,6 +58,7 @@ export const updateCommands = (config: DefaultConfigType) => {
   const isTestnet = config.NETWORK === Network.TESTNET
   const isRPC = config.NODE_TYPE === NodeType.RPC
   const isJito = config.VALIDATOR_TYPE === ValidatorType.JITO
+  const isBam = config.VALIDATOR_TYPE === ValidatorType.BAM
   const isFrankendancer = config.VALIDATOR_TYPE === ValidatorType.FRANKENDANCER
   const isAutoRestart = config.AUTO_RESTART
   const isModded = config.MOD
@@ -65,6 +71,12 @@ export const updateCommands = (config: DefaultConfigType) => {
     version = VERSION_JITO_MAINNET
     if (isTestnet) {
       version = VERSION_JITO_TESTNET
+    }
+  }
+  if (isBam) {
+    version = VERSION_BAM_MAINNET
+    if (isTestnet) {
+      version = VERSION_BAM_TESTNET
     }
   }
   if (isFrankendancer) {
@@ -171,6 +183,15 @@ export const updateCommands = (config: DefaultConfigType) => {
             tag: `v${jitoVersion}`,
           })
         }
+        if (isBam) {
+          const bamVersion = isTestnet
+            ? VERSION_BAM_TESTNET
+            : VERSION_BAM_MAINNET
+          await updateJitoSolvConfig({
+            version: bamVersion,
+            tag: `v${bamVersion}`,
+          })
+        }
         console.log(
           chalk.green(
             '✔️ Updated Solv Config Default Solana Version\n\n You can now run `solv i` to install the latest version',
@@ -192,12 +213,25 @@ export const updateCommands = (config: DefaultConfigType) => {
         })
         // rmSnapshot(config)
         if (isJito) {
-          jitoUpdate(`v${version}`, options.mod || isModded, isMajorThree)
+          const jitoPatch = JITO_PATCH;
+          const jitoTagBase = `v${version}-jito`
+          const jitoModBase = `v${version}-mod`
+          const jitoTag = options.mod || isModded ? `${jitoModBase}${jitoPatch}` : `${jitoTagBase}${jitoPatch}`
+          jitoUpdate(jitoTag, options.mod || isModded, isMajorThree)
           await updateJitoSolvConfig({ version, tag: `v${version}` })
           await monitorUpdate(deliquentStake, true, minIdleTime)
           return
         }
-
+        if (isBam) {
+          const bamPatch = BAM_PATCH;
+          const bamTagBase = `v${version}-bam`
+          const bamModBase = `v${version}-mod`
+          const bamTag = options.mod || isModded ? `${bamModBase}${bamPatch}` : `${bamTagBase}${bamPatch}`
+          bamUpdate(bamTag, options.mod || isModded, isMajorThree)
+          await updateJitoSolvConfig({ version, tag: `v${version}` })
+          await monitorUpdate(deliquentStake, true, minIdleTime)
+          return
+        }
         if (isFrankendancer) {
           await frankendancerUpdate(config, version, options.mod || isModded)
           await monitorUpdate(deliquentStake, true, minIdleTime)

@@ -5,6 +5,8 @@ import {
   NODE_RESTART_REQUIRED_TESTNET,
   FD_RESTART_REQUIRED_MAINNET,
   FD_RESTART_REQUIRED_TESTNET,
+  BAM_RESTART_REQUIRED_TESTNET,
+  BAM_RESTART_REQUIRED_MAINNET,
 } from '@/config/config'
 import { sendDiscord } from '@/lib/sendDiscord'
 import { spawnSync } from 'child_process'
@@ -22,6 +24,7 @@ import { Network, ValidatorType } from '@/config/enums'
 const autoUpdate = async (config: DefaultConfigType) => {
   const isMainnet = config.NETWORK === Network.MAINNET
   const isFrankendancer = config.VALIDATOR_TYPE === ValidatorType.FRANKENDANCER
+  const isBam = config.VALIDATOR_TYPE === ValidatorType.BAM
   const { mainnetValidatorKey, testnetValidatorKey } = getAllKeyPaths()
   const validatorKey = isMainnet ? mainnetValidatorKey : testnetValidatorKey
   // const solanaVersion = getSolanaVersion()
@@ -32,6 +35,10 @@ const autoUpdate = async (config: DefaultConfigType) => {
     isUpdateRequired = isMainnet
       ? FD_RESTART_REQUIRED_MAINNET
       : FD_RESTART_REQUIRED_TESTNET
+  } else if (isBam) {
+    isUpdateRequired = isMainnet
+      ? BAM_RESTART_REQUIRED_MAINNET
+      : BAM_RESTART_REQUIRED_TESTNET
   } else {
     isUpdateRequired = isMainnet
       ? NODE_RESTART_REQUIRED_MAINNET

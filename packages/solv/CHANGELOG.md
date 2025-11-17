@@ -1,4 +1,8 @@
 # @gabrielhicks/solv
+## 5.5.4
+### Config tag, versioning updates
+Test BAM, Jito, Agave
+
 ## 5.5.3
 ### Testnet FD Update
 Trigger restarts

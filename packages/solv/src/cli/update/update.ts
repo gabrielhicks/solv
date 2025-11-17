@@ -2,9 +2,13 @@ import { LEDGER_PATH } from '@/config/constants'
 import { spawnSync } from 'child_process'
 import installAgave from '../install/installAgave'
 import getSolanaCLI from '@/config/getSolanaCLI'
+import { AGAVE_PATCH } from '@/config/versionConfig'
 
 export const updateVersion = async (version: string, mod = false, isMajorThree = false) => {
-  installAgave(version, mod, isMajorThree)
+  const agavePatch = AGAVE_PATCH;
+  const agaveTagBase = `v${version}`
+  const agaveTag = `${agaveTagBase}${agavePatch}`
+  installAgave(agaveTag, mod, isMajorThree)
   return
 }
 

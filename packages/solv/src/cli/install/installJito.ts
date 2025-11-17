@@ -4,41 +4,39 @@ import { spawnSync } from 'child_process'
 export const installJito = (version = VERSION_JITO_MAINNET, mod = false, isMajorThree = false) => {
   if(isMajorThree) {
     if(mod) {
-      const tag = `v${version}-mod`
       spawnSync(
-        `sh -c "$(curl --netrc-optional -sSfL https://raw.githubusercontent.com/gabrielhicks/jito-solana/v${tag}/installer)"`,
+        `sh -c "$(curl --netrc-optional -sSfL https://raw.githubusercontent.com/gabrielhicks/jito-solana/${version}/installer)"`,
         {
           shell: true,
           stdio: 'inherit',
         },
       )
     } else {
-      const tag = `v${version}-jito`
-      spawnSync(`mkdir /tmp/${tag}`, {
+      spawnSync(`mkdir /tmp/${version}`, {
         shell: true,
         stdio: 'inherit',
       })
-      spawnSync(`cd /tmp/${tag}`, {
+      spawnSync(`cd /tmp/${version}`, {
         shell: true,
         stdio: 'inherit',
       })
       spawnSync(
-        `git -C /tmp/${tag} clone https://github.com/jito-foundation/jito-solana.git --recurse-submodules .`,
+        `git -C /tmp/${version} clone https://github.com/jito-foundation/jito-solana.git --recurse-submodules .`,
         {
           shell: true,
           stdio: 'inherit',
         },
       )
-      spawnSync(`git -C /tmp/${tag} checkout ${tag}`, {
+      spawnSync(`git -C /tmp/${version} checkout ${version}`, {
         shell: true,
         stdio: 'inherit',
       })
-      spawnSync(`git -C /tmp/${tag} submodule update --init --recursive`, {
+      spawnSync(`git -C /tmp/${version} submodule update --init --recursive`, {
         shell: true,
         stdio: 'inherit',
       })
       spawnSync(
-        `CI_COMMIT=$(git -C /tmp/${tag} rev-parse HEAD) /tmp/${tag}/scripts/cargo-install-all.sh /home/solv/.local/share/solana/install/releases/${tag}`,
+        `CI_COMMIT=$(git -C /tmp/${version} rev-parse HEAD) /tmp/${version}/scripts/cargo-install-all.sh /home/solv/.local/share/solana/install/releases/${version}`,
         {
           shell: true,
           stdio: 'inherit',
@@ -52,13 +50,13 @@ export const installJito = (version = VERSION_JITO_MAINNET, mod = false, isMajor
         },
       )
       spawnSync(
-        `sudo ln -sfn /home/solv/.local/share/solana/install/releases/${tag} /home/solv/.local/share/solana/install/active_release`,
+        `sudo ln -sfn /home/solv/.local/share/solana/install/releases/${version} /home/solv/.local/share/solana/install/active_release`,
         {
           shell: true,
           stdio: 'inherit',
         },
       )
-      spawnSync(`sudo rm -rf /tmp/${tag}`, {
+      spawnSync(`sudo rm -rf /tmp/${version}`, {
         shell: true,
         stdio: 'inherit',
       })
@@ -70,7 +68,7 @@ export const installJito = (version = VERSION_JITO_MAINNET, mod = false, isMajor
   } else {
     if(mod) {
       spawnSync(
-        `sh -c "$(curl --netrc-optional -sSfL https://raw.githubusercontent.com/gabrielhicks/jito-solana/v${version}-mod/installer)"`,
+        `sh -c "$(curl --netrc-optional -sSfL https://raw.githubusercontent.com/gabrielhicks/jito-solana/${version}/installer)"`,
         {
           shell: true,
           stdio: 'inherit',
@@ -78,7 +76,7 @@ export const installJito = (version = VERSION_JITO_MAINNET, mod = false, isMajor
       )
     } else {
       spawnSync(
-        `sh -c "$(curl --netrc-optional -sSfL https://release.jito.wtf/v${version}-jito/install)"`,
+        `sh -c "$(curl --netrc-optional -sSfL https://release.jito.wtf/${version}/install)"`,
         {
           shell: true,
           stdio: 'inherit',

@@ -1,38 +1,37 @@
-import { VERSION_MAINNET } from '@/config/versionConfig'
 import { spawnSync } from 'node:child_process'
 
 // Agave Install e.g. installAgave('0.1.0')
-const installAgave = (version = VERSION_MAINNET, mod = false, isMajorThree = false) => {
+const installAgave = (version: string, mod = false, isMajorThree = false) => {
   if(isMajorThree) {
     if(mod) {
-      spawnSync(`mkdir /tmp/v${version}-agave-mod`, {
+      spawnSync(`mkdir /tmp/${version}-agave-mod`, {
         shell: true,
         stdio: 'inherit',
       })
-      spawnSync(`cd /tmp/v${version}-agave-mod`, {
+      spawnSync(`cd /tmp/${version}-agave-mod`, {
         shell: true,
         stdio: 'inherit',
       })
       spawnSync(
-        `git clone https://github.com/gabrielhicks/agave.git --recurse-submodules /tmp/v${version}-agave-mod`,
+        `git clone https://github.com/gabrielhicks/agave.git --recurse-submodules /tmp/${version}-agave-mod`,
         {
           shell: true,
           stdio: 'inherit',
         },
       )
-      spawnSync(`git -C /tmp/v${version}-agave-mod checkout v${version}-mod`, {
+      spawnSync(`git -C /tmp/${version}-agave-mod checkout ${version}-mod`, {
         shell: true,
         stdio: 'inherit',
       })
       spawnSync(
-        `git -C /tmp/v${version}-agave-mod submodule update --init --recursive`,
+        `git -C /tmp/${version}-agave-mod submodule update --init --recursive`,
         {
           shell: true,
           stdio: 'inherit',
         },
       )
       spawnSync(
-        `CI_COMMIT=$(git -C /tmp/v${version}-agave-mod rev-parse HEAD) /tmp/v${version}-agave-mod/scripts/cargo-install-all.sh /home/solv/.local/share/solana/install/releases/v${version}-agave-mod`,
+        `CI_COMMIT=$(git -C /tmp/${version}-agave-mod rev-parse HEAD) /tmp/${version}-agave-mod/scripts/cargo-install-all.sh /home/solv/.local/share/solana/install/releases/${version}-agave-mod`,
         {
           shell: true,
           stdio: 'inherit',
@@ -46,42 +45,42 @@ const installAgave = (version = VERSION_MAINNET, mod = false, isMajorThree = fal
         },
       )
       spawnSync(
-        `sudo ln -sfn /home/solv/.local/share/solana/install/releases/v${version}-agave-mod /home/solv/.local/share/solana/install/active_release`,
+        `sudo ln -sfn /home/solv/.local/share/solana/install/releases/${version}-agave-mod /home/solv/.local/share/solana/install/active_release`,
         {
           shell: true,
           stdio: 'inherit',
         },
       )
-      spawnSync(`sudo rm -rf /tmp/v${version}-agave-mod`, {
+      spawnSync(`sudo rm -rf /tmp/${version}-agave-mod`, {
         shell: true,
         stdio: 'inherit',
       })
     } else {
-      spawnSync(`mkdir /tmp/v${version}-agave`, {
+      spawnSync(`mkdir /tmp/${version}-agave`, {
         shell: true,
         stdio: 'inherit',
       })
-      spawnSync(`cd /tmp/v${version}-agave`, {
+      spawnSync(`cd /tmp/${version}-agave`, {
         shell: true,
         stdio: 'inherit',
       })
       spawnSync(
-        `git clone https://github.com/anza-xyz/agave.git --recurse-submodules /tmp/v${version}-agave`,
+        `git clone https://github.com/anza-xyz/agave.git --recurse-submodules /tmp/${version}-agave`,
         {
           shell: true,
           stdio: 'inherit',
         },
       )
-      spawnSync(`git -C /tmp/v${version}-agave checkout v${version}`, {
+      spawnSync(`git -C /tmp/${version}-agave checkout v${version}`, {
         shell: true,
         stdio: 'inherit',
       })
-      spawnSync(`git -C /tmp/v${version}-agave submodule update --init --recursive`, {
+      spawnSync(`git -C /tmp/${version}-agave submodule update --init --recursive`, {
         shell: true,
         stdio: 'inherit',
       })
       spawnSync(
-        `CI_COMMIT=$(git -C /tmp/v${version}-agave rev-parse HEAD) /tmp/v${version}-agave/scripts/cargo-install-all.sh /home/solv/.local/share/solana/install/releases/v${version}-agave`,
+        `CI_COMMIT=$(git -C /tmp/${version}-agave rev-parse HEAD) /tmp/${version}-agave/scripts/cargo-install-all.sh /home/solv/.local/share/solana/install/releases/${version}-agave`,
         {
           shell: true,
           stdio: 'inherit',
@@ -95,13 +94,13 @@ const installAgave = (version = VERSION_MAINNET, mod = false, isMajorThree = fal
         },
       )
       spawnSync(
-        `sudo ln -sfn /home/solv/.local/share/solana/install/releases/v${version}-agave /home/solv/.local/share/solana/install/active_release`,
+        `sudo ln -sfn /home/solv/.local/share/solana/install/releases/${version}-agave /home/solv/.local/share/solana/install/active_release`,
         {
           shell: true,
           stdio: 'inherit',
         },
       )
-      spawnSync(`sudo rm -rf /tmp/v${version}-agave`, {
+      spawnSync(`sudo rm -rf /tmp/${version}-agave`, {
         shell: true,
         stdio: 'inherit',
       })
@@ -109,7 +108,7 @@ const installAgave = (version = VERSION_MAINNET, mod = false, isMajorThree = fal
   } else {
     if(mod) {
       spawnSync(
-          `sh -c "$(curl --netrc-optional -sSfL https://raw.githubusercontent.com/gabrielhicks/agave/v${version}-mod/installer)"`,
+          `sh -c "$(curl --netrc-optional -sSfL https://raw.githubusercontent.com/gabrielhicks/agave/${version}-mod/installer)"`,
           {
             shell: true,
             stdio: 'inherit',
@@ -117,7 +116,7 @@ const installAgave = (version = VERSION_MAINNET, mod = false, isMajorThree = fal
         )
     } else {
       spawnSync(
-        `sh -c "$(curl --netrc-optional -sSfL https://release.anza.xyz/v${version}/install)"`,
+        `sh -c "$(curl --netrc-optional -sSfL https://release.anza.xyz/${version}/install)"`,
         {
           shell: true,
           stdio: 'inherit',

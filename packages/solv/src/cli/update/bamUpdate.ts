@@ -1,7 +1,6 @@
-import { JITO_CONFIG } from '@/config/jitConfig'
 import { spawnSync } from 'child_process'
 
-export const bamUpdate = (tag = JITO_CONFIG.tag, mod = false, isMajorThree = false) => {
+export const bamUpdate = (tag: string, mod = false, isMajorThree = false) => {
   // Update DZ
   spawnSync(
     `sudo apt install --only-upgrade doublezero doublezero-solana -y`,
@@ -14,7 +13,7 @@ export const bamUpdate = (tag = JITO_CONFIG.tag, mod = false, isMajorThree = fal
   if (isMajorThree) {
     if (mod) {
       spawnSync(
-        `sh -c "$(curl --netrc-optional -sSfL https://raw.githubusercontent.com/gabrielhicks/jito-bam/${tag}-mod/installer)"`,
+        `sh -c "$(curl --netrc-optional -sSfL https://raw.githubusercontent.com/gabrielhicks/jito-bam/${tag}/installer)"`,
         {
           shell: true,
           stdio: 'inherit',
@@ -30,22 +29,22 @@ export const bamUpdate = (tag = JITO_CONFIG.tag, mod = false, isMajorThree = fal
         stdio: 'inherit',
       })
       spawnSync(
-        `git clone https://github.com/jito-labs/bam-client.git --recurse-submodules /tmp/${tag}-bam`,
+        `git clone https://github.com/jito-labs/bam-client.git --recurse-submodules /tmp/${tag}`,
         {
           shell: true,
           stdio: 'inherit',
         },
       )
-      spawnSync(`git -C /tmp/${tag}-bam checkout ${tag}-bam`, {
+      spawnSync(`git -C /tmp/${tag} checkout ${tag}`, {
         shell: true,
         stdio: 'inherit',
       })
-      spawnSync(`git -C /tmp/${tag}-bam submodule update --init --recursive`, {
+      spawnSync(`git -C /tmp/${tag} submodule update --init --recursive`, {
         shell: true,
         stdio: 'inherit',
       })
       spawnSync(
-        `CI_COMMIT=$(git -C /tmp/${tag}-bam rev-parse HEAD) /tmp/${tag}-bam/scripts/cargo-install-all.sh /home/solv/.local/share/solana/install/releases/${tag}-bam`,
+        `CI_COMMIT=$(git -C /tmp/${tag} rev-parse HEAD) /tmp/${tag}/scripts/cargo-install-all.sh /home/solv/.local/share/solana/install/releases/${tag}`,
         {
           shell: true,
           stdio: 'inherit',
@@ -59,13 +58,13 @@ export const bamUpdate = (tag = JITO_CONFIG.tag, mod = false, isMajorThree = fal
         },
       )
       spawnSync(
-        `sudo ln -sfn /home/solv/.local/share/solana/install/releases/${tag}-bam /home/solv/.local/share/solana/install/active_release`,
+        `sudo ln -sfn /home/solv/.local/share/solana/install/releases/${tag} /home/solv/.local/share/solana/install/active_release`,
         {
           shell: true,
           stdio: 'inherit',
         },
       )
-      spawnSync(`sudo rm -rf /tmp/${tag}-bam`, {
+      spawnSync(`sudo rm -rf /tmp/${tag}`, {
         shell: true,
         stdio: 'inherit',
       })
@@ -73,7 +72,7 @@ export const bamUpdate = (tag = JITO_CONFIG.tag, mod = false, isMajorThree = fal
   } else {
     if(mod) {
       spawnSync(
-          `sh -c "$(curl --netrc-optional -sSfL https://raw.githubusercontent.com/gabrielhicks/jito-bam/${tag}-mod/installer)"`,
+          `sh -c "$(curl --netrc-optional -sSfL https://raw.githubusercontent.com/gabrielhicks/jito-bam/${tag}/installer)"`,
           {
             shell: true,
             stdio: 'inherit',
@@ -81,7 +80,7 @@ export const bamUpdate = (tag = JITO_CONFIG.tag, mod = false, isMajorThree = fal
         )
     } else {
       spawnSync(
-         `sh -c "$(curl --netrc-optional -sSfL https://release.jito.wtf/${tag}-bam/install)"`,
+         `sh -c "$(curl --netrc-optional -sSfL https://release.jito.wtf/${tag}/install)"`,
         {
           shell: true,
           stdio: 'inherit',
