@@ -13,7 +13,7 @@ export const frankendancerUpdate = async (config: DefaultConfigType, version?: s
   const {filePath: modFilePath, body: modDiffContent} = modDiff();
   // Update and restart DZ
   spawnSync(
-    `sudo apt install --only-upgrade doublezero -y`,
+    `sudo apt install --only-upgrade doublezero doublezero-solana -y`,
     { shell: true, stdio: 'inherit' },
   )
   spawnSync(

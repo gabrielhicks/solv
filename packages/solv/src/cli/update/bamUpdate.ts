@@ -4,7 +4,7 @@ import { spawnSync } from 'child_process'
 export const bamUpdate = (tag = JITO_CONFIG.tag, mod = false, isMajorThree = false) => {
   // Update DZ
   spawnSync(
-    `sudo apt install --only-upgrade doublezero -y`,
+    `sudo apt install --only-upgrade doublezero doublezero-solana -y`,
     { shell: true, stdio: 'inherit' },
   )
   spawnSync(

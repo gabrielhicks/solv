@@ -1,5 +1,9 @@
 # @gabrielhicks/solv
-## 5.5.1
+## 5.5.3
+### Testnet FD Update
+Trigger restarts
+
+## 5.5.2
 ### BAM update
 Fix symlink removing leading /
 
