@@ -14,7 +14,7 @@ export const cronCommands = () => {
   crond
     .command('epoch')
     .description('Solv Epoch Timer Discord Notification Command')
-    .option('-c, --cron <value>', 'Cron Job', '*/5 14-22 * * *')
+    .option('-c, --cron <value>', 'Cron Job', '*/5 * * * *')
     .action(async (options: CronOptions) => {
       const hasCron = await hasEpochTimer()
       if (hasCron) {

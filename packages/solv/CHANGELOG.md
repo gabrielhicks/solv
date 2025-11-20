@@ -1,4 +1,8 @@
 # @gabrielhicks/solv
+## 5.5.8
+### FD Testnet Update
+Test BAM, Jito, Agave
+
 ## 5.5.7
 ### Force update
 Test BAM, Jito, Agave
