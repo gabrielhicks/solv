@@ -18,7 +18,7 @@ export const monitorUpdate = async (
   minIdleTime = 10,
 ) => {
   const solanaValidatorClient = getSolanaCLI()
-  let cmd = `${solanaValidatorClient} --ledger ${LEDGER_PATH} exit --max-delinquent-stake ${maxDelinquentStake} --monitor --min-idle-time ${minIdleTime}`
+  let cmd = `${solanaValidatorClient} --ledger ${LEDGER_PATH} exit --max-delinquent-stake ${maxDelinquentStake} --min-idle-time ${minIdleTime}`
   if (noMonitor) {
     cmd = `${solanaValidatorClient} --ledger ${LEDGER_PATH} exit --max-delinquent-stake ${maxDelinquentStake} --min-idle-time ${minIdleTime}`
   }
