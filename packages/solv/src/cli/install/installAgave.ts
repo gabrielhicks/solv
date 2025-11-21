@@ -71,7 +71,7 @@ const installAgave = (version: string, mod = false, isMajorThree = false) => {
           stdio: 'inherit',
         },
       )
-      spawnSync(`git -C /tmp/${version}-agave checkout v${version}`, {
+      spawnSync(`git -C /tmp/${version}-agave checkout ${version}`, {
         shell: true,
         stdio: 'inherit',
       })
