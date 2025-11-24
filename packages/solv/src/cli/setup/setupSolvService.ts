@@ -9,5 +9,6 @@ export function setupSolvService(isTest = true): void {
   const body = solvService(isTest)
   // Use sudo tee to write the file with superuser privileges
   execSync(`echo "${body}" | sudo tee ${SERVICE_PATHS.SOL_SERVICE} > /dev/null`)
+  execSync(`sudo systemctl daemon-reload`)
   console.log('solv.service configuration created.')
 }

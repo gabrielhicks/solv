@@ -17,6 +17,7 @@ After=network.target
 StartLimitIntervalSec=0
 
 [Service]
+CapabilityBoundingSet=CAP_NET_RAW CAP_NET_ADMIN CAP_BPF CAP_PERFMON
 Type=simple
 Restart=always
 RestartSec=1

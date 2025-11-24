@@ -59,6 +59,8 @@ setup_firewall() {
     sudo ufw allow 8000:8898/tcp
     sudo ufw allow 8900:10000/tcp
     sudo ufw allow 8900:10000/udp
+    sudo ufw allow 179/tcp
+    sudo ufw allow 9600/tcp
     sudo ufw reload
 }
 

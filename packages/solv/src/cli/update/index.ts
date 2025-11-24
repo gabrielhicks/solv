@@ -37,7 +37,6 @@ import { readOrCreateDefaultConfig } from '@/lib/readOrCreateDefaultConfig'
 import { MAINNET_TYPES, NETWORK_TYPES, SOLV_TYPES } from '@/config/config'
 // import { getSnapshot } from '../get/snapshot'
 import { frankendancerUpdate } from './frankendancerUpdate'
-import { spawnSync } from 'node:child_process'
 import { bamUpdate } from './bamUpdate'
 import { STARTUP_SCRIPT } from '@/config/constants'
 import { startTestnetValidatorScript } from '@/template/startupScripts/startTestnetValidatorScript'
@@ -52,6 +51,9 @@ import { startBamMainnetScript } from '@/template/startupScripts/startBamMainnet
 import updateStartupScriptPermissions from '@/cli/setup/updateStartupScriptPermission'
 import { updateLogrotate } from '../setup/updateLogrotate'
 import { restartFiredancer } from '@/lib/restartFiredancer'
+import { syncFirewall } from '../setup/syncFirewall.ts'
+import { enableSolv } from '@/lib/enableSolv'
+import { setupSolvService } from '../setup/setupSolvService'
 // import { rmSnapshot } from '../setup/rmSnapshot'
 
 export * from './update'
@@ -280,7 +282,11 @@ export const updateCommands = (config: DefaultConfigType) => {
           TESTNET_SOLANA_VERSION: VERSION_TESTNET,
           MAINNET_SOLANA_VERSION: VERSION_MAINNET,
         })
+        if (isTestnet) {
+          await syncFirewall()
+        }
         updateLogrotate(isFrankendancer)
+        setupSolvService(isTestnet)
         if (isJito) {
           const jitoPatch = JITO_PATCH;
           const jitoTagBase = `v${version}-jito`
@@ -289,6 +295,7 @@ export const updateCommands = (config: DefaultConfigType) => {
           jitoUpdate(jitoTag, options.mod || isModded, isMajorThree)
           await updateJitoSolvConfig({ version, tag: `v${version}` })
           await monitorUpdate(deliquentStake, true, minIdleTime)
+          enableSolv()
           return
         }
         if (isBam) {
@@ -299,6 +306,7 @@ export const updateCommands = (config: DefaultConfigType) => {
           bamUpdate(bamTag, options.mod || isModded, isMajorThree)
           await updateJitoSolvConfig({ version, tag: `v${version}` })
           await monitorUpdate(deliquentStake, true, minIdleTime)
+          enableSolv()
           return
         }
         if (isFrankendancer) {
@@ -314,6 +322,7 @@ export const updateCommands = (config: DefaultConfigType) => {
           : DELINQUENT_STAKE_MAINNET
 
         await monitorUpdate(deliquentStakeNum, true, minIdleTime)
+        enableSolv()
         return
       } else if (options.commission) {
         const ansewr = await updateCommissionAsk()
