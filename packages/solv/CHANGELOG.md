@@ -1,4 +1,8 @@
 # @gabrielhicks/solv
+## 5.5.11
+### Jito 3.1 release
+Test Jito
+
 ## 5.5.10
 ### 3.1 Upgrade testnet
 Test Agave
