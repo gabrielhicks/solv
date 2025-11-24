@@ -50,6 +50,8 @@ import { readOrCreateJitoConfig } from '@/lib/readOrCreateJitoConfig'
 import { startJitoMainnetScript } from '@/template/startupScripts/startJitoMainnetScript'
 import { startBamMainnetScript } from '@/template/startupScripts/startBamMainnetScript'
 import updateStartupScriptPermissions from '@/cli/setup/updateStartupScriptPermission'
+import { updateLogrotate } from '../setup/updateLogrotate'
+import { restartFiredancer } from '@/lib/restartFiredancer'
 // import { rmSnapshot } from '../setup/rmSnapshot'
 
 export * from './update'
@@ -278,7 +280,7 @@ export const updateCommands = (config: DefaultConfigType) => {
           TESTNET_SOLANA_VERSION: VERSION_TESTNET,
           MAINNET_SOLANA_VERSION: VERSION_MAINNET,
         })
-        // rmSnapshot(config)
+        updateLogrotate(isFrankendancer)
         if (isJito) {
           const jitoPatch = JITO_PATCH;
           const jitoTagBase = `v${version}-jito`
@@ -302,6 +304,7 @@ export const updateCommands = (config: DefaultConfigType) => {
         if (isFrankendancer) {
           await frankendancerUpdate(config, version, options.mod || isModded)
           await monitorUpdate(deliquentStake, true, minIdleTime)
+          restartFiredancer()
           return
         }
 
@@ -309,11 +312,6 @@ export const updateCommands = (config: DefaultConfigType) => {
         const deliquentStakeNum = isTestnet
           ? DELINQUENT_STAKE_TESTNET
           : DELINQUENT_STAKE_MAINNET
-
-        if (isTestnet) {
-          // getSnapshot(isTestnet, '10', config.SNAPSHOTS_PATH, VERSION_TESTNET)
-          spawnSync('solv start', { stdio: 'inherit', shell: true })
-        }
 
         await monitorUpdate(deliquentStakeNum, true, minIdleTime)
         return

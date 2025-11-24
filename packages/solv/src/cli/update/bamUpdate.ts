@@ -10,6 +10,7 @@ export const bamUpdate = (tag: string, mod = false, isMajorThree = false) => {
     `sudo systemctl restart doublezerod`,
     { shell: true, stdio: 'inherit' },
   )
+
   if (isMajorThree) {
     if (mod) {
       spawnSync(
@@ -88,4 +89,12 @@ export const bamUpdate = (tag: string, mod = false, isMajorThree = false) => {
       )
     }
   }
+  spawnSync(`sudo systemctl disable frankendancer.service`, {
+    stdio: 'inherit',
+    shell: true,
+  })
+  spawnSync(`sudo systemctl stop frankendancer.service`, {
+    stdio: 'inherit',
+    shell: true,
+  })
 }

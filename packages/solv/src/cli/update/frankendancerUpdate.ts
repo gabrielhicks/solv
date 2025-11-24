@@ -101,14 +101,17 @@ export const frankendancerUpdate = async (config: DefaultConfigType, version?: s
     },
   )
 
-  // Restart services
-  spawnSync(
-    `sudo systemctl restart frankendancer`,
-    { shell: true, stdio: 'inherit' },
-  )
-
   spawnSync(
     `sudo systemctl restart port-relay`,
     { shell: true, stdio: 'inherit' },
   )
+
+  spawnSync(`sudo systemctl disable solv.service`, {
+    stdio: 'inherit',
+    shell: true,
+  })
+  spawnSync(`sudo systemctl stop solv.service`, {
+    stdio: 'inherit',
+    shell: true,
+  })
 }

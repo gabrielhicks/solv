@@ -9,6 +9,14 @@ const installSolana = (version: string) => {
       stdio: 'inherit',
     },
   )
+  spawnSync(`sudo systemctl disable frankendancer.service`, {
+    stdio: 'inherit',
+    shell: true,
+  })
+  spawnSync(`sudo systemctl stop frankendancer.service`, {
+    stdio: 'inherit',
+    shell: true,
+  })
 }
 
 export default installSolana

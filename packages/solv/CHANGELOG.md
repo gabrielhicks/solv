@@ -1,4 +1,8 @@
 # @gabrielhicks/solv
+## 5.5.12
+### Client changes systemd etc
+Testing between client changes downstream
+
 ## 5.5.11
 ### Jito 3.1 release
 Test Jito

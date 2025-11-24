@@ -18,6 +18,9 @@ import { restartLogrotate } from '@/lib/restartLogrotate'
 import { enableSolv } from '@/lib/enableSolv'
 import { createSymLink } from './createSymLink'
 import rpcLog from '@/utils/rpcLog'
+import { enableFiredancer } from '@/lib/enableFiredancer'
+import { disableFiredancer } from '@/lib/disableFiredancer'
+import { disableSolv } from '@/lib/disableSolv'
 
 export const setupV2 = async (skipInitConfig: boolean, skipMount: boolean, pivot: boolean, mod: boolean) => {
   try {
@@ -30,6 +33,7 @@ export const setupV2 = async (skipInitConfig: boolean, skipMount: boolean, pivot
 
     let latestConfig = await readConfig()
     const isTest = latestConfig.NETWORK === Network.TESTNET
+    const isFiredancer = latestConfig.VALIDATOR_TYPE === ValidatorType.FRANKENDANCER
     // Generate /mnt/ledger, /mnt/accounts and /mnt/snapshots if third disk is available
     if (!skipMount) {
       console.log(chalk.white(`🟢 Entering Mount Phase`))
@@ -38,7 +42,7 @@ export const setupV2 = async (skipInitConfig: boolean, skipMount: boolean, pivot
       await mountDirs()
     }
     // Generate Systemd Service
-    makeServices(isTest)
+    makeServices(isTest, isFiredancer)
     // Restart Logrotate
     restartLogrotate()
     // Set CPU governor to performance
@@ -72,10 +76,15 @@ export const setupV2 = async (skipInitConfig: boolean, skipMount: boolean, pivot
       if(!pivot) {
         latestConfig = await readConfig()
         // Enable Solv Service
+        disableFiredancer()
         enableSolv()
         // Download Snapshot
         getSnapshot(isTest, `100`, latestConfig.SNAPSHOTS_PATH, isTest ? latestConfig.TESTNET_SOLANA_VERSION : latestConfig.MAINNET_SOLANA_VERSION)
       }
+    } else {
+      disableSolv()
+      enableFiredancer()
+      getSnapshot(isTest, `100`, latestConfig.SNAPSHOTS_PATH, isTest ? latestConfig.TESTNET_SOLANA_VERSION : latestConfig.MAINNET_SOLANA_VERSION)
     }
     if(!skipMount) {
       // Start Solana
