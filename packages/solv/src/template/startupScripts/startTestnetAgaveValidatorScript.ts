@@ -46,6 +46,9 @@ ${validatorArgs}
 --block-verification-method unified-scheduler \\
 --maximum-full-snapshots-to-retain 1 \\
 --maximum-incremental-snapshots-to-retain 2 \\
+--experimental-retransmit-xdp-cpu-cores 2 \\
+--experimental-retransmit-xdp-zero-copy \\
+--experimental-poh-pinned-cpu-core 6 \\
 `
 // To be added later for XDP
 // --experimental-retransmit-xdp-cpu-cores 2 \\

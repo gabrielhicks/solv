@@ -61,6 +61,9 @@ ${validatorArgs}
 --expected-shred-version 41708 \\
 --expected-bank-hash 4NuNyboT36pwwGJvMPZLreFqYpkbpBjX82nkt4AkJ9QT \\
 --expected-genesis-hash 4uhcVJyU9pJkvQyS88uRDiswHXSCkY3zQawwpjk2NsNY \\
+--experimental-retransmit-xdp-cpu-cores 2 \\
+--experimental-retransmit-xdp-zero-copy \\
+--experimental-poh-pinned-cpu-core 6 \\
 `
 // To be added later for XDP
 // --experimental-retransmit-xdp-cpu-cores 2 \\

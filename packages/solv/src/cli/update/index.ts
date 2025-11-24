@@ -54,6 +54,7 @@ import { restartFiredancer } from '@/lib/restartFiredancer'
 import { syncFirewall } from '../setup/syncFirewall.ts'
 import { enableSolv } from '@/lib/enableSolv'
 import { setupSolvService } from '../setup/setupSolvService'
+import { startSolv } from '@/lib/startSolv'
 // import { rmSnapshot } from '../setup/rmSnapshot'
 
 export * from './update'
@@ -296,6 +297,7 @@ export const updateCommands = (config: DefaultConfigType) => {
           await updateJitoSolvConfig({ version, tag: `v${version}` })
           await monitorUpdate(deliquentStake, true, minIdleTime)
           enableSolv()
+          startSolv()
           return
         }
         if (isBam) {
@@ -307,6 +309,7 @@ export const updateCommands = (config: DefaultConfigType) => {
           await updateJitoSolvConfig({ version, tag: `v${version}` })
           await monitorUpdate(deliquentStake, true, minIdleTime)
           enableSolv()
+          startSolv()
           return
         }
         if (isFrankendancer) {
@@ -323,6 +326,7 @@ export const updateCommands = (config: DefaultConfigType) => {
 
         await monitorUpdate(deliquentStakeNum, true, minIdleTime)
         enableSolv()
+        startSolv()
         return
       } else if (options.commission) {
         const ansewr = await updateCommissionAsk()
