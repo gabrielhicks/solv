@@ -18,6 +18,8 @@ StartLimitIntervalSec=0
 
 [Service]
 CapabilityBoundingSet=CAP_NET_RAW CAP_NET_ADMIN CAP_BPF CAP_PERFMON
+AmbientCapabilities=CAP_NET_RAW CAP_NET_ADMIN CAP_BPF CAP_PERFMON
+NoNewPrivileges=false
 Type=simple
 Restart=always
 RestartSec=1
