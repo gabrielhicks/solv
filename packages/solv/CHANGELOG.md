@@ -1,4 +1,8 @@
 # @gabrielhicks/solv
+## 5.5.17
+### Client changes systemd etc XDP
+Testing between client changes downstream
+
 ## 5.5.16
 ### Client changes systemd etc XDP
 Testing between client changes downstream
