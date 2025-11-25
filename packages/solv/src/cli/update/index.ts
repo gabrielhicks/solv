@@ -136,6 +136,7 @@ export const updateCommands = (config: DefaultConfigType) => {
         return
       }
       if (options.service) {
+        await syncFirewall()
         updateLogrotate(isFrankendancer)
         setupSolvService(isTestnet)
       }
