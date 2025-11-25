@@ -69,6 +69,7 @@ export type UpdateOptions = {
   auto: boolean
   mod: boolean
   startup: boolean
+  service: boolean
 }
 
 export const updateCommands = (config: DefaultConfigType) => {
@@ -121,6 +122,7 @@ export const updateCommands = (config: DefaultConfigType) => {
     .option('--auto', 'Auto Update', false)
     .option('--mod', 'Modified Versions', false)
     .option('--startup', 'Start up Script', false)
+    .option('--service', 'SystemD Service', false)
     .action(async (options: UpdateOptions) => {
       const solvVersion = getSolvVersion()
       const deliquentStake = isTestnet
@@ -133,7 +135,10 @@ export const updateCommands = (config: DefaultConfigType) => {
         await autoUpdate(config)
         return
       }
-
+      if (options.service) {
+        updateLogrotate(isFrankendancer)
+        setupSolvService(isTestnet)
+      }
       if (options.migrateConfig) {
         // Temporarily!!
         // Migrate solv.config.json to solv4.config.json
