@@ -87,7 +87,11 @@ const setupFiredancer = async (mod = false, config?: DefaultConfigType) => {
   //   stdio: 'inherit',
   //   cwd: '/home/solv/firedancer',
   // })
-
+  spawnSync(`export EXTRAS="openssl"`, {
+    shell: true,
+    stdio: 'inherit',
+    cwd: '/home/solv/firedancer',
+  })
   spawnSync(
     `export FD_AUTO_INSTALL_PACKAGES=1 && ./deps.sh fetch check install`,
     {

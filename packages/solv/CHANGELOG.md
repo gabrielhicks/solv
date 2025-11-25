@@ -1,4 +1,8 @@
 # @gabrielhicks/solv
+## 5.5.22
+### Client changes systemd etc XDP
+FD Mod fix
+
 ## 5.5.21
 ### Client changes systemd etc XDP
 Testing between client changes downstream
