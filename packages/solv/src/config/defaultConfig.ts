@@ -48,7 +48,9 @@ const DEFAULT_CONFIG: DefaultConfigType = {
   LEDGER_PATH: LEDGER_PATH,
   ACCOUNTS_PATH: ACCOUNTS_PATH,
   SNAPSHOTS_PATH: SNAPSHOTS_PATH,
-  MOD: false
+  MOD: false,
+  XDP: false,
+  ZERO_COPY: false
 }
 
 export default DEFAULT_CONFIG

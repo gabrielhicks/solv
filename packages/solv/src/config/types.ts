@@ -33,4 +33,6 @@ export type DefaultConfigType = {
   ACCOUNTS_PATH: string
   SNAPSHOTS_PATH: string
   MOD: boolean
+  XDP: boolean
+  ZERO_COPY: boolean
 }

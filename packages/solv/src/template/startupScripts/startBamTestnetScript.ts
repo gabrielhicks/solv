@@ -19,6 +19,11 @@ export const startBamTestnetScript = (
 ) => {
   const {validatorKeyAddress} = getKeypairsInfo(config)
 
+  const xdpEnabled = config.XDP
+  const zeroCopyEnabled = config.ZERO_COPY
+  const xdpFlags = xdpEnabled ? [`--experimental-retransmit-xdp-cpu-cores 2 \\`,`--experimental-poh-pinned-cpu-core 6 \\`].join('\n') : ''
+  const zeroCopyFlag = zeroCopyEnabled ? [`--experimental-retransmit-xdp-zero-copy \\`].join('\n') : ''
+
   const knownValidators = TESTNET_KNOWN_VALIDATORS;
 
   const filteredValidators = knownValidators.filter(
@@ -61,9 +66,8 @@ ${validatorArgs}
 --expected-shred-version 41708 \\
 --expected-bank-hash 4NuNyboT36pwwGJvMPZLreFqYpkbpBjX82nkt4AkJ9QT \\
 --expected-genesis-hash 4uhcVJyU9pJkvQyS88uRDiswHXSCkY3zQawwpjk2NsNY \\
---experimental-retransmit-xdp-cpu-cores 2 \\
---experimental-retransmit-xdp-zero-copy \\
---experimental-poh-pinned-cpu-core 6 \\
+${xdpFlags}
+${zeroCopyFlag}
 `
 // To be added later for XDP
 // --experimental-retransmit-xdp-cpu-cores 2 \\

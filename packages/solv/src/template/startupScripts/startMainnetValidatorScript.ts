@@ -11,6 +11,11 @@ import { DefaultConfigType } from '@/config/types'
 export const startMainnetValidatorScript = (config: DefaultConfigType, solanaCLI = 'agave-validator') => {
   const {validatorKeyAddress} = getKeypairsInfo(config)
 
+  const xdpEnabled = config.XDP
+  const zeroCopyEnabled = config.ZERO_COPY
+  const xdpFlags = xdpEnabled ? [`--experimental-retransmit-xdp-cpu-cores 2 \\`,`--experimental-poh-pinned-cpu-core 6 \\`].join('\n') : ''
+  const zeroCopyFlag = zeroCopyEnabled ? [`--experimental-retransmit-xdp-zero-copy \\`].join('\n') : ''
+
   const knownValidators = MAINNET_KNOWN_VALIDATORS;
 
   const filteredValidators = knownValidators.filter(
@@ -51,10 +56,8 @@ ${validatorArgs}
 --experimental-retransmit-xdp-cpu-cores 2 \\
 --experimental-retransmit-xdp-zero-copy \\
 --experimental-poh-pinned-cpu-core 6 \\
+${xdpFlags}
+${zeroCopyFlag}
 `
-// To be added later for XDP
-// --experimental-retransmit-xdp-cpu-cores 2 \\
-// --experimental-retransmit-xdp-zero-copy \\
-// --experimental-poh-pinned-cpu-core 6 \\
   return script
 }

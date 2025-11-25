@@ -11,6 +11,11 @@ import { DefaultConfigType } from '@/config/types'
 export const startTestnetAgaveValidatorScript = (config: DefaultConfigType) => {
   const {validatorKeyAddress} = getKeypairsInfo(config)
 
+  const xdpEnabled = config.XDP
+  const zeroCopyEnabled = config.ZERO_COPY
+  const xdpFlags = xdpEnabled ? [`--experimental-retransmit-xdp-cpu-cores 2 \\`,`--experimental-poh-pinned-cpu-core 6 \\`].join('\n') : ''
+  const zeroCopyFlag = zeroCopyEnabled ? [`--experimental-retransmit-xdp-zero-copy \\`].join('\n') : ''
+
   const knownValidators = TESTNET_KNOWN_VALIDATORS;
 
   const filteredValidators = knownValidators.filter(
@@ -46,9 +51,8 @@ ${validatorArgs}
 --block-verification-method unified-scheduler \\
 --maximum-full-snapshots-to-retain 1 \\
 --maximum-incremental-snapshots-to-retain 2 \\
---experimental-retransmit-xdp-cpu-cores 2 \\
---experimental-retransmit-xdp-zero-copy \\
---experimental-poh-pinned-cpu-core 6 \\
+${xdpFlags}
+${zeroCopyFlag}
 `
 // To be added later for XDP
 // --experimental-retransmit-xdp-cpu-cores 2 \\

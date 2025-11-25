@@ -93,6 +93,8 @@ export type CONFIG_TYPE = {
   ACCOUNTS_PATH: string
   SNAPSHOTS_PATH: string
   MOD: boolean
+  XDP: boolean
+  ZERO_COPY: boolean
 }
 
 export type PartialConfigType = Partial<CONFIG_TYPE>
@@ -128,7 +130,9 @@ export const CONFIG: CONFIG_TYPE = {
   AUTO_RESTART: false,
   ACCOUNTS_PATH: '/mnt/accounts',
   SNAPSHOTS_PATH: '/mnt/snapshots',
-  MOD: false
+  MOD: false,
+  XDP: false,
+  ZERO_COPY: false,
 }
 
 export const HOME_PATHS = {
