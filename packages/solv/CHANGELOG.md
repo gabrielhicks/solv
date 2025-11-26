@@ -1,4 +1,8 @@
 # @gabrielhicks/solv
+## 5.5.23
+### Client changes systemd etc XDP
+FD Mod fix
+
 ## 5.5.22
 ### Client changes systemd etc XDP
 FD Mod fix
