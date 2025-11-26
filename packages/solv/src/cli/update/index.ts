@@ -55,6 +55,10 @@ import { syncFirewall } from '../setup/syncFirewall.ts'
 import { enableSolv } from '@/lib/enableSolv'
 import { setupSolvService } from '../setup/setupSolvService'
 import { startSolv } from '@/lib/startSolv'
+import { disableFiredancer } from '@/lib/disableFiredancer'
+import { stopFiredancer } from '@/lib/stopFiredancer'
+import { disableSolv } from '@/lib/disableSolv'
+import { stopSolv } from '@/lib/stopSolv'
 // import { rmSnapshot } from '../setup/rmSnapshot'
 
 export * from './update'
@@ -304,6 +308,8 @@ export const updateCommands = (config: DefaultConfigType) => {
           jitoUpdate(jitoTag, options.mod || isModded, isMajorThree)
           await updateJitoSolvConfig({ version, tag: `v${version}` })
           await monitorUpdate(deliquentStake, true, minIdleTime)
+          disableFiredancer()
+          stopFiredancer()
           enableSolv()
           startSolv()
           return
@@ -316,6 +322,8 @@ export const updateCommands = (config: DefaultConfigType) => {
           bamUpdate(bamTag, options.mod || isModded, isMajorThree)
           await updateJitoSolvConfig({ version, tag: `v${version}` })
           await monitorUpdate(deliquentStake, true, minIdleTime)
+          disableFiredancer()
+          stopFiredancer()
           enableSolv()
           startSolv()
           return
@@ -323,6 +331,8 @@ export const updateCommands = (config: DefaultConfigType) => {
         if (isFrankendancer) {
           await frankendancerUpdate(config, version, options.mod || isModded)
           await monitorUpdate(deliquentStake, true, minIdleTime)
+          disableSolv()
+          stopSolv()
           restartFiredancer()
           return
         }
@@ -333,6 +343,8 @@ export const updateCommands = (config: DefaultConfigType) => {
           : DELINQUENT_STAKE_MAINNET
 
         await monitorUpdate(deliquentStakeNum, true, minIdleTime)
+        disableFiredancer()
+        stopFiredancer()
         enableSolv()
         startSolv()
         return

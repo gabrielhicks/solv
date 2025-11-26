@@ -84,12 +84,4 @@ export const installJito = (version = VERSION_JITO_MAINNET, mod = false, isMajor
       )
     }
   }
-  spawnSync(`sudo systemctl disable frankendancer.service`, {
-    stdio: 'inherit',
-    shell: true,
-  })
-  spawnSync(`sudo systemctl stop frankendancer.service`, {
-    stdio: 'inherit',
-    shell: true,
-  })
 }
