@@ -1,4 +1,8 @@
 # @gabrielhicks/solv
+## 5.5.25
+### Latest clients
+Update versions
+
 ## 5.5.24
 ### Client changes systemd etc XDP
 FD Mod fix
