@@ -41,12 +41,13 @@ exec agave-validator \\
 ${validatorArgs}
 --only-known-rpc \\
 --rpc-bind-address 0.0.0.0 \\
---expected-bank-hash 4NuNyboT36pwwGJvMPZLreFqYpkbpBjX82nkt4AkJ9QT \\
 --expected-genesis-hash 4uhcVJyU9pJkvQyS88uRDiswHXSCkY3zQawwpjk2NsNY \\
 --dynamic-port-range 8000-8025 \\
 --rpc-port 8899 \\
 --wal-recovery-mode skip_any_corrupted_record \\
---expected-shred-version 41708 \\
+--wait-for-supermajority 374301609 \\
+--expected-shred-version 24207 \\
+--expected-bank-hash A3qNoPtSaAniWAyRNHR1b1kAxqF9kDbdgR4irr3akhTA \\
 --limit-ledger-size 50000000 \\
 --block-production-method central-scheduler-greedy \\
 --block-verification-method unified-scheduler \\

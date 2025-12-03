@@ -1,4 +1,8 @@
 # @gabrielhicks/solv
+## 5.5.27
+### Testnet script changes
+Testnet restart 12/03
+
 ## 5.5.26
 ### Added JagSnap service
 Add JAG_SNAPSHOTS: true, and JAG_REGION to supported region, then run solv update --jagsnap, and restart validator
