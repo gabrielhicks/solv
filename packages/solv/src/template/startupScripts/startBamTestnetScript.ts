@@ -21,6 +21,7 @@ export const startBamTestnetScript = (
 
   const xdpEnabled = config.XDP
   const zeroCopyEnabled = config.ZERO_COPY
+  // const jagSnapshotsEnabled = config.JAG_SNAPSHOTS
   const xdpFlags = xdpEnabled ? [`--experimental-retransmit-xdp-cpu-cores 2 \\`,`--experimental-poh-pinned-cpu-core 6 \\`].join('\n') : ''
   const zeroCopyFlag = zeroCopyEnabled ? [`--experimental-retransmit-xdp-zero-copy \\`].join('\n') : ''
 

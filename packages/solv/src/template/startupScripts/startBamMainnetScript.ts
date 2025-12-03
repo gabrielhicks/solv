@@ -7,6 +7,7 @@ import {
   MAINNET_VALIDATOR_VOTE_KEY_PATH,
 } from '@/config/constants'
 import { DefaultConfigType } from '@/config/types'
+import { execSync } from 'node:child_process';
 
 export const startBamMainnetScript = (
   commissionBps = 0,
@@ -19,9 +20,14 @@ export const startBamMainnetScript = (
 ) => {
   const {validatorKeyAddress} = getKeypairsInfo(config)
 
+  const localIp = execSync(`hostname -I | awk '{print $1}'`).toString().trim()
+  const defaultPort = "18899"
+  const publicRpc = `${localIp}:${defaultPort}`
   const xdpEnabled = config.XDP
   const zeroCopyEnabled = config.ZERO_COPY
+  const jagSnapshotsEnabled = config.JAG_SNAPSHOTS
   const xdpFlags = xdpEnabled ? [`--experimental-retransmit-xdp-cpu-cores 2 \\`,`--experimental-poh-pinned-cpu-core 6 \\`].join('\n') : ''
+  const jagFlags = jagSnapshotsEnabled ? [`--public-rpc-address ${publicRpc} \\`,`--no-port-check \\`].join('\n') : [`--full-rpc-api \\`, `--private-rpc \\`].join('\n')
   const zeroCopyFlag = zeroCopyEnabled ? [`--experimental-retransmit-xdp-zero-copy \\`].join('\n') : ''
   const knownValidators = MAINNET_KNOWN_VALIDATORS;
 
@@ -54,19 +60,18 @@ ${validatorArgs}
 --merkle-root-upload-authority GZctHpWXmsZC1YHACTGGcHhYxjdRqQvTpYkb9LMvxDib \\
 --commission-bps ${commissionBps} \\
 --rpc-bind-address 127.0.0.1 \\
+--rpc-port 8899 \\
+${jagFlags}
 --block-engine-url ${blockEngineUrl} \\
 --shred-receiver-address ${shredReceiverAddr} \\
 --bam-url ${bamUrl} \\
 --dynamic-port-range 8000-8025 \\
---rpc-port 8899 \\
 --wal-recovery-mode skip_any_corrupted_record \\
 --limit-ledger-size 50000000 \\
 --block-production-method central-scheduler-greedy \\
 --block-verification-method unified-scheduler \\
 --maximum-full-snapshots-to-retain 1 \\
 --maximum-incremental-snapshots-to-retain 2 \\
---private-rpc \\
---full-rpc-api \\
 ${xdpFlags}
 ${zeroCopyFlag}
 `

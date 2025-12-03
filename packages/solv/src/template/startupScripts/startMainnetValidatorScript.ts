@@ -7,12 +7,18 @@ import {
   MAINNET_VALIDATOR_VOTE_KEY_PATH,
 } from '@/config/constants'
 import { DefaultConfigType } from '@/config/types'
+import { execSync } from 'node:child_process';
 
 export const startMainnetValidatorScript = (config: DefaultConfigType, solanaCLI = 'agave-validator') => {
   const {validatorKeyAddress} = getKeypairsInfo(config)
 
   const xdpEnabled = config.XDP
   const zeroCopyEnabled = config.ZERO_COPY
+  const jagSnapshotsEnabled = config.JAG_SNAPSHOTS
+  const localIp = execSync(`hostname -I | awk '{print $1}'`).toString().trim()
+  const defaultPort = "18899"
+  const publicRpc = `${localIp}:${defaultPort}`
+  const jagFlags = jagSnapshotsEnabled ? [`--public-rpc-address ${publicRpc} \\`,`--no-port-check \\`].join('\n') : [`--full-rpc-api \\`, `--private-rpc \\`].join('\n')
   const xdpFlags = xdpEnabled ? [`--experimental-retransmit-xdp-cpu-cores 2 \\`,`--experimental-poh-pinned-cpu-core 6 \\`].join('\n') : ''
   const zeroCopyFlag = zeroCopyEnabled ? [`--experimental-retransmit-xdp-zero-copy \\`].join('\n') : ''
 
@@ -45,6 +51,7 @@ ${validatorArgs}
 --dynamic-port-range 8000-8025 \\
 --rpc-bind-address 127.0.0.1 \\
 --rpc-port 8899 \\
+${jagFlags}
 --wal-recovery-mode skip_any_corrupted_record \\
 --use-snapshot-archives-at-startup when-newest \\
 --limit-ledger-size 50000000 \\
@@ -52,10 +59,6 @@ ${validatorArgs}
 --block-verification-method unified-scheduler \\
 --maximum-full-snapshots-to-retain 1 \\
 --maximum-incremental-snapshots-to-retain 2 \\
---private-rpc \\
---experimental-retransmit-xdp-cpu-cores 2 \\
---experimental-retransmit-xdp-zero-copy \\
---experimental-poh-pinned-cpu-core 6 \\
 ${xdpFlags}
 ${zeroCopyFlag}
 `

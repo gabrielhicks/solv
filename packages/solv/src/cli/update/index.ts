@@ -59,7 +59,7 @@ import { disableFiredancer } from '@/lib/disableFiredancer'
 import { stopFiredancer } from '@/lib/stopFiredancer'
 import { disableSolv } from '@/lib/disableSolv'
 import { stopSolv } from '@/lib/stopSolv'
-// import { rmSnapshot } from '../setup/rmSnapshot'
+import installJagSnap from '../install/installJagSnap'
 
 export * from './update'
 
@@ -74,6 +74,7 @@ export type UpdateOptions = {
   mod: boolean
   startup: boolean
   service: boolean
+  jagsnap: boolean
 }
 
 export const updateCommands = (config: DefaultConfigType) => {
@@ -127,6 +128,7 @@ export const updateCommands = (config: DefaultConfigType) => {
     .option('--mod', 'Modified Versions', false)
     .option('--startup', 'Start up Script', false)
     .option('--service', 'SystemD Service', false)
+    .option('--jagsnap', 'JagSnaps Service', false)
     .action(async (options: UpdateOptions) => {
       const solvVersion = getSolvVersion()
       const deliquentStake = isTestnet
@@ -194,6 +196,8 @@ export const updateCommands = (config: DefaultConfigType) => {
           MOD: false,
           XDP: false,
           ZERO_COPY: false,
+          JAG_SNAPSHOTS: false,
+          JAG_REGION: "",
         }
 
         await updateDefaultConfig(newConfigBody)
@@ -287,6 +291,10 @@ export const updateCommands = (config: DefaultConfigType) => {
         await writeFile(STARTUP_SCRIPT, startupScript, 'utf-8')
         updateStartupScriptPermissions()
         return
+      }
+      if (options.jagsnap) {
+        const jagRegion = config.JAG_REGION
+        installJagSnap(jagRegion)
       }
       if (options.background) {
         let version = options.version

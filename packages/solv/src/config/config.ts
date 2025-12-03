@@ -95,6 +95,8 @@ export type CONFIG_TYPE = {
   MOD: boolean
   XDP: boolean
   ZERO_COPY: boolean
+  JAG_SNAPSHOTS: boolean
+  JAG_REGION: string
 }
 
 export type PartialConfigType = Partial<CONFIG_TYPE>
@@ -133,6 +135,8 @@ export const CONFIG: CONFIG_TYPE = {
   MOD: false,
   XDP: false,
   ZERO_COPY: false,
+  JAG_SNAPSHOTS: false,
+  JAG_REGION: "",
 }
 
 export const HOME_PATHS = {

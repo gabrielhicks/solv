@@ -50,7 +50,9 @@ const DEFAULT_CONFIG: DefaultConfigType = {
   SNAPSHOTS_PATH: SNAPSHOTS_PATH,
   MOD: false,
   XDP: false,
-  ZERO_COPY: false
+  ZERO_COPY: false,
+  JAG_SNAPSHOTS: false,
+  JAG_REGION: ""
 }
 
 export default DEFAULT_CONFIG

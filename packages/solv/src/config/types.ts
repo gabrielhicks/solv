@@ -35,4 +35,6 @@ export type DefaultConfigType = {
   MOD: boolean
   XDP: boolean
   ZERO_COPY: boolean
+  JAG_SNAPSHOTS: boolean
+  JAG_REGION: string
 }
