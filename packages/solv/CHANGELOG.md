@@ -1,4 +1,8 @@
 # @gabrielhicks/solv
+## 5.5.30
+### Testnet script changes
+Testnet restart 12/06
+
 ## 5.5.29
 ### Testnet script changes
 Testnet restart 12/03
