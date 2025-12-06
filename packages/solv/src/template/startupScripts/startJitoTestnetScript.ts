@@ -63,7 +63,7 @@ ${validatorArgs}
 --maximum-incremental-snapshots-to-retain 2 \\
 --wait-for-supermajority 374301609 \\
 --expected-shred-version 24207 \\
---expected-bank-hash A3qNoPtSaAniWAyRNHR1b1kAxqF9kDbdgR4irr3akhTA \\
+--expected-bank-hash CJZAAtgdqYiqHTFKJ9XD9qw4W21wHqojkhrVJSfFF9b7 \\
 --expected-genesis-hash 4uhcVJyU9pJkvQyS88uRDiswHXSCkY3zQawwpjk2NsNY \\
 ${xdpFlags}
 ${zeroCopyFlag}

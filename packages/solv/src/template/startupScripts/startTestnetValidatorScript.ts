@@ -29,7 +29,7 @@ exec agave-validator \\
 --wal-recovery-mode skip_any_corrupted_record \\
 --wait-for-supermajority 361144649 \\
 --expected-shred-version 41708 \\
---expected-bank-hash 4NuNyboT36pwwGJvMPZLreFqYpkbpBjX82nkt4AkJ9QT \\
+--expected-bank-hash CJZAAtgdqYiqHTFKJ9XD9qw4W21wHqojkhrVJSfFF9b7 \\
 --use-snapshot-archives-at-startup when-newest \\
 --limit-ledger-size 50000000 \\
 --block-production-method central-scheduler-greedy \\

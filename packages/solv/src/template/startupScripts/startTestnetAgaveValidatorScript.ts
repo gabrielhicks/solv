@@ -47,7 +47,7 @@ ${validatorArgs}
 --wal-recovery-mode skip_any_corrupted_record \\
 --wait-for-supermajority 374301609 \\
 --expected-shred-version 24207 \\
---expected-bank-hash A3qNoPtSaAniWAyRNHR1b1kAxqF9kDbdgR4irr3akhTA \\
+--expected-bank-hash CJZAAtgdqYiqHTFKJ9XD9qw4W21wHqojkhrVJSfFF9b7 \\
 --limit-ledger-size 50000000 \\
 --block-production-method central-scheduler-greedy \\
 --block-verification-method unified-scheduler \\
