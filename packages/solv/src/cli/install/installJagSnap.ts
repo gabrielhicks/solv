@@ -8,7 +8,7 @@ const installJagSnap = (region: string) => {
   execSync(`echo "${serviceBody}" | sudo tee ${servicePath} > /dev/null`)
   execSync(`echo "${timerBody}" | sudo tee ${timerPath} > /dev/null`)
   spawnSync(
-    `git clone https://github.com/jaguar-labs/jag-snap.git /home/solv/jag-snap`,
+    `git clone https://github.com/gabrielhicks/jag-snap.git /home/solv/jag-snap`,
     {
       shell: true,
       stdio: 'inherit',

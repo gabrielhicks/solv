@@ -1,4 +1,8 @@
 # @gabrielhicks/solv
+## 5.5.31
+### Small Jag Snap update
+Adding my diffs
+
 ## 5.5.30
 ### Testnet script changes
 Testnet restart 12/06
