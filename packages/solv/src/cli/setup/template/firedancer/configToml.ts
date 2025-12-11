@@ -133,8 +133,8 @@ user = \"solv\"
         \"/home/solv/testnet-validator-keypair.json\"
     ]
     expected_genesis_hash = \"4uhcVJyU9pJkvQyS88uRDiswHXSCkY3zQawwpjk2NsNY\"
-    expected_bank_hash = \"Bn8ULiSxvGdyedFFENjrcLU4PUUqX9NGASHHjuSMAKA1\"
-    expected_shred_version = 6045
+    expected_bank_hash = \"EJMzxv7JscF8WNZfDYqzsAyALCDCS52HuihabVgyz5mf\"
+    expected_shred_version = 9604
     wait_for_supermajority_at_slot = 374301609
     known_validators = [
         \"5D1fNXzvv5NjV1ysLjirC4WY92RNsVH18vjmcszZd8on\", 

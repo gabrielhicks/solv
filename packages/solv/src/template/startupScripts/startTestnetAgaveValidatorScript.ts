@@ -46,8 +46,8 @@ ${validatorArgs}
 --rpc-port 8899 \\
 --wal-recovery-mode skip_any_corrupted_record \\
 --wait-for-supermajority 374301609 \\
---expected-shred-version 6045 \\
---expected-bank-hash Bn8ULiSxvGdyedFFENjrcLU4PUUqX9NGASHHjuSMAKA1 \\
+--expected-shred-version 9604 \\
+--expected-bank-hash EJMzxv7JscF8WNZfDYqzsAyALCDCS52HuihabVgyz5mf \\
 --limit-ledger-size 50000000 \\
 --block-production-method central-scheduler-greedy \\
 --block-verification-method unified-scheduler \\
