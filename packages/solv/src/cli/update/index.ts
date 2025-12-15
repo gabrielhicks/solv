@@ -85,6 +85,7 @@ export const updateCommands = (config: DefaultConfigType) => {
   const isFrankendancer = config.VALIDATOR_TYPE === ValidatorType.FRANKENDANCER
   const isAutoRestart = config.AUTO_RESTART
   const isModded = config.MOD
+  const xdpEnabled = config.XDP
   let minIdleTime = 10
   if (isAutoRestart && !isTestnet) {
     minIdleTime = 30
@@ -313,7 +314,7 @@ export const updateCommands = (config: DefaultConfigType) => {
           const jitoTagBase = `v${version}-jito`
           const jitoModBase = `v${version}-mod`
           const jitoTag = options.mod || isModded ? `${jitoModBase}${jitoPatch}` : `${jitoTagBase}${jitoPatch}`
-          jitoUpdate(jitoTag, options.mod || isModded, isMajorThree)
+          jitoUpdate(jitoTag, options.mod || isModded, isMajorThree, xdpEnabled)
           await updateJitoSolvConfig({ version, tag: `v${version}` })
           await monitorUpdate(deliquentStake, true, minIdleTime)
           disableFiredancer()
@@ -327,7 +328,7 @@ export const updateCommands = (config: DefaultConfigType) => {
           const bamTagBase = `v${version}-bam`
           const bamModBase = `v${version}-mod`
           const bamTag = options.mod || isModded ? `${bamModBase}${bamPatch}` : `${bamTagBase}${bamPatch}`
-          bamUpdate(bamTag, options.mod || isModded, isMajorThree)
+          bamUpdate(bamTag, options.mod || isModded, isMajorThree, xdpEnabled)
           await updateJitoSolvConfig({ version, tag: `v${version}` })
           await monitorUpdate(deliquentStake, true, minIdleTime)
           disableFiredancer()
@@ -345,7 +346,7 @@ export const updateCommands = (config: DefaultConfigType) => {
           return
         }
 
-        await updateVersion(version, options.mod || isModded, isMajorThree)
+        await updateVersion(version, options.mod || isModded, isMajorThree, xdpEnabled)
         const deliquentStakeNum = isTestnet
           ? DELINQUENT_STAKE_TESTNET
           : DELINQUENT_STAKE_MAINNET

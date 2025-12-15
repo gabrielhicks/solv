@@ -1,7 +1,7 @@
 import { VERSION_JITO_MAINNET } from '@/config/versionConfig'
 import { spawnSync } from 'child_process'
 
-export const installJito = (version = VERSION_JITO_MAINNET, mod = false, isMajorThree = false) => {
+export const installJito = (version = VERSION_JITO_MAINNET, mod = false, isMajorThree = false, xdp = false) => {
   if(isMajorThree) {
     if(mod) {
       spawnSync(
@@ -56,6 +56,15 @@ export const installJito = (version = VERSION_JITO_MAINNET, mod = false, isMajor
           stdio: 'inherit',
         },
       )
+      if(xdp) {
+        spawnSync(
+          `sudo setcap cap_net_raw,cap_net_admin,cap_bpf,cap_perfmon=p /home/solv/.local/share/solana/install/active_release/bin/agave-validator`,
+          {
+            shell: true,
+            stdio: 'inherit',
+          },
+        )
+      }
       spawnSync(`sudo rm -rf /tmp/${version}`, {
         shell: true,
         stdio: 'inherit',

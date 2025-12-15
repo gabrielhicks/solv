@@ -32,7 +32,7 @@ const setupValidatorNode = async (config: DefaultConfigType, mod = false) => {
 }
 
 const setupMainnetValidator = async (config: DefaultConfigType, mod = false) => {
-  const { VALIDATOR_TYPE: validatorType, MAINNET_SOLANA_VERSION: version, MOD: modConfig } =
+  const { VALIDATOR_TYPE: validatorType, MAINNET_SOLANA_VERSION: version, MOD: modConfig, XDP: xdpEnabled } =
     config
   mod = modConfig
   let startupScript = ''
@@ -55,7 +55,7 @@ const setupMainnetValidator = async (config: DefaultConfigType, mod = false) => 
       const jitoTagBase = `v${version}-jito`
       const jitoModBase = `v${version}-mod`
       const jitoTag = mod ? `${jitoModBase}${jitoPatch}` :`${jitoTagBase}${jitoPatch}`
-      installJito(jitoTag, mod, isMajorThree)
+      installJito(jitoTag, mod, isMajorThree, xdpEnabled)
       startupScript = startJitoMainnetScript(
         jitoConfig.commissionBps,
         jitoConfig.relayerUrl,
@@ -71,7 +71,7 @@ const setupMainnetValidator = async (config: DefaultConfigType, mod = false) => 
       const bamTagBase = `v${version}-bam`
       const bamModBase = `v${version}-mod`
       const bamTag = mod ? `${bamModBase}${bamPatch}` :`${bamTagBase}${bamPatch}`
-      installBam(bamTag, mod, isMajorThree)
+      installBam(bamTag, mod, isMajorThree, xdpEnabled)
       startupScript = startBamMainnetScript(
         bamConfig.commissionBps,
         bamConfig.relayerUrl,
@@ -100,7 +100,7 @@ const setupMainnetValidator = async (config: DefaultConfigType, mod = false) => 
 }
 
 const setupTestnetValidator = async (config: DefaultConfigType, mod = false) => {
-  const { VALIDATOR_TYPE: validatorType, MOD: modConfig, TESTNET_SOLANA_VERSION: version } = config
+  const { VALIDATOR_TYPE: validatorType, MOD: modConfig, TESTNET_SOLANA_VERSION: version, XDP: xdpEnabled } = config
   mod = modConfig
   let startupScript = ''
   let isMajorThree = version.startsWith("3") ? true : false;
@@ -121,13 +121,13 @@ const setupTestnetValidator = async (config: DefaultConfigType, mod = false) => 
       startupScript = startTestnetAgaveValidatorScript(config)
     case ValidatorType.AGAVE:
       console.log('Agave Validator Setup for Testnet')
-      installAgave(agaveTag, mod, isMajorThree)
+      installAgave(agaveTag, mod, isMajorThree, xdpEnabled)
       startupScript = startTestnetAgaveValidatorScript(config)
       break
     case ValidatorType.JITO:
       console.log('JITO Validator Setup for Testnet')
       const jitoConfig = await readOrCreateJitoConfig()
-      installJito(jitoTag, mod, isMajorThree)
+      installJito(jitoTag, mod, isMajorThree, xdpEnabled)
       startupScript = startJitoTestnetScript(
         jitoConfig.commissionBps,
         jitoConfig.relayerUrl,
@@ -139,7 +139,7 @@ const setupTestnetValidator = async (config: DefaultConfigType, mod = false) => 
     case ValidatorType.BAM:
       console.log('BAM Validator Setup for Mainnet')
       const bamConfig = await readOrCreateJitoConfig()
-      installBam(bamTag, mod, isMajorThree)
+      installBam(bamTag, mod, isMajorThree, xdpEnabled)
       startupScript = startBamTestnetScript(
         bamConfig.commissionBps,
         bamConfig.relayerUrl,

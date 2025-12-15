@@ -4,11 +4,11 @@ import installAgave from '../install/installAgave'
 import getSolanaCLI from '@/config/getSolanaCLI'
 import { AGAVE_PATCH } from '@/config/versionConfig'
 
-export const updateVersion = async (version: string, mod = false, isMajorThree = false) => {
+export const updateVersion = async (version: string, mod = false, isMajorThree = false, xdp = false) => {
   const agavePatch = AGAVE_PATCH;
   const agaveTagBase = `v${version}`
   const agaveTag = `${agaveTagBase}${agavePatch}`
-  installAgave(agaveTag, mod, isMajorThree)
+  installAgave(agaveTag, mod, isMajorThree, xdp)
   return
 }
 

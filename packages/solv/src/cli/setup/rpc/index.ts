@@ -17,7 +17,7 @@ const setupRpcNode = async (config: DefaultConfigType) => {
   switch (rpcType) {
     case RpcType.AGAVE:
       console.log('Agave RPC Node Setup')
-      installAgave(config.TESTNET_SOLANA_VERSION)
+      installAgave(config.TESTNET_SOLANA_VERSION, config.MOD, true, config.XDP)
       startupScript = startRPCNodeScript()
       break
     case RpcType.JITO:

@@ -1,7 +1,7 @@
 import { spawnSync } from 'node:child_process'
 
 // Agave Install e.g. installAgave('0.1.0')
-const installAgave = (version: string, mod = false, isMajorThree = false) => {
+const installAgave = (version: string, mod = false, isMajorThree = false, xdp = false) => {
   if(isMajorThree) {
     if(mod) {
       spawnSync(`mkdir /tmp/${version}-agave-mod`, {
@@ -51,6 +51,15 @@ const installAgave = (version: string, mod = false, isMajorThree = false) => {
           stdio: 'inherit',
         },
       )
+      if(xdp) {
+        spawnSync(
+          `sudo setcap cap_net_raw,cap_net_admin,cap_bpf,cap_perfmon=p /home/solv/.local/share/solana/install/active_release/bin/agave-validator`,
+          {
+            shell: true,
+            stdio: 'inherit',
+          },
+        )
+      }
       spawnSync(`sudo rm -rf /tmp/${version}-agave-mod`, {
         shell: true,
         stdio: 'inherit',
@@ -100,6 +109,15 @@ const installAgave = (version: string, mod = false, isMajorThree = false) => {
           stdio: 'inherit',
         },
       )
+      if(xdp) {
+        spawnSync(
+          `sudo setcap cap_net_raw,cap_net_admin,cap_bpf,cap_perfmon=p /home/solv/.local/share/solana/install/active_release/bin/agave-validator`,
+          {
+            shell: true,
+            stdio: 'inherit',
+          },
+        )
+      }
       spawnSync(`sudo rm -rf /tmp/${version}-agave`, {
         shell: true,
         stdio: 'inherit',

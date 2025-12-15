@@ -1,6 +1,6 @@
 import { spawnSync } from 'child_process'
 
-export const bamUpdate = (tag: string, mod = false, isMajorThree = false) => {
+export const bamUpdate = (tag: string, mod = false, isMajorThree = false, xdp = false) => {
   // Update DZ
   spawnSync(
     `sudo apt install --only-upgrade doublezero doublezero-solana -y`,
@@ -65,6 +65,15 @@ export const bamUpdate = (tag: string, mod = false, isMajorThree = false) => {
           stdio: 'inherit',
         },
       )
+      if(xdp) {
+        spawnSync(
+          `sudo setcap cap_net_raw,cap_net_admin,cap_bpf,cap_perfmon=p /home/solv/.local/share/solana/install/active_release/bin/agave-validator`,
+          {
+            shell: true,
+            stdio: 'inherit',
+          },
+        )
+      }
       spawnSync(`sudo rm -rf /tmp/${tag}`, {
         shell: true,
         stdio: 'inherit',

@@ -1,6 +1,6 @@
 import { spawnSync } from 'child_process'
 
-export const installBam = (version: string, mod = false, isMajorThree = false) => {
+export const installBam = (version: string, mod = false, isMajorThree = false, xdp = false) => {
   if(isMajorThree) {
     if(mod) {
       spawnSync(
@@ -55,6 +55,15 @@ export const installBam = (version: string, mod = false, isMajorThree = false) =
           stdio: 'inherit',
         },
       )
+      if(xdp) {
+        spawnSync(
+          `sudo setcap cap_net_raw,cap_net_admin,cap_bpf,cap_perfmon=p /home/solv/.local/share/solana/install/active_release/bin/agave-validator`,
+          {
+            shell: true,
+            stdio: 'inherit',
+          },
+        )
+      }
       spawnSync(`sudo rm -rf /tmp/${version}`, {
         shell: true,
         stdio: 'inherit',

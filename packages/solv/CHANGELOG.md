@@ -1,4 +1,8 @@
 # @gabrielhicks/solv
+## 5.6.2
+### Bump XDP
+change xdp defaults and binary commands
+
 ## 5.6.1
 ### Bump XDP
 change xdp defaults

@@ -41,6 +41,7 @@ export const installCommands = (config: DefaultConfigType) => {
       const isJitoBam = config.VALIDATOR_TYPE === ValidatorType.BAM
       const isFrankendancer = config.VALIDATOR_TYPE === ValidatorType.FRANKENDANCER
       const isModified = options.mod || config.MOD;
+      const xdpEnabled = config.XDP
       if (isJito) {
         const jitoVersion = options.version || VERSION_JITO_MAINNET
         const jitoPatch = JITO_PATCH;
@@ -48,7 +49,7 @@ export const installCommands = (config: DefaultConfigType) => {
         const jitoModBase = `v${jitoVersion}-mod`
         const jitoTag = isModified ? `${jitoModBase}${jitoPatch}` :`${jitoTagBase}${jitoPatch}`
         const isMajorThree = jitoVersion.startsWith("3") ? true : false;
-        jitoUpdate(jitoTag, isModified, isMajorThree)
+        jitoUpdate(jitoTag, isModified, isMajorThree, xdpEnabled)
         return
       }
       if (isJitoBam) {
@@ -58,7 +59,7 @@ export const installCommands = (config: DefaultConfigType) => {
         const bamModBase = `v${bamVersion}-mod`
         const bamTag = isModified ? `${bamModBase}${bamPatch}` :`${bamTagBase}${bamPatch}`
         const isMajorThree = bamVersion.startsWith("3") ? true : false;
-        bamUpdate(bamTag, isModified, isMajorThree)
+        bamUpdate(bamTag, isModified, isMajorThree, xdpEnabled)
         return
       }
       if (isFrankendancer) {
