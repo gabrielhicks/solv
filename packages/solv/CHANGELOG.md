@@ -1,4 +1,8 @@
 # @gabrielhicks/solv
+## 5.6.1
+### Bump XDP
+change xdp defaults
+
 ## 5.6.0
 ### Testnet restart
 Last one

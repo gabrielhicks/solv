@@ -19,7 +19,7 @@ export const startMainnetValidatorScript = (config: DefaultConfigType, solanaCLI
   const defaultPort = "18899"
   const publicRpc = `${localIp}:${defaultPort}`
   const jagFlags = jagSnapshotsEnabled ? [`--public-rpc-address ${publicRpc} \\`,`--no-port-check \\`].join('\n') : [`--full-rpc-api \\`, `--private-rpc \\`].join('\n')
-  const xdpFlags = xdpEnabled ? [`--experimental-retransmit-xdp-cpu-cores 2 \\`,`--experimental-poh-pinned-cpu-core 6 \\`].join('\n') : ''
+  const xdpFlags = xdpEnabled ? [`--experimental-retransmit-xdp-cpu-cores 1 \\`,`--experimental-poh-pinned-cpu-core 10 \\`].join('\n') : ''
   const zeroCopyFlag = zeroCopyEnabled ? [`--experimental-retransmit-xdp-zero-copy \\`].join('\n') : ''
 
   const knownValidators = MAINNET_KNOWN_VALIDATORS;

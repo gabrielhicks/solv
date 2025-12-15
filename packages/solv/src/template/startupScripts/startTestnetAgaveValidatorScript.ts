@@ -14,7 +14,7 @@ export const startTestnetAgaveValidatorScript = (config: DefaultConfigType) => {
   const xdpEnabled = config.XDP
   const zeroCopyEnabled = config.ZERO_COPY
   // const jagSnapshotsEnabled = config.JAG_SNAPSHOTS
-  const xdpFlags = xdpEnabled ? [`--experimental-retransmit-xdp-cpu-cores 2 \\`,`--experimental-poh-pinned-cpu-core 6 \\`].join('\n') : ''
+  const xdpFlags = xdpEnabled ? [`--experimental-retransmit-xdp-cpu-cores 1 \\`,`--experimental-poh-pinned-cpu-core 10 \\`].join('\n') : ''
   const zeroCopyFlag = zeroCopyEnabled ? [`--experimental-retransmit-xdp-zero-copy \\`].join('\n') : ''
 
   const knownValidators = TESTNET_KNOWN_VALIDATORS;
