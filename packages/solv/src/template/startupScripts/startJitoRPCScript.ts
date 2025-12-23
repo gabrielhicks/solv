@@ -3,10 +3,21 @@ import {
   IDENTITY_KEY_PATH,
   LEDGER_PATH,
   LOG_PATH,
+  MAINNET_KNOWN_VALIDATORS,
   SNAPSHOTS_PATH,
 } from '@/config/constants'
 
 export const startJitoRPCScript = () => {
+  const knownValidators = MAINNET_KNOWN_VALIDATORS;
+
+  const filteredValidators = knownValidators.filter(
+    (address) => address !== ""
+  );
+
+  const validatorArgs = filteredValidators
+    .map((address) => `--known-validator ${address} \\`)
+    .join('\n');
+
   const script = `#!/bin/bash
 exec agave-validator \\
 --identity ${IDENTITY_KEY_PATH} \\
@@ -19,17 +30,13 @@ exec agave-validator \\
 --entrypoint entrypoint3.mainnet-beta.solana.com:8001 \\
 --entrypoint entrypoint4.mainnet-beta.solana.com:8001 \\
 --entrypoint entrypoint5.mainnet-beta.solana.com:8001 \\
---known-validator Certusm1sa411sMpV9FPqU5dXAYhmmhygvxJ23S6hJ24 \\
---known-validator 7Np41oeYqPefeNQEHSv1UDhYrehxin3NStELsSKCT4K2 \\
---known-validator GdnSyH3YtwcxFvQrVVJMm1JhTS4QVX7MFsX56uJLUfiZ \\
---known-validator CakcnaRDHka2gXyfbEd2d3xsvkJkqsLw2akB3zsN1D2S \\
+${validatorArgs}
 --expected-genesis-hash 5eykt4UsFv8P8NJdTREpY1vzqKqZKvdpKuc147dw2N9d \\
 --expected-shred-version 50093 \\
 --only-known-rpc \\
 --full-rpc-api \\
 --no-voting \\
 --private-rpc \\
---enable-cpi-and-log-storage \\
 --no-skip-initial-accounts-db-clean \\
 --dynamic-port-range 8000-8025 \\
 --rpc-bind-address 127.0.0.1 \\

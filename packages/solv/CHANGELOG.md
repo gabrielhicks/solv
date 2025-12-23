@@ -1,4 +1,8 @@
 # @gabrielhicks/solv
+## 5.6.3
+### Bump RPC
+Update RPC config
+
 ## 5.6.2
 ### Bump XDP
 change xdp defaults and binary commands

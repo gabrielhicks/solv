@@ -81,7 +81,7 @@ user = \"solv\"
     url = \"${jitoConfig.blockEngineUrl}\"
     tip_distribution_program_addr = \"4R3gSG8BpU4t19KYj8CfnbtRpnT8gtk4dvTHxVRwc2r7\"
     tip_payment_program_addr = \"T1pyyaTNZsKv2WcRAB8oVnk93mLJw2XzjtVYqCsaHqt\"
-    tip_distribution_authority = \"GZctHpWXmsZC1YHACTGGcHhYxjdRqQvTpYkb9LMvxDib\"
+    tip_distribution_authority = \"8F4jGUmxF36vQ6yabnsxX6AQVXdKBhs8kGSUuRKSg8Xt\"
     commission_bps = 0
 
 [tiles.pack]
@@ -167,7 +167,7 @@ user = \"solv\"
     url = \"https://ny.testnet.block-engine.jito.wtf\"
     tip_distribution_program_addr = \"F2Zu7QZiTYUhPd7u9ukRVwxh7B71oA3NMJcHuCHc29P2\"
     tip_payment_program_addr = \"GJHtFqM9agxPmkeKjHny6qiRKrXZALvvFGiKf11QE7hy\"
-    tip_distribution_authority = \"GZctHpWXmsZC1YHACTGGcHhYxjdRqQvTpYkb9LMvxDib\"
+    tip_distribution_authority = \"8F4jGUmxF36vQ6yabnsxX6AQVXdKBhs8kGSUuRKSg8Xt\"
     commission_bps = 10000
 
 [tiles.pack]

@@ -48,7 +48,7 @@ exec ${solanaCLI} \\
 ${validatorArgs}
 --tip-payment-program-pubkey GJHtFqM9agxPmkeKjHny6qiRKrXZALvvFGiKf11QE7hy \\
 --tip-distribution-program-pubkey F2Zu7QZiTYUhPd7u9ukRVwxh7B71oA3NMJcHuCHc29P2 \\
---merkle-root-upload-authority GZctHpWXmsZC1YHACTGGcHhYxjdRqQvTpYkb9LMvxDib \\
+--merkle-root-upload-authority 8F4jGUmxF36vQ6yabnsxX6AQVXdKBhs8kGSUuRKSg8Xt \\
 --commission-bps ${commissionBps} \\
 --rpc-bind-address 0.0.0.0 \\
 --block-engine-url ${blockEngineUrl} \\
