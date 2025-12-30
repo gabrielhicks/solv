@@ -10,9 +10,13 @@ def load_identity_account_pubkey(config: ValidatorConfig) -> Optional[str]:
     :param config: Validator Configuration
     :return: returns validator identity pubkey or None
     """
-    identity_cmd = f'solana address -u localhost --keypair ' + config.secrets_path + '/validator-keypair.json'
+    identity_cmd = f'solana-keygen pubkey ' + config.secrets_path + '/validator-keypair.json'
     debug(config, identity_cmd)
-    return execute_cmd_str(config, identity_cmd, convert_to_json=False)
+    result = execute_cmd_str(config, identity_cmd, convert_to_json=False)
+    # Strip whitespace and return None if empty
+    if result:
+        return result.strip()
+    return None
 
 
 def load_vote_account_pubkey(config: ValidatorConfig) -> Optional[str]:
@@ -21,9 +25,13 @@ def load_vote_account_pubkey(config: ValidatorConfig) -> Optional[str]:
     :param config: Validator Configuration
     :return: returns vote account pubkey  or None
     """
-    vote_pubkey_cmd = f'solana address -u localhost --keypair ' + config.secrets_path + '/vote-account-keypair.json'
+    vote_pubkey_cmd = f'solana-keygen pubkey ' + config.secrets_path + '/vote-account-keypair.json'
     debug(config, vote_pubkey_cmd)
-    return execute_cmd_str(config, vote_pubkey_cmd, convert_to_json=False)
+    result = execute_cmd_str(config, vote_pubkey_cmd, convert_to_json=False)
+    # Strip whitespace and return None if empty
+    if result:
+        return result.strip()
+    return None
 
 
 def load_vote_account_balance(config: ValidatorConfig, vote_account_pubkey: str):
