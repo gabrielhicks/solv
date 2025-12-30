@@ -1,4 +1,8 @@
 # @gabrielhicks/solv
+## 5.6.13
+### Monitoring Module
+Use local perms
+
 ## 5.6.12
 ### Monitoring Module
 Use local perms

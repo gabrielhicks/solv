@@ -25,19 +25,26 @@ export const setupDoublezero = async (): Promise<void> => {
 import os
 import re
 import urllib.request
+import sys
 
 # Prometheus endpoint exposed by doublezero
 METRICS_URL = os.environ.get("DZ_METRICS_URL", "http://localhost:2113/metrics")
 
 
 def fetch_metrics(url: str) -> str:
-    with urllib.request.urlopen(url, timeout=5) as resp:
-        return resp.read().decode("utf-8", errors="replace")
+    try:
+        with urllib.request.urlopen(url, timeout=5) as resp:
+            return resp.read().decode("utf-8", errors="replace")
+    except Exception:
+        return ""
 
 
 def parse_metrics(text: str):
     version = None
     session_is_up = None
+
+    if not text:
+        return version, session_is_up
 
     for line in text.splitlines():
         line = line.strip()
@@ -56,7 +63,7 @@ def parse_metrics(text: str):
             if len(parts) >= 2:
                 try:
                     session_is_up = int(float(parts[1]))
-                except ValueError:
+                except (ValueError, IndexError):
                     pass
 
     return version, session_is_up
@@ -64,7 +71,9 @@ def parse_metrics(text: str):
 
 def esc_string_field(val: str) -> str:
     # escape for string fields in Influx line protocol
-    return val.replace("\\\\", "\\\\\\\\").replace('"', r'\\"')
+    if val is None:
+        return ""
+    return str(val).replace("\\\\", "\\\\\\\\").replace('"', r'\\"')
 
 
 def main():
@@ -74,20 +83,22 @@ def main():
 
         if version is None and session_is_up is None:
             # No metrics found, output empty measurement
-            print("doublezero version=\"unknown\",session_is_up=0i")
+            print("doublezero version=\\"unknown\\",session_is_up=0i")
             return
 
         parts = []
         if version is not None:
-            parts.append(f'version="{esc_string_field(version)}"')
+            parts.append('version="' + esc_string_field(version) + '"')
         if session_is_up is not None:
-            parts.append(f'session_is_up={session_is_up}i')
+            parts.append('session_is_up=' + str(session_is_up) + 'i')
 
         if parts:
-            print(f"doublezero {','.join(parts)}")
+            print("doublezero " + ",".join(parts))
+        else:
+            print("doublezero version=\\"unknown\\",session_is_up=0i")
     except Exception as e:
         # On error, output a safe default
-        print("doublezero version=\"error\",session_is_up=0i")
+        print("doublezero version=\\"error\\",session_is_up=0i", file=sys.stderr)
 
 
 if __name__ == "__main__":
