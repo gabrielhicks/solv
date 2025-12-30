@@ -243,15 +243,16 @@ config = ValidatorConfig(
   })
 
   // Create output_starter.sh
+  // Escape $ to avoid template string interpolation - need literal ${result} in bash script
   const outputStarter = `#!/bin/bash
 source "${monitoringDir}/bin/activate"
 result=$(timeout -k 50 45 python3 "${scriptsDir}/$1.py")
 
-if [ -z "$result" ]
+if [ -z "$` + '{result}' + `" ]
 then
         echo "{}"
 else
-        echo "$result"
+        echo "$` + '{result}' + `"
 fi
 `
 
