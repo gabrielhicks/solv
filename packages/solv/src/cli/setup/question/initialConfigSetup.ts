@@ -14,6 +14,7 @@ import inquirer from 'inquirer'
 import { askJitoSetting } from '../askJitoSetting'
 import { updateJitoSolvConfig } from '@/lib/updateJitoSolvConfig'
 import { readOrCreateJitoConfig } from '@/lib/readOrCreateJitoConfig'
+import { askChronyLocation } from '../askChronyLocation'
 
 type SolvInitialConfig = {
   network: Network
@@ -28,6 +29,7 @@ const initialConfigSetup = async () => {
     let rpcType: RpcType = RpcType.AGAVE
     let commission = DEFAULT_CONFIG.COMMISSION
     let isDummy = false
+    let chronyLocation = ''
     const answer = await inquirer.prompt<SolvInitialConfig>([
       {
         name: 'network',
@@ -111,6 +113,9 @@ const initialConfigSetup = async () => {
       }
     }
 
+    // Ask for chrony location
+    chronyLocation = await askChronyLocation(isTestnet)
+
     const { network, nodeType } = answer
     console.log(chalk.white('Network:', network))
     console.log(chalk.white('Node Type:', nodeType))
@@ -127,6 +132,7 @@ const initialConfigSetup = async () => {
       RPC_TYPE: rpcType,
       COMMISSION: commission,
       IS_DUMMY: isDummy,
+      CHRONY_LOCATION: chronyLocation,
     })
     return true
   } catch (error: any) {

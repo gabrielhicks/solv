@@ -37,4 +37,5 @@ export type DefaultConfigType = {
   ZERO_COPY: boolean
   JAG_SNAPSHOTS: boolean
   JAG_REGION: string
+  CHRONY_LOCATION: string
 }

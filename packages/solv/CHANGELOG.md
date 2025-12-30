@@ -1,4 +1,8 @@
 # @gabrielhicks/solv
+## 5.6.16
+### QOL Module
+Updating to add chrony and other QOL adds
+
 ## 5.6.15
 ### Monitoring Module
 Use local perms

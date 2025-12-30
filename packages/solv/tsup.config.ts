@@ -33,6 +33,16 @@ export default defineConfig({
     } catch (e) {
       console.log('Note: Could not copy monitoring scripts:', e)
     }
+    // Copy chrony config files to dist
+    try {
+      await cp(
+        join('src', 'cli', 'chrony'),
+        join('dist', 'cli', 'chrony'),
+        { recursive: true }
+      )
+    } catch (e) {
+      console.log('Note: Could not copy chrony configs:', e)
+    }
   },
   external: [
     'child_process',

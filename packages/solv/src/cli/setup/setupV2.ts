@@ -21,6 +21,11 @@ import rpcLog from '@/utils/rpcLog'
 import { enableFiredancer } from '@/lib/enableFiredancer'
 import { disableFiredancer } from '@/lib/disableFiredancer'
 import { disableSolv } from '@/lib/disableSolv'
+import { setupChrony } from './setupChrony'
+import { disableAutoUpdates } from './disableAutoUpdates'
+import { setupCpuFreqUtils } from './setupCpuFreqUtils'
+import { setupFail2ban } from './setupFail2ban'
+import { setupBbrNetwork } from './setupBbrNetwork'
 export const setupV2 = async (skipInitConfig: boolean, skipMount: boolean, pivot: boolean, mod: boolean, jagSnap: boolean) => {
   try {
     if (!skipInitConfig) {
@@ -44,10 +49,22 @@ export const setupV2 = async (skipInitConfig: boolean, skipMount: boolean, pivot
     makeServices(isTest, isFiredancer)
     // Restart Logrotate
     restartLogrotate()
-    // Set CPU governor to performance
+    // Disable auto updates
+    disableAutoUpdates()
+    // Setup CPU governor with cpufrequtils
+    setupCpuFreqUtils()
+    // Set CPU governor to performance (fallback method)
     setupCpuGovernor()
     // Update Sysctl Config if needed
     await updateSysctlConfig()
+    // Setup BBR network congestion control
+    setupBbrNetwork()
+    // Setup chrony for NTP synchronization
+    if (latestConfig.CHRONY_LOCATION) {
+      await setupChrony(latestConfig.NETWORK, latestConfig.CHRONY_LOCATION)
+    }
+    // Setup fail2ban
+    setupFail2ban()
     if (!skipMount) {
       // Generate Solana Keys
       setupKeys(latestConfig)

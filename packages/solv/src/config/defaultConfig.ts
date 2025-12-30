@@ -52,7 +52,8 @@ const DEFAULT_CONFIG: DefaultConfigType = {
   XDP: false,
   ZERO_COPY: false,
   JAG_SNAPSHOTS: false,
-  JAG_REGION: ""
+  JAG_REGION: "",
+  CHRONY_LOCATION: ""
 }
 
 export default DEFAULT_CONFIG
