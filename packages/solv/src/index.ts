@@ -34,6 +34,7 @@ import createSnapshot from './cli/get/createSnapshot'
 import { swapCommand } from './cli/swap'
 import readConfig from './config/readConfig'
 import { jupiterCommands } from './cli/jupiter'
+import { monitoringCommands } from './cli/monitoring'
 import chalk from 'chalk'
 import getSolanaVersion from './cli/epochTimer/getSolanaVersion'
 
@@ -73,6 +74,8 @@ async function main() {
     switchCommand(program, config)
     jupiterCommands()
     logrotateCommand(config)
+    monitoringCommands(config)
+    monitoringCommands(config)
 
     program
       .command('rm:log')

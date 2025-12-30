@@ -12,12 +12,42 @@ const installDZ = (version: string, isTestnet: boolean) => {
       stdio: 'inherit',
     })
     spawnSync(
-      `sudo mkdir -p /etc/systemd/system/doublezerod.service.d \
-    && echo -e "[Service]\nExecStart=\nExecStart=/usr/bin/doublezerod -sock-file /run/doublezerod/doublezerod.sock -env testnet -metrics-enable -metrics-addr localhost:2113" | sudo tee /etc/systemd/system/doublezerod.service.d/override.conf > /dev/null \
-    && sudo systemctl daemon-reload \
-    && sudo systemctl restart doublezerod \
-    && doublezero config set --env testnet  > /dev/null \
-    && echo "✅ doublezerod configured for environment testnet"`,
+      `sudo mkdir -p /etc/systemd/system/doublezerod.service.d`,
+      {
+        shell: true,
+        stdio: 'inherit',
+      },
+    )
+    spawnSync(
+      `echo -e "[Service]\nExecStart=\nExecStart=/usr/bin/doublezerod -sock-file /run/doublezerod/doublezerod.sock -env testnet -metrics-enable -metrics-addr localhost:2113" | sudo tee /etc/systemd/system/doublezerod.service.d/override.conf > /dev/null`,
+      {
+        shell: true,
+        stdio: 'inherit',
+      },
+    )
+    spawnSync(
+      `sudo systemctl daemon-reload`,
+      {
+        shell: true,
+        stdio: 'inherit',
+      },
+    )
+    spawnSync(
+      `sudo systemctl restart doublezerod`,
+      {
+        shell: true,
+        stdio: 'inherit',
+      },
+    )
+    spawnSync(
+      `doublezero config set --env testnet  > /dev/null`,
+      {
+        shell: true,
+        stdio: 'inherit',
+      },
+    )
+    spawnSync(
+      `echo "✅ doublezerod configured for environment testnet"`,
       {
         shell: true,
         stdio: 'inherit',
@@ -41,12 +71,42 @@ const installDZ = (version: string, isTestnet: boolean) => {
       stdio: 'inherit',
     })
     spawnSync(
-      `sudo mkdir -p /etc/systemd/system/doublezerod.service.d \
-      && echo -e "[Service]\nExecStart=\nExecStart=/usr/bin/doublezerod -sock-file /run/doublezerod/doublezerod.sock -env mainnet-beta -metrics-enable -metrics-addr localhost:2113" | sudo tee /etc/systemd/system/doublezerod.service.d/override.conf > /dev/null \
-      && sudo systemctl daemon-reload \
-      && sudo systemctl restart doublezerod \
-      && doublezero config set --env mainnet-beta  > /dev/null \
-      && echo "✅ doublezerod configured for environment mainnet-beta"`,
+      `sudo mkdir -p /etc/systemd/system/doublezerod.service.d`,
+      {
+        shell: true,
+        stdio: 'inherit',
+      },
+    )
+    spawnSync(
+      `echo -e "[Service]\nExecStart=\nExecStart=/usr/bin/doublezerod -sock-file /run/doublezerod/doublezerod.sock -env mainnet-beta -metrics-enable -metrics-addr localhost:2113" | sudo tee /etc/systemd/system/doublezerod.service.d/override.conf > /dev/null`,
+      {
+        shell: true,
+        stdio: 'inherit',
+      },
+    )
+    spawnSync(
+      `sudo systemctl daemon-reload`,
+      {
+        shell: true,
+        stdio: 'inherit',
+      },
+    )
+    spawnSync(
+      `sudo systemctl restart doublezerod`,
+      {
+        shell: true,
+        stdio: 'inherit',
+      },
+    )
+    spawnSync(
+      `doublezero config set --env mainnet-beta  > /dev/null`,
+      {
+        shell: true,
+        stdio: 'inherit',
+      },
+    )
+    spawnSync(
+      `echo "✅ doublezerod configured for environment mainnet-beta"`,
       {
         shell: true,
         stdio: 'inherit',

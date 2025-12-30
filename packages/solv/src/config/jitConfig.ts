@@ -37,7 +37,7 @@ export const JITO_REGIONS = {
       BLOCK_ENGINE_URL: 'https://dallas.testnet.block-engine.jito.wtf',
       RELAYER_URL: 'http://dallas.testnet.relayer.jito.wtf:8100',
       SHRED_RECEIVER_ADDR: '141.98.218.12:1002',
-      BAM_URL: 'http://ny.testnet.bam.jito.wtf',
+      BAM_URL: 'http://slc.testnet.bam.jito.wtf',
     },
   },
   MAINNET: {
