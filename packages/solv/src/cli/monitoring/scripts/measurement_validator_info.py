@@ -333,6 +333,10 @@ def calculate_output_data(config: ValidatorConfig):
     }
 
     legacy_tags = {
+        "tags_validator_name": config.validator_name,
+        "tags_validator_identity_pubkey": data['identity_account_pubkey'],
+        "tags_validator_vote_pubkey": data['vote_account_pubkey'],
+        "tags_cluster_environment": config.cluster_environment,
         "validator_identity_pubkey": data['identity_account_pubkey'],
         "validator_vote_pubkey": data['vote_account_pubkey'],
         "validator_name": config.validator_name,
