@@ -1,6 +1,6 @@
 {
   "name": "@gabrielhicks/solv",
-  "version": "5.6.7",
+  "version": "5.6.8",
   "description": "Solana Validator CLI SOLV",
   "main": "dist/index.js",
   "type": "module",
@@ -14,7 +14,8 @@
     "web3"
   ],
   "files": [
-    "dist"
+    "dist",
+    "dist/cli/monitoring/scripts"
   ],
   "author": "ELSOUL LABO B.V.",
   "private": false,
