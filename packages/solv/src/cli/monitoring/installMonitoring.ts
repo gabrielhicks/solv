@@ -8,6 +8,7 @@ import { configureTelegraf } from './configureTelegraf'
 import { setupDoublezero } from './setupDoublezero'
 import { restartMonitoring } from './restartMonitoring'
 import { setupMonitoringScripts } from './setupMonitoringScripts'
+import { setupSudoers } from './setupSudoers'
 import { TelegrafConfig, MonitoringConfig } from './types'
 import { KEYPAIRS, HOME_PATHS } from '@/config/config'
 
@@ -62,10 +63,13 @@ export const installMonitoring = async (
     // Step 2: Setup monitoring Python scripts
     await setupMonitoringScripts(user, cluster, validatorName)
 
-    // Step 3: Setup validator key symlinks
+    // Step 3: Configure sudoers for telegraf
+    await setupSudoers(user)
+
+    // Step 4: Setup validator key symlinks
     await setupValidatorKeys(user, validatorKeyPath, voteKeyPath)
 
-    // Step 4: Configure telegraf
+    // Step 5: Configure telegraf
     const telegrafConfig: TelegrafConfig = {
       hostname: validatorName,
       flushInterval: '30s',
@@ -94,12 +98,12 @@ export const installMonitoring = async (
 
     await configureTelegraf(telegrafConfig)
 
-    // Step 5: Setup doublezero monitoring if not skipped
+    // Step 6: Setup doublezero monitoring if not skipped
     if (!skipDoublezero) {
       await setupDoublezero()
     }
 
-    // Step 6: Restart telegraf service
+    // Step 7: Restart telegraf service
     await restartMonitoring()
 
     console.log(chalk.green('\n✅ Monitoring installation complete!'))

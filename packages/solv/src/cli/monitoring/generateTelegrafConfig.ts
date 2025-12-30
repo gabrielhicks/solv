@@ -53,7 +53,7 @@ export const generateTelegrafConfig = (config: TelegrafConfig): string => {
 
 [[inputs.exec]]
   commands = [
-               "sudo -i -u ${validatorUser} /home/${validatorUser}/monitoring/output_starter.sh output_validator_measurements"
+               "sudo -u ${validatorUser} /home/${validatorUser}/monitoring/output_starter.sh output_validator_measurements"
              ]
   interval = "${interval}"
   timeout = "${interval}"

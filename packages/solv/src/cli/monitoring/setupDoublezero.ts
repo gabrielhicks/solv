@@ -84,7 +84,7 @@ def main():
             parts.append(f'session_is_up={session_is_up}i')
 
         if parts:
-            print(f"doublezero {",".join(parts)}")
+            print(f"doublezero {','.join(parts)}")
     except Exception as e:
         # On error, output a safe default
         print("doublezero version=\"error\",session_is_up=0i")
