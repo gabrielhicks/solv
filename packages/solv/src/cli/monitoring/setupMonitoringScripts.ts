@@ -1,5 +1,7 @@
 import { spawnSync } from 'node:child_process'
-import { existsSync, writeFileSync } from 'fs'
+import { existsSync, writeFileSync, readFileSync, copyFileSync } from 'fs'
+import { join, dirname } from 'path'
+import { fileURLToPath } from 'url'
 import chalk from 'chalk'
 
 /**
@@ -18,9 +20,13 @@ export const setupMonitoringScripts = async (
   const binDir = `${monitoringDir}/bin`
   const scriptsDir = `${monitoringDir}/scripts`
 
-  // Create directories
+  // Create directories with proper ownership
   if (!existsSync(monitoringDir)) {
     spawnSync(`sudo mkdir -p ${monitoringDir}`, {
+      shell: true,
+      stdio: 'inherit',
+    })
+    spawnSync(`sudo chown -R ${user}:${user} ${monitoringDir}`, {
       shell: true,
       stdio: 'inherit',
     })
@@ -31,15 +37,32 @@ export const setupMonitoringScripts = async (
       shell: true,
       stdio: 'inherit',
     })
+    spawnSync(`sudo chown -R ${user}:${user} ${scriptsDir}`, {
+      shell: true,
+      stdio: 'inherit',
+    })
   }
 
   // Create Python virtual environment if it doesn't exist
   if (!existsSync(binDir)) {
     console.log(chalk.white('Creating Python virtual environment...'))
-    spawnSync(`sudo -u ${user} python3 -m venv ${monitoringDir}`, {
+    // Ensure directory is owned by user before creating venv
+    spawnSync(`sudo chown -R ${user}:${user} ${monitoringDir}`, {
       shell: true,
       stdio: 'inherit',
     })
+    const venvResult = spawnSync(`sudo -u ${user} python3 -m venv ${monitoringDir}`, {
+      shell: true,
+      stdio: 'inherit',
+    })
+    if (venvResult.status !== 0) {
+      throw new Error('Failed to create Python virtual environment')
+    }
+  }
+
+  // Verify venv was created successfully
+  if (!existsSync(`${binDir}/pip`)) {
+    throw new Error('Python virtual environment was not created successfully')
   }
 
   // Install required Python packages
@@ -50,7 +73,7 @@ requests>=2.25.0`
   const requirementsPath = '/tmp/monitoring_requirements.txt'
   writeFileSync(requirementsPath, requirements, 'utf-8')
   
-  spawnSync(
+  const pipResult = spawnSync(
     `sudo -u ${user} ${binDir}/pip install -q -r ${requirementsPath}`,
     {
       shell: true,
@@ -58,7 +81,11 @@ requests>=2.25.0`
     },
   )
 
-  // Download monitoring scripts from sv-manager
+  if (pipResult.status !== 0) {
+    throw new Error('Failed to install Python dependencies')
+  }
+
+  // Copy monitoring scripts from local package
   const scripts = [
     'common.py',
     'solana_rpc.py',
@@ -67,25 +94,55 @@ requests>=2.25.0`
     'output_validator_measurements.py',
   ]
 
-  const baseUrl = 'https://raw.githubusercontent.com/mfactory-lab/sv-manager/main/roles/monitoring/files'
+  // Get the path to the local scripts directory
+  // Try multiple locations: dist (production), src (development), or relative to current file
+  let localScriptsDir: string | null = null
+  
+  // Try dist location first (production build)
+  const distScriptsPath = join(process.cwd(), 'dist', 'cli', 'monitoring', 'scripts')
+  if (existsSync(distScriptsPath)) {
+    localScriptsDir = distScriptsPath
+  } else {
+    // Try src location (development)
+    const srcScriptsPath = join(process.cwd(), 'src', 'cli', 'monitoring', 'scripts')
+    if (existsSync(srcScriptsPath)) {
+      localScriptsDir = srcScriptsPath
+    } else {
+      // Try relative to current file (when running from node_modules)
+      const currentFile = fileURLToPath(import.meta.url)
+      const currentDir = dirname(currentFile)
+      const relativeScriptsPath = join(currentDir, 'scripts')
+      if (existsSync(relativeScriptsPath)) {
+        localScriptsDir = relativeScriptsPath
+      }
+    }
+  }
+
+  if (!localScriptsDir) {
+    throw new Error('Could not find monitoring scripts directory. Please ensure the package is built correctly.')
+  }
 
   for (const script of scripts) {
-    console.log(chalk.white(`Downloading ${script}...`))
-    const scriptPath = `${scriptsDir}/${script}`
-    const downloadResult = spawnSync(
-      `curl -fsSL ${baseUrl}/${script} -o ${scriptPath}`,
-      {
-        shell: true,
-        stdio: 'pipe',
-      },
-    )
+    console.log(chalk.white(`Copying ${script}...`))
+    const localScriptPath = join(localScriptsDir, script)
+    const targetScriptPath = `${scriptsDir}/${script}`
+    const tempPath = `/tmp/${script}`
 
-    if (downloadResult.status !== 0) {
-      throw new Error(`Failed to download ${script}`)
+    // Check if local script exists
+    if (!existsSync(localScriptPath)) {
+      throw new Error(`Local script not found: ${localScriptPath}`)
     }
 
-    // Set ownership
-    spawnSync(`sudo chown ${user}:${user} ${scriptPath}`, {
+    // Read local file and write to temp
+    const scriptContent = readFileSync(localScriptPath, 'utf-8')
+    writeFileSync(tempPath, scriptContent, 'utf-8')
+
+    // Move to final location and set ownership
+    spawnSync(`sudo mv ${tempPath} ${targetScriptPath}`, {
+      shell: true,
+      stdio: 'inherit',
+    })
+    spawnSync(`sudo chown ${user}:${user} ${targetScriptPath}`, {
       shell: true,
       stdio: 'inherit',
     })
