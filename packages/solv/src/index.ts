@@ -75,7 +75,6 @@ async function main() {
     jupiterCommands()
     logrotateCommand(config)
     monitoringCommands(config)
-    monitoringCommands(config)
 
     program
       .command('rm:log')
