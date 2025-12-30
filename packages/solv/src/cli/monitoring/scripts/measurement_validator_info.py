@@ -325,24 +325,20 @@ def calculate_influx_fields(data):
 def calculate_output_data(config: ValidatorConfig):
     data = load_data(config)
 
-    # Ensure pubkeys are strings, not None
-    identity_pubkey = data['identity_account_pubkey'] or ""
-    vote_pubkey = data['vote_account_pubkey'] or ""
-
     tags = {
-        "validator_identity_pubkey": identity_pubkey,
-        "validator_vote_pubkey": vote_pubkey,
+        "validator_identity_pubkey": data['identity_account_pubkey'],
+        "validator_vote_pubkey": data['vote_account_pubkey'],
         "validator_name": config.validator_name,
         "cluster_environment": config.cluster_environment
     }
 
     legacy_tags = {
         "tags_validator_name": config.validator_name,
-        "tags_validator_identity_pubkey": identity_pubkey,
-        "tags_validator_vote_pubkey": vote_pubkey,
+        "tags_validator_identity_pubkey": data['identity_account_pubkey'],
+        "tags_validator_vote_pubkey": data['vote_account_pubkey'],
         "tags_cluster_environment": config.cluster_environment,
-        "validator_identity_pubkey": identity_pubkey,
-        "validator_vote_pubkey": vote_pubkey,
+        "validator_identity_pubkey": data['identity_account_pubkey'],
+        "validator_vote_pubkey": data['vote_account_pubkey'],
         "validator_name": config.validator_name,
     }
 
