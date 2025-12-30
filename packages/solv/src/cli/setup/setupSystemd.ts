@@ -14,15 +14,15 @@ net.core.wmem_default = 134217728
 net.core.wmem_max = 134217728
 
 # Increase memory mapped files limit
-vm.max_map_count = 1000000
+vm.max_map_count = 1048576
 
 # Increase number of allowed open file descriptors
-fs.nr_open = 1000000
+fs.nr_open = 1048576
 `
 
     const nofilesConfig = `
 # Increase process file descriptor count limit
-* - nofile 1000000
+* - nofile 1048576
 `
 
     // Write sysctl configuration
@@ -35,7 +35,7 @@ fs.nr_open = 1000000
 
     // Update systemd configuration
     execSync(
-      `echo "DefaultFILE=1000000" | sudo tee -a ${SERVICE_PATHS.SOL_SYSTEM_CONF}`
+      `echo "DefaultFILE=1048576" | sudo tee -a ${SERVICE_PATHS.SOL_SYSTEM_CONF}`
     )
 
     // Write nofiles configuration

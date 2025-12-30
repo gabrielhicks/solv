@@ -21,8 +21,7 @@ import rpcLog from '@/utils/rpcLog'
 import { enableFiredancer } from '@/lib/enableFiredancer'
 import { disableFiredancer } from '@/lib/disableFiredancer'
 import { disableSolv } from '@/lib/disableSolv'
-
-export const setupV2 = async (skipInitConfig: boolean, skipMount: boolean, pivot: boolean, mod: boolean) => {
+export const setupV2 = async (skipInitConfig: boolean, skipMount: boolean, pivot: boolean, mod: boolean, jagSnap: boolean) => {
   try {
     if (!skipInitConfig) {
       console.log(chalk.white(`🟢 Initializing Setup`))

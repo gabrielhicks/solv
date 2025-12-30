@@ -23,6 +23,7 @@ type SetupOptions = {
   skipMount: boolean
   pivot: boolean
   mod: boolean
+  jagSnap: boolean
 }
 
 export const setupCommands = (config: DefaultConfigType) => {
@@ -39,6 +40,7 @@ export const setupCommands = (config: DefaultConfigType) => {
     .option('--skip-mount', 'Skip Mount', false)
     .option('--pivot', 'Pivot install', false)
     .option('--mod', 'Modified install', false)
+    .option('--jagsnap', 'Jag Snapshot enabled', false)
     .action(async (options: SetupOptions) => {
       const isModded = config.MOD || options.mod
       try {
@@ -88,6 +90,7 @@ export const setupCommands = (config: DefaultConfigType) => {
           options.skipMount,
           options.pivot,
           isModded,
+          options.jagSnap,
         )
       } catch (error: any) {
         if (

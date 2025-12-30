@@ -24,6 +24,8 @@ import {
   JITO_PATCH,
   VERSION_BAM_MAINNET,
   VERSION_BAM_TESTNET,
+  VERSION_DZ_MAINNET,
+  VERSION_DZ_TESTNET,
   VERSION_FIREDANCER,
   VERSION_FIREDANCER_TESTNET,
   VERSION_JITO_MAINNET,
@@ -60,6 +62,7 @@ import { stopFiredancer } from '@/lib/stopFiredancer'
 import { disableSolv } from '@/lib/disableSolv'
 import { stopSolv } from '@/lib/stopSolv'
 import installJagSnap from '../install/installJagSnap'
+import installDZ from '../install/installDZ'
 
 export * from './update'
 
@@ -75,6 +78,7 @@ export type UpdateOptions = {
   startup: boolean
   service: boolean
   jagsnap: boolean
+  dz: boolean
 }
 
 export const updateCommands = (config: DefaultConfigType) => {
@@ -91,6 +95,7 @@ export const updateCommands = (config: DefaultConfigType) => {
     minIdleTime = 30
   }
   let version = isTestnet ? VERSION_TESTNET : VERSION_MAINNET
+  let dzVersion = isTestnet ? VERSION_DZ_TESTNET : VERSION_DZ_MAINNET
   if (isJito) {
     version = VERSION_JITO_MAINNET
     if (isTestnet) {
@@ -129,7 +134,8 @@ export const updateCommands = (config: DefaultConfigType) => {
     .option('--mod', 'Modified Versions', false)
     .option('--startup', 'Start up Script', false)
     .option('--service', 'SystemD Service', false)
-    .option('--jagsnap', 'JagSnaps Service', false)
+    .option('-j, --jagsnap', 'JagSnaps Service', false)
+    .option('-z, --dz', 'Doublezero Service', false)
     .action(async (options: UpdateOptions) => {
       const solvVersion = getSolvVersion()
       const deliquentStake = isTestnet
@@ -362,6 +368,9 @@ export const updateCommands = (config: DefaultConfigType) => {
         updateCommission(ansewr.commission, isTestnet)
       } else {
         updateSolv()
+      }
+      if(options.dz) {
+        installDZ(dzVersion, isTestnet)
       }
     })
 }

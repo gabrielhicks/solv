@@ -1,4 +1,8 @@
 # @gabrielhicks/solv
+## 5.6.4
+### DZ Updates
+Added DZ on setup and update
+
 ## 5.6.3
 ### Bump RPC
 Update RPC config

@@ -10,7 +10,7 @@ Type=simple
 Restart=always
 RestartSec=1
 User=solv
-LimitNOFILE=1000000
+LimitNOFILE=1048576
 LogRateLimitIntervalSec=0
 ExecStart=/home/solv/start-firedancer.sh
 

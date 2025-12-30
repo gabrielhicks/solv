@@ -15,7 +15,8 @@ import { startBamMainnetScript } from '@/template/startupScripts/startBamMainnet
 import { installBam } from '@/cli/install/installBam'
 import { startBamTestnetScript } from '@/template/startupScripts/startBamTestnetScript'
 import setupFiredancer from '../firedancer/setupFiredancer'
-import { AGAVE_PATCH, BAM_PATCH, JITO_PATCH } from '@/config/versionConfig'
+import { AGAVE_PATCH, BAM_PATCH, JITO_PATCH, VERSION_DZ_MAINNET, VERSION_DZ_TESTNET } from '@/config/versionConfig'
+import installDZ from '@/cli/install/installDZ'
 
 const setupValidatorNode = async (config: DefaultConfigType, mod = false) => {
   const { NETWORK: network, MOD: modConfig } = config
@@ -37,6 +38,7 @@ const setupMainnetValidator = async (config: DefaultConfigType, mod = false) => 
   mod = modConfig
   let startupScript = ''
   let isMajorThree = version.startsWith("3") ? true : false;
+  installDZ(VERSION_DZ_MAINNET, false)
   switch (validatorType) {
     case ValidatorType.SOLANA:
       const agavePatch = AGAVE_PATCH;
@@ -115,6 +117,7 @@ const setupTestnetValidator = async (config: DefaultConfigType, mod = false) => 
   const bamTagBase = `v${version}-bam`
   const bamModBase = `v${version}-mod`
   const bamTag = mod ? `${bamModBase}${bamPatch}` :`${bamTagBase}${bamPatch}`
+  installDZ(VERSION_DZ_TESTNET, true)
   switch (validatorType) {
     case ValidatorType.SOLANA:
       installSolana(agaveTag)
