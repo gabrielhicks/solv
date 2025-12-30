@@ -1,4 +1,5 @@
 import { spawnSync } from 'node:child_process'
+import { writeFileSync } from 'fs'
 
 // Agave Install e.g. installDZ('0.1.0')
 const installDZ = (version: string, isTestnet: boolean) => {
@@ -18,8 +19,20 @@ const installDZ = (version: string, isTestnet: boolean) => {
         stdio: 'inherit',
       },
     )
+    const testnetOverrideConfig = `[Service]
+ExecStart=
+ExecStart=/usr/bin/doublezerod -sock-file /run/doublezerod/doublezerod.sock -env testnet -metrics-enable -metrics-addr localhost:2113
+`
+    writeFileSync('/tmp/doublezerod-override.conf', testnetOverrideConfig, 'utf-8')
     spawnSync(
-      `echo -e "[Service]\nExecStart=\nExecStart=/usr/bin/doublezerod -sock-file /run/doublezerod/doublezerod.sock -env testnet -metrics-enable -metrics-addr localhost:2113" | sudo tee /etc/systemd/system/doublezerod.service.d/override.conf > /dev/null`,
+      `sudo mv /tmp/doublezerod-override.conf /etc/systemd/system/doublezerod.service.d/override.conf`,
+      {
+        shell: true,
+        stdio: 'inherit',
+      },
+    )
+    spawnSync(
+      `sudo chmod 644 /etc/systemd/system/doublezerod.service.d/override.conf`,
       {
         shell: true,
         stdio: 'inherit',
@@ -77,8 +90,20 @@ const installDZ = (version: string, isTestnet: boolean) => {
         stdio: 'inherit',
       },
     )
+    const mainnetOverrideConfig = `[Service]
+ExecStart=
+ExecStart=/usr/bin/doublezerod -sock-file /run/doublezerod/doublezerod.sock -env mainnet-beta -metrics-enable -metrics-addr localhost:2113
+`
+    writeFileSync('/tmp/doublezerod-override.conf', mainnetOverrideConfig, 'utf-8')
     spawnSync(
-      `echo -e "[Service]\nExecStart=\nExecStart=/usr/bin/doublezerod -sock-file /run/doublezerod/doublezerod.sock -env mainnet-beta -metrics-enable -metrics-addr localhost:2113" | sudo tee /etc/systemd/system/doublezerod.service.d/override.conf > /dev/null`,
+      `sudo mv /tmp/doublezerod-override.conf /etc/systemd/system/doublezerod.service.d/override.conf`,
+      {
+        shell: true,
+        stdio: 'inherit',
+      },
+    )
+    spawnSync(
+      `sudo chmod 644 /etc/systemd/system/doublezerod.service.d/override.conf`,
       {
         shell: true,
         stdio: 'inherit',

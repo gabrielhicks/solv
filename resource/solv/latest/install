@@ -66,7 +66,7 @@ setup_firewall() {
 
 setup_lib() {
     echo "Installing Packages..."
-    sudo apt install fail2ban ipset iptables python3.12-venv -y
+    sudo apt install fail2ban ipset iptables python3-venv -y
     sudo apt-get install libsasl2-dev build-essential -y
     sudo apt-get install -y libssl-dev libudev-dev pkg-config zlib1g-dev llvm clang cmake make libprotobuf-dev protobuf-compiler libclang-18-dev clang-18 llvm-18-dev
 }

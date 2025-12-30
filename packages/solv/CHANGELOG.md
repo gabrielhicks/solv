@@ -1,4 +1,8 @@
 # @gabrielhicks/solv
+## 5.6.17
+### QOL Module
+Small DZ Fix
+
 ## 5.6.16
 ### QOL Module
 Updating to add chrony and other QOL adds
