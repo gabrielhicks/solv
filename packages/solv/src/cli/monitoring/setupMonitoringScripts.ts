@@ -244,8 +244,11 @@ config = ValidatorConfig(
 
   // Create output_starter.sh
   // Escape $ to avoid template string interpolation - need literal ${result} in bash script
+  // Ensure PATH includes solana binaries for solana-keygen to work
   const outputStarter = `#!/bin/bash
 source "${monitoringDir}/bin/activate"
+# Add common solana install paths to PATH
+export PATH="$PATH:/home/solana/.local/share/solana/install/active_release/bin:/home/solv/.local/share/solana/install/active_release/bin:/usr/local/bin"
 result=$(timeout -k 50 45 python3 "${scriptsDir}/$1.py")
 
 if [ -z "$` + '{result}' + `" ]

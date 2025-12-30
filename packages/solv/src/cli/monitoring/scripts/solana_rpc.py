@@ -4,13 +4,40 @@ from common import debug
 from request_utils import execute_cmd_str, smart_rpc_call, rpc_call
 
 
+def _find_solana_keygen() -> str:
+    """Find the solana-keygen binary, trying common locations"""
+    import shutil
+    import os
+    
+    # Try to find in PATH first
+    keygen_path = shutil.which('solana-keygen')
+    if keygen_path:
+        return keygen_path
+    
+    # Try common installation paths
+    common_paths = [
+        '/home/solana/.local/share/solana/install/active_release/bin/solana-keygen',
+        '/home/solv/.local/share/solana/install/active_release/bin/solana-keygen',
+        '/usr/local/bin/solana-keygen',
+        '/opt/solana/bin/solana-keygen',
+    ]
+    
+    for path in common_paths:
+        if os.path.exists(path):
+            return path
+    
+    # Fallback to just 'solana-keygen' and hope it's in PATH
+    return 'solana-keygen'
+
+
 def load_identity_account_pubkey(config: ValidatorConfig) -> Optional[str]:
     """
     loads validator identity account pubkey
     :param config: Validator Configuration
     :return: returns validator identity pubkey or None
     """
-    identity_cmd = f'solana-keygen pubkey ' + config.secrets_path + '/validator-keypair.json'
+    keygen_bin = _find_solana_keygen()
+    identity_cmd = f'{keygen_bin} pubkey ' + config.secrets_path + '/validator-keypair.json'
     debug(config, identity_cmd)
     result = execute_cmd_str(config, identity_cmd, convert_to_json=False)
     # Strip whitespace and return None if empty
@@ -25,7 +52,8 @@ def load_vote_account_pubkey(config: ValidatorConfig) -> Optional[str]:
     :param config: Validator Configuration
     :return: returns vote account pubkey  or None
     """
-    vote_pubkey_cmd = f'solana-keygen pubkey ' + config.secrets_path + '/vote-account-keypair.json'
+    keygen_bin = _find_solana_keygen()
+    vote_pubkey_cmd = f'{keygen_bin} pubkey ' + config.secrets_path + '/vote-account-keypair.json'
     debug(config, vote_pubkey_cmd)
     result = execute_cmd_str(config, vote_pubkey_cmd, convert_to_json=False)
     # Strip whitespace and return None if empty
