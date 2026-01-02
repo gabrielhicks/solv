@@ -1,4 +1,8 @@
 # @gabrielhicks/solv
+## 5.6.18
+### QOL Module
+Updating expected shred
+
 ## 5.6.17
 ### QOL Module
 Small DZ Fix

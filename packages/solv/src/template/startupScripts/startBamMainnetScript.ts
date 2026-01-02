@@ -58,6 +58,7 @@ ${validatorArgs}
 --tip-payment-program-pubkey T1pyyaTNZsKv2WcRAB8oVnk93mLJw2XzjtVYqCsaHqt \\
 --tip-distribution-program-pubkey 4R3gSG8BpU4t19KYj8CfnbtRpnT8gtk4dvTHxVRwc2r7 \\
 --merkle-root-upload-authority 8F4jGUmxF36vQ6yabnsxX6AQVXdKBhs8kGSUuRKSg8Xt \\
+--expected-shred-version 50093 \\
 --commission-bps ${commissionBps} \\
 --rpc-bind-address 127.0.0.1 \\
 --rpc-port 8899 \\
