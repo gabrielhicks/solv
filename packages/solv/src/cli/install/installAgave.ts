@@ -1,7 +1,7 @@
 import { spawnSync } from 'node:child_process'
 
 // Agave Install e.g. installAgave('0.1.0')
-const installAgave = (version: string, mod = false, isMajorThree = false, xdp = false) => {
+const installAgave = (version: string, mod = false, isMajorThree = true, xdp = false) => {
   if(isMajorThree) {
     if(mod) {
       spawnSync(`mkdir /tmp/${version}-agave-mod`, {

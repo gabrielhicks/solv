@@ -1,6 +1,5 @@
 import installAgave from '@/cli/install/installAgave'
 import { installJito } from '@/cli/install/installJito'
-import installSolana from '@/cli/install/installSolana'
 import { STARTUP_SCRIPT } from '@/config/constants'
 import { Network, ValidatorType } from '@/config/enums'
 import { DefaultConfigType } from '@/config/types'
@@ -44,7 +43,7 @@ const setupMainnetValidator = async (config: DefaultConfigType, mod = false) => 
       const agavePatch = AGAVE_PATCH;
       const agaveTagBase = `v${version}`
       const agaveTag = `${agaveTagBase}${agavePatch}`
-      installSolana(agaveTag)
+      installAgave(agaveTag, mod, isMajorThree, xdpEnabled)
       startupScript = startMainnetValidatorScript(config)
       break
     // case ValidatorType.AGAVE:
@@ -120,7 +119,7 @@ const setupTestnetValidator = async (config: DefaultConfigType, mod = false) => 
   installDZ(VERSION_DZ_TESTNET, true)
   switch (validatorType) {
     case ValidatorType.SOLANA:
-      installSolana(agaveTag)
+      installAgave(agaveTag, mod, isMajorThree, xdpEnabled)
       startupScript = startTestnetAgaveValidatorScript(config)
     case ValidatorType.AGAVE:
       console.log('Agave Validator Setup for Testnet')

@@ -1,4 +1,8 @@
 # @gabrielhicks/solv
+## 5.6.19
+### RPC Changes
+Change agave install dir
+
 ## 5.6.18
 ### QOL Module
 Updating expected shred
