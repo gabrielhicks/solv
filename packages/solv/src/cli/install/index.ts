@@ -72,6 +72,7 @@ export const installCommands = (config: DefaultConfigType) => {
         version = VERSION_SOLANA_RPC
       }
       const solanaCLIVersion = options.version || version
-      await updateVersion(solanaCLIVersion, isModified)
+      const isMajorThree = solanaCLIVersion.startsWith("3") ? true : false;
+      await updateVersion(solanaCLIVersion, isModified, isMajorThree, xdpEnabled)
     })
 }

@@ -1,5 +1,9 @@
 # @gabrielhicks/solv
-## 5.6.19
+## 5.6.21
+### Version Changes
+Change agave install dir
+
+## 5.6.20
 ### Version Changes
 Change agave install dir
 
