@@ -91,6 +91,7 @@ export const setupCommands = (config: DefaultConfigType) => {
           options.pivot,
           isModded,
           options.jagSnap,
+          true
         )
       } catch (error: any) {
         if (

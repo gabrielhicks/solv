@@ -26,7 +26,7 @@ import { disableAutoUpdates } from './disableAutoUpdates'
 import { setupCpuFreqUtils } from './setupCpuFreqUtils'
 import { setupFail2ban } from './setupFail2ban'
 import { setupBbrNetwork } from './setupBbrNetwork'
-export const setupV2 = async (skipInitConfig: boolean, skipMount: boolean, pivot: boolean, mod: boolean, jagSnap: boolean) => {
+export const setupV2 = async (skipInitConfig: boolean, skipMount: boolean, pivot: boolean, mod: boolean, jagSnap: boolean, skipChrony: boolean) => {
   try {
     if (!skipInitConfig) {
       console.log(chalk.white(`🟢 Initializing Setup`))
@@ -60,7 +60,7 @@ export const setupV2 = async (skipInitConfig: boolean, skipMount: boolean, pivot
     // Setup BBR network congestion control
     setupBbrNetwork()
     // Setup chrony for NTP synchronization
-    if (latestConfig.CHRONY_LOCATION) {
+    if (latestConfig.CHRONY_LOCATION && !skipChrony) {
       await setupChrony(latestConfig.NETWORK, latestConfig.CHRONY_LOCATION)
     }
     // Setup fail2ban
