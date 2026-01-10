@@ -1,4 +1,8 @@
 # @gabrielhicks/solv
+## 5.6.23
+### Patch
+Patched 3.0.14
+
 ## 5.6.22
 ### Version Changes
 Change agave install dir
