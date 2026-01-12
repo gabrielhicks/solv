@@ -1,4 +1,8 @@
 # @gabrielhicks/solv
+## 5.6.24
+### Restart
+change testnet reset reqs
+
 ## 5.6.23
 ### Patch
 Patched 3.0.14
