@@ -1,4 +1,8 @@
 # @gabrielhicks/solv
+## 5.6.26
+### Bump MN Frankendancer
+0.808.30014
+
 ## 5.6.25
 ### Restart
 change testnet reset reqs
