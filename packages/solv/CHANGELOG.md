@@ -1,5 +1,11 @@
 # @gabrielhicks/solv
 
+## 5.6.29
+
+### Fix export in ~/.profile
+
+bumpity
+
 ## 5.6.28
 
 ### Fix export in ~/.profile
