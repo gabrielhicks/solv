@@ -1,1117 +1,1438 @@
 # @gabrielhicks/solv
+
+## 5.6.27
+
+### Fix export in ~/.profile
+
+bumpity
+
 ## 5.6.26
+
 ### Bump MN Frankendancer
+
 0.808.30014
 
 ## 5.6.25
+
 ### Restart
+
 change testnet reset reqs
 
 ## 5.6.24
+
 ### Restart
+
 change testnet reset reqs
 
 ## 5.6.23
+
 ### Patch
+
 Patched 3.0.14
 
 ## 5.6.22
+
 ### Version Changes
+
 Change agave install dir
 
 ## 5.6.21
+
 ### Version Changes
+
 Change agave install dir
 
 ## 5.6.20
+
 ### Version Changes
+
 Change agave install dir
 
 ## 5.6.19
+
 ### RPC Changes
+
 Change agave install dir
 
 ## 5.6.18
+
 ### QOL Module
+
 Updating expected shred
 
 ## 5.6.17
+
 ### QOL Module
+
 Small DZ Fix
 
 ## 5.6.16
+
 ### QOL Module
+
 Updating to add chrony and other QOL adds
 
 ## 5.6.15
+
 ### Monitoring Module
+
 Use local perms
 
 ## 5.6.14
+
 ### Monitoring Module
+
 Use local perms
 
 ## 5.6.13
+
 ### Monitoring Module
+
 Use local perms
 
 ## 5.6.12
+
 ### Monitoring Module
+
 Use local perms
 
 ## 5.6.11
+
 ### Monitoring Module
+
 Use local perms
 
 ## 5.6.10
+
 ### Monitoring Module
+
 Use local perms
 
 ## 5.6.9
+
 ### Monitoring Module
+
 Use local perms
 
 ## 5.6.8
+
 ### Monitoring Module
+
 Use local files
 
 ## 5.6.7
+
 ### Monitoring Module
+
 Use local files
 
 ## 5.6.6
+
 ### Monitoring Module
+
 Testing vibecoded Monitoring module
 
 ## 5.6.5
+
 ### Monitoring Module
+
 Testing vibecoded Monitoring module
 
 ## 5.6.4
+
 ### DZ Updates
+
 Added DZ on setup and update
 
 ## 5.6.3
+
 ### Bump RPC
+
 Update RPC config
 
 ## 5.6.2
+
 ### Bump XDP
+
 change xdp defaults and binary commands
 
 ## 5.6.1
+
 ### Bump XDP
+
 change xdp defaults
 
 ## 5.6.0
+
 ### Testnet restart
+
 Last one
 
 ## 5.5.33
+
 ### Testnet restart
+
 Last one
 
 ## 5.5.32
+
 ### Testnet restart
+
 Last one
 
 ## 5.5.31
+
 ### Small Jag Snap update
+
 Adding my diffs
 
 ## 5.5.30
+
 ### Testnet script changes
+
 Testnet restart 12/06
 
 ## 5.5.29
+
 ### Testnet script changes
+
 Testnet restart 12/03
 
 ## 5.5.28
+
 ### Testnet script changes
+
 Testnet restart 12/03
 
 ## 5.5.27
+
 ### Testnet script changes
+
 Testnet restart 12/03
 
 ## 5.5.26
+
 ### Added JagSnap service
+
 Add JAG_SNAPSHOTS: true, and JAG_REGION to supported region, then run solv update --jagsnap, and restart validator
 
 ## 5.5.25
+
 ### Latest clients
+
 Update versions
 
 ## 5.5.24
+
 ### Client changes systemd etc XDP
+
 FD Mod fix
 
 ## 5.5.23
+
 ### Client changes systemd etc XDP
+
 FD Mod fix
 
 ## 5.5.22
+
 ### Client changes systemd etc XDP
+
 FD Mod fix
 
 ## 5.5.21
+
 ### Client changes systemd etc XDP
+
 Testing between client changes downstream
 
 ## 5.5.20
+
 ### Client changes systemd etc XDP
+
 Testing between client changes downstream
 
 ## 5.5.19
+
 ### Client changes systemd etc XDP
+
 Testing between client changes downstream
 
 ## 5.5.18
+
 ### Client changes systemd etc XDP
+
 Testing between client changes downstream
 
 ## 5.5.17
+
 ### Client changes systemd etc XDP
+
 Testing between client changes downstream
 
 ## 5.5.16
+
 ### Client changes systemd etc XDP
+
 Testing between client changes downstream
 
 ## 5.5.15
+
 ### Client changes systemd etc XDP
+
 Testing between client changes downstream
 
 ## 5.5.14
+
 ### Client changes systemd etc XDP
+
 Testing between client changes downstream
 
 ## 5.5.13
+
 ### Client changes systemd etc
+
 Testing between client changes downstream
 
 ## 5.5.12
+
 ### Client changes systemd etc
+
 Testing between client changes downstream
 
 ## 5.5.11
+
 ### Jito 3.1 release
+
 Test Jito
 
 ## 5.5.10
+
 ### 3.1 Upgrade testnet
+
 Test Agave
 
 ## 5.5.9
+
 ### 3.1 Upgrade testnet
+
 Test Agave
 
 ## 5.5.8
+
 ### FD Testnet Update
+
 Test BAM, Jito, Agave
 
 ## 5.5.7
+
 ### Force update
+
 Test BAM, Jito, Agave
 
 ## 5.5.6
+
 ### Add update command for startup
+
 Test BAM, Jito, Agave
 
 ## 5.5.5
+
 ### Config tag, versioning updates
+
 Test BAM, Jito, Agave
 
 ## 5.5.4
+
 ### Config tag, versioning updates
+
 Test BAM, Jito, Agave
 
 ## 5.5.3
+
 ### Testnet FD Update
+
 Trigger restarts
 
 ## 5.5.2
+
 ### BAM update
+
 Fix symlink removing leading /
 
 ## 5.5.1
+
 ### BAM update
+
 Fix symlink
 
 ## 5.5.0
+
 ### BAM update
+
 Ready to ship
 
 ## 5.4.18
+
 ### BAM update
+
 Polishing up some config stuff for setup
 
 ## 5.4.17
+
 ### BAM update
+
 Polishing up some config stuff for setup
 
 ## 5.4.16
+
 ### BAM update
+
 Probably gonna fail first try
 
 ## 5.4.15
+
 ### BAM update
+
 Probably gonna fail first try
 
 ## 5.4.14
+
 ### BAM update
+
 Probably gonna fail first try
 
 ## 5.4.13
+
 ### BAM update
+
 Probably gonna fail first try
 
 ## 5.4.12
+
 ### BAM update
+
 Probably gonna fail first try
 
 ## 5.4.11
+
 ### Remove autoupdate
+
 Remove autoupdate, remove balance check
 
 ## 5.4.10
+
 ### Test Mainnet Autoupdate
+
 3.0.10, 0.713.30008
 
 ## 5.4.9
+
 ### Test Mainnet Autoupdate
+
 3.0.10, 0.713.30008
 
 ## 5.4.8
+
 ### Test Mainnet Autoupdate
+
 3.0.10, 0.713.30008
 
 ## 5.4.7
+
 ### Test Mainnet Autoupdate
+
 3.0.10, 0.713.30008
 
 ## 5.4.6
+
 ### Test Mainnet Autoupdate
+
 3.0.10, 0.713.30008
 
 ## 5.4.5
+
 ### Test Mainnet Autoupdate
+
 3.0.10, 0.713.30008
 
 ## 5.4.4
+
 ### Test Rev Sched mods for FD
+
 Fixing 3.0.8+
 
 ## 5.4.3
+
 ### Test Rev Sched mods for FD
+
 Fixing 3.0.8+
 
 ## 5.4.2
+
 ### Test Rev Sched mods for FD
+
 Fixing 3.0.8+
 
 ## 5.4.1
+
 ### Patch jito
+
 Fixing 3.0.8+
 
 ## 5.4.0
+
 ### Mainnet 3.0
+
 update to 3.0.6, 0.712.30006
 
 ## 5.3.39
+
 ### mainnet 3.0
+
 update to 3.0.6
 
 ## 5.3.38
 
 ### Testnet update restart
+
 FD to 0.711.30006, anza,jito to 3.0.6
 
 ## 5.3.37
 
 ### FD Bug Fix
+
 Updating Logrotate to use same path, but overwrite for FD
 
 ## 5.3.36
 
 ### Testnet update restart
+
 FD to 0.708.20306, anza,jito to 2.3.13
 
 ## 5.3.35
 
 ### Testnet update
+
 FD to 0.711.30006
 
 ## 5.3.34
 
 ### Testnet update
+
 3.0.6
 
 ## 5.3.33
 
 ### Firedancer updates
+
 Updating some configs
 
 ## 5.3.32
 
 ### Firedancer updates
+
 Updating some configs
 
 ## 5.3.31
 
 ### Testnet Halt 5 - autoupdate
+
 removed dumping ledger, accounts, snapshots, and fetching snaps
 
 ## 5.3.30
 
 ### Testnet Halt 4
+
 removed dumping ledger, accounts, snapshots, and fetching snaps
 
 ## 5.3.29
 
 ### Testnet Halt 3
+
 removed dumping ledger, accounts, snapshots, and fetching snaps
 
 ## 5.3.28
 
 ### Testnet Halt 2
+
 2.3.11 & 3.0.4
 
 ## 5.3.27
 
 ### Testnet Halt
+
 2.3.11 & 3.0.4
 
 ## 5.3.26
 
 ### Version Update
+
 2.3.10 & 3.0.4
 
 ## 5.3.25
 
 ### Version Update
+
 2.3.9 & 3.0.2
 
 ## 5.3.24
 
 ### Testnet Update
+
 0.709.30000 & 3.0.1
 
 ## 5.3.23
 
 ### Bump version for FD test
+
 0.709.30000
 
 ## 5.3.22
 
 ### Bump version for jito
+
 2.3.8
 
 ## 5.3.21
 
 ### Override chalk
+
 Security update
 
 ## 5.3.20
 
 ### Minor version changes
+
 2.3.8, 0.708
 
 ## 5.3.19
 
 ### Update install method per major version
+
 Uses tarball when major version is not 3.
 
 ## 5.3.18
 
 ### Bump install script
+
 Adds some extra stuff to service and install script for 3.0
 
 ## 5.3.17
 
 ### Patch Agave 3.0.X install
+
 Fixing up build
 
 ## 5.3.16
 
 ### Update to 3.0.0v9
+
 allow testnet more room for restart
 
 ## 5.3.15
 
 ### Update to 3.0.0v8
+
 allow testnet more room for restart
 
 # @gabrielhicks/solv
+
 ## 5.3.14
 
 ### Update to 3.0.0v7
+
 allow testnet more room for restart
 
 ## 5.3.13
 
 ### Update to 3.0.0v6
+
 allow testnet more room for restart
 
 ## 5.3.12
 
 ### Update to 3.0.0v5
+
 allow testnet more room for restart
 
 ## 5.3.11
 
 ### Update to 3.0.0v4
+
 allow testnet more room for restart
 
 ## 5.3.10
 
 ### Update to 3.0.0v3
+
 allow testnet more room for restart
 
 ## 5.3.9
 
 ### Update to 3.0.0v2
+
 allow testnet more room for restart
 
 ## 5.3.8
 
 ### Update to 3.0.0
+
 allow testnet more room for restart
 
 ## 5.3.7
 
 ### change delinuqency status
+
 allow testnet more room for restart
 
 ## 5.3.6
 
 ### change delinuqency status
+
 allow testnet more room for restart
 
 ## 5.3.5
 
 ### add auto update
+
 agave/jito to 2.3.7, fd to 0.707
 
 ## 5.3.4
 
 ### remove auto update
+
 agave/jito to 2.3.7, fd to 0.707
 
 ## 5.3.3
 
 ### New mainnet and testnet bumps
+
 agave/jito to 2.3.7, fd to 0.707
 
 ## 5.3.2
 
 ### New mainnet update
+
 Add some known validators
 
 ## 5.3.1
 
 ### New testnet update
+
 Update to 0.706
 
 ## 5.3.0
 
 ### New testnet update
+
 Update to 0.705
 
 ## 5.2.30
 
 ### New testnet update
+
 Update to 0.705
 
 ## 5.2.29
 
 ### New testnet update
+
 Update to 2.3.6
 
 ## 5.2.28
 
 ### New testnet firedancer update
+
 Update FD to 0.703
 
 ## 5.2.27
 
 ### New testnet firedancer update
+
 Update FD to 2.3
 
 ## 5.2.26
 
 ### Bum versions to 2.3.6
+
 Update configuration
 
 ## 5.2.25
 
 ### testnet rollback
+
 Roll back to 2.2.20
 
 ## 5.2.24
 
 ### 2.3.5 and 2.2.20
+
 Push auto updarte if anyone subscribes
 
 ## 5.2.23
 
 ### 2.3.5 and 2.2.20
+
 Updating Testnet and Mainnet versions
 
 ## 5.2.22
 
 ### 2.3.4 auto upate with jito
+
 Updating Testnet to 2.3.4
 
 ## 5.2.21
 
 ### 2.3.4 auto upate
+
 Updating Testnet to 2.3.4
 
 ## 5.2.20
 
 ### 2.3.4 Upgrade shred
+
 Updating Testnet to 2.3.4
 
 ## 5.2.19
 
 ### 2.3.4 Upgrade
+
 Updating Testnet to 2.3.4
 
 ## 5.2.18
 
 ### 2.3.1 Upgrade
+
 Updating Testnet to 2.3.1
 
 ## 5.2.17
 
 ### 2.3.0 Upgrade
+
 Updating Testnet to 2.3.0
 
 ## 5.2.16
 
 ### 2.3.0 Upgrade
+
 Updating Testnet to 2.3.0
 
 ## 5.2.15
 
 ### Add jito / singapore region
+
 Add Singapore Jito config
 
 ## 5.2.14
 
 ### Fix last service restart for FD
+
 Updating autoUpdate to include Frankendancer
 
 ## 5.2.13
 
 ### Testnet Auto Update
+
 Updating autoUpdate to include Frankendancer
 
 ## 5.2.12
 
 ### Frankendancer Auto Update
+
 Updating autoUpdate to include Frankendancer
 
 ## 5.2.11
 
 ### Recursive submodule update
+
 fix firedancer version
 
 ## 5.2.10
 
 ### Recursive submodule update
+
 fix firedancer version
 
 ## 5.2.9
 
 ### 2.2.16 release + config
+
 fix firedancer version
 
 ## 5.2.8
 
 ### 2.2.16 release + config
+
 Config change
 
 ## 5.2.7
 
 ### 2.2.16 release + config
+
 Config change
 
 ## 5.2.6
 
 ### 2.2.16 release + config
+
 Config change
 
 ## 5.2.5
 
 ### 2.2.16 release + config
+
 Config change
 
 ## 5.2.4
 
 ### 2.2.16 release + config
+
 Config change
 
 ## 5.2.3
 
 ### Mainnet Auto Restart
+
 Testing Auto restart parameters for Mainnet
 
 ## 5.2.2
 
 ### Mainnet Auto Restart
+
 Testing Auto restart parameters for Mainnet
 
 ## 5.2.1
 
 ### self-hosted
+
 Change build to self-hosted
 
 ## 5.2.0
 
 ### FD Bump
+
 Upgrade testnet to 0.504.20215
 
 ## 5.1.37
 
 ### FD Bump
+
 Upgrade testnet to 0.504.20215
 
 ## 5.1.36
 
 ### Testnet Bump
+
 Upgrade testnet to 2.2.15
 
 ## 5.1.35
 
 ### FD Bump
+
 Upgrade testnet to 0.503.20214
 
 ## 5.1.34
 
 ### FD Bump
+
 Upgrade testnet to 0.503.20214
 
 ## 5.1.33
 
 ### Testnet bump
+
 Upgrade testnet to 2.2.14
 
 ## 5.1.32
 
 ### Testnet bump
+
 Upgrade testnet to 2.2.14
 
 ## 5.1.31
 
 ### New solv stop check
+
 Stop solv stop from breaking mainnet
 
 ## 5.1.30
 
 ### New solv stop check
+
 Stop solv stop from breaking mainnet
 
 ## 5.1.29
 
 ### New solv stop check
+
 Stop solv stop from breaking mainnet
 
 ## 5.1.28
 
 ### New solv stop check
+
 Stop solv stop from breaking mainnet
 
 ## 5.1.27
 
 ### New testnet version
+
 Bump testnet
 
 ## 5.1.26
 
 ### New set-identity
+
 Fix FD set-identity
 
 # @gabrielhicks/solv
+
 ## 5.1.25
 
 ### Bump installer
+
 fix installer
 
 ## 5.1.24
 
 ### SFDP testnet update
+
 Update testnet to 2.2.12
 
 ## 5.1.23
 
 ### SFDP patch requirement
+
 Update with critical patch
 
 ## 5.1.22
 
 ### Critical Patch
+
 Update with critical patch
 
 ## 5.1.21
 
 ### Auto Upgrade
+
 Bumping the cron
 
 ## 5.1.20
 
 ### Testnet Upgrade
+
 Testnet is upgrading back to 2.2.7
 
 ## 5.1.19
 
 ### Snapshot fetch
+
 Add snapshot fetch into restart
 
 ## 5.1.18
 
 ### Snapshot fetch
+
 Add snapshot fetch into restart
 
 ## 5.1.17
 
 ### Testnet Downgrade
+
 Set versions for testnet downgrade
 
 ## 5.1.16
 
 ### Version update
+
 Turn off health check, turn off auto update, change jito repo
 
 ## 5.1.15
 
 ### Version update
+
 Remove 5 minute cron, setup less noisy alerts
 
 ## 5.1.14
 
 ### Version update
+
 Enable auto update again
 
 ## 5.1.13
 
 ### Version update
+
 FD to 408
 
 ## 5.1.12
 
 ### Sudoer bump
+
 Retrigger disk via sudo
 
 ## 5.1.11
 
 ### Update mounts
+
 Retrigger disk
 
 ## 5.1.10
 
 ### Update mounts
+
 Await mounting
 
 ## 5.1.9
 
 ### Update mounts
+
 Await mounting
 
 ## 5.1.8
 
 ### Update mounts
+
 Await mounting
 
 ## 5.1.7
 
 ### Update mounts
+
 Await mounting
 
 ## 5.1.6
 
 ### Update mounts
+
 Update mount method,
 
 ## 5.1.5
 
 ### Update mounts, add London
+
 Update mount method, add London for Jito
 
 ## 5.1.4
 
 ### Mainnet version update
+
 Bump to 2.1.16
 
 ## 5.1.3
 
 ### Unsafe Switch
+
 Default safe, wrap entire check otherwise
 
 ## 5.1.2
 
 ### Unsafe Switch
+
 Adds flag to switch command enabling unsafe switching
 
 ## 5.1.1
 
 ### Bump Jito
+
 Adds original jito flag back
 
 ## 5.1.0
 
 ### Config, install, update changes
+
 v0.407.21113 for testnet as well as v2.2.2
 Removes assumptions for modified code (experimental)
 
 ## 5.0.4
 
 ### Config, install, update changes
+
 v0.407.21113 for testnet as well as v2.2.2
 Removes assumptions for modified code (experimental)
 
 ## 5.0.3
 
 ### Frankendancer Update
+
 v0.406.21113
 
 ## 5.0.2
 
 ### Update Jito Frankfurt
+
 Switches Shred Reciever IP
 
 ## 5.0.1
 
 ### Remove double ledger flag
+
 Ready for Frankendancer Swaps
 
 ## 5.0.0
 
 ### Were going to call it 5
+
 Ready for Frankendancer Swaps
 
 ## 4.9.1
 
 ### Reformat Frankendancer Swap
+
 Ready for Frankendancer Swaps
 
 ## 4.9.0
 
 ### Frankedancer Swap
+
 Ready for Frankendancer Swaps
 
 ## 4.8.37
 
 ### SSH Bug
+
 Fix small SSH bug
 
 ## 4.8.36
 
 ### SSH Bug
+
 Fix small SSH bug
 
 ## 4.8.35
 
 ### Frankendancer Hotswap
-Enabled fdctl usage for zero downtime updates when using Frankendancer
 
+Enabled fdctl usage for zero downtime updates when using Frankendancer
 
 ## 4.8.34
 
 ### Updated snapshots directory
+
 RPC updates
 
 ## 4.8.33
 
 ### Updated to latest
+
 RPC and version bumps
 
 ## 4.8.32
 
 ### Frankendancer
-bump
 
+bump
 
 ## 4.8.31
 
 ### Limiting Ledger
-50_000_000
 
+50_000_000
 
 ## 4.8.30
 
 ### Ttestnet install to 2.1.13
-Update latest Jito
 
+Update latest Jito
 
 ## 4.8.29
 
 ### Mainnet install to 2.1.11
-Update latest Jito
 
+Update latest Jito
 
 ## 4.8.28
 
 ### Mainnet install to 2.0.24
+
 Update latest Jito
 
 ## 4.8.27
 
 ### Testnet restart parameters
+
 Yet another testnet restart
 
 ## 4.8.26
 
 ### Testnet restart parameters
+
 Yet another testnet restart
 
 ## 4.8.25
 
 ### Mainnet Version Bump
+
 Jito Change
 
 ## 4.8.24
 
 ### Testnet restart parameters
+
 Expected hash change
 
 ## 4.8.23
 
 ### Testnet restart parameters
+
 Testnet restart patch
 
 ## 4.8.22
 
 ### Testnet restart parameters
+
 Added correct versioning for testnet restarts
 
 ## 4.8.21
 
 ### Patch Changes
+
 Fix FD Toml
 
 ## 4.8.20
 
 ### Patch Changes
+
 Fix FD Toml
 
 ## 4.8.19
 
 ### Patch Changes
+
 Bumped some of the config for rpc bind address
 
 ## 4.8.18
 
 ### Patch Changes
+
 Bumped some of the config for rpc bind address
 
 ## 4.8.17
 
 ### Patch Changes
+
 Added firedancer mod and install
 
 ## 4.8.16
 
 ### Patch Changes
+
 Bump solana versions, and new installer
 
 ## 4.8.15
 
 ### Patch Changes
+
 Bump solana versions, and new installer
 
 ## 4.8.14
 
 ### Patch Changes
+
 Bump solana versions, and new installer
 
 ## 4.8.13
 
 ### Patch Changes
+
 Latest snapshot paths and install
 
 ## 4.8.12
 
 ### Patch Changes
+
 Switch user option 5
 
 ## 4.8.11
 
 ### Patch Changes
+
 Switch user option 4
 
 ## 4.8.10
 
 ### Patch Changes
+
 Switch user option 3
 
 ## 4.8.9
 
 ### Patch Changes
+
 Switch user option 2
 
 ## 4.8.8
 
 ### Patch Changes
+
 Switch user option
 
 ## 4.8.7
 
 ### Patch Changes
+
 Add pivot option
 
 ## 4.8.6
 
 ### Patch Changes
+
 Troubleshooting createSnapshot
 
 ## 4.8.5
 
 ### Patch Changes
+
 Bump latest agave version
 
 ## 4.8.4
 
 ### Patch Changes
+
 Update for testnet restart
-  Updating createSnapshot function for testnet restart 2
+Updating createSnapshot function for testnet restart 2
 
 ## 4.8.3
 
 ### Patch Changes
+
 Update for testnet restart
-  Updating createSnapshot function for testnet restart
+Updating createSnapshot function for testnet restart
 
 ## 4.8.2
 
 ### Patch Changes
+
 Change config output
-  Root cause analysis for solv config changes and misconfigurations
+Root cause analysis for solv config changes and misconfigurations
 
 ## 4.8.1
 
 ### Patch Changes
+
 Update get snapshots
-  Added avirio as an optional flag, and when using avirio, snapshot will be renamed correctly
+Added avirio as an optional flag, and when using avirio, snapshot will be renamed correctly
 
 ## 4.8.0
 
 ### Patch Changes
+
 FIX upstream to modified repositories
 
 ## 4.7.9
 
 ### Patch Changes
+
 Set upstream to modified repositories
 
 ## 4.7.8
 
 ### Patch Changes
+
 Hard Fork
-  Using a hard fork now to integrate snapshot directory
-  Bumped and made bot active
+Using a hard fork now to integrate snapshot directory
+Bumped and made bot active
 
 ## 4.7.7
 
@@ -1186,7 +1507,6 @@ Hard Fork
 ### Patch Changes
 
 - [`66f2978`](https://github.com/gabrielhicks/solv/commit/66f2978b712cd9d339bab0022a6526356336c4a3) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - Update Solana Version v2.0.15 for Mainnet/Testnet
-
   - For users who are not using solv Auto Operation Mode: Please follow the instructions below.
 
   ```bash
@@ -1294,7 +1614,6 @@ Hard Fork
 ### Patch Changes
 
 - [`e153c6d`](https://github.com/gabrielhicks/solv/commit/e153c6dd893e5c90fe60836b293f8ee9ecb2a557) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - Update Solana Testnet v2.0.14
-
   - For users who are not using solv Auto Operation Mode: Please follow the instructions below.
 
   ```bash
@@ -1339,7 +1658,6 @@ Hard Fork
 ### Patch Changes
 
 - [`f039622`](https://github.com/gabrielhicks/solv/commit/f0396220c61acf8debe41799aa1844b7ff6b61b8) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - Downgrade Solana Testnet v1.18.26
-
   - For users who are not using solv Auto Operation Mode: Please follow the instructions below.
 
   ```bash
@@ -1384,7 +1702,6 @@ Hard Fork
 ### Patch Changes
 
 - [`bd9c764`](https://github.com/gabrielhicks/solv/commit/bd9c76498ac9fd56a40bbfdb78261c03361a77a0) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - Update Solana Testnet Version v2.0.14
-
   - For users who are not using solv Auto Operation Mode: Please follow the instructions below.
 
   ```bash
@@ -1451,7 +1768,6 @@ Hard Fork
   ## solv switch
 
   This update also includes the following changes:
-
   - solv switch to use `--require-tower`
   - solv scp download - not include `unstaked-keypair.json` in the download
   - solv setup - key generation always generate a new unstaked keypair
@@ -1479,7 +1795,6 @@ Hard Fork
 ### Patch Changes
 
 - [`3af615b`](https://github.com/gabrielhicks/solv/commit/3af615be8683e75c0d9960cfbc9239e13782c562) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - Update epochTimer
-
   - Update epochTimer to enable auto update
 
   Please update solv version to the v4.6.7 to enable auto update.
@@ -1495,11 +1810,9 @@ Hard Fork
 - [#308](https://github.com/gabrielhicks/solv/pull/308) [`510c692`](https://github.com/gabrielhicks/solv/commit/510c69279054ee65a1fce3dcd1b4557b09747b66) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - Downgrade Instruction for Testnet
 
   Solana Official Instructions: https://github.com/anza-xyz/agave/wiki/2024-10-09-Testnet-Rollback-and-Restart
-
   - For users who is using solv Auto Operation Mode: No action is required.
 
   ※ The name solv Mev mode will be changed to solv Auto Operation Mode.
-
   - For users who are not using solv Auto Operation Mode: Please follow the instructions below.
 
   ```bash
@@ -1659,7 +1972,6 @@ Hard Fork
 
   Please update the VALIDATOR_TYPE value to `frankendancer` in the `solv4.config.json` file.
   solv start will automatically read firedancer.service instead of solv.service.
-
   - Firedancer Doc - [https://firedancer-io.github.io/firedancer/](https://firedancer-io.github.io/firedancer/)
 
 ## 4.6.1
@@ -1744,7 +2056,6 @@ Hard Fork
 ### Patch Changes
 
 - [#285](https://github.com/gabrielhicks/solv/pull/285) [`7627876`](https://github.com/gabrielhicks/solv/commit/762787679adf98f600d6930132bbd879d34e534f) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - Update - rm priority fee
-
   - small bug fix
   - added new option to `solv swap` command
 
@@ -1891,7 +2202,6 @@ Hard Fork
   ```
 
   ## New Features
-
   - `solv setup` command is now more user-friendly
   - `solv swap` command is now available
   - `solv jupiter` command is now available
@@ -1912,7 +2222,6 @@ Hard Fork
   Now new config is migrating to `solv4.config.json` file.
 
   ## Bug Fixes
-
   - `solv switch` command now works as expected.
   - `bigint` warning message is now resolved.
 
@@ -1930,7 +2239,6 @@ Hard Fork
 ### Patch Changes
 
 - [#263](https://github.com/gabrielhicks/solv/pull/263) [`1fe901d`](https://github.com/gabrielhicks/solv/commit/1fe901d3830285d28b4f7e71401937e0eada5d0a) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - Update - solv setup --script, solv epochTimer
-
   - Added `solv setup --script` command to update `start-validator.sh`, remove old snapshot, and restart.
 
   ```bash
@@ -1940,7 +2248,6 @@ Hard Fork
   Solana Official Restart Instructions:
 
   https://github.com/anza-xyz/agave/wiki/2024-08-26-Testnet-Restart
-
   - Updated `solv epochTimer` to use Rust CLI.
 
 ## 4.4.14
@@ -2021,7 +2328,6 @@ Hard Fork
 ### Patch Changes
 
 - [#256](https://github.com/gabrielhicks/solv/pull/256) [`4bbf087`](https://github.com/gabrielhicks/solv/commit/4bbf0872ebd092a02d356f8ce4edf4a7cb506177) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - ## Update - solv relayer
-
   - Added solv relayer setup to setup separate Jito Relayer
   - Added solv relayer set:url to set Relayer URL on Validator
     This command will set the Relayer URL on the Validator
@@ -2226,7 +2532,6 @@ Hard Fork
 - [#247](https://github.com/gabrielhicks/solv/pull/247) [`e73103a`](https://github.com/gabrielhicks/solv/commit/e73103acf9bf1ac6bb1b8b583526fb49d1e91a2d) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - Update - solv scp download
 
   Now solv scp download command will download the following files:
-
   - mainnet-validator-keypair.json
   - mainnet-vote-account-keypair.json
   - mainnet-authority-keypair.json
@@ -2594,7 +2899,6 @@ Hard Fork
   It will also send notifications to your Discord channel.
 
   solv epochTimer checks following items:
-
   - Check Validator Account Balance
     Send a notification if the balance is less than 0.5 SOL.
   - Check Validator Health Status
@@ -2622,7 +2926,6 @@ Hard Fork
 
   The CPU governor is a driver that manages how the CPU scales frequency and voltage. The CPU governor can be set to performance, powersave, ondemand, conservative, schedutil, and userspace.
   solv setup will set the CPU governor to performance.
-
   - performance: The CPU runs at the maximum frequency.
   - powersave: The CPU runs at the minimum frequency.
   - ondemand: The CPU runs at the maximum frequency when the system is busy and at the minimum frequency when the system is idle.
@@ -2694,7 +2997,6 @@ Hard Fork
   ### Epoch Timer Sends Discord Notification
 
   Epoch Timer will send a Discord notification when the epoch is less than 1 day, 8 hours, 1 hour and the new epoch starts.
-
   - New Epoch
   - Less than 1 day
   - Less than 8 hours
@@ -2708,7 +3010,6 @@ Hard Fork
   solv harvest will be executed automatically if solv MEV Mode is enabled.
   This will harvest your rewards to your authority account every right before the epoch ends.
   Then convert SOL to elSOL (LST) and send it to your desired account.
-
   1. Withdraw rewards from the Vote Account to the Validator Authority Account.
   2. Calculate the amount of SOL to be transferred from the Validator Account to the Authority Account.
   3. Convert the amount of SOL to elSOL (LST).
@@ -2806,7 +3107,6 @@ Hard Fork
 ### Patch Changes
 
 - [#210](https://github.com/gabrielhicks/solv/pull/210) [`5c1451e`](https://github.com/gabrielhicks/solv/commit/5c1451e93695ce7364939967ccd43b2b03388c12) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - ## New Features - v4.2.0~v4.2.1
-
   - Added Solana Liquid Staking Command
   - Added Solana Transfer Command
   - Added Auto Reward Harvest Command
@@ -2816,7 +3116,6 @@ Hard Fork
   - Added solv df command
   - Migrated to ESM Module
   - Added Turbo Repo
-
   * You should set the SOLANA_RPC_URL in the .env file to use this feature effectively.
 
   ### Solana Liquid Staking Command
@@ -2851,7 +3150,6 @@ Hard Fork
 
   The epochTimer is a feature that allows you to set a specific time to run the some commands.
   This feature is especially useful for those who want to stake rewards at before the epoch change.
-
   - You need to set `DISCORD_WEBHOOK_URL` in the `.env` file to use this feature.
 
   ```bash
@@ -2895,7 +3193,6 @@ Hard Fork
 ### Minor Changes
 
 - [#204](https://github.com/gabrielhicks/solv/pull/204) [`bd8cf63`](https://github.com/gabrielhicks/solv/commit/bd8cf63feed2459ee1f467b3582e94153de7f74f) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - Update solv stake/setup/bal - added LST stake, improved solv setup, added solv bal --spl option
-
   - Added LST stake command
 
   ```bash
@@ -2985,7 +3282,6 @@ Hard Fork
 
 - [#190](https://github.com/gabrielhicks/solv/pull/190) [`f5f9712`](https://github.com/gabrielhicks/solv/commit/f5f97128a65c60ba6b30a166a89f3942dab4b9ed) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - Updated - solv stake/bal
   Added - `--block-production-method` Option to start up script
-
   1. Updated solv stake Command
 
   ```bash
@@ -3150,7 +3446,6 @@ Hard Fork
 ### Minor Changes
 
 - [#156](https://github.com/gabrielhicks/solv/pull/156) [`39205e5`](https://github.com/gabrielhicks/solv/commit/39205e573877208ca8cfa643f4dd5de232cb2523) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - ## New Features - v4.0.0~v4.1.0
-
   - Jito Relayer Setup
   - Jito RPC Setup
   - No Downtime Migration
@@ -3163,7 +3458,6 @@ Hard Fork
   Greatly reduce the time to start the Solana Validator.
 
   Special Thanks to c29r3 for the great OSS ⭐️
-
   - [Solana Snapshot Finder](https://github.com/c29r3/solana-snapshot-finder)
 
   If your node does not start, you can try the following command.
@@ -3205,7 +3499,6 @@ Hard Fork
   This function was created with reference to the following link.
 
   Special Thanks to pumpkins-pool for the great OSS ⭐️
-
   - [Pumpkin's Pool - Identity Transition](https://pumpkins-pool.gitbook.io/pumpkins-pool)
 
   ## Jito MEV Setup
@@ -3255,7 +3548,6 @@ Hard Fork
 - [#147](https://github.com/gabrielhicks/solv/pull/147) [`0043376`](https://github.com/gabrielhicks/solv/commit/0043376b943840960cc59b5ec9707c03c12dfa56) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - Update - solv4
 
   ## New Features
-
   - No Downtime Migration
   - Jito RPC Setup
   - Jito Relayer Setup
@@ -3273,10 +3565,8 @@ Hard Fork
   Now you can migrate your validator without downtime.
   You need to setup your new server with solv4.
   (solv4 uses symbolic link to define the validator keypair path.)
-
   1. Setup your new server with solv4 as Dummy Server (Inactive Side)
      Please upload your main keys to the new server before setup.
-
   - mainnet-validator-keypair.json
   - mainnet-vote-account-keypair.json
   - mainnet-authority-keypair.json
@@ -3409,7 +3699,6 @@ Hard Fork
   ```
 
   Added new feature - solv CLI
-
   - `solv rm:log` - Delete validator logs
   - `solv rm:snapshot` - Delete Incremental snapshot and RocksDB
   - `solv withdraw` - Withdraw SOL from Vote Account to Authority Keypair
