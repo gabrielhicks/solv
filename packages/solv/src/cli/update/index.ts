@@ -110,14 +110,14 @@ export const updateCommands = (config: DefaultConfigType) => {
   }
   if (isFrankendancer) {
     version = VERSION_FIREDANCER
-    if(isTestnet) {
+    if (isTestnet) {
       version = VERSION_FIREDANCER_TESTNET
     }
   }
   if (isRPC) {
     version = VERSION_SOLANA_RPC
     if (isJito) {
-       version = VERSION_JITO_RPC
+      version = VERSION_JITO_RPC
     }
   }
   program
@@ -165,8 +165,7 @@ export const updateCommands = (config: DefaultConfigType) => {
         } else {
           diskType = MNT_DISK_TYPE.TRIPLE
         }
-          const isTestnetOld =
-            oldConfig.SOLANA_NETWORK === NETWORK_TYPES.TESTNET
+        const isTestnetOld = oldConfig.SOLANA_NETWORK === NETWORK_TYPES.TESTNET
         const isRPCOld = oldConfig.SOLV_TYPE === SOLV_TYPES.RPC_NODE
         const isJitoOld = oldConfig.MAINNET_TYPE === MAINNET_TYPES.JITO_MEV
         const newConfigBody: DefaultConfigType = {
@@ -204,7 +203,8 @@ export const updateCommands = (config: DefaultConfigType) => {
           XDP: false,
           ZERO_COPY: false,
           JAG_SNAPSHOTS: false,
-          JAG_REGION: "",
+          JAG_REGION: '',
+          CHRONY_LOCATION: '',
         }
 
         await updateDefaultConfig(newConfigBody)
@@ -249,47 +249,52 @@ export const updateCommands = (config: DefaultConfigType) => {
         let startupScript = ''
         switch (validatorType) {
           case ValidatorType.SOLANA:
-            startupScript = isTestnet ? startTestnetValidatorScript() : startMainnetValidatorScript(config)
+            startupScript = isTestnet
+              ? startTestnetValidatorScript()
+              : startMainnetValidatorScript(config)
             break
           case ValidatorType.AGAVE:
-            startupScript = isTestnet ? startTestnetAgaveValidatorScript(config) : startMainnetValidatorScript(config)
+            startupScript = isTestnet
+              ? startTestnetAgaveValidatorScript(config)
+              : startMainnetValidatorScript(config)
             break
           case ValidatorType.JITO:
             const jitoConfig = await readOrCreateJitoConfig()
-            startupScript = isTestnet ? startJitoTestnetScript(
-              jitoConfig.commissionBps,
-              jitoConfig.relayerUrl,
-              jitoConfig.blockEngineUrl,
-              jitoConfig.shredReceiverAddr,
-              config
-            ) : startJitoMainnetScript(
-              jitoConfig.commissionBps,
-              jitoConfig.relayerUrl,
-              jitoConfig.blockEngineUrl,
-              jitoConfig.shredReceiverAddr,
-              config
-            )
+            startupScript = isTestnet
+              ? startJitoTestnetScript(
+                  jitoConfig.commissionBps,
+                  jitoConfig.relayerUrl,
+                  jitoConfig.blockEngineUrl,
+                  jitoConfig.shredReceiverAddr,
+                  config,
+                )
+              : startJitoMainnetScript(
+                  jitoConfig.commissionBps,
+                  jitoConfig.relayerUrl,
+                  jitoConfig.blockEngineUrl,
+                  jitoConfig.shredReceiverAddr,
+                  config,
+                )
             break
           case ValidatorType.BAM:
             const bamConfig = await readOrCreateJitoConfig()
-            startupScript = isTestnet ? 
-            startBamTestnetScript(
-              bamConfig.commissionBps,
-              bamConfig.relayerUrl,
-              bamConfig.blockEngineUrl,
-              bamConfig.shredReceiverAddr,
-              bamConfig.bamUrl,
-              config
-            )
-            :
-            startBamMainnetScript(
-              bamConfig.commissionBps,
-              bamConfig.relayerUrl,
-              bamConfig.blockEngineUrl,
-              bamConfig.shredReceiverAddr,
-              bamConfig.bamUrl,
-              config
-            )
+            startupScript = isTestnet
+              ? startBamTestnetScript(
+                  bamConfig.commissionBps,
+                  bamConfig.relayerUrl,
+                  bamConfig.blockEngineUrl,
+                  bamConfig.shredReceiverAddr,
+                  bamConfig.bamUrl,
+                  config,
+                )
+              : startBamMainnetScript(
+                  bamConfig.commissionBps,
+                  bamConfig.relayerUrl,
+                  bamConfig.blockEngineUrl,
+                  bamConfig.shredReceiverAddr,
+                  bamConfig.bamUrl,
+                  config,
+                )
             break
           default:
             console.log('Unknown Validator Type for Update Script')
@@ -305,7 +310,7 @@ export const updateCommands = (config: DefaultConfigType) => {
       }
       if (options.background) {
         let version = options.version
-        let isMajorThree = version.startsWith("3") ? true : false;
+        let isMajorThree = version.startsWith('3') ? true : false
         await updateDefaultConfig({
           TESTNET_SOLANA_VERSION: VERSION_TESTNET,
           MAINNET_SOLANA_VERSION: VERSION_MAINNET,
@@ -316,10 +321,13 @@ export const updateCommands = (config: DefaultConfigType) => {
         updateLogrotate(isFrankendancer)
         setupSolvService(isTestnet)
         if (isJito) {
-          const jitoPatch = JITO_PATCH;
+          const jitoPatch = JITO_PATCH
           const jitoTagBase = `v${version}-jito`
           const jitoModBase = `v${version}-mod`
-          const jitoTag = options.mod || isModded ? `${jitoModBase}${jitoPatch}` : `${jitoTagBase}${jitoPatch}`
+          const jitoTag =
+            options.mod || isModded
+              ? `${jitoModBase}${jitoPatch}`
+              : `${jitoTagBase}${jitoPatch}`
           jitoUpdate(jitoTag, options.mod || isModded, isMajorThree, xdpEnabled)
           await updateJitoSolvConfig({ version, tag: `v${version}` })
           await monitorUpdate(deliquentStake, true, minIdleTime)
@@ -330,10 +338,13 @@ export const updateCommands = (config: DefaultConfigType) => {
           return
         }
         if (isBam) {
-          const bamPatch = BAM_PATCH;
+          const bamPatch = BAM_PATCH
           const bamTagBase = `v${version}-bam`
           const bamModBase = `v${version}-mod`
-          const bamTag = options.mod || isModded ? `${bamModBase}${bamPatch}` : `${bamTagBase}${bamPatch}`
+          const bamTag =
+            options.mod || isModded
+              ? `${bamModBase}${bamPatch}`
+              : `${bamTagBase}${bamPatch}`
           bamUpdate(bamTag, options.mod || isModded, isMajorThree, xdpEnabled)
           await updateJitoSolvConfig({ version, tag: `v${version}` })
           await monitorUpdate(deliquentStake, true, minIdleTime)
@@ -352,7 +363,7 @@ export const updateCommands = (config: DefaultConfigType) => {
           return
         }
 
-        await updateVersion(version, options.mod || isModded, isMajorThree, xdpEnabled)
+        await updateVersion(version)
         const deliquentStakeNum = isTestnet
           ? DELINQUENT_STAKE_TESTNET
           : DELINQUENT_STAKE_MAINNET
@@ -369,7 +380,7 @@ export const updateCommands = (config: DefaultConfigType) => {
       } else {
         updateSolv()
       }
-      if(options.dz) {
+      if (options.dz) {
         installDZ(dzVersion, isTestnet)
       }
     })

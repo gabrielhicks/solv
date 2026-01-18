@@ -96,7 +96,7 @@ install_pnpm_and_packages() {
         echo 'export PATH="\$PNPM_HOME:\$PATH"' >> ~/.profile
         echo 'export LIBCLANG_PATH=/usr/lib/llvm-18/lib' >> ~/.profile
         echo 'export CLANG_PATH=/usr/bin/clang-18' >> ~/.profile
-        echo 'export PATH="/home/solv/.local/share/solana/install/active_release/bin:$PATH"' >> ~/.profile
+        echo 'export PATH="/home/solv/.local/share/solana/install/active_release/bin:\$PATH"' >> ~/.profile
         
 
         echo "Sourcing ~/.bashrc in case it's needed..."

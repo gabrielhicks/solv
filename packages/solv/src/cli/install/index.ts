@@ -31,34 +31,35 @@ export const installCommands = (config: DefaultConfigType) => {
       `Solana Version e.g. ${version}`,
       version,
     )
-    .option(
-      '-m, --mod <version>',
-      `Use modified installer`,
-      false,
-    )
-    .action(async (options: { version: string, mod: boolean }) => {
+    .option('-m, --mod <version>', `Use modified installer`, false)
+    .action(async (options: { version: string; mod: boolean }) => {
       const isJito = config.VALIDATOR_TYPE === ValidatorType.JITO
       const isJitoBam = config.VALIDATOR_TYPE === ValidatorType.BAM
-      const isFrankendancer = config.VALIDATOR_TYPE === ValidatorType.FRANKENDANCER
-      const isModified = options.mod || config.MOD;
+      const isFrankendancer =
+        config.VALIDATOR_TYPE === ValidatorType.FRANKENDANCER
+      const isModified = options.mod || config.MOD
       const xdpEnabled = config.XDP
       if (isJito) {
         const jitoVersion = options.version || VERSION_JITO_MAINNET
-        const jitoPatch = JITO_PATCH;
+        const jitoPatch = JITO_PATCH
         const jitoTagBase = `v${jitoVersion}-jito`
         const jitoModBase = `v${jitoVersion}-mod`
-        const jitoTag = isModified ? `${jitoModBase}${jitoPatch}` :`${jitoTagBase}${jitoPatch}`
-        const isMajorThree = jitoVersion.startsWith("3") ? true : false;
+        const jitoTag = isModified
+          ? `${jitoModBase}${jitoPatch}`
+          : `${jitoTagBase}${jitoPatch}`
+        const isMajorThree = jitoVersion.startsWith('3') ? true : false
         jitoUpdate(jitoTag, isModified, isMajorThree, xdpEnabled)
         return
       }
       if (isJitoBam) {
         const bamVersion = options.version || VERSION_BAM_MAINNET
-        const bamPatch = BAM_PATCH;
+        const bamPatch = BAM_PATCH
         const bamTagBase = `v${bamVersion}-bam`
         const bamModBase = `v${bamVersion}-mod`
-        const bamTag = isModified ? `${bamModBase}${bamPatch}` :`${bamTagBase}${bamPatch}`
-        const isMajorThree = bamVersion.startsWith("3") ? true : false;
+        const bamTag = isModified
+          ? `${bamModBase}${bamPatch}`
+          : `${bamTagBase}${bamPatch}`
+        const isMajorThree = bamVersion.startsWith('3') ? true : false
         bamUpdate(bamTag, isModified, isMajorThree, xdpEnabled)
         return
       }
@@ -72,7 +73,6 @@ export const installCommands = (config: DefaultConfigType) => {
         version = VERSION_SOLANA_RPC
       }
       const solanaCLIVersion = options.version || version
-      const isMajorThree = solanaCLIVersion.startsWith("3") ? true : false;
-      await updateVersion(solanaCLIVersion, isModified, isMajorThree, xdpEnabled)
+      await updateVersion(solanaCLIVersion)
     })
 }

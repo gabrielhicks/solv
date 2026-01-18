@@ -14,7 +14,13 @@ import { startBamMainnetScript } from '@/template/startupScripts/startBamMainnet
 import { installBam } from '@/cli/install/installBam'
 import { startBamTestnetScript } from '@/template/startupScripts/startBamTestnetScript'
 import setupFiredancer from '../firedancer/setupFiredancer'
-import { AGAVE_PATCH, BAM_PATCH, JITO_PATCH, VERSION_DZ_MAINNET, VERSION_DZ_TESTNET } from '@/config/versionConfig'
+import {
+  AGAVE_PATCH,
+  BAM_PATCH,
+  JITO_PATCH,
+  VERSION_DZ_MAINNET,
+  VERSION_DZ_TESTNET,
+} from '@/config/versionConfig'
 import installDZ from '@/cli/install/installDZ'
 
 const setupValidatorNode = async (config: DefaultConfigType, mod = false) => {
@@ -31,19 +37,26 @@ const setupValidatorNode = async (config: DefaultConfigType, mod = false) => {
   }
 }
 
-const setupMainnetValidator = async (config: DefaultConfigType, mod = false) => {
-  const { VALIDATOR_TYPE: validatorType, MAINNET_SOLANA_VERSION: version, MOD: modConfig, XDP: xdpEnabled } =
-    config
+const setupMainnetValidator = async (
+  config: DefaultConfigType,
+  mod = false,
+) => {
+  const {
+    VALIDATOR_TYPE: validatorType,
+    MAINNET_SOLANA_VERSION: version,
+    MOD: modConfig,
+    XDP: xdpEnabled,
+  } = config
   mod = modConfig
   let startupScript = ''
-  let isMajorThree = version.startsWith("3") ? true : false;
+  let isMajorThree = version.startsWith('3') ? true : false
   installDZ(VERSION_DZ_MAINNET, false)
   switch (validatorType) {
     case ValidatorType.SOLANA:
-      const agavePatch = AGAVE_PATCH;
+      const agavePatch = AGAVE_PATCH
       const agaveTagBase = `v${version}`
       const agaveTag = `${agaveTagBase}${agavePatch}`
-      installAgave(agaveTag, mod, isMajorThree, xdpEnabled)
+      installAgave(agaveTag)
       startupScript = startMainnetValidatorScript(config)
       break
     // case ValidatorType.AGAVE:
@@ -52,26 +65,30 @@ const setupMainnetValidator = async (config: DefaultConfigType, mod = false) => 
     case ValidatorType.JITO:
       console.log('JITO Validator Setup for Mainnet')
       const jitoConfig = await readOrCreateJitoConfig()
-      const jitoPatch = JITO_PATCH;
+      const jitoPatch = JITO_PATCH
       const jitoTagBase = `v${version}-jito`
       const jitoModBase = `v${version}-mod`
-      const jitoTag = mod ? `${jitoModBase}${jitoPatch}` :`${jitoTagBase}${jitoPatch}`
+      const jitoTag = mod
+        ? `${jitoModBase}${jitoPatch}`
+        : `${jitoTagBase}${jitoPatch}`
       installJito(jitoTag, mod, isMajorThree, xdpEnabled)
       startupScript = startJitoMainnetScript(
         jitoConfig.commissionBps,
         jitoConfig.relayerUrl,
         jitoConfig.blockEngineUrl,
         jitoConfig.shredReceiverAddr,
-        config
+        config,
       )
       break
     case ValidatorType.BAM:
       console.log('JITO Validator Setup for Mainnet')
       const bamConfig = await readOrCreateJitoConfig()
-      const bamPatch = BAM_PATCH;
+      const bamPatch = BAM_PATCH
       const bamTagBase = `v${version}-bam`
       const bamModBase = `v${version}-mod`
-      const bamTag = mod ? `${bamModBase}${bamPatch}` :`${bamTagBase}${bamPatch}`
+      const bamTag = mod
+        ? `${bamModBase}${bamPatch}`
+        : `${bamTagBase}${bamPatch}`
       installBam(bamTag, mod, isMajorThree, xdpEnabled)
       startupScript = startBamMainnetScript(
         bamConfig.commissionBps,
@@ -79,7 +96,7 @@ const setupMainnetValidator = async (config: DefaultConfigType, mod = false) => 
         bamConfig.blockEngineUrl,
         bamConfig.shredReceiverAddr,
         bamConfig.bamUrl,
-        config
+        config,
       )
       break
     case ValidatorType.FRANKENDANCER:
@@ -100,30 +117,40 @@ const setupMainnetValidator = async (config: DefaultConfigType, mod = false) => 
   updateStartupScriptPermissions()
 }
 
-const setupTestnetValidator = async (config: DefaultConfigType, mod = false) => {
-  const { VALIDATOR_TYPE: validatorType, MOD: modConfig, TESTNET_SOLANA_VERSION: version, XDP: xdpEnabled } = config
+const setupTestnetValidator = async (
+  config: DefaultConfigType,
+  mod = false,
+) => {
+  const {
+    VALIDATOR_TYPE: validatorType,
+    MOD: modConfig,
+    TESTNET_SOLANA_VERSION: version,
+    XDP: xdpEnabled,
+  } = config
   mod = modConfig
   let startupScript = ''
-  let isMajorThree = version.startsWith("3") ? true : false;
-  const agavePatch = AGAVE_PATCH;
+  let isMajorThree = version.startsWith('3') ? true : false
+  const agavePatch = AGAVE_PATCH
   const agaveTagBase = `v${version}`
   const agaveTag = `${agaveTagBase}${agavePatch}`
-  const jitoPatch = JITO_PATCH;
+  const jitoPatch = JITO_PATCH
   const jitoTagBase = `v${version}-jito`
   const jitoModBase = `v${version}-mod`
-  const jitoTag = mod ? `${jitoModBase}${jitoPatch}` :`${jitoTagBase}${jitoPatch}`
-  const bamPatch = BAM_PATCH;
+  const jitoTag = mod
+    ? `${jitoModBase}${jitoPatch}`
+    : `${jitoTagBase}${jitoPatch}`
+  const bamPatch = BAM_PATCH
   const bamTagBase = `v${version}-bam`
   const bamModBase = `v${version}-mod`
-  const bamTag = mod ? `${bamModBase}${bamPatch}` :`${bamTagBase}${bamPatch}`
+  const bamTag = mod ? `${bamModBase}${bamPatch}` : `${bamTagBase}${bamPatch}`
   installDZ(VERSION_DZ_TESTNET, true)
   switch (validatorType) {
     case ValidatorType.SOLANA:
-      installAgave(agaveTag, mod, isMajorThree, xdpEnabled)
+      installAgave(agaveTag)
       startupScript = startTestnetAgaveValidatorScript(config)
     case ValidatorType.AGAVE:
       console.log('Agave Validator Setup for Testnet')
-      installAgave(agaveTag, mod, isMajorThree, xdpEnabled)
+      installAgave(agaveTag)
       startupScript = startTestnetAgaveValidatorScript(config)
       break
     case ValidatorType.JITO:
@@ -135,7 +162,7 @@ const setupTestnetValidator = async (config: DefaultConfigType, mod = false) => 
         jitoConfig.relayerUrl,
         jitoConfig.blockEngineUrl,
         jitoConfig.shredReceiverAddr,
-        config
+        config,
       )
       break
     case ValidatorType.BAM:
@@ -148,7 +175,7 @@ const setupTestnetValidator = async (config: DefaultConfigType, mod = false) => 
         bamConfig.blockEngineUrl,
         bamConfig.shredReceiverAddr,
         bamConfig.bamUrl,
-        config
+        config,
       )
       break
     case ValidatorType.FRANKENDANCER:
