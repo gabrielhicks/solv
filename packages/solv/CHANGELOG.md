@@ -1,5 +1,11 @@
 # @gabrielhicks/solv
 
+## 5.6.30
+
+### Testnet Version
+
+3.1.7
+
 ## 5.6.29
 
 ### Fix export in ~/.profile

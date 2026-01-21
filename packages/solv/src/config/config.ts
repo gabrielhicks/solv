@@ -56,7 +56,7 @@ export enum MAINNET_TYPES {
 
 // ⚠️ Please DO NOT forget to turn this to false if restart is not needed
 export const NODE_RESTART_REQUIRED_MAINNET = false
-export const NODE_RESTART_REQUIRED_TESTNET = false
+export const NODE_RESTART_REQUIRED_TESTNET = true
 export const FD_RESTART_REQUIRED_MAINNET = false
 export const FD_RESTART_REQUIRED_TESTNET = false
 export const BAM_RESTART_REQUIRED_MAINNET = false
@@ -136,7 +136,7 @@ export const CONFIG: CONFIG_TYPE = {
   XDP: false,
   ZERO_COPY: false,
   JAG_SNAPSHOTS: false,
-  JAG_REGION: "",
+  JAG_REGION: '',
 }
 
 export const HOME_PATHS = {
