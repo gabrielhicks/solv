@@ -1,5 +1,11 @@
 # @gabrielhicks/solv
 
+## 5.6.32
+
+### Testnet Version and restart
+
+3.1.7
+
 ## 5.6.31
 
 ### Testnet Version

@@ -27,9 +27,9 @@ exec agave-validator \\
 --dynamic-port-range 8000-8025 \\
 --rpc-port 8899 \\
 --wal-recovery-mode skip_any_corrupted_record \\
---wait-for-supermajority 374301609 \\
---expected-shred-version 9604 \\
---expected-bank-hash EJMzxv7JscF8WNZfDYqzsAyALCDCS52HuihabVgyz5mf \\
+--wait-for-supermajority 383520372 \\
+--expected-shred-version 27350 \\
+--expected-bank-hash 3zk4WMwk6wCTVJXu9UAk2dYWMedCKooDs15XL5u6FkvE \\
 --use-snapshot-archives-at-startup when-newest \\
 --limit-ledger-size 50000000 \\
 --block-production-method central-scheduler-greedy \\
@@ -39,9 +39,9 @@ exec agave-validator \\
 --experimental-retransmit-xdp-zero-copy \\
 --experimental-poh-pinned-cpu-core 6 \\
 `
-// To be added later for XDP
-// --experimental-retransmit-xdp-cpu-cores 2 \\
-// --experimental-retransmit-xdp-zero-copy \\
-// --experimental-poh-pinned-cpu-core 6 \\
+  // To be added later for XDP
+  // --experimental-retransmit-xdp-cpu-cores 2 \\
+  // --experimental-retransmit-xdp-zero-copy \\
+  // --experimental-poh-pinned-cpu-core 6 \\
   return script
 }

@@ -1,4 +1,4 @@
-import { getKeypairsInfo } from '@/cli/balance';
+import { getKeypairsInfo } from '@/cli/balance'
 import {
   IDENTITY_KEY_PATH,
   LOG_PATH,
@@ -9,23 +9,30 @@ import {
 import { DefaultConfigType } from '@/config/types'
 
 export const startTestnetAgaveValidatorScript = (config: DefaultConfigType) => {
-  const {validatorKeyAddress} = getKeypairsInfo(config)
+  const { validatorKeyAddress } = getKeypairsInfo(config)
 
   const xdpEnabled = config.XDP
   const zeroCopyEnabled = config.ZERO_COPY
   // const jagSnapshotsEnabled = config.JAG_SNAPSHOTS
-  const xdpFlags = xdpEnabled ? [`--experimental-retransmit-xdp-cpu-cores 1 \\`,`--experimental-poh-pinned-cpu-core 10 \\`].join('\n') : ''
-  const zeroCopyFlag = zeroCopyEnabled ? [`--experimental-retransmit-xdp-zero-copy \\`].join('\n') : ''
+  const xdpFlags = xdpEnabled
+    ? [
+        `--experimental-retransmit-xdp-cpu-cores 1 \\`,
+        `--experimental-poh-pinned-cpu-core 10 \\`,
+      ].join('\n')
+    : ''
+  const zeroCopyFlag = zeroCopyEnabled
+    ? [`--experimental-retransmit-xdp-zero-copy \\`].join('\n')
+    : ''
 
-  const knownValidators = TESTNET_KNOWN_VALIDATORS;
+  const knownValidators = TESTNET_KNOWN_VALIDATORS
 
   const filteredValidators = knownValidators.filter(
-    (address) => address !== validatorKeyAddress
-  );
+    (address) => address !== validatorKeyAddress,
+  )
 
   const validatorArgs = filteredValidators
     .map((address) => `--known-validator ${address} \\`)
-    .join('\n');
+    .join('\n')
   const script = `#!/bin/bash
 exec agave-validator \\
 --identity ${IDENTITY_KEY_PATH} \\
@@ -45,9 +52,9 @@ ${validatorArgs}
 --dynamic-port-range 8000-8025 \\
 --rpc-port 8899 \\
 --wal-recovery-mode skip_any_corrupted_record \\
---wait-for-supermajority 374301609 \\
---expected-shred-version 9604 \\
---expected-bank-hash EJMzxv7JscF8WNZfDYqzsAyALCDCS52HuihabVgyz5mf \\
+--wait-for-supermajority 383520372 \\
+--expected-shred-version 27350 \\
+--expected-bank-hash 3zk4WMwk6wCTVJXu9UAk2dYWMedCKooDs15XL5u6FkvE \\
 --limit-ledger-size 50000000 \\
 --block-production-method central-scheduler-greedy \\
 --block-verification-method unified-scheduler \\
@@ -56,9 +63,9 @@ ${validatorArgs}
 ${xdpFlags}
 ${zeroCopyFlag}
 `
-// To be added later for XDP
-// --experimental-retransmit-xdp-cpu-cores 2 \\
-// --experimental-retransmit-xdp-zero-copy \\
-// --experimental-poh-pinned-cpu-core 6 \\
+  // To be added later for XDP
+  // --experimental-retransmit-xdp-cpu-cores 2 \\
+  // --experimental-retransmit-xdp-zero-copy \\
+  // --experimental-poh-pinned-cpu-core 6 \\
   return script
 }
