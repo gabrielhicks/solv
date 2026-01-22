@@ -1,5 +1,11 @@
 # @gabrielhicks/solv
 
+## 5.6.33
+
+### Small chnges in install
+
+3.1.7
+
 ## 5.6.32
 
 ### Testnet Version and restart
