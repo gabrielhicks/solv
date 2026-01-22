@@ -1,5 +1,11 @@
 # @gabrielhicks/solv
 
+## 5.6.34
+
+### Small chnges in install
+
+Agave install
+
 ## 5.6.33
 
 ### Small chnges in install
