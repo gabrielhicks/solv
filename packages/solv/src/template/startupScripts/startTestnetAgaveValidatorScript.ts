@@ -52,7 +52,6 @@ ${validatorArgs}
 --dynamic-port-range 8000-8025 \\
 --rpc-port 8899 \\
 --wal-recovery-mode skip_any_corrupted_record \\
---wait-for-supermajority 383520372 \\
 --expected-shred-version 27350 \\
 --expected-bank-hash 3zk4WMwk6wCTVJXu9UAk2dYWMedCKooDs15XL5u6FkvE \\
 --limit-ledger-size 50000000 \\

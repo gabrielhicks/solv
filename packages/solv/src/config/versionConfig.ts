@@ -1,13 +1,13 @@
-export const VERSION_TESTNET = '3.1.7'
+export const VERSION_TESTNET = '3.0.14'
 export const VERSION_MAINNET = '3.0.14'
 export const AGAVE_PATCH = ''
-export const VERSION_JITO_TESTNET = '3.1.7'
+export const VERSION_JITO_TESTNET = '3.0.14'
 export const VERSION_JITO_MAINNET = '3.0.14'
 export const JITO_PATCH = ''
-export const VERSION_BAM_TESTNET = '3.1.7'
+export const VERSION_BAM_TESTNET = '3.0.14'
 export const VERSION_BAM_MAINNET = '3.0.14'
 export const BAM_PATCH = ''
-export const VERSION_JITO_RPC = '3.1.7'
+export const VERSION_JITO_RPC = '3.0.14'
 export const VERSION_SOLANA_RPC = '3.0.14'
 export const DELINQUENT_STAKE_TESTNET = 10
 export const DELINQUENT_STAKE_MAINNET = 5
