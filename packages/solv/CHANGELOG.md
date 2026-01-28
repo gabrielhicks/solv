@@ -1,5 +1,11 @@
 # @gabrielhicks/solv
 
+## 5.6.36
+
+### Testnet Update
+
+3.1.8
+
 ## 5.6.35
 
 ### Testnet Update
