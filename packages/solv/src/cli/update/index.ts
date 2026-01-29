@@ -62,7 +62,7 @@ import { stopFiredancer } from '@/lib/stopFiredancer'
 import { disableSolv } from '@/lib/disableSolv'
 import { stopSolv } from '@/lib/stopSolv'
 import installJagSnap from '../install/installJagSnap'
-import installDZ from '../install/installDZ'
+import updateDZ from './updateDZ'
 
 export * from './update'
 
@@ -205,6 +205,7 @@ export const updateCommands = (config: DefaultConfigType) => {
           JAG_SNAPSHOTS: false,
           JAG_REGION: '',
           CHRONY_LOCATION: '',
+          MEV_COMMISSION: 1000,
         }
 
         await updateDefaultConfig(newConfigBody)
@@ -222,6 +223,7 @@ export const updateCommands = (config: DefaultConfigType) => {
           await updateJitoSolvConfig({
             version: jitoVersion,
             tag: `v${jitoVersion}`,
+            commissionBps: config.MEV_COMMISSION,
           })
         }
         if (isBam) {
@@ -231,6 +233,7 @@ export const updateCommands = (config: DefaultConfigType) => {
           await updateJitoSolvConfig({
             version: bamVersion,
             tag: `v${bamVersion}`,
+            commissionBps: config.MEV_COMMISSION,
           })
         }
         console.log(
@@ -310,6 +313,7 @@ export const updateCommands = (config: DefaultConfigType) => {
       }
       if (options.background) {
         let version = options.version
+        let dzVersion = isTestnet ? VERSION_DZ_TESTNET : VERSION_DZ_MAINNET
         let isMajorThree = version.startsWith('3') ? true : false
         await updateDefaultConfig({
           TESTNET_SOLANA_VERSION: VERSION_TESTNET,
@@ -320,6 +324,7 @@ export const updateCommands = (config: DefaultConfigType) => {
         }
         updateLogrotate(isFrankendancer)
         setupSolvService(isTestnet)
+        updateDZ(dzVersion, isTestnet)
         if (isJito) {
           const jitoPatch = JITO_PATCH
           const jitoTagBase = `v${version}-jito`
@@ -381,7 +386,7 @@ export const updateCommands = (config: DefaultConfigType) => {
         updateSolv()
       }
       if (options.dz) {
-        installDZ(dzVersion, isTestnet)
+        updateDZ(dzVersion, isTestnet)
       }
     })
 }

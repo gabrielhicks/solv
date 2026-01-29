@@ -3,8 +3,8 @@ import jagsnapService from '../setup/template/firedancer/jagsnapService'
 import jagsnapTimer from '../setup/template/firedancer/jagsnapTimer'
 
 const installJagSnap = (region: string) => {
-  const {filePath: servicePath, body: serviceBody} = jagsnapService(region)
-  const {filePath: timerPath, body: timerBody} = jagsnapTimer(region)
+  const { filePath: servicePath, body: serviceBody } = jagsnapService(region)
+  const { filePath: timerPath, body: timerBody } = jagsnapTimer(region)
   execSync(`echo "${serviceBody}" | sudo tee ${servicePath} > /dev/null`)
   execSync(`echo "${timerBody}" | sudo tee ${timerPath} > /dev/null`)
   spawnSync(
@@ -18,90 +18,29 @@ const installJagSnap = (region: string) => {
     shell: true,
     stdio: 'inherit',
   })
+  spawnSync(`sudo apt install ipset iptables -y`, {
+    shell: true,
+    stdio: 'inherit',
+  })
+  spawnSync(`sudo iptables -A INPUT -p tcp --dport 18899 -j ACCEPT`, {
+    shell: true,
+    stdio: 'inherit',
+  })
   spawnSync(
-    `sudo cp /home/solv/jag-snap/jag-snap-fw.sh /usr/local/bin/`,
+    `sudo iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT`,
     {
       shell: true,
       stdio: 'inherit',
     },
   )
-  spawnSync(
-    `sudo chown solv:solv /usr/local/bin/jag-snap-fw.sh`,
-    {
-      shell: true,
-      stdio: 'inherit',
-    },
-  )
-  spawnSync(
-    `sudo chmod 755 /usr/local/bin/jag-snap-fw.sh`,
-    {
-      shell: true,
-      stdio: 'inherit',
-    },
-  )
-  spawnSync(
-    `sudo useradd -m -s /bin/false jag-snap-fw`,
-    {
-      shell: true,
-      stdio: 'inherit',
-    },
-  )
-  spawnSync(
-    `sudo touch /etc/sudoers.d/jag-snap-fw`,
-    {
-      shell: true,
-      stdio: 'inherit',
-    },
-  )
-  spawnSync(
-    `echo "jag-snap-fw ALL=(root) NOPASSWD: /sbin/iptables, /sbin/ipset" | sudo tee /etc/sudoers.d/jag-snap-fw > /dev/null`,
-    {
-      shell: true,
-      stdio: 'inherit',
-    },
-  )
-  spawnSync(
-    `sudo chmod 440 /etc/sudoers.d/jag-snap-fw`,
-    {
-      shell: true,
-      stdio: 'inherit',
-    },
-  )
-  spawnSync(
-    `sudo chmod 644 /etc/systemd/system/jag-snap-fw.service`,
-    {
-      shell: true,
-      stdio: 'inherit',
-    },
-  )
-  spawnSync(
-    `sudo chmod 644 /etc/systemd/system/jag-snap-fw.timer`,
-    {
-      shell: true,
-      stdio: 'inherit',
-    },
-  )
-  spawnSync(
-    `sudo systemctl daemon-reload`,
-    {
-      shell: true,
-      stdio: 'inherit',
-    },
-  )
-  spawnSync(
-    `sudo systemctl enable jag-snap-fw.timer`,
-    {
-      shell: true,
-      stdio: 'inherit',
-    },
-  )
-  spawnSync(
-    `sudo systemctl start jag-snap-fw.timer`,
-    {
-      shell: true,
-      stdio: 'inherit',
-    },
-  )
+  spawnSync(`sudo ufw allow 18899/tcp`, {
+    shell: true,
+    stdio: 'inherit',
+  })
+  spawnSync(`sudo ufw reload`, {
+    shell: true,
+    stdio: 'inherit',
+  })
   spawnSync(
     `cd /home/solv/jag-snap && docker build -t jag-snap . && docker run -d --name jag-snap --network host jag-snap`,
     {

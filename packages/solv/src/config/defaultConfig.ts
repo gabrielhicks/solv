@@ -13,6 +13,7 @@ import {
   VERSION_MAINNET,
   VERSION_NODE,
   VERSION_TESTNET,
+  MEV_COMMISSION,
 } from '@/config/versionConfig'
 import {
   ACCOUNTS_PATH,
@@ -52,8 +53,9 @@ const DEFAULT_CONFIG: DefaultConfigType = {
   XDP: false,
   ZERO_COPY: false,
   JAG_SNAPSHOTS: false,
-  JAG_REGION: "",
-  CHRONY_LOCATION: ""
+  JAG_REGION: '',
+  CHRONY_LOCATION: '',
+  MEV_COMMISSION: MEV_COMMISSION,
 }
 
 export default DEFAULT_CONFIG

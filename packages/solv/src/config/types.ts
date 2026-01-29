@@ -38,4 +38,5 @@ export type DefaultConfigType = {
   JAG_SNAPSHOTS: boolean
   JAG_REGION: string
   CHRONY_LOCATION: string
+  MEV_COMMISSION: number
 }

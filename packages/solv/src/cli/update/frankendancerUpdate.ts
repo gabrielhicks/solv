@@ -1,35 +1,34 @@
-import { VERSION_FIREDANCER, VERSION_FIREDANCER_TESTNET } from '@/config/versionConfig'
+import {
+  VERSION_FIREDANCER,
+  VERSION_FIREDANCER_TESTNET,
+} from '@/config/versionConfig'
 import { spawnSync } from 'child_process'
 import { promises as fs } from 'fs'
-import path from 'path';
+import path from 'path'
 import { DefaultConfigType } from '@/config/types'
 import { Network } from '@/config/enums'
-import modDiff from '../setup/template/firedancer/mod';
+import modDiff from '../setup/template/firedancer/mod'
 
-export const frankendancerUpdate = async (config: DefaultConfigType, version?: string, mod = false) => {
+export const frankendancerUpdate = async (
+  config: DefaultConfigType,
+  version?: string,
+  mod = false,
+) => {
   const isTestnet = config.NETWORK === Network.TESTNET
-  const firedancerVersion = version || (isTestnet ? VERSION_FIREDANCER_TESTNET : VERSION_FIREDANCER)
+  const firedancerVersion =
+    version || (isTestnet ? VERSION_FIREDANCER_TESTNET : VERSION_FIREDANCER)
   const isModified = mod || config.MOD
-  const {filePath: modFilePath, body: modDiffContent} = modDiff();
-  // Update and restart DZ
-  spawnSync(
-    `sudo apt install --only-upgrade doublezero doublezero-solana -y`,
-    { shell: true, stdio: 'inherit' },
-  )
-  spawnSync(
-    `sudo systemctl restart doublezerod`,
-    { shell: true, stdio: 'inherit' },
-  )
+  const { filePath: modFilePath, body: modDiffContent } = modDiff()
   // Update Firedancer
   if (isModified) {
-    spawnSync(
-      `git -C /home/solv/firedancer fetch origin`,
-      { shell: true, stdio: 'inherit' },
-    )
-    spawnSync(
-      `git -C /home/solv/firedancer checkout v${firedancerVersion}`,
-      { shell: true, stdio: 'inherit' },
-    )
+    spawnSync(`git -C /home/solv/firedancer fetch origin`, {
+      shell: true,
+      stdio: 'inherit',
+    })
+    spawnSync(`git -C /home/solv/firedancer checkout v${firedancerVersion}`, {
+      shell: true,
+      stdio: 'inherit',
+    })
     spawnSync(
       `git -C /home/solv/firedancer submodule update --init --recursive`,
       { shell: true, stdio: 'inherit' },
@@ -42,8 +41,8 @@ export const frankendancerUpdate = async (config: DefaultConfigType, version?: s
       `git -C /home/solv/firedancer config --global user.name "Your Name"`,
       { shell: true, stdio: 'inherit' },
     )
-    await fs.mkdir(path.dirname(modFilePath), { recursive: true });
-    await fs.writeFile(modFilePath, modDiffContent, "utf8");
+    await fs.mkdir(path.dirname(modFilePath), { recursive: true })
+    await fs.writeFile(modFilePath, modDiffContent, 'utf8')
     spawnSync(`sudo chown solv:solv "${modFilePath}"`, {
       shell: true,
       stdio: 'inherit',
@@ -69,14 +68,14 @@ export const frankendancerUpdate = async (config: DefaultConfigType, version?: s
       cwd: '/home/solv/firedancer',
     })
   } else {
-    spawnSync(
-      `git -C /home/solv/firedancer fetch origin`,
-      { shell: true, stdio: 'inherit' },
-    )
-    spawnSync(
-      `git -C /home/solv/firedancer checkout v${firedancerVersion}`,
-      { shell: true, stdio: 'inherit' },
-    )
+    spawnSync(`git -C /home/solv/firedancer fetch origin`, {
+      shell: true,
+      stdio: 'inherit',
+    })
+    spawnSync(`git -C /home/solv/firedancer checkout v${firedancerVersion}`, {
+      shell: true,
+      stdio: 'inherit',
+    })
     spawnSync(
       `git -C /home/solv/firedancer submodule update --init --recursive`,
       { shell: true, stdio: 'inherit' },
@@ -92,19 +91,16 @@ export const frankendancerUpdate = async (config: DefaultConfigType, version?: s
       cwd: '/home/solv/firedancer',
     },
   )
-  spawnSync(
-    `make -j fdctl solana`,
-    {
-      shell: true,
-      stdio: 'inherit',
-      cwd: '/home/solv/firedancer',
-    },
-  )
+  spawnSync(`make -j fdctl solana`, {
+    shell: true,
+    stdio: 'inherit',
+    cwd: '/home/solv/firedancer',
+  })
 
-  spawnSync(
-    `sudo systemctl restart port-relay`,
-    { shell: true, stdio: 'inherit' },
-  )
+  spawnSync(`sudo systemctl restart port-relay`, {
+    shell: true,
+    stdio: 'inherit',
+  })
 
   spawnSync(`sudo systemctl disable solv.service`, {
     stdio: 'inherit',

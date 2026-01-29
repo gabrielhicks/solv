@@ -1,5 +1,11 @@
 # @gabrielhicks/solv
 
+## 5.6.37
+
+### Better Jag Snaps, DZ update, MEV commission
+
+do it all in solv4.config.json
+
 ## 5.6.36
 
 ### Testnet Update
