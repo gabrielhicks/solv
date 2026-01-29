@@ -79,6 +79,7 @@ export type UpdateOptions = {
   service: boolean
   jagsnap: boolean
   dz: boolean
+  configOnce: boolean
 }
 
 export const updateCommands = (config: DefaultConfigType) => {
@@ -130,6 +131,7 @@ export const updateCommands = (config: DefaultConfigType) => {
     .option('-f, --firewall', 'Update Firewall', false)
     .option('--migrate-config', 'Migrate Solv Config', false)
     .option('--config', 'Update Solv Config Default Solana Version', false)
+    .option('--configOnce', 'Update Solv Config ONCE', false)
     .option('--auto', 'Auto Update', false)
     .option('--mod', 'Modified Versions', false)
     .option('--startup', 'Start up Script', false)
@@ -205,11 +207,50 @@ export const updateCommands = (config: DefaultConfigType) => {
           JAG_SNAPSHOTS: false,
           JAG_REGION: '',
           CHRONY_LOCATION: '',
-          MEV_COMMISSION: 1000,
+          MEV_COMMISSION: 0,
         }
 
         await updateDefaultConfig(newConfigBody)
         // --- End of Temporarily!!
+      }
+      if (options.configOnce) {
+        await updateDefaultConfig({
+          TESTNET_SOLANA_VERSION: VERSION_TESTNET,
+          MAINNET_SOLANA_VERSION: VERSION_MAINNET,
+          MOD: false,
+          XDP: false,
+          ZERO_COPY: false,
+          JAG_SNAPSHOTS: false,
+          JAG_REGION: '',
+          CHRONY_LOCATION: '',
+          MEV_COMMISSION: 0,
+        })
+        if (isJito) {
+          const jitoVersion = isTestnet
+            ? VERSION_JITO_TESTNET
+            : VERSION_JITO_MAINNET
+          await updateJitoSolvConfig({
+            version: jitoVersion,
+            tag: `v${jitoVersion}`,
+            commissionBps: config.MEV_COMMISSION,
+          })
+        }
+        if (isBam) {
+          const bamVersion = isTestnet
+            ? VERSION_BAM_TESTNET
+            : VERSION_BAM_MAINNET
+          await updateJitoSolvConfig({
+            version: bamVersion,
+            tag: `v${bamVersion}`,
+            commissionBps: config.MEV_COMMISSION,
+          })
+        }
+        console.log(
+          chalk.green(
+            '✔️ Updated Solv Config Default Solana Version\n\n You can now run `solv i` to install the latest version',
+          ),
+        )
+        return
       }
       if (options.config) {
         await updateDefaultConfig({
