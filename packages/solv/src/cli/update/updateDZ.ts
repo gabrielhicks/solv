@@ -2,11 +2,22 @@ import { spawnSync } from 'node:child_process'
 
 const updateDZ = (version: string, isTestnet: boolean) => {
   if (isTestnet) {
+    spawnSync(
+      `curl -1sLf https://dl.cloudsmith.io/public/malbeclabs/doublezero-testnet/setup.deb.sh | sudo -E bash`,
+      {
+        shell: true,
+        stdio: 'inherit',
+      },
+    )
+    spawnSync(`sudo apt-get install doublezero`, {
+      shell: true,
+      stdio: 'inherit',
+    })
     spawnSync(`sudo apt update -y`, {
       shell: true,
       stdio: 'inherit',
     })
-    spawnSync(`sudo apt install --upgrade-only doublezero=${version} -y`, {
+    spawnSync(`sudo apt install doublezero=${version} -y`, {
       shell: true,
       stdio: 'inherit',
     })

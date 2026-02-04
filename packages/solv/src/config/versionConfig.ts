@@ -16,6 +16,6 @@ export const VERSION_NODE = '20.17.0'
 export const VERSION_FIREDANCER_TESTNET = '0.811.30108'
 export const VERSION_FIREDANCER = '0.808.30014'
 export const FIREDANCER_PATCH = ''
-export const VERSION_DZ_TESTNET = '0.8.5'
+export const VERSION_DZ_TESTNET = '0.8.5-1'
 export const VERSION_DZ_MAINNET = '0.8.2-1'
 export const MEV_COMMISSION = 1000

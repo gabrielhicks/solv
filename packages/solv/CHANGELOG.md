@@ -1,5 +1,11 @@
 # @gabrielhicks/solv
 
+## 5.6.42
+
+### DZ Update Flag
+
+bump testnet dz update
+
 ## 5.6.41
 
 ### DZ Update Flag
