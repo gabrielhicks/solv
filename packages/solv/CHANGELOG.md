@@ -1,5 +1,11 @@
 # @gabrielhicks/solv
 
+## 5.6.39
+
+### DZ Update Flag
+
+bump testnet dz update
+
 ## 5.6.38
 
 ### Better Jag Snaps, DZ update, MEV commission
