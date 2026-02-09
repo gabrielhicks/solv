@@ -1,5 +1,11 @@
 # @gabrielhicks/solv
 
+## 5.6.43
+
+### Upgrade Mainnet to 3.1
+
+Update to mainnet 3.1
+
 ## 5.6.42
 
 ### DZ Update Flag
