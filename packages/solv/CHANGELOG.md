@@ -1,5 +1,11 @@
 # @gabrielhicks/solv
 
+## 5.7.0
+
+### Upgrade Mainnet to 3.1.9
+
+Update to mainnet 3.1.9
+
 ## 5.6.43
 
 ### Upgrade Mainnet to 3.1
