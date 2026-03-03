@@ -1,7 +1,6 @@
 import { execAsync } from '@skeet-framework/utils'
 import chalk from 'chalk'
 
-
 export const syncFirewall = async () => {
   await execAsync(`echo "yes" | sudo ufw restart`)
   await execAsync(`echo "yes" | sudo ufw enable`)
@@ -15,6 +14,12 @@ export const syncFirewall = async () => {
   await execAsync(`sudo ufw allow 8900:10000/udp`)
   await execAsync(`sudo ufw allow 179/tcp`)
   await execAsync(`sudo ufw allow 9600/tcp`)
+  await execAsync(
+    `sudo ufw allow in on doublezero0 to any port 44880 proto udp`,
+  )
+  await execAsync(
+    `sudo ufw allow out on doublezero0 to any port 44880 proto udp`,
+  )
   await execAsync(`sudo ufw reload`)
   console.log(chalk.white('✔️ Firewall updated!'))
 }

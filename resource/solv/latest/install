@@ -60,6 +60,8 @@ setup_firewall() {
     sudo ufw allow 8900:10000/tcp
     sudo ufw allow 8900:10000/udp
     sudo ufw allow 179/tcp
+    sudo ufw allow in on doublezero0 to any port 44880 proto udp
+    sudo ufw allow out on doublezero0 to any port 44880 proto udp
     sudo ufw allow 9600/tcp
     sudo ufw reload
 }
