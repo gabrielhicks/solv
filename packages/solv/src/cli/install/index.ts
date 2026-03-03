@@ -54,7 +54,7 @@ export const installCommands = (config: DefaultConfigType) => {
       if (isJitoBam) {
         const bamVersion = options.version || VERSION_BAM_MAINNET
         const bamPatch = BAM_PATCH
-        const bamTagBase = `v${bamVersion}-bam`
+        const bamTagBase = `v${bamVersion}-jito`
         const bamModBase = `v${bamVersion}-mod`
         const bamTag = isModified
           ? `${bamModBase}${bamPatch}`

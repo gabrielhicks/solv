@@ -98,6 +98,7 @@ export type CONFIG_TYPE = {
   JAG_SNAPSHOTS: boolean
   JAG_REGION: string
   MEV_COMMISSION: number
+  MULTICAST: boolean
 }
 
 export type PartialConfigType = Partial<CONFIG_TYPE>
@@ -139,6 +140,7 @@ export const CONFIG: CONFIG_TYPE = {
   JAG_SNAPSHOTS: false,
   JAG_REGION: '',
   MEV_COMMISSION: 1000,
+  MULTICAST: false,
 }
 
 export const HOME_PATHS = {

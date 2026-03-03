@@ -1,5 +1,11 @@
 # @gabrielhicks/solv
 
+## 5.7.1
+
+### Add DoubleZero Multicast
+
+Added configuration to enable DZ MultiCast on Jito flavored clients
+
 ## 5.7.0
 
 ### Upgrade Mainnet to 3.1.9

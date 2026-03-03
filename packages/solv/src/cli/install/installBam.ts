@@ -1,10 +1,15 @@
 import { spawnSync } from 'child_process'
 
-export const installBam = (version: string, mod = false, isMajorThree = false, xdp = false) => {
-  if(isMajorThree) {
-    if(mod) {
+export const installBam = (
+  version: string,
+  mod = false,
+  isMajorThree = false,
+  xdp = false,
+) => {
+  if (isMajorThree) {
+    if (mod) {
       spawnSync(
-        `sh -c "$(curl --netrc-optional -sSfL https://raw.githubusercontent.com/gabrielhicks/jito-bam/${version}/installer)"`,
+        `sh -c "$(curl --netrc-optional -sSfL https://raw.githubusercontent.com/gabrielhicks/jito-solana/${version}/installer)"`,
         {
           shell: true,
           stdio: 'inherit',
@@ -20,7 +25,7 @@ export const installBam = (version: string, mod = false, isMajorThree = false, x
         stdio: 'inherit',
       })
       spawnSync(
-        `git -C /tmp/${version} clone https://github.com/jito-labs/bam-client.git --recurse-submodules .`,
+        `git -C /tmp/${version} clone https://github.com/jito-foundation/jito-solana.git --recurse-submodules .`,
         {
           shell: true,
           stdio: 'inherit',
@@ -55,7 +60,7 @@ export const installBam = (version: string, mod = false, isMajorThree = false, x
           stdio: 'inherit',
         },
       )
-      if(xdp) {
+      if (xdp) {
         spawnSync(
           `sudo setcap cap_net_raw,cap_net_admin,cap_bpf,cap_perfmon=p /home/solv/.local/share/solana/install/active_release/bin/agave-validator`,
           {
@@ -74,9 +79,9 @@ export const installBam = (version: string, mod = false, isMajorThree = false, x
       })
     }
   } else {
-    if(mod) {
+    if (mod) {
       spawnSync(
-        `sh -c "$(curl --netrc-optional -sSfL https://raw.githubusercontent.com/gabrielhicks/jito-bam/${version}/installer)"`,
+        `sh -c "$(curl --netrc-optional -sSfL https://raw.githubusercontent.com/gabrielhicks/jito-solana/${version}/installer)"`,
         {
           shell: true,
           stdio: 'inherit',

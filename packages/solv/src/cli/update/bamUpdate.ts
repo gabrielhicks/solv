@@ -9,23 +9,23 @@ export const bamUpdate = (
   if (isMajorThree) {
     if (mod) {
       spawnSync(
-        `sh -c "$(curl --netrc-optional -sSfL https://raw.githubusercontent.com/gabrielhicks/jito-bam/${tag}/installer)"`,
+        `sh -c "$(curl --netrc-optional -sSfL https://raw.githubusercontent.com/gabrielhicks/jito-solana/${tag}/installer)"`,
         {
           shell: true,
           stdio: 'inherit',
         },
       )
     } else {
-      spawnSync(`mkdir /tmp/${tag}-bam`, {
+      spawnSync(`mkdir /tmp/${tag}`, {
         shell: true,
         stdio: 'inherit',
       })
-      spawnSync(`cd /tmp/${tag}-bam`, {
+      spawnSync(`cd /tmp/${tag}`, {
         shell: true,
         stdio: 'inherit',
       })
       spawnSync(
-        `git clone https://github.com/jito-labs/bam-client.git --recurse-submodules /tmp/${tag}`,
+        `git clone https://github.com/jito-foundation/jito-solana.git --recurse-submodules /tmp/${tag}`,
         {
           shell: true,
           stdio: 'inherit',
@@ -77,7 +77,7 @@ export const bamUpdate = (
   } else {
     if (mod) {
       spawnSync(
-        `sh -c "$(curl --netrc-optional -sSfL https://raw.githubusercontent.com/gabrielhicks/jito-bam/${tag}/installer)"`,
+        `sh -c "$(curl --netrc-optional -sSfL https://raw.githubusercontent.com/gabrielhicks/jito-solana/${tag}/installer)"`,
         {
           shell: true,
           stdio: 'inherit',

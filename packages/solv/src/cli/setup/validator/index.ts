@@ -84,7 +84,7 @@ const setupMainnetValidator = async (
       console.log('JITO Validator Setup for Mainnet')
       const bamConfig = await readOrCreateJitoConfig()
       const bamPatch = BAM_PATCH
-      const bamTagBase = `v${version}-bam`
+      const bamTagBase = `v${version}-jito`
       const bamModBase = `v${version}-mod`
       const bamTag = mod
         ? `${bamModBase}${bamPatch}`
@@ -140,7 +140,7 @@ const setupTestnetValidator = async (
     ? `${jitoModBase}${jitoPatch}`
     : `${jitoTagBase}${jitoPatch}`
   const bamPatch = BAM_PATCH
-  const bamTagBase = `v${version}-bam`
+  const bamTagBase = `v${version}-jito`
   const bamModBase = `v${version}-mod`
   const bamTag = mod ? `${bamModBase}${bamPatch}` : `${bamTagBase}${bamPatch}`
   installDZ(VERSION_DZ_TESTNET, true)

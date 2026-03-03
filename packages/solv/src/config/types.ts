@@ -39,4 +39,5 @@ export type DefaultConfigType = {
   JAG_REGION: string
   CHRONY_LOCATION: string
   MEV_COMMISSION: number
+  MULTICAST: boolean
 }

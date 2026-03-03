@@ -208,6 +208,7 @@ export const updateCommands = (config: DefaultConfigType) => {
           JAG_REGION: '',
           CHRONY_LOCATION: '',
           MEV_COMMISSION: 0,
+          MULTICAST: false,
         }
 
         await updateDefaultConfig(newConfigBody)
@@ -385,7 +386,7 @@ export const updateCommands = (config: DefaultConfigType) => {
         }
         if (isBam) {
           const bamPatch = BAM_PATCH
-          const bamTagBase = `v${version}-bam`
+          const bamTagBase = `v${version}-jito`
           const bamModBase = `v${version}-mod`
           const bamTag =
             options.mod || isModded

@@ -17,27 +17,39 @@ export const startJitoMainnetScript = (
   config: DefaultConfigType,
   solanaCLI = 'agave-validator',
 ) => {
-  const {validatorKeyAddress} = getKeypairsInfo(config)
+  const { validatorKeyAddress } = getKeypairsInfo(config)
 
   const xdpEnabled = config.XDP
   const zeroCopyEnabled = config.ZERO_COPY
   const jagSnapshotsEnabled = config.JAG_SNAPSHOTS
   const localIp = execSync(`hostname -I | awk '{print $1}'`).toString().trim()
-  const defaultPort = "18899"
+  const defaultPort = '18899'
   const publicRpc = `${localIp}:${defaultPort}`
-  const jagFlags = jagSnapshotsEnabled ? [`--public-rpc-address ${publicRpc} \\`,`--no-port-check \\`].join('\n') : [`--full-rpc-api \\`, `--private-rpc \\`].join('\n')
-  const xdpFlags = xdpEnabled ? [`--experimental-retransmit-xdp-cpu-cores 1 \\`,`--experimental-poh-pinned-cpu-core 10 \\`].join('\n') : ''
-  const zeroCopyFlag = zeroCopyEnabled ? [`--experimental-retransmit-xdp-zero-copy \\`].join('\n') : ''
-
-  const knownValidators = MAINNET_KNOWN_VALIDATORS;
+  const jagFlags = jagSnapshotsEnabled
+  const multicastEnabled = config.MULTICAST
+    ? [`--public-rpc-address ${publicRpc} \\`, `--no-port-check \\`].join('\n')
+    : [`--full-rpc-api \\`, `--private-rpc \\`].join('\n')
+  const xdpFlags = xdpEnabled
+    ? [
+        `--experimental-retransmit-xdp-cpu-cores 1 \\`,
+        `--experimental-poh-pinned-cpu-core 10 \\`,
+      ].join('\n')
+    : ''
+  const zeroCopyFlag = zeroCopyEnabled
+    ? [`--experimental-retransmit-xdp-zero-copy \\`].join('\n')
+    : ''
+  const multicastFlag = multicastEnabled
+    ? [`--shred-receiver-address 233.84.178.1:7733 \\`].join('\n')
+    : ''
+  const knownValidators = MAINNET_KNOWN_VALIDATORS
 
   const filteredValidators = knownValidators.filter(
-    (address) => address !== validatorKeyAddress
-  );
+    (address) => address !== validatorKeyAddress,
+  )
 
   const validatorArgs = filteredValidators
     .map((address) => `--known-validator ${address} \\`)
-    .join('\n');
+    .join('\n')
 
   const script = `#!/bin/bash
 exec ${solanaCLI} \\
@@ -74,10 +86,11 @@ ${jagFlags}
 --maximum-incremental-snapshots-to-retain 2 \\
 ${xdpFlags}
 ${zeroCopyFlag}
+${multicastFlag}
 `
-// To be added later for XDP
-// --experimental-retransmit-xdp-cpu-cores 2 \\
-// --experimental-retransmit-xdp-zero-copy \\
-// --experimental-poh-pinned-cpu-core 6 \\
+  // To be added later for XDP
+  // --experimental-retransmit-xdp-cpu-cores 2 \\
+  // --experimental-retransmit-xdp-zero-copy \\
+  // --experimental-poh-pinned-cpu-core 6 \\
   return script
 }

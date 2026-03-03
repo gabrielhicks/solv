@@ -56,6 +56,7 @@ const DEFAULT_CONFIG: DefaultConfigType = {
   JAG_REGION: '',
   CHRONY_LOCATION: '',
   MEV_COMMISSION: MEV_COMMISSION,
+  MULTICAST: false,
 }
 
 export default DEFAULT_CONFIG
