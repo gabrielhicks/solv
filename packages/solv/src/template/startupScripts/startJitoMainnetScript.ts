@@ -26,6 +26,8 @@ export const startJitoMainnetScript = (
   const defaultPort = '18899'
   const publicRpc = `${localIp}:${defaultPort}`
   const jagFlags = jagSnapshotsEnabled
+    ? [`--public-rpc-address ${publicRpc} \\`, `--no-port-check \\`].join('\n')
+    : [`--full-rpc-api \\`, `--private-rpc \\`].join('\n')
   const multicastEnabled = config.MULTICAST
     ? [`--public-rpc-address ${publicRpc} \\`, `--no-port-check \\`].join('\n')
     : [`--full-rpc-api \\`, `--private-rpc \\`].join('\n')

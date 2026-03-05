@@ -1,5 +1,11 @@
 # @gabrielhicks/solv
 
+## 5.7.3
+
+### Add DoubleZero Multicast
+
+Added sync firewall for dz
+
 ## 5.7.2
 
 ### Add DoubleZero Multicast
