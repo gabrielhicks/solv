@@ -1,5 +1,11 @@
 # @gabrielhicks/solv
 
+## 5.7.5
+
+### Bump Agave - all versions
+
+Jito to 3.1.10 on test until 4.0
+
 ## 5.7.4
 
 ### Bump Agave - all versions
