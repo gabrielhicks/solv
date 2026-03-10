@@ -1,5 +1,11 @@
 # @gabrielhicks/solv
 
+## 5.7.4
+
+### Bump Agave - all versions
+
+Mainnet to 3.1.10 and test to 4.0
+
 ## 5.7.3
 
 ### Add DoubleZero Multicast
