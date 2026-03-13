@@ -1,5 +1,11 @@
 # @gabrielhicks/solv
 
+## 5.7.6
+
+### Telegraf
+
+patches
+
 ## 5.7.5
 
 ### Bump Agave - all versions
