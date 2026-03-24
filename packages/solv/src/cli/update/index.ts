@@ -22,6 +22,7 @@ import {
   DELINQUENT_STAKE_MAINNET,
   DELINQUENT_STAKE_TESTNET,
   JITO_PATCH,
+  JITO_TESTNET_PATCH,
   VERSION_BAM_MAINNET,
   VERSION_BAM_TESTNET,
   VERSION_DZ_MAINNET,
@@ -368,7 +369,7 @@ export const updateCommands = (config: DefaultConfigType) => {
         setupSolvService(isTestnet)
         updateDZ(dzVersion, isTestnet)
         if (isJito) {
-          const jitoPatch = JITO_PATCH
+          const jitoPatch = isTestnet ? JITO_TESTNET_PATCH : JITO_PATCH
           const jitoTagBase = `v${version}-jito`
           const jitoModBase = `v${version}-mod`
           const jitoTag =

@@ -48,6 +48,10 @@ export const startBamMainnetScript = (
     (address) => address !== validatorKeyAddress,
   )
 
+  const optionalFlags = [jagFlags, xdpFlags, zeroCopyFlag, multicastFlag]
+    .filter(Boolean)
+    .join('\n')
+
   const validatorArgs = filteredValidators
     .map((address) => `--known-validator ${address} \\`)
     .join('\n')
@@ -75,7 +79,6 @@ ${validatorArgs}
 --commission-bps ${commissionBps} \\
 --rpc-bind-address 127.0.0.1 \\
 --rpc-port 8899 \\
-${jagFlags}
 --block-engine-url ${blockEngineUrl} \\
 --shred-receiver-address ${shredReceiverAddr} \\
 --bam-url ${bamUrl} \\
@@ -86,9 +89,7 @@ ${jagFlags}
 --block-verification-method unified-scheduler \\
 --maximum-full-snapshots-to-retain 1 \\
 --maximum-incremental-snapshots-to-retain 2 \\
-${xdpFlags}
-${zeroCopyFlag}
-${multicastFlag}
+${optionalFlags}
 `
   // To be added later for XDP
   // --experimental-retransmit-xdp-cpu-cores 2 \\

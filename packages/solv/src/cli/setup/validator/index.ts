@@ -16,8 +16,11 @@ import { startBamTestnetScript } from '@/template/startupScripts/startBamTestnet
 import setupFiredancer from '../firedancer/setupFiredancer'
 import {
   AGAVE_PATCH,
+  AGAVE_TESTNET_PATCH,
   BAM_PATCH,
+  BAM_TESTNET_PATCH,
   JITO_PATCH,
+  JITO_TESTNET_PATCH,
   VERSION_DZ_MAINNET,
   VERSION_DZ_TESTNET,
 } from '@/config/versionConfig'
@@ -130,16 +133,16 @@ const setupTestnetValidator = async (
   mod = modConfig
   let startupScript = ''
   let isMajorThree = version.startsWith('3') ? true : false
-  const agavePatch = AGAVE_PATCH
+  const agavePatch = AGAVE_TESTNET_PATCH
   const agaveTagBase = `v${version}`
   const agaveTag = `${agaveTagBase}${agavePatch}`
-  const jitoPatch = JITO_PATCH
+  const jitoPatch = JITO_TESTNET_PATCH
   const jitoTagBase = `v${version}-jito`
   const jitoModBase = `v${version}-mod`
   const jitoTag = mod
     ? `${jitoModBase}${jitoPatch}`
     : `${jitoTagBase}${jitoPatch}`
-  const bamPatch = BAM_PATCH
+  const bamPatch = BAM_TESTNET_PATCH
   const bamTagBase = `v${version}-jito`
   const bamModBase = `v${version}-mod`
   const bamTag = mod ? `${bamModBase}${bamPatch}` : `${bamTagBase}${bamPatch}`
