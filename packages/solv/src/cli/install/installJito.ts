@@ -1,9 +1,14 @@
 import { VERSION_JITO_MAINNET } from '@/config/versionConfig'
 import { spawnSync } from 'child_process'
 
-export const installJito = (version = VERSION_JITO_MAINNET, mod = false, isMajorThree = false, xdp = false) => {
-  if(isMajorThree) {
-    if(mod) {
+export const installJito = (
+  version = VERSION_JITO_MAINNET,
+  mod = false,
+  isMajorThree = false,
+  xdp = false,
+) => {
+  if (isMajorThree) {
+    if (mod) {
       spawnSync(
         `sh -c "$(curl --netrc-optional -sSfL https://raw.githubusercontent.com/gabrielhicks/jito-solana/${version}/installer)"`,
         {
@@ -56,7 +61,7 @@ export const installJito = (version = VERSION_JITO_MAINNET, mod = false, isMajor
           stdio: 'inherit',
         },
       )
-      if(xdp) {
+      if (xdp) {
         spawnSync(
           `sudo setcap cap_net_raw,cap_net_admin,cap_bpf,cap_perfmon=p /home/solv/.local/share/solana/install/active_release/bin/agave-validator`,
           {
@@ -73,24 +78,6 @@ export const installJito = (version = VERSION_JITO_MAINNET, mod = false, isMajor
         shell: true,
         stdio: 'inherit',
       })
-    }
-  } else {
-    if(mod) {
-      spawnSync(
-        `sh -c "$(curl --netrc-optional -sSfL https://raw.githubusercontent.com/gabrielhicks/jito-solana/${version}/installer)"`,
-        {
-          shell: true,
-          stdio: 'inherit',
-        },
-      )
-    } else {
-      spawnSync(
-        `sh -c "$(curl --netrc-optional -sSfL https://release.jito.wtf/${version}/install)"`,
-        {
-          shell: true,
-          stdio: 'inherit',
-        },
-      )
     }
   }
 }

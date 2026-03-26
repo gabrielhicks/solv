@@ -58,7 +58,7 @@ const setupMainnetValidator = async (
     case ValidatorType.SOLANA:
       const agavePatch = AGAVE_PATCH
       const agaveTagBase = `v${version}`
-      const agaveTag = `${agaveTagBase}${agavePatch}`
+      const agaveTag = `${agaveTagBase}`
       installAgave(agaveTag)
       startupScript = startMainnetValidatorScript(config)
       break
@@ -69,8 +69,8 @@ const setupMainnetValidator = async (
       console.log('JITO Validator Setup for Mainnet')
       const jitoConfig = await readOrCreateJitoConfig()
       const jitoPatch = JITO_PATCH
-      const jitoTagBase = `v${version}${jitoPatch}-jito`
-      const jitoModBase = `v${version}${jitoPatch}-mod`
+      const jitoTagBase = `v${version}-jito`
+      const jitoModBase = `v${version}-mod`
       const jitoTag = mod ? `${jitoModBase}` : `${jitoTagBase}`
       installJito(jitoTag, mod, isMajorThree, xdpEnabled)
       startupScript = startJitoMainnetScript(
@@ -85,8 +85,8 @@ const setupMainnetValidator = async (
       console.log('JITO Validator Setup for Mainnet')
       const bamConfig = await readOrCreateJitoConfig()
       const bamPatch = BAM_PATCH
-      const bamTagBase = `v${version}${bamPatch}-jito`
-      const bamModBase = `v${version}${bamPatch}-mod`
+      const bamTagBase = `v${version}-jito`
+      const bamModBase = `v${version}-mod`
       const bamTag = mod ? `${bamModBase}` : `${bamTagBase}`
       installBam(bamTag, mod, isMajorThree, xdpEnabled)
       startupScript = startBamMainnetScript(
@@ -131,14 +131,14 @@ const setupTestnetValidator = async (
   let isMajorThree = version.startsWith('3') ? true : false
   const agavePatch = AGAVE_TESTNET_PATCH
   const agaveTagBase = `v${version}`
-  const agaveTag = `${agaveTagBase}${agavePatch}`
+  const agaveTag = `${agaveTagBase}`
   const jitoPatch = JITO_TESTNET_PATCH
-  const jitoTagBase = `v${version}${jitoPatch}-jito`
-  const jitoModBase = `v${version}${jitoPatch}-mod`
+  const jitoTagBase = `v${version}-jito`
+  const jitoModBase = `v${version}-mod`
   const jitoTag = mod ? `${jitoModBase}` : `${jitoTagBase}`
   const bamPatch = BAM_TESTNET_PATCH
-  const bamTagBase = `v${version}${bamPatch}-jito`
-  const bamModBase = `v${version}${bamPatch}-mod`
+  const bamTagBase = `v${version}-jito`
+  const bamModBase = `v${version}-mod`
   const bamTag = mod ? `${bamModBase}` : `${bamTagBase}`
   installDZ(VERSION_DZ_TESTNET, true)
   switch (validatorType) {

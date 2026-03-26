@@ -78,23 +78,5 @@ export const installBam = (
         stdio: 'inherit',
       })
     }
-  } else {
-    if (mod) {
-      spawnSync(
-        `sh -c "$(curl --netrc-optional -sSfL https://raw.githubusercontent.com/gabrielhicks/jito-solana/${version}/installer)"`,
-        {
-          shell: true,
-          stdio: 'inherit',
-        },
-      )
-    } else {
-      spawnSync(
-        `sh -c "$(curl --netrc-optional -sSfL https://release.jito.wtf/${version}/install)"`,
-        {
-          shell: true,
-          stdio: 'inherit',
-        },
-      )
-    }
   }
 }

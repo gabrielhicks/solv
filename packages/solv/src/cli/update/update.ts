@@ -6,7 +6,7 @@ import { AGAVE_PATCH } from '@/config/versionConfig'
 
 export const updateVersion = async (version: string) => {
   const agavePatch = AGAVE_PATCH
-  const agaveTagBase = `v${version}${agavePatch}`
+  const agaveTagBase = `v${version}`
   const agaveTag = `${agaveTagBase}`
   installAgave(agaveTag)
   return

@@ -370,8 +370,8 @@ export const updateCommands = (config: DefaultConfigType) => {
         updateDZ(dzVersion, isTestnet)
         if (isJito) {
           const jitoPatch = isTestnet ? JITO_TESTNET_PATCH : JITO_PATCH
-          const jitoTagBase = `v${version}${jitoPatch}-jito`
-          const jitoModBase = `v${version}${jitoPatch}-mod`
+          const jitoTagBase = `v${version}-jito`
+          const jitoModBase = `v${version}-mod`
           const jitoTag =
             options.mod || isModded ? `${jitoModBase}` : `${jitoTagBase}`
           jitoUpdate(jitoTag, options.mod || isModded, isMajorThree, xdpEnabled)
@@ -385,8 +385,8 @@ export const updateCommands = (config: DefaultConfigType) => {
         }
         if (isBam) {
           const bamPatch = BAM_PATCH
-          const bamTagBase = `v${version}${bamPatch}-jito`
-          const bamModBase = `v${version}${bamPatch}-mod`
+          const bamTagBase = `v${version}-jito`
+          const bamModBase = `v${version}-mod`
           const bamTag =
             options.mod || isModded ? `${bamModBase}` : `${bamTagBase}`
           bamUpdate(bamTag, options.mod || isModded, isMajorThree, xdpEnabled)
