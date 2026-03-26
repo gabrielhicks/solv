@@ -42,11 +42,9 @@ export const installCommands = (config: DefaultConfigType) => {
       if (isJito) {
         const jitoVersion = options.version || VERSION_JITO_MAINNET
         const jitoPatch = JITO_PATCH
-        const jitoTagBase = `v${jitoVersion}-jito`
-        const jitoModBase = `v${jitoVersion}-mod`
-        const jitoTag = isModified
-          ? `${jitoModBase}${jitoPatch}`
-          : `${jitoTagBase}${jitoPatch}`
+        const jitoTagBase = `v${jitoVersion}${jitoPatch}-jito`
+        const jitoModBase = `v${jitoVersion}${jitoPatch}-mod`
+        const jitoTag = isModified ? `${jitoModBase}` : `${jitoTagBase}`
         const isMajorThree = jitoVersion.startsWith('3') ? true : false
         jitoUpdate(jitoTag, isModified, isMajorThree, xdpEnabled)
         return
@@ -54,11 +52,9 @@ export const installCommands = (config: DefaultConfigType) => {
       if (isJitoBam) {
         const bamVersion = options.version || VERSION_BAM_MAINNET
         const bamPatch = BAM_PATCH
-        const bamTagBase = `v${bamVersion}-jito`
-        const bamModBase = `v${bamVersion}-mod`
-        const bamTag = isModified
-          ? `${bamModBase}${bamPatch}`
-          : `${bamTagBase}${bamPatch}`
+        const bamTagBase = `v${bamVersion}${bamPatch}-jito`
+        const bamModBase = `v${bamVersion}${bamPatch}-mod`
+        const bamTag = isModified ? `${bamModBase}` : `${bamTagBase}`
         const isMajorThree = bamVersion.startsWith('3') ? true : false
         bamUpdate(bamTag, isModified, isMajorThree, xdpEnabled)
         return

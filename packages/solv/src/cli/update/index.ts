@@ -371,11 +371,9 @@ export const updateCommands = (config: DefaultConfigType) => {
         if (isJito) {
           const jitoPatch = isTestnet ? JITO_TESTNET_PATCH : JITO_PATCH
           const jitoTagBase = `v${version}${jitoPatch}-jito`
-          const jitoModBase = `v${version}-mod`
+          const jitoModBase = `v${version}${jitoPatch}-mod`
           const jitoTag =
-            options.mod || isModded
-              ? `${jitoModBase}${jitoPatch}`
-              : `${jitoTagBase}${jitoPatch}`
+            options.mod || isModded ? `${jitoModBase}` : `${jitoTagBase}`
           jitoUpdate(jitoTag, options.mod || isModded, isMajorThree, xdpEnabled)
           await updateJitoSolvConfig({ version, tag: `v${version}` })
           await monitorUpdate(deliquentStake, true, minIdleTime)
@@ -387,12 +385,10 @@ export const updateCommands = (config: DefaultConfigType) => {
         }
         if (isBam) {
           const bamPatch = BAM_PATCH
-          const bamTagBase = `v${version}-jito`
-          const bamModBase = `v${version}-mod`
+          const bamTagBase = `v${version}${bamPatch}-jito`
+          const bamModBase = `v${version}${bamPatch}-mod`
           const bamTag =
-            options.mod || isModded
-              ? `${bamModBase}${bamPatch}`
-              : `${bamTagBase}${bamPatch}`
+            options.mod || isModded ? `${bamModBase}` : `${bamTagBase}`
           bamUpdate(bamTag, options.mod || isModded, isMajorThree, xdpEnabled)
           await updateJitoSolvConfig({ version, tag: `v${version}` })
           await monitorUpdate(deliquentStake, true, minIdleTime)
