@@ -23,8 +23,8 @@ const setupRpcNode = async (config: DefaultConfigType) => {
     case RpcType.JITO:
       console.log('JITO RPC Node Setup')
       const jitoPatch = JITO_PATCH
-      const jitoTagBase = `v${VERSION_JITO_TESTNET}-jito`
-      const jitoTag = `${jitoTagBase}${jitoPatch}`
+      const jitoTagBase = `v${VERSION_JITO_TESTNET}${jitoPatch}-jito`
+      const jitoTag = `${jitoTagBase}`
       installJito(jitoTag)
       startupScript = startJitoRPCScript()
       break
