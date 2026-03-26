@@ -370,7 +370,7 @@ export const updateCommands = (config: DefaultConfigType) => {
         updateDZ(dzVersion, isTestnet)
         if (isJito) {
           const jitoPatch = isTestnet ? JITO_TESTNET_PATCH : JITO_PATCH
-          const jitoTagBase = `v${version}-jito`
+          const jitoTagBase = `v${version}${jitoPatch}-jito`
           const jitoModBase = `v${version}-mod`
           const jitoTag =
             options.mod || isModded

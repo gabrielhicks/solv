@@ -137,7 +137,7 @@ const setupTestnetValidator = async (
   const agaveTagBase = `v${version}`
   const agaveTag = `${agaveTagBase}${agavePatch}`
   const jitoPatch = JITO_TESTNET_PATCH
-  const jitoTagBase = `v${version}-jito`
+  const jitoTagBase = `v${version}${jitoPatch}-jito`
   const jitoModBase = `v${version}-mod`
   const jitoTag = mod
     ? `${jitoModBase}${jitoPatch}`

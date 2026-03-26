@@ -1,5 +1,11 @@
 # @gabrielhicks/solv
 
+## 5.7.8
+
+### Agave 4.0
+
+Testnet bump
+
 ## 5.7.7
 
 ### Agave 4.0
