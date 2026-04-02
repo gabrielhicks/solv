@@ -204,29 +204,34 @@ const updateTelegrafForDoublezero = async (): Promise<void> => {
   let updatedConfig = currentConfig
 
   // Check for v_metrics influxdb output and add tagdrop if missing
-  const vMetricsInfluxRegex = /(\[\[outputs\.influxdb\]\]\s+[^\[]*?database\s*=\s*"v_metrics"[^\[]*?)(?=\[\[|$)/
+  const vMetricsInfluxRegex =
+    /(\[\[outputs\.influxdb\]\]\s+[^\[]*?database\s*=\s*"v_metrics"[^\[]*?)(?=\[\[|$)/
   const vMetricsMatch = currentConfig.match(vMetricsInfluxRegex)
-  if (vMetricsMatch && !vMetricsMatch[0].includes('[outputs.influxdb.tagdrop]')) {
-    updatedConfig = updatedConfig.replace(
-      vMetricsInfluxRegex,
-      (match) => {
-        // Add tagdrop before the closing of the section or next section
-        return match.trim() + '\n  [outputs.influxdb.tagdrop]\n    pipeline = ["doublezero"]'
-      },
-    )
+  if (
+    vMetricsMatch &&
+    !vMetricsMatch[0].includes('[outputs.influxdb.tagdrop]')
+  ) {
+    updatedConfig = updatedConfig.replace(vMetricsInfluxRegex, (match) => {
+      // Add tagdrop before the closing of the section or next section
+      return (
+        match.trim() +
+        '\n  [outputs.influxdb.tagdrop]\n    pipeline = ["doublezero"]'
+      )
+    })
   }
 
   // Check for http output with v_metrics and add tagdrop if missing
-  const httpVMetricsRegex = /(\[\[outputs\.http\]\]\s+[^\[]*?url\s*=\s*"[^"]*db=v_metrics[^"]*"[^\[]*?)(?=\[\[|$)/
+  const httpVMetricsRegex =
+    /(\[\[outputs\.http\]\]\s+[^\[]*?url\s*=\s*"[^"]*db=v_metrics[^"]*"[^\[]*?)(?=\[\[|$)/
   const httpMatch = currentConfig.match(httpVMetricsRegex)
   if (httpMatch && !httpMatch[0].includes('[outputs.http.tagdrop]')) {
-    updatedConfig = updatedConfig.replace(
-      httpVMetricsRegex,
-      (match) => {
-        // Add tagdrop before the closing of the section or next section
-        return match.trim() + '\n  [outputs.http.tagdrop]\n    pipeline = ["doublezero"]'
-      },
-    )
+    updatedConfig = updatedConfig.replace(httpVMetricsRegex, (match) => {
+      // Add tagdrop before the closing of the section or next section
+      return (
+        match.trim() +
+        '\n  [outputs.http.tagdrop]\n    pipeline = ["doublezero"]'
+      )
+    })
   }
 
   // Add dz_metrics output block at the end
@@ -252,16 +257,15 @@ const updateTelegrafForDoublezero = async (): Promise<void> => {
   })
 
   // Set proper permissions
-  spawnSync(`sudo chown root:root ${telegrafConfigPath}`, {
+  spawnSync(`sudo chown solv:solv ${telegrafConfigPath}`, {
     shell: true,
     stdio: 'inherit',
   })
 
-  spawnSync(`sudo chmod 644 ${telegrafConfigPath}`, {
+  spawnSync(`sudo chmod 664 ${telegrafConfigPath}`, {
     shell: true,
     stdio: 'inherit',
   })
 
   console.log(chalk.green('✅ Telegraf config updated for doublezero'))
 }
-

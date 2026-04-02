@@ -26,16 +26,15 @@ export const configureTelegraf = async (
   })
 
   // Set proper permissions
-  spawnSync(`sudo chown root:root ${telegrafConfigPath}`, {
+  spawnSync(`sudo chown solv:solv ${telegrafConfigPath}`, {
     shell: true,
     stdio: 'inherit',
   })
 
-  spawnSync(`sudo chmod 644 ${telegrafConfigPath}`, {
+  spawnSync(`sudo chmod 664 ${telegrafConfigPath}`, {
     shell: true,
     stdio: 'inherit',
   })
 
   console.log(chalk.green('✅ Telegraf configuration written'))
 }
-

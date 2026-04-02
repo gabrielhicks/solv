@@ -56,7 +56,8 @@ setup_firewall() {
     sudo ufw allow 8899/udp
     sudo ufw allow 8899/tcp
     sudo ufw allow 8000:8898/udp
-    sudo ufw allow 8000:8898/tcp
+    sudo ufw deny proto tcp from any to any port 8000:8025
+    sudo ufw allow 8026:8898/tcp
     sudo ufw allow 8900:10000/tcp
     sudo ufw allow 8900:10000/udp
     sudo ufw allow 179/tcp

@@ -56,15 +56,20 @@ setup_firewall() {
     sudo ufw allow 8899/udp
     sudo ufw allow 8899/tcp
     sudo ufw allow 8000:8898/udp
-    sudo ufw allow 8000:8898/tcp
+    sudo ufw deny proto tcp from any to any port 8000:8025
+    sudo ufw allow 8026:8898/tcp
     sudo ufw allow 8900:10000/tcp
     sudo ufw allow 8900:10000/udp
+    sudo ufw allow 179/tcp
+    sudo ufw allow in on doublezero0 to any port 44880 proto udp
+    sudo ufw allow out on doublezero0 to any port 44880 proto udp
+    sudo ufw allow 9600/tcp
     sudo ufw reload
 }
 
 setup_lib() {
     echo "Installing Packages..."
-    sudo apt install fail2ban -y
+    sudo apt install fail2ban ipset iptables python3-venv -y
     sudo apt-get install libsasl2-dev build-essential -y
     sudo apt-get install -y libssl-dev libudev-dev pkg-config zlib1g-dev llvm clang cmake make libprotobuf-dev protobuf-compiler libclang-18-dev clang-18 llvm-18-dev
 }
@@ -95,6 +100,7 @@ install_pnpm_and_packages() {
         echo 'export LIBCLANG_PATH=/usr/lib/llvm-18/lib' >> ~/.profile
         echo 'export CLANG_PATH=/usr/bin/clang-18' >> ~/.profile
         echo 'export PATH="/home/solv/.local/share/solana/install/active_release/bin:\$PATH"' >> ~/.profile
+        
 
         echo "Sourcing ~/.bashrc in case it's needed..."
         if [ -f ~/.bashrc ]; then source ~/.bashrc; fi

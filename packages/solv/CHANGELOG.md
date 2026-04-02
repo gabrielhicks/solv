@@ -1,5 +1,11 @@
 # @gabrielhicks/solv
 
+## 5.8.4
+
+### Minor changes
+
+new minor changes
+
 ## 5.8.3
 
 ### Agave 4.0
