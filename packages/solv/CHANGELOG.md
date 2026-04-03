@@ -1,5 +1,11 @@
 # @gabrielhicks/solv
 
+## 5.8.6
+
+### Minor changes
+
+new minor changes
+
 ## 5.8.5
 
 ### Minor changes
