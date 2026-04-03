@@ -2,7 +2,7 @@ import { execAsync } from '@skeet-framework/utils'
 import chalk from 'chalk'
 
 export const syncFirewall = async () => {
-  await execAsync(`echo "yes" | sudo ufw restart`)
+  await execAsync(`echo "yes" | sudo ufw reset`)
   await execAsync(`echo "yes" | sudo ufw enable`)
   await execAsync(`sudo ufw allow ssh`)
   await execAsync(`sudo ufw allow 53`)
