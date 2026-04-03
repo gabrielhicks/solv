@@ -1,5 +1,11 @@
 # @gabrielhicks/solv
 
+## 5.8.9
+
+### Jag multicast
+
+new minor changes
+
 ## 5.8.8
 
 ### Minor changes

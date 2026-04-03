@@ -49,3 +49,10 @@ export enum MNT_DISK_TYPE {
   DOUBLE = 'double',
   TRIPLE = 'triple',
 }
+
+export enum JagRegion {
+  LATAM = 'LATAM',
+  SINGAPORE = 'Singapore',
+  AFRICA = 'SA',
+  APAC = 'APAC',
+}

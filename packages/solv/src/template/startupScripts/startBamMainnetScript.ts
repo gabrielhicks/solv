@@ -6,6 +6,8 @@ import {
   MAINNET_VALIDATOR_KEY_PATH,
   MAINNET_VALIDATOR_VOTE_KEY_PATH,
 } from '@/config/constants'
+import { JagRegion } from '@/config/enums'
+import { JAG_SHRED_ADDRESSES } from '@/config/jagConfig'
 import { DefaultConfigType } from '@/config/types'
 import { execSync } from 'node:child_process'
 
@@ -26,6 +28,8 @@ export const startBamMainnetScript = (
   const xdpEnabled = config.XDP
   const zeroCopyEnabled = config.ZERO_COPY
   const jagSnapshotsEnabled = config.JAG_SNAPSHOTS
+  const jagRegion = config.JAG_REGION
+  const jagShreds = JAG_SHRED_ADDRESSES[jagRegion as JagRegion]
   const multicastEnabled = config.MULTICAST
   const xdpFlags = xdpEnabled
     ? [
@@ -34,7 +38,7 @@ export const startBamMainnetScript = (
       ].join('\n')
     : ''
   const jagFlags = jagSnapshotsEnabled
-    ? [`--public-rpc-address ${publicRpc} \\`, `--no-port-check \\`].join('\n')
+    ? [`--public-rpc-address ${publicRpc} \\`, `--no-port-check \\`, jagShreds].join('\n')
     : [`--full-rpc-api \\`, `--private-rpc \\`].join('\n')
   const zeroCopyFlag = zeroCopyEnabled
     ? [`--experimental-retransmit-xdp-zero-copy \\`].join('\n')

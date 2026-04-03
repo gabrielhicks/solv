@@ -6,6 +6,8 @@ import {
   MAINNET_VALIDATOR_KEY_PATH,
   MAINNET_VALIDATOR_VOTE_KEY_PATH,
 } from '@/config/constants'
+import { JagRegion } from '@/config/enums'
+import { JAG_SHRED_ADDRESSES } from '@/config/jagConfig'
 import { DefaultConfigType } from '@/config/types'
 import { execSync } from 'node:child_process'
 
@@ -19,24 +21,28 @@ export const startJitoMainnetScript = (
 ) => {
   const { validatorKeyAddress } = getKeypairsInfo(config)
 
-  const xdpEnabled = config.XDP
-  const zeroCopyEnabled = config.ZERO_COPY
-  const jagSnapshotsEnabled = config.JAG_SNAPSHOTS
   const localIp = execSync(`hostname -I | awk '{print $1}'`).toString().trim()
   const defaultPort = '18899'
   const publicRpc = `${localIp}:${defaultPort}`
-  const jagFlags = jagSnapshotsEnabled
-    ? [`--public-rpc-address ${publicRpc} \\`, `--no-port-check \\`].join('\n')
-    : [`--full-rpc-api \\`, `--private-rpc \\`].join('\n')
+  const xdpEnabled = config.XDP
+  const zeroCopyEnabled = config.ZERO_COPY
+  const jagSnapshotsEnabled = config.JAG_SNAPSHOTS
+  const jagRegion = config.JAG_REGION
+  const jagShreds = JAG_SHRED_ADDRESSES[jagRegion as JagRegion]
   const multicastEnabled = config.MULTICAST
-    ? [`--public-rpc-address ${publicRpc} \\`, `--no-port-check \\`].join('\n')
-    : [`--full-rpc-api \\`, `--private-rpc \\`].join('\n')
   const xdpFlags = xdpEnabled
     ? [
         `--experimental-retransmit-xdp-cpu-cores 1 \\`,
         `--experimental-poh-pinned-cpu-core 10 \\`,
       ].join('\n')
     : ''
+  const jagFlags = jagSnapshotsEnabled
+    ? [
+        `--public-rpc-address ${publicRpc} \\`,
+        `--no-port-check \\`,
+        jagShreds,
+      ].join('\n')
+    : [`--full-rpc-api \\`, `--private-rpc \\`].join('\n')
   const zeroCopyFlag = zeroCopyEnabled
     ? [`--experimental-retransmit-xdp-zero-copy \\`].join('\n')
     : ''
@@ -48,6 +54,10 @@ export const startJitoMainnetScript = (
   const filteredValidators = knownValidators.filter(
     (address) => address !== validatorKeyAddress,
   )
+
+  const optionalFlags = [jagFlags, xdpFlags, zeroCopyFlag, multicastFlag]
+    .filter(Boolean)
+    .join('\n')
 
   const validatorArgs = filteredValidators
     .map((address) => `--known-validator ${address} \\`)
@@ -79,16 +89,13 @@ ${validatorArgs}
 --dynamic-port-range 8000-8025 \\
 --rpc-bind-address 127.0.0.1 \\
 --rpc-port 8899 \\
-${jagFlags}
 --wal-recovery-mode skip_any_corrupted_record \\
 --limit-ledger-size 50000000 \\
 --block-production-method central-scheduler-greedy \\
 --block-verification-method unified-scheduler \\
 --maximum-full-snapshots-to-retain 1 \\
 --maximum-incremental-snapshots-to-retain 2 \\
-${xdpFlags}
-${zeroCopyFlag}
-${multicastFlag}
+${optionalFlags}
 `
   // To be added later for XDP
   // --experimental-retransmit-xdp-cpu-cores 2 \\
