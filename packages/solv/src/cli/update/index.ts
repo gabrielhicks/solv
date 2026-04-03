@@ -5,7 +5,6 @@ import { updateSolv } from './updateSolv'
 import { jitoUpdate } from './jitoUpdate'
 import { updateJitoSolvConfig } from '@/lib/updateJitoSolvConfig'
 import { updateCommission, updateCommissionAsk } from './updateCommission'
-import { updateFirewall } from '../setup/updateFirewall'
 import autoUpdate from './autoUpdate'
 import getSolvVersion from '../epochTimer/getSolvVersion'
 import { updateDefaultConfig } from '@/config/updateDefaultConfig'
@@ -287,7 +286,7 @@ export const updateCommands = (config: DefaultConfigType) => {
         return
       }
       if (options.firewall) {
-        await updateFirewall()
+        await syncFirewall()
         return
       }
       if (options.startup) {
