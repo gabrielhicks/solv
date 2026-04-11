@@ -1,5 +1,11 @@
 # @gabrielhicks/solv
 
+## 5.8.10
+
+### Version Upgrades
+
+Testnet, Mainnet
+
 ## 5.8.9
 
 ### Jag multicast
