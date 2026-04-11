@@ -1,5 +1,11 @@
 # @gabrielhicks/solv
 
+## 5.8.11
+
+### Version Upgrades
+
+Testnet, Mainnet
+
 ## 5.8.10
 
 ### Version Upgrades
