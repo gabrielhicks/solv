@@ -1,5 +1,11 @@
 # @gabrielhicks/solv
 
+## 5.8.12
+
+### testnet restart
+
+Testnet
+
 ## 5.8.11
 
 ### Version Upgrades

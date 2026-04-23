@@ -71,8 +71,9 @@ ${validatorArgs}
 --block-verification-method unified-scheduler \\
 --maximum-full-snapshots-to-retain 1 \\
 --maximum-incremental-snapshots-to-retain 2 \\
---expected-shred-version 27350 \\
---expected-bank-hash 3zk4WMwk6wCTVJXu9UAk2dYWMedCKooDs15XL5u6FkvE \\
+--expected-shred-version 57087 \\
+--wait-for-supermajority 403818246 \\
+--expected-bank-hash YFxSkDcvSPiA7EQpSTbCsWbJvNYMAsWXGvwGc3bXHEA \\
 --expected-genesis-hash 4uhcVJyU9pJkvQyS88uRDiswHXSCkY3zQawwpjk2NsNY \\
 ${xdpFlags}
 ${zeroCopyFlag}
