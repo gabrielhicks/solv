@@ -1,5 +1,11 @@
 # @gabrielhicks/solv
 
+## 5.8.13
+
+### testnet upgrade
+
+Testnet v4.0.0-rc.0
+
 ## 5.8.12
 
 ### testnet restart
