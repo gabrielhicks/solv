@@ -1,7 +1,8 @@
+import { VERSION_BAM_MAINNET } from '@/config/versionConfig'
 import { spawnSync } from 'child_process'
 
 export const installBam = (
-  version: string,
+  version = `v${VERSION_BAM_MAINNET}`,
   mod = false,
   isMajorThree = false,
   xdp = false,

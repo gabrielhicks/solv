@@ -82,7 +82,7 @@ const setupMainnetValidator = async (
       )
       break
     case ValidatorType.BAM:
-      console.log('JITO Validator Setup for Mainnet')
+      console.log('JITO-BAM Validator Setup for Mainnet')
       const bamConfig = await readOrCreateJitoConfig()
       const bamPatch = BAM_PATCH
       const bamTagBase = `v${version}-jito`
