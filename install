@@ -95,9 +95,12 @@ install_pnpm_and_packages() {
         curl -fsSL https://get.pnpm.io/install.sh | sh -
 
         # Locate the pnpm binary regardless of where the installer put it.
+        # Newer pnpm puts the binary at \$HOME/.local/share/pnpm/bin/pnpm; older versions used \$HOME/.local/share/pnpm/pnpm.
         PNPM_BIN=""
         for candidate in \\
+            "\$HOME/.local/share/pnpm/bin/pnpm" \\
             "\$HOME/.local/share/pnpm/pnpm" \\
+            "/home/solv/.local/share/pnpm/bin/pnpm" \\
             "/home/solv/.local/share/pnpm/pnpm" \\
             "\$HOME/.pnpm/pnpm"; do
             if [ -x "\$candidate" ]; then
@@ -116,12 +119,23 @@ install_pnpm_and_packages() {
         fi
         echo "Found pnpm at: \$PNPM_BIN"
 
-        PNPM_HOME="\$(dirname "\$PNPM_BIN")"
+        # Derive PNPM_HOME and the global-bin dir.
+        # New layout: pnpm at \$PNPM_HOME/bin/pnpm; global bins also in \$PNPM_HOME/bin.
+        # Old layout: pnpm at \$PNPM_HOME/pnpm; global bins also in \$PNPM_HOME.
+        PNPM_BIN_DIR="\$(dirname "\$PNPM_BIN")"
+        if [ "\$(basename "\$PNPM_BIN_DIR")" = "bin" ]; then
+            PNPM_HOME="\$(dirname "\$PNPM_BIN_DIR")"
+            PNPM_GLOBAL_BIN="\$PNPM_BIN_DIR"
+        else
+            PNPM_HOME="\$PNPM_BIN_DIR"
+            PNPM_GLOBAL_BIN="\$PNPM_BIN_DIR"
+        fi
         export PNPM_HOME
-        export PATH="\$PNPM_HOME:\$PATH"
+        export PATH="\$PNPM_GLOBAL_BIN:\$PATH"
+        echo "PNPM_HOME=\$PNPM_HOME  global-bin=\$PNPM_GLOBAL_BIN"
 
         echo "export PNPM_HOME=\"\$PNPM_HOME\"" >> ~/.profile
-        echo 'export PATH="\$PNPM_HOME:\$PATH"' >> ~/.profile
+        echo "export PATH=\"\$PNPM_GLOBAL_BIN:\\\$PATH\"" >> ~/.profile
         echo 'export LIBCLANG_PATH=/usr/lib/llvm-18/lib' >> ~/.profile
         echo 'export CLANG_PATH=/usr/bin/clang-18' >> ~/.profile
         echo 'export PATH="/home/solv/.local/share/solana/install/active_release/bin:\$PATH"' >> ~/.profile
@@ -132,7 +146,7 @@ install_pnpm_and_packages() {
         echo "Installing @gabrielhicks/solv..."
         "\$PNPM_BIN" add -g @gabrielhicks/solv
 
-        SOLV_BIN="\$PNPM_HOME/solv"
+        SOLV_BIN="\$PNPM_GLOBAL_BIN/solv"
         if [ ! -x "\$SOLV_BIN" ]; then
             SOLV_BIN=\$(find "\$HOME" -maxdepth 6 -type f -name solv -executable 2>/dev/null | head -n 1)
         fi
