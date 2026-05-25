@@ -12,14 +12,12 @@ jobs:
     runs-on: self-hosted
     strategy:
       matrix:
-        node-version: [20]
+        node-version: [24]
 
     steps:
       - name: checkout code repository
         uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
-        with:
-          version: 9.3.0
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:

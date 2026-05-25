@@ -1,3 +1,16 @@
 packages:
   - 'packages/*'
   - 'website/*'
+allowBuilds:
+  '@fortawesome/fontawesome-common-types': true
+  '@fortawesome/fontawesome-svg-core': true
+  '@fortawesome/free-brands-svg-icons': true
+  '@fortawesome/free-solid-svg-icons': true
+  '@swc/core': true
+  bigint-buffer: true
+  bufferutil: true
+  core-js-pure: true
+  esbuild: true
+  sharp: true
+  utf-8-validate: true
+  workerd: true
