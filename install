@@ -87,36 +87,32 @@ EOF_SOLV
 
 install_pnpm_and_packages() {
     sudo su - solv <<EOF_SOLV
+        echo "Setting pnpm environment variables..."
+        export PNPM_HOME="/home/solv/.local/share/pnpm"
+        export PATH="\$PNPM_HOME:\$PATH"
+
         echo "Installing pnpm..."
         curl -fsSL https://get.pnpm.io/install.sh | sh -
 
-        echo "Setting pnpm environment variables..."
-        PNPM_HOME="/home/solv/.local/share/pnpm"
-        export PNPM_HOME
-        PATH="\$PNPM_HOME:\$PATH"
-        export PATH
         echo 'export PNPM_HOME="\$HOME/.local/share/pnpm"' >> ~/.profile
         echo 'export PATH="\$PNPM_HOME:\$PATH"' >> ~/.profile
         echo 'export LIBCLANG_PATH=/usr/lib/llvm-18/lib' >> ~/.profile
         echo 'export CLANG_PATH=/usr/bin/clang-18' >> ~/.profile
         echo 'export PATH="/home/solv/.local/share/solana/install/active_release/bin:\$PATH"' >> ~/.profile
-        
 
-        echo "Sourcing ~/.bashrc in case it's needed..."
-        if [ -f ~/.bashrc ]; then source ~/.bashrc; fi
+        if [ ! -x "\$PNPM_HOME/pnpm" ]; then
+            echo "ERROR: pnpm was not installed at \$PNPM_HOME/pnpm" >&2
+            exit 1
+        fi
 
         echo "Installing node $NODE_VERSION..."
-        pnpm env use $NODE_VERSION --global
+        "\$PNPM_HOME/pnpm" env use $NODE_VERSION --global
 
         echo "Installing @gabrielhicks/solv..."
-        pnpm add -g @gabrielhicks/solv
+        "\$PNPM_HOME/pnpm" add -g @gabrielhicks/solv
 
-        echo "Sourcing ~/.profile in case it's needed..."
-        if [ -f ~/.profile ]; then source ~/.profile; fi
-
-        # Use the full path to solv if it's not found
-        /home/solv/.local/share/pnpm/solv i
-        /home/solv/.local/share/pnpm/solv get aa
+        "\$PNPM_HOME/solv" i
+        "\$PNPM_HOME/solv" get aa
 EOF_SOLV
 }
 

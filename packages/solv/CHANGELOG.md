@@ -1,5 +1,11 @@
 # @gabrielhicks/solv
 
+## 5.8.17
+
+### Install change
+
+Small install bump
+
 ## 5.8.16
 
 ### Mainnet 4.0
