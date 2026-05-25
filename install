@@ -1,7 +1,7 @@
 #/bin/bash
 
 # Constants and configurable variables
-NODE_VERSION=20.17.0
+NODE_VERSION=24.16.0
 
 # This ensures the entire script is downloaded
 {
@@ -127,7 +127,7 @@ install_pnpm_and_packages() {
         echo 'export PATH="/home/solv/.local/share/solana/install/active_release/bin:\$PATH"' >> ~/.profile
 
         echo "Installing node $NODE_VERSION..."
-        "\$PNPM_BIN" env use $NODE_VERSION --global
+        "\$PNPM_BIN" runtime set node $NODE_VERSION -g
 
         echo "Installing @gabrielhicks/solv..."
         "\$PNPM_BIN" add -g @gabrielhicks/solv

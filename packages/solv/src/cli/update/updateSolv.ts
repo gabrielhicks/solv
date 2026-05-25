@@ -2,12 +2,14 @@ import { CONFIG } from '@/config/config'
 import { spawnSync } from 'child_process'
 
 export const updateSolv = () => {
-  spawnSync('pnpm add -g pnpm', { shell: true, stdio: 'inherit' })
+  spawnSync('pnpm self-update', { shell: true, stdio: 'inherit' })
   const nodeVersion = CONFIG.NODE_VERSION
-  spawnSync(`pnpm env use ${nodeVersion} --global`, {
+  spawnSync(`pnpm runtime set node ${nodeVersion} -g`, {
     shell: true,
     stdio: 'inherit',
   })
-  const cmd = `pnpm add -g @gabrielhicks/solv`
-  spawnSync(cmd, { shell: true, stdio: 'inherit' })
+  spawnSync('pnpm add -g @gabrielhicks/solv', {
+    shell: true,
+    stdio: 'inherit',
+  })
 }

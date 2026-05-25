@@ -1,5 +1,16 @@
 # @gabrielhicks/solv
 
+## 5.8.18
+
+### Node 24, pnpm 11, ERR_REQUIRE_ESM fix
+
+- Bumped Node to 24.16.0 LTS (Krypton) and require pnpm >=11
+- Replaced deprecated `pnpm env use` with `pnpm runtime set node ... -g`
+- Replaced `pnpm add -g pnpm` with `pnpm self-update`
+- Bumped `@solana/web3.js` to 1.98.4
+- Pinned `uuid` to 9.0.1 via overrides to avoid `ERR_REQUIRE_ESM` from `rpc-websockets`
+- Hardened install script to locate the pnpm binary regardless of installer path
+
 ## 5.8.17
 
 ### Install change

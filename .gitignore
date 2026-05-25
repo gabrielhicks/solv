@@ -54,3 +54,5 @@ tmp
 dist
 .turbo
 node_modules
+
+.claude
