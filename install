@@ -87,32 +87,63 @@ EOF_SOLV
 
 install_pnpm_and_packages() {
     sudo su - solv <<EOF_SOLV
-        echo "Setting pnpm environment variables..."
-        export PNPM_HOME="/home/solv/.local/share/pnpm"
-        export PATH="\$PNPM_HOME:\$PATH"
+        set -e
 
+        # Do NOT pre-export PNPM_HOME — pnpm's installer/setup will short-circuit
+        # ("No changes to the environment were made") and skip copying the binary.
         echo "Installing pnpm..."
         curl -fsSL https://get.pnpm.io/install.sh | sh -
 
-        echo 'export PNPM_HOME="\$HOME/.local/share/pnpm"' >> ~/.profile
+        # Locate the pnpm binary regardless of where the installer put it.
+        PNPM_BIN=""
+        for candidate in \\
+            "\$HOME/.local/share/pnpm/pnpm" \\
+            "/home/solv/.local/share/pnpm/pnpm" \\
+            "\$HOME/.pnpm/pnpm"; do
+            if [ -x "\$candidate" ]; then
+                PNPM_BIN="\$candidate"
+                break
+            fi
+        done
+        if [ -z "\$PNPM_BIN" ]; then
+            PNPM_BIN=\$(find "\$HOME" -maxdepth 6 -type f -name pnpm -executable 2>/dev/null | head -n 1)
+        fi
+        if [ -z "\$PNPM_BIN" ] || [ ! -x "\$PNPM_BIN" ]; then
+            echo "ERROR: could not locate pnpm binary after install" >&2
+            echo "DEBUG: listing \$HOME/.local/share:" >&2
+            ls -laR "\$HOME/.local/share" 2>&1 | head -100 >&2 || true
+            exit 1
+        fi
+        echo "Found pnpm at: \$PNPM_BIN"
+
+        PNPM_HOME="\$(dirname "\$PNPM_BIN")"
+        export PNPM_HOME
+        export PATH="\$PNPM_HOME:\$PATH"
+
+        echo "export PNPM_HOME=\"\$PNPM_HOME\"" >> ~/.profile
         echo 'export PATH="\$PNPM_HOME:\$PATH"' >> ~/.profile
         echo 'export LIBCLANG_PATH=/usr/lib/llvm-18/lib' >> ~/.profile
         echo 'export CLANG_PATH=/usr/bin/clang-18' >> ~/.profile
         echo 'export PATH="/home/solv/.local/share/solana/install/active_release/bin:\$PATH"' >> ~/.profile
 
-        if [ ! -x "\$PNPM_HOME/pnpm" ]; then
-            echo "ERROR: pnpm was not installed at \$PNPM_HOME/pnpm" >&2
-            exit 1
-        fi
-
         echo "Installing node $NODE_VERSION..."
-        "\$PNPM_HOME/pnpm" env use $NODE_VERSION --global
+        "\$PNPM_BIN" env use $NODE_VERSION --global
 
         echo "Installing @gabrielhicks/solv..."
-        "\$PNPM_HOME/pnpm" add -g @gabrielhicks/solv
+        "\$PNPM_BIN" add -g @gabrielhicks/solv
 
-        "\$PNPM_HOME/solv" i
-        "\$PNPM_HOME/solv" get aa
+        SOLV_BIN="\$PNPM_HOME/solv"
+        if [ ! -x "\$SOLV_BIN" ]; then
+            SOLV_BIN=\$(find "\$HOME" -maxdepth 6 -type f -name solv -executable 2>/dev/null | head -n 1)
+        fi
+        if [ -z "\$SOLV_BIN" ] || [ ! -x "\$SOLV_BIN" ]; then
+            echo "ERROR: could not locate solv binary after install" >&2
+            exit 1
+        fi
+        echo "Found solv at: \$SOLV_BIN"
+
+        "\$SOLV_BIN" i
+        "\$SOLV_BIN" get aa
 EOF_SOLV
 }
 
