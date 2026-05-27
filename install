@@ -2,6 +2,7 @@
 
 # Constants and configurable variables
 NODE_VERSION=24.16.0
+SOLANA_VERSION=v4.0.0
 
 # This ensures the entire script is downloaded
 {
@@ -151,7 +152,7 @@ install_pnpm_and_packages() {
         "\$PNPM_BIN" runtime set node $NODE_VERSION -g
 
         echo "Installing @gabrielhicks/solv..."
-        "\$PNPM_BIN" add -g --prefer-online @gabrielhicks/solv@latest
+        "\$PNPM_BIN" add -g @gabrielhicks/solv@latest
 
         SOLV_BIN="\$PNPM_GLOBAL_BIN/solv"
         if [ ! -x "\$SOLV_BIN" ]; then
@@ -163,7 +164,12 @@ install_pnpm_and_packages() {
         fi
         echo "Found solv at: \$SOLV_BIN"
 
-        "\$SOLV_BIN" i
+        # Install the prebuilt Anza Solana CLI ($SOLANA_VERSION). This gives the
+        # operator working solana/agave tooling immediately. The from-source
+        # validator build (Jito/BAM/Agave) happens later during "solv setup"/"solv install".
+        echo "Installing Solana CLI $SOLANA_VERSION (prebuilt)..."
+        sh -c "\$(curl -sSfL https://release.anza.xyz/$SOLANA_VERSION/install)"
+
         "\$SOLV_BIN" get aa
 EOF_SOLV
 }

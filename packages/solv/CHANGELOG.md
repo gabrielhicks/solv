@@ -1,6 +1,15 @@
 # @gabrielhicks/solv
 
-## 5.8.18
+## 5.8.20
+
+### Prebuilt Solana CLI install + keypair generation fix
+
+- Install script now installs the prebuilt Anza Solana CLI (`release.anza.xyz/v4.0.0/install`) instead of building from source; the from-source validator build stays in `solv install`/`solv setup`
+- Ensure the Solana CLI bin dir is on PATH for all child processes solv spawns, so `solana-keygen` resolves during `solv setup` regardless of shell profile state
+- Removed invalid `--prefer-online` pnpm flag (rejected by pnpm v11.4.0)
+- Added `jq` to installer packages (required by Agave's `cargo-install-all.sh`)
+
+## 5.8.19
 
 ### Small change
 
