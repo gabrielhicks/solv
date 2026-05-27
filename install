@@ -23,6 +23,20 @@ FLAGS:
 EOF
 }
 
+fix_root_ownership() {
+    # On some images / after an errant recursive chown, "/" ends up owned by a
+    # non-root user. This makes ufw (and other tools) spam:
+    #   "WARN: uid is 0 but '/' is owned by <uid>"
+    # "/" must be owned by root. Repair just the top-level directory (NOT -R).
+    local owner
+    owner=$(stat -c '%U' / 2>/dev/null || echo "")
+    if [ -n "$owner" ] && [ "$owner" != "root" ]; then
+        echo "WARNING: '/' is owned by '$owner' (expected root). Repairing ownership..."
+        sudo chown root:root /
+        sudo chmod 755 /
+    fi
+}
+
 create_user() {
     if getent passwd solv >/dev/null 2>&1; then
         echo "User 'solv' already exists, skipping..."
@@ -188,6 +202,7 @@ main() {
       esac
     done
 
+    fix_root_ownership
     create_user
     setup_firewall
     setup_lib
