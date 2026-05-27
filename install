@@ -69,7 +69,7 @@ setup_firewall() {
 
 setup_lib() {
     echo "Installing Packages..."
-    sudo apt install fail2ban ipset iptables python3-venv -y
+    sudo apt install fail2ban ipset iptables python3-venv jq -y
     sudo apt-get install libsasl2-dev build-essential -y
     sudo apt-get install -y libssl-dev libudev-dev pkg-config zlib1g-dev llvm clang cmake make libprotobuf-dev protobuf-compiler libclang-18-dev clang-18 llvm-18-dev
 }
@@ -86,6 +86,13 @@ EOF_SOLV
 }
 
 install_pnpm_and_packages() {
+    # Heal ownership: prior install runs (or `solv update` invoked as root)
+    # can leave root-owned files under solv's pnpm dir, causing EACCES on rmdir.
+    if [ -d /home/solv/.local/share/pnpm ]; then
+        echo "Fixing ownership of /home/solv/.local/share/pnpm..."
+        sudo chown -R solv:solv /home/solv/.local/share/pnpm
+    fi
+
     sudo su - solv <<EOF_SOLV
         set -e
 
@@ -144,7 +151,7 @@ install_pnpm_and_packages() {
         "\$PNPM_BIN" runtime set node $NODE_VERSION -g
 
         echo "Installing @gabrielhicks/solv..."
-        "\$PNPM_BIN" add -g @gabrielhicks/solv
+        "\$PNPM_BIN" add -g --prefer-online @gabrielhicks/solv@latest
 
         SOLV_BIN="\$PNPM_GLOBAL_BIN/solv"
         if [ ! -x "\$SOLV_BIN" ]; then

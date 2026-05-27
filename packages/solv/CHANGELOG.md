@@ -2,6 +2,12 @@
 
 ## 5.8.18
 
+### Small change
+
+BUMP
+
+## 5.8.18
+
 ### Node 24, pnpm 11, ERR_REQUIRE_ESM fix
 
 - Bumped Node to 24.16.0 LTS (Krypton) and require pnpm >=11
@@ -1782,6 +1788,7 @@ Bumped and made bot active
 ### Patch Changes
 
 - [`66f2978`](https://github.com/gabrielhicks/solv/commit/66f2978b712cd9d339bab0022a6526356336c4a3) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - Update Solana Version v2.0.15 for Mainnet/Testnet
+
   - For users who are not using solv Auto Operation Mode: Please follow the instructions below.
 
   ```bash
@@ -1889,6 +1896,7 @@ Bumped and made bot active
 ### Patch Changes
 
 - [`e153c6d`](https://github.com/gabrielhicks/solv/commit/e153c6dd893e5c90fe60836b293f8ee9ecb2a557) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - Update Solana Testnet v2.0.14
+
   - For users who are not using solv Auto Operation Mode: Please follow the instructions below.
 
   ```bash
@@ -1933,6 +1941,7 @@ Bumped and made bot active
 ### Patch Changes
 
 - [`f039622`](https://github.com/gabrielhicks/solv/commit/f0396220c61acf8debe41799aa1844b7ff6b61b8) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - Downgrade Solana Testnet v1.18.26
+
   - For users who are not using solv Auto Operation Mode: Please follow the instructions below.
 
   ```bash
@@ -1977,6 +1986,7 @@ Bumped and made bot active
 ### Patch Changes
 
 - [`bd9c764`](https://github.com/gabrielhicks/solv/commit/bd9c76498ac9fd56a40bbfdb78261c03361a77a0) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - Update Solana Testnet Version v2.0.14
+
   - For users who are not using solv Auto Operation Mode: Please follow the instructions below.
 
   ```bash
@@ -2043,6 +2053,7 @@ Bumped and made bot active
   ## solv switch
 
   This update also includes the following changes:
+
   - solv switch to use `--require-tower`
   - solv scp download - not include `unstaked-keypair.json` in the download
   - solv setup - key generation always generate a new unstaked keypair
@@ -2070,6 +2081,7 @@ Bumped and made bot active
 ### Patch Changes
 
 - [`3af615b`](https://github.com/gabrielhicks/solv/commit/3af615be8683e75c0d9960cfbc9239e13782c562) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - Update epochTimer
+
   - Update epochTimer to enable auto update
 
   Please update solv version to the v4.6.7 to enable auto update.
@@ -2085,9 +2097,11 @@ Bumped and made bot active
 - [#308](https://github.com/gabrielhicks/solv/pull/308) [`510c692`](https://github.com/gabrielhicks/solv/commit/510c69279054ee65a1fce3dcd1b4557b09747b66) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - Downgrade Instruction for Testnet
 
   Solana Official Instructions: https://github.com/anza-xyz/agave/wiki/2024-10-09-Testnet-Rollback-and-Restart
+
   - For users who is using solv Auto Operation Mode: No action is required.
 
   ※ The name solv Mev mode will be changed to solv Auto Operation Mode.
+
   - For users who are not using solv Auto Operation Mode: Please follow the instructions below.
 
   ```bash
@@ -2247,6 +2261,7 @@ Bumped and made bot active
 
   Please update the VALIDATOR_TYPE value to `frankendancer` in the `solv4.config.json` file.
   solv start will automatically read firedancer.service instead of solv.service.
+
   - Firedancer Doc - [https://firedancer-io.github.io/firedancer/](https://firedancer-io.github.io/firedancer/)
 
 ## 4.6.1
@@ -2477,6 +2492,7 @@ Bumped and made bot active
   ```
 
   ## New Features
+
   - `solv setup` command is now more user-friendly
   - `solv swap` command is now available
   - `solv jupiter` command is now available
@@ -2497,6 +2513,7 @@ Bumped and made bot active
   Now new config is migrating to `solv4.config.json` file.
 
   ## Bug Fixes
+
   - `solv switch` command now works as expected.
   - `bigint` warning message is now resolved.
 
@@ -2514,6 +2531,7 @@ Bumped and made bot active
 ### Patch Changes
 
 - [#263](https://github.com/gabrielhicks/solv/pull/263) [`1fe901d`](https://github.com/gabrielhicks/solv/commit/1fe901d3830285d28b4f7e71401937e0eada5d0a) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - Update - solv setup --script, solv epochTimer
+
   - Added `solv setup --script` command to update `start-validator.sh`, remove old snapshot, and restart.
 
   ```bash
@@ -2523,6 +2541,7 @@ Bumped and made bot active
   Solana Official Restart Instructions:
 
   https://github.com/anza-xyz/agave/wiki/2024-08-26-Testnet-Restart
+
   - Updated `solv epochTimer` to use Rust CLI.
 
 ## 4.4.14
@@ -2603,6 +2622,7 @@ Bumped and made bot active
 ### Patch Changes
 
 - [#256](https://github.com/gabrielhicks/solv/pull/256) [`4bbf087`](https://github.com/gabrielhicks/solv/commit/4bbf0872ebd092a02d356f8ce4edf4a7cb506177) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - ## Update - solv relayer
+
   - Added solv relayer setup to setup separate Jito Relayer
   - Added solv relayer set:url to set Relayer URL on Validator
     This command will set the Relayer URL on the Validator
@@ -2807,6 +2827,7 @@ Bumped and made bot active
 - [#247](https://github.com/gabrielhicks/solv/pull/247) [`e73103a`](https://github.com/gabrielhicks/solv/commit/e73103acf9bf1ac6bb1b8b583526fb49d1e91a2d) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - Update - solv scp download
 
   Now solv scp download command will download the following files:
+
   - mainnet-validator-keypair.json
   - mainnet-vote-account-keypair.json
   - mainnet-authority-keypair.json
@@ -3174,6 +3195,7 @@ Bumped and made bot active
   It will also send notifications to your Discord channel.
 
   solv epochTimer checks following items:
+
   - Check Validator Account Balance
     Send a notification if the balance is less than 0.5 SOL.
   - Check Validator Health Status
@@ -3201,6 +3223,7 @@ Bumped and made bot active
 
   The CPU governor is a driver that manages how the CPU scales frequency and voltage. The CPU governor can be set to performance, powersave, ondemand, conservative, schedutil, and userspace.
   solv setup will set the CPU governor to performance.
+
   - performance: The CPU runs at the maximum frequency.
   - powersave: The CPU runs at the minimum frequency.
   - ondemand: The CPU runs at the maximum frequency when the system is busy and at the minimum frequency when the system is idle.
@@ -3272,6 +3295,7 @@ Bumped and made bot active
   ### Epoch Timer Sends Discord Notification
 
   Epoch Timer will send a Discord notification when the epoch is less than 1 day, 8 hours, 1 hour and the new epoch starts.
+
   - New Epoch
   - Less than 1 day
   - Less than 8 hours
@@ -3285,6 +3309,7 @@ Bumped and made bot active
   solv harvest will be executed automatically if solv MEV Mode is enabled.
   This will harvest your rewards to your authority account every right before the epoch ends.
   Then convert SOL to elSOL (LST) and send it to your desired account.
+
   1. Withdraw rewards from the Vote Account to the Validator Authority Account.
   2. Calculate the amount of SOL to be transferred from the Validator Account to the Authority Account.
   3. Convert the amount of SOL to elSOL (LST).
@@ -3382,6 +3407,7 @@ Bumped and made bot active
 ### Patch Changes
 
 - [#210](https://github.com/gabrielhicks/solv/pull/210) [`5c1451e`](https://github.com/gabrielhicks/solv/commit/5c1451e93695ce7364939967ccd43b2b03388c12) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - ## New Features - v4.2.0~v4.2.1
+
   - Added Solana Liquid Staking Command
   - Added Solana Transfer Command
   - Added Auto Reward Harvest Command
@@ -3391,6 +3417,7 @@ Bumped and made bot active
   - Added solv df command
   - Migrated to ESM Module
   - Added Turbo Repo
+
   * You should set the SOLANA_RPC_URL in the .env file to use this feature effectively.
 
   ### Solana Liquid Staking Command
@@ -3425,6 +3452,7 @@ Bumped and made bot active
 
   The epochTimer is a feature that allows you to set a specific time to run the some commands.
   This feature is especially useful for those who want to stake rewards at before the epoch change.
+
   - You need to set `DISCORD_WEBHOOK_URL` in the `.env` file to use this feature.
 
   ```bash
@@ -3468,6 +3496,7 @@ Bumped and made bot active
 ### Minor Changes
 
 - [#204](https://github.com/gabrielhicks/solv/pull/204) [`bd8cf63`](https://github.com/gabrielhicks/solv/commit/bd8cf63feed2459ee1f467b3582e94153de7f74f) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - Update solv stake/setup/bal - added LST stake, improved solv setup, added solv bal --spl option
+
   - Added LST stake command
 
   ```bash
@@ -3557,6 +3586,7 @@ Bumped and made bot active
 
 - [#190](https://github.com/gabrielhicks/solv/pull/190) [`f5f9712`](https://github.com/gabrielhicks/solv/commit/f5f97128a65c60ba6b30a166a89f3942dab4b9ed) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - Updated - solv stake/bal
   Added - `--block-production-method` Option to start up script
+
   1. Updated solv stake Command
 
   ```bash
@@ -3721,6 +3751,7 @@ Bumped and made bot active
 ### Minor Changes
 
 - [#156](https://github.com/gabrielhicks/solv/pull/156) [`39205e5`](https://github.com/gabrielhicks/solv/commit/39205e573877208ca8cfa643f4dd5de232cb2523) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - ## New Features - v4.0.0~v4.1.0
+
   - Jito Relayer Setup
   - Jito RPC Setup
   - No Downtime Migration
@@ -3733,6 +3764,7 @@ Bumped and made bot active
   Greatly reduce the time to start the Solana Validator.
 
   Special Thanks to c29r3 for the great OSS ⭐️
+
   - [Solana Snapshot Finder](https://github.com/c29r3/solana-snapshot-finder)
 
   If your node does not start, you can try the following command.
@@ -3774,6 +3806,7 @@ Bumped and made bot active
   This function was created with reference to the following link.
 
   Special Thanks to pumpkins-pool for the great OSS ⭐️
+
   - [Pumpkin's Pool - Identity Transition](https://pumpkins-pool.gitbook.io/pumpkins-pool)
 
   ## Jito MEV Setup
@@ -3823,6 +3856,7 @@ Bumped and made bot active
 - [#147](https://github.com/gabrielhicks/solv/pull/147) [`0043376`](https://github.com/gabrielhicks/solv/commit/0043376b943840960cc59b5ec9707c03c12dfa56) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - Update - solv4
 
   ## New Features
+
   - No Downtime Migration
   - Jito RPC Setup
   - Jito Relayer Setup
@@ -3840,8 +3874,10 @@ Bumped and made bot active
   Now you can migrate your validator without downtime.
   You need to setup your new server with solv4.
   (solv4 uses symbolic link to define the validator keypair path.)
+
   1. Setup your new server with solv4 as Dummy Server (Inactive Side)
      Please upload your main keys to the new server before setup.
+
   - mainnet-validator-keypair.json
   - mainnet-vote-account-keypair.json
   - mainnet-authority-keypair.json
@@ -3974,6 +4010,7 @@ Bumped and made bot active
   ```
 
   Added new feature - solv CLI
+
   - `solv rm:log` - Delete validator logs
   - `solv rm:snapshot` - Delete Incremental snapshot and RocksDB
   - `solv withdraw` - Withdraw SOL from Vote Account to Authority Keypair

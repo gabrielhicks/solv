@@ -8,7 +8,7 @@ export const updateSolv = () => {
     shell: true,
     stdio: 'inherit',
   })
-  spawnSync('pnpm add -g @gabrielhicks/solv', {
+  spawnSync('pnpm add -g --prefer-online @gabrielhicks/solv@latest', {
     shell: true,
     stdio: 'inherit',
   })
