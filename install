@@ -48,6 +48,30 @@ create_user() {
     fi
 }
 
+install_prerequisites() {
+    # Install every base command the installer itself invokes, before they are used:
+    #   ufw           -> setup_firewall
+    #   gnupg (gpg)   -> install_docker (apt key dearmor)
+    #   lsb-release   -> install_docker (lsb_release -cs)
+    #   curl          -> pnpm / anza / docker key downloads
+    #   jq            -> Agave's cargo-install-all.sh (from-source build)
+    #   git           -> from-source validator clone (solv install)
+    #   vim           -> preferred editor for manual edits
+    echo "Installing prerequisite packages..."
+    sudo apt-get update -y
+    sudo apt-get install -y \
+        ufw \
+        curl \
+        ca-certificates \
+        gnupg \
+        lsb-release \
+        apt-transport-https \
+        software-properties-common \
+        jq \
+        git \
+        vim
+}
+
 install_docker() {
     echo "Installing Docker..."
     sudo apt update
@@ -204,6 +228,7 @@ main() {
 
     fix_root_ownership
     create_user
+    install_prerequisites
     setup_firewall
     setup_lib
     install_docker
