@@ -11,31 +11,43 @@ const run = (cmd: string): number => {
   return r.status ?? 1
 }
 
-// Read what Node version the LATEST published solv expects, so a Node bump
-// rolls out in the same `solv update` cycle as the solv bump. Falls back to
-// the running solv's source constant if the registry can't be reached.
-const fetchLatestTargetNode = async (): Promise<string> => {
+type LatestMeta = {
+  version: string | null // null means "fall back to @latest"
+  targetNode: string
+}
+
+// Pull the LATEST published version + its declared targetNode straight from the
+// npm registry. We use this so `solv update`:
+//   1. Pins the install to an explicit version (no @latest cache ambiguity), and
+//   2. Installs the Node version the published package wants in the same cycle.
+const fetchLatestMeta = async (): Promise<LatestMeta> => {
   try {
     const controller = new AbortController()
     const timer = setTimeout(() => controller.abort(), 5000)
     const res = await fetch(NPM_META_URL, { signal: controller.signal })
     clearTimeout(timer)
     if (!res.ok) throw new Error(`HTTP ${res.status}`)
-    const data = (await res.json()) as { solv?: { targetNode?: string } }
-    if (data?.solv?.targetNode) {
-      return data.solv.targetNode
+    const data = (await res.json()) as {
+      version?: string
+      solv?: { targetNode?: string }
+    }
+    return {
+      version: data.version ?? null,
+      targetNode: data?.solv?.targetNode ?? VERSION_NODE,
     }
   } catch (err) {
     console.warn(
-      `[updateSolv] could not fetch latest target Node from npm, using source default: ${(err as Error).message}`,
+      `[updateSolv] could not fetch latest meta from npm, falling back to defaults: ${(err as Error).message}`,
     )
+    return { version: null, targetNode: VERSION_NODE }
   }
-  return VERSION_NODE
 }
 
 export const updateSolv = async (): Promise<void> => {
   // 1. Upgrade pnpm to latest.
   run('pnpm self-update')
+
+  const meta = await fetchLatestMeta()
 
   // 2. Set Node to whatever the LATEST published solv wants — NOT the local
   //    config, which is stale on long-lived nodes.
@@ -45,9 +57,12 @@ export const updateSolv = async (): Promise<void> => {
   //    ERR_PNPM_NO_IMPORTER_MANIFEST_FOUND when run from $HOME. `env use` is
   //    deprecated but functional and is the only form that works for a
   //    truly global runtime install without a package.json.
-  const targetNode = await fetchLatestTargetNode()
-  run(`pnpm env use ${targetNode} --global`)
+  run(`pnpm env use ${meta.targetNode} --global`)
 
-  // 3. Install the latest solv.
-  run('pnpm add -g @gabrielhicks/solv@latest')
+  // 3. Install the latest solv. Pin to an explicit version when we know it —
+  //    pnpm's `@latest` resolution is cached and will silently keep an
+  //    already-installed version (we saw `+ ... 5.8.21 (5.8.22 is available)`
+  //    with `added 0`). Pinning bypasses that cache entirely.
+  const versionSpec = meta.version ? `@${meta.version}` : '@latest'
+  run(`pnpm add -g @gabrielhicks/solv${versionSpec}`)
 }
