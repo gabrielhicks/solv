@@ -1,5 +1,13 @@
 # @gabrielhicks/solv
 
+## 5.8.21
+
+### Make `solv update` honor the published Node version
+
+- `updateSolv()` now reads the latest published solv's `solv.targetNode` from the npm registry and sets Node to that — instead of using the local (stale) `CONFIG.NODE_VERSION`. Falls back to the in-source `VERSION_NODE` if the registry can't be reached. Result: a Node version bump rolls out in the **same** `solv update` cycle as the solv bump.
+- Added `solv.targetNode` (and `solv.targetPnpm`) declarations to `package.json` as the source of truth for runtime requirements.
+- `updateSolv` now logs non-zero exit statuses so a broken step is visible instead of silently swallowed.
+
 ## 5.8.20
 
 ### Prebuilt Solana CLI install + keypair generation fix

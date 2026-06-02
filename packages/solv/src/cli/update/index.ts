@@ -421,7 +421,7 @@ export const updateCommands = (config: DefaultConfigType) => {
         const ansewr = await updateCommissionAsk()
         updateCommission(ansewr.commission, isTestnet)
       } else {
-        updateSolv()
+        await updateSolv()
       }
       if (options.dz) {
         updateDZ(dzVersion, isTestnet)
