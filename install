@@ -193,7 +193,9 @@ install_pnpm_and_packages() {
         "\$PNPM_BIN" env use $NODE_VERSION --global
 
         echo "Installing @gabrielhicks/solv..."
-        "\$PNPM_BIN" add -g @gabrielhicks/solv@latest
+        # --config.minimumReleaseAge=0 disables pnpm 11.5+'s default 24h quarantine
+        # (ERR_PNPM_MINIMUM_RELEASE_AGE_VIOLATION) for newly-published packages.
+        "\$PNPM_BIN" add -g --config.minimumReleaseAge=0 @gabrielhicks/solv@latest
 
         SOLV_BIN="\$PNPM_GLOBAL_BIN/solv"
         if [ ! -x "\$SOLV_BIN" ]; then

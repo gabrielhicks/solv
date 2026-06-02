@@ -1,5 +1,11 @@
 # @gabrielhicks/solv
 
+## 5.8.25
+
+### Bypass pnpm 11.5's 24-hour `minimumReleaseAge` quarantine
+
+- `solv update` and the install script now pass `--config.minimumReleaseAge=0` to `pnpm add -g`. Without it, every fresh release was blocked for 24h by `ERR_PNPM_MINIMUM_RELEASE_AGE_VIOLATION` for users on pnpm 11.5+. The policy is a supply-chain safety net against typosquats, but it just keeps our own users from getting fixes for a day after every release.
+
 ## 5.8.24
 
 ### Install Node BEFORE self-updating pnpm

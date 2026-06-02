@@ -68,6 +68,12 @@ export const updateSolv = async (): Promise<void> => {
   //    pnpm's `@latest` resolution is cached and will silently keep an
   //    already-installed version (we saw `+ ... 5.8.21 (5.8.22 is available)`
   //    with `added 0`). Pinning bypasses that cache entirely.
+  //
+  //    `--config.minimumReleaseAge=0` disables pnpm 11.5+'s default 24-hour
+  //    quarantine for newly-published packages (ERR_PNPM_MINIMUM_RELEASE_AGE_VIOLATION).
+  //    The policy is a supply-chain safety net against typosquats, but for a
+  //    package we publish ourselves it just blocks our own users from getting
+  //    fixes for a day after every release.
   const versionSpec = meta.version ? `@${meta.version}` : '@latest'
-  run(`pnpm add -g @gabrielhicks/solv${versionSpec}`)
+  run(`pnpm add -g --config.minimumReleaseAge=0 @gabrielhicks/solv${versionSpec}`)
 }
