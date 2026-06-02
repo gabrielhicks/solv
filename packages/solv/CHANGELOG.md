@@ -1,5 +1,11 @@
 # @gabrielhicks/solv
 
+## 5.8.26
+
+### Bump Versions
+
+- DZ, Testnet, Mainnet, etc
+
 ## 5.8.25
 
 ### Bypass pnpm 11.5's 24-hour `minimumReleaseAge` quarantine
