@@ -1,5 +1,11 @@
 # @gabrielhicks/solv
 
+## 5.8.24
+
+### Install Node BEFORE self-updating pnpm
+
+- Reordered `updateSolv` so it installs the new Node version first, then runs `pnpm self-update`. Previous order could land the box on a newer pnpm (e.g. 11.5.1) that requires Node 22.13+ while the system was still on Node 20 — crashing with `ERR_UNKNOWN_BUILTIN_MODULE: No such built-in module: node:sqlite`. Doing Node first means whatever pnpm we land on has a compatible runtime to execute in.
+
 ## 5.8.23
 
 ### Pin solv install to an explicit version (bypass pnpm `@latest` cache)

@@ -44,20 +44,25 @@ const fetchLatestMeta = async (): Promise<LatestMeta> => {
 }
 
 export const updateSolv = async (): Promise<void> => {
-  // 1. Upgrade pnpm to latest.
-  run('pnpm self-update')
-
   const meta = await fetchLatestMeta()
 
-  // 2. Set Node to whatever the LATEST published solv wants — NOT the local
-  //    config, which is stale on long-lived nodes.
+  // 1. Upgrade Node FIRST, using the currently-installed pnpm.
+  //    Order matters: `pnpm self-update` can move pnpm to a version that
+  //    requires a newer Node than the box has. We've seen pnpm 11.5.1 require
+  //    Node 22.13 (it imports `node:sqlite`) — self-updating before Node leaves
+  //    pnpm crashing with ERR_UNKNOWN_BUILTIN_MODULE. Installing Node first
+  //    ensures the newly-self-updated pnpm always has a compatible runtime.
+  //
   //    Note: we deliberately use the (deprecated) `pnpm env use … --global`
   //    instead of `pnpm runtime set node … -g`. The latter has a bug where it
   //    still requires a project manifest even with `-g`, erroring with
   //    ERR_PNPM_NO_IMPORTER_MANIFEST_FOUND when run from $HOME. `env use` is
-  //    deprecated but functional and is the only form that works for a
-  //    truly global runtime install without a package.json.
+  //    deprecated but functional and is the only form that works for a truly
+  //    global runtime install without a package.json.
   run(`pnpm env use ${meta.targetNode} --global`)
+
+  // 2. Now safe to self-update pnpm — Node is current.
+  run('pnpm self-update')
 
   // 3. Install the latest solv. Pin to an explicit version when we know it —
   //    pnpm's `@latest` resolution is cached and will silently keep an
