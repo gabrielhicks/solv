@@ -1,5 +1,16 @@
 # @gabrielhicks/solv
 
+## 5.8.27
+
+### Honest Discord auto-update pings (no more spam, no more lies)
+
+- `autoUpdate` was pinging Discord unconditionally before any update was attempted, claiming `**addr** updated solv to **X**` even when nothing actually changed. On stuck nodes this fired every epoch with the *old* version — looking like success while the node was silently failing.
+- Now: compare current bundled version to npm latest after the update chain runs, and:
+  - if `current == latest`: ping `updated solv to **X**` (real success)
+  - if `current != latest`: ping `⚠️ failed to auto-update — still on **X** (latest is **Y**)` (real failure, surfaced to the channel)
+  - if registry lookup failed: ping a distinct "registry lookup failed" message
+- Throttle: write the last-pinged state to `~/.solv-last-pinged-version` and only ping when it changes. Stuck nodes ping once when they get stuck, recovered nodes ping once when they recover.
+
 ## 5.8.26
 
 ### Bump Versions

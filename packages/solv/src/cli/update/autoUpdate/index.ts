@@ -1,4 +1,5 @@
 import getSolvVersion from '@/cli/epochTimer/getSolvVersion'
+import getNpmLatestVersion from '@/cli/epochTimer/getNpmLatestVersion'
 import {
   getAllKeyPaths,
   NODE_RESTART_REQUIRED_MAINNET,
@@ -10,11 +11,33 @@ import {
 } from '@/config/config'
 import { sendDiscord } from '@/lib/sendDiscord'
 import { spawnSync } from 'child_process'
+import { existsSync, readFileSync, writeFileSync } from 'fs'
+import { homedir } from 'os'
+import { join } from 'path'
 import waitCatchup from './waitCatchup'
 import { getSolanaAddress } from '@/lib/getSolanaAddress'
 import sleep from '@/lib/sleep'
 import { DefaultConfigType } from '@/config/types'
 import { Network, ValidatorType } from '@/config/enums'
+
+// File where we record the last version we pinged Discord about, so we don't
+// spam the channel every epoch when a node is stuck or unchanged.
+const LAST_PINGED_VERSION_FILE = join(homedir(), '.solv-last-pinged-version')
+
+const readLastPingedVersion = (): string | null => {
+  try {
+    if (existsSync(LAST_PINGED_VERSION_FILE)) {
+      return readFileSync(LAST_PINGED_VERSION_FILE, 'utf8').trim() || null
+    }
+  } catch {}
+  return null
+}
+
+const writeLastPingedVersion = (v: string): void => {
+  try {
+    writeFileSync(LAST_PINGED_VERSION_FILE, v, 'utf8')
+  } catch {}
+}
 
 // NODE_RESTART_REQUIRED_MAINNET/TESTNET is a boolean
 // This is a global variable that is not defined in this file
@@ -47,8 +70,33 @@ const autoUpdate = async (config: DefaultConfigType) => {
   isUpdateRequired = isUpdateRequired && config.AUTO_RESTART
 
   const address = getSolanaAddress(validatorKey)
-  const msg = `**${address}** updated solv to **${getSolvVersion()}**`
-  await sendDiscord(msg)
+  const currentVersion = getSolvVersion()
+  const latestVersion = await getNpmLatestVersion()
+  const lastPinged = readLastPingedVersion()
+
+  // Only ping Discord when the situation actually changed since the last ping
+  // (success or failure). This prevents the channel from getting spammed every
+  // epoch when a node is stuck and the `solv update` chain is silently no-op-ing.
+  // We key the "state" by both the version and whether it's a success/failure,
+  // so transitioning stuck-state -> updated -> stuck-state still pings each time.
+  const pingState = latestVersion
+    ? currentVersion === latestVersion
+      ? `ok:${currentVersion}`
+      : `stuck:${currentVersion}->${latestVersion}`
+    : `unknown:${currentVersion}`
+
+  if (pingState !== lastPinged) {
+    let msg: string
+    if (!latestVersion) {
+      msg = `**${address}** ran auto-update — registry lookup failed; on **${currentVersion}**`
+    } else if (currentVersion === latestVersion) {
+      msg = `**${address}** updated solv to **${currentVersion}**`
+    } else {
+      msg = `⚠️ **${address}** failed to auto-update — still on **${currentVersion}** (latest is **${latestVersion}**)`
+    }
+    await sendDiscord(msg)
+    writeLastPingedVersion(pingState)
+  }
 
   if (isUpdateRequired) {
     // Restart the node
