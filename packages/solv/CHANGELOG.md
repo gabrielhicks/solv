@@ -1,5 +1,13 @@
 # @gabrielhicks/solv
 
+## 5.8.22
+
+### Ensure pnpm's global bin dir is on PATH, and use a Node-install command that actually works
+
+- Extended the runtime-PATH guard (formerly `ensureSolanaPath`, now `ensureRuntimePath`) to also prepend the pnpm global bin directory. Fixes `[ERROR] The configured global bin directory ".../pnpm/bin" is not in PATH` from `pnpm` invocations in `solv update`.
+- Reverted the Node-version install command from `pnpm runtime set node X -g` back to `pnpm env use X --global`. The newer `runtime set` form has a bug where `-g` still requires a project manifest, erroring with `ERR_PNPM_NO_IMPORTER_MANIFEST_FOUND` when run from `$HOME`. `env use` is deprecated but is the only form that works for a truly global install.
+- Same fix applied to the bash installer.
+
 ## 5.8.21
 
 ### Make `solv update` honor the published Node version

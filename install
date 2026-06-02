@@ -187,7 +187,10 @@ install_pnpm_and_packages() {
         echo 'export PATH="/home/solv/.local/share/solana/install/active_release/bin:\$PATH"' >> ~/.profile
 
         echo "Installing node $NODE_VERSION..."
-        "\$PNPM_BIN" runtime set node $NODE_VERSION -g
+        # NOTE: \`pnpm env use --global\` is deprecated in favor of \`pnpm runtime set\`,
+        # but the newer command has a bug where -g still requires a project manifest
+        # (ERR_PNPM_NO_IMPORTER_MANIFEST_FOUND). Keep \`env use\` until that's fixed.
+        "\$PNPM_BIN" env use $NODE_VERSION --global
 
         echo "Installing @gabrielhicks/solv..."
         "\$PNPM_BIN" add -g @gabrielhicks/solv@latest

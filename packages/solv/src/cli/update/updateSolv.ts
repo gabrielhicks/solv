@@ -39,8 +39,14 @@ export const updateSolv = async (): Promise<void> => {
 
   // 2. Set Node to whatever the LATEST published solv wants — NOT the local
   //    config, which is stale on long-lived nodes.
+  //    Note: we deliberately use the (deprecated) `pnpm env use … --global`
+  //    instead of `pnpm runtime set node … -g`. The latter has a bug where it
+  //    still requires a project manifest even with `-g`, erroring with
+  //    ERR_PNPM_NO_IMPORTER_MANIFEST_FOUND when run from $HOME. `env use` is
+  //    deprecated but functional and is the only form that works for a
+  //    truly global runtime install without a package.json.
   const targetNode = await fetchLatestTargetNode()
-  run(`pnpm runtime set node ${targetNode} -g`)
+  run(`pnpm env use ${targetNode} --global`)
 
   // 3. Install the latest solv.
   run('pnpm add -g @gabrielhicks/solv@latest')

@@ -1,7 +1,7 @@
 import 'dotenv/config'
 import { Command } from 'commander'
 import { VERSION } from '@/lib/version'
-import { ensureSolanaPath } from '@/lib/ensureSolanaPath'
+import { ensureRuntimePath } from '@/lib/ensureRuntimePath'
 import {
   logCommands,
   startCommand,
@@ -48,9 +48,9 @@ program
 
 async function main() {
   try {
-    // Make solana-keygen / agave-validator resolvable for all spawned children,
-    // regardless of how the invoking shell set up PATH.
-    ensureSolanaPath()
+    // Make solana-keygen / agave-validator / pnpm resolvable for all spawned
+    // children, regardless of how the invoking shell set up PATH.
+    ensureRuntimePath()
 
     // This config will be new config file - solv4.config.json
     const config = await readConfig()
