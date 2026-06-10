@@ -1,10 +1,16 @@
 # @gabrielhicks/solv
 
+## 5.8.28
+
+### Lazy Nathan Special
+
+- 4.0.2
+
 ## 5.8.27
 
 ### Honest Discord auto-update pings (no more spam, no more lies)
 
-- `autoUpdate` was pinging Discord unconditionally before any update was attempted, claiming `**addr** updated solv to **X**` even when nothing actually changed. On stuck nodes this fired every epoch with the *old* version — looking like success while the node was silently failing.
+- `autoUpdate` was pinging Discord unconditionally before any update was attempted, claiming `**addr** updated solv to **X**` even when nothing actually changed. On stuck nodes this fired every epoch with the _old_ version — looking like success while the node was silently failing.
 - Now: compare current bundled version to npm latest after the update chain runs, and:
   - if `current == latest`: ping `updated solv to **X**` (real success)
   - if `current != latest`: ping `⚠️ failed to auto-update — still on **X** (latest is **Y**)` (real failure, surfaced to the channel)
