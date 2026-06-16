@@ -1,5 +1,11 @@
 # @gabrielhicks/solv
 
+## 5.8.30
+
+### DZ Bump
+
+- 0.25.1 and 0.27.1
+
 ## 5.8.29
 
 ### Downgrade and Upgrade
