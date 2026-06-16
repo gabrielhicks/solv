@@ -1,5 +1,11 @@
 # @gabrielhicks/solv
 
+## 5.8.29
+
+### Downgrade and Upgrade
+
+- 4.0.3
+
 ## 5.8.28
 
 ### Lazy Nathan Special
