@@ -49,7 +49,7 @@ ${validatorArgs}
 --only-known-rpc \\
 --rpc-bind-address 0.0.0.0 \\
 --expected-genesis-hash 4uhcVJyU9pJkvQyS88uRDiswHXSCkY3zQawwpjk2NsNY \\
---dynamic-port-range 8000-8025 \\
+--dynamic-port-range 8000-8026 \\
 --rpc-port 8899 \\
 --wal-recovery-mode skip_any_corrupted_record \\
 --expected-shred-version 57087 \\

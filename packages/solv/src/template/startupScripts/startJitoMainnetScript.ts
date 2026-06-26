@@ -86,7 +86,7 @@ ${validatorArgs}
 --commission-bps ${commissionBps} \\
 --block-engine-url ${blockEngineUrl} \\
 --shred-receiver-address ${shredReceiverAddr} \\
---dynamic-port-range 8000-8025 \\
+--dynamic-port-range 8000-8026 \\
 --rpc-bind-address 127.0.0.1 \\
 --rpc-port 8899 \\
 --wal-recovery-mode skip_any_corrupted_record \\

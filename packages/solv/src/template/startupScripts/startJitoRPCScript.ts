@@ -8,15 +8,13 @@ import {
 } from '@/config/constants'
 
 export const startJitoRPCScript = () => {
-  const knownValidators = MAINNET_KNOWN_VALIDATORS;
+  const knownValidators = MAINNET_KNOWN_VALIDATORS
 
-  const filteredValidators = knownValidators.filter(
-    (address) => address !== ""
-  );
+  const filteredValidators = knownValidators.filter((address) => address !== '')
 
   const validatorArgs = filteredValidators
     .map((address) => `--known-validator ${address} \\`)
-    .join('\n');
+    .join('\n')
 
   const script = `#!/bin/bash
 exec agave-validator \\
@@ -38,7 +36,7 @@ ${validatorArgs}
 --no-voting \\
 --private-rpc \\
 --no-skip-initial-accounts-db-clean \\
---dynamic-port-range 8000-8025 \\
+--dynamic-port-range 8000-8026 \\
 --rpc-bind-address 127.0.0.1 \\
 --rpc-port 8899 \\
 --no-port-check \\

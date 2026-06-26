@@ -63,7 +63,7 @@ ${validatorArgs}
 --block-engine-url ${blockEngineUrl} \\
 --shred-receiver-address ${shredReceiverAddr} \\
 --bam-url ${bamUrl} \\
---dynamic-port-range 8000-8025 \\
+--dynamic-port-range 8000-8026 \\
 --rpc-port 8899 \\
 --wal-recovery-mode skip_any_corrupted_record \\
 --limit-ledger-size 50000000 \\

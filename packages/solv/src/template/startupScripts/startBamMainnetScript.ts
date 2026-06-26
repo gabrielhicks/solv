@@ -38,7 +38,11 @@ export const startBamMainnetScript = (
       ].join('\n')
     : ''
   const jagFlags = jagSnapshotsEnabled
-    ? [`--public-rpc-address ${publicRpc} \\`, `--no-port-check \\`, jagShreds].join('\n')
+    ? [
+        `--public-rpc-address ${publicRpc} \\`,
+        `--no-port-check \\`,
+        jagShreds,
+      ].join('\n')
     : [`--full-rpc-api \\`, `--private-rpc \\`].join('\n')
   const zeroCopyFlag = zeroCopyEnabled
     ? [`--experimental-retransmit-xdp-zero-copy \\`].join('\n')
@@ -86,7 +90,7 @@ ${validatorArgs}
 --block-engine-url ${blockEngineUrl} \\
 --shred-receiver-address ${shredReceiverAddr} \\
 --bam-url ${bamUrl} \\
---dynamic-port-range 8000-8025 \\
+--dynamic-port-range 8000-8026 \\
 --wal-recovery-mode skip_any_corrupted_record \\
 --limit-ledger-size 50000000 \\
 --block-production-method central-scheduler-greedy \\

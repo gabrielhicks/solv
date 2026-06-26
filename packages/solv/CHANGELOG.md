@@ -1,5 +1,11 @@
 # @gabrielhicks/solv
 
+## 5.8.31
+
+### Version Bump
+
+- 4.1.0
+
 ## 5.8.30
 
 ### DZ Bump

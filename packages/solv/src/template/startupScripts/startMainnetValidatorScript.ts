@@ -76,7 +76,7 @@ exec ${solanaCLI} \\
 ${validatorArgs}
 --expected-genesis-hash 5eykt4UsFv8P8NJdTREpY1vzqKqZKvdpKuc147dw2N9d \\
 --expected-shred-version 50093 \\
---dynamic-port-range 8000-8025 \\
+--dynamic-port-range 8000-8026 \\
 --rpc-bind-address 127.0.0.1 \\
 --rpc-port 8899 \\
 --wal-recovery-mode skip_any_corrupted_record \\
