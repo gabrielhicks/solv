@@ -55,11 +55,11 @@ export enum MAINNET_TYPES {
 }
 
 // ⚠️ Please DO NOT forget to turn this to false if restart is not needed
-export const NODE_RESTART_REQUIRED_MAINNET = true
+export const NODE_RESTART_REQUIRED_MAINNET = false
 export const NODE_RESTART_REQUIRED_TESTNET = true
-export const FD_RESTART_REQUIRED_MAINNET = true
+export const FD_RESTART_REQUIRED_MAINNET = false
 export const FD_RESTART_REQUIRED_TESTNET = true
-export const BAM_RESTART_REQUIRED_MAINNET = true
+export const BAM_RESTART_REQUIRED_MAINNET = false
 export const BAM_RESTART_REQUIRED_TESTNET = true
 
 export type CONFIG_TYPE = {

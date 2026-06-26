@@ -147,6 +147,7 @@ export const updateCommands = (config: DefaultConfigType) => {
 
       // Auto Update
       if (options.auto) {
+        await syncFirewall()
         await autoUpdate(config)
         return
       }
