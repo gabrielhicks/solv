@@ -4,6 +4,12 @@
 
 ### Version Bump (upgrade)
 
+- 4.2.0-rc.1
+
+## 5.8.37
+
+### Version Bump (upgrade)
+
 - 4.2.0
 
 ## 5.8.36
