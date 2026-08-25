@@ -19,7 +19,6 @@ jobs:
     steps:
       - name: checkout code repository
         uses: actions/checkout@v7
-      - uses: pnpm/action-setup@v6
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v7
         with:
@@ -27,6 +26,12 @@ jobs:
           # No `cache:` input on purpose. The pnpm store lives on a persistent PVC mounted at
           # /cache on the runner, so GitHub's hosted cache would tar that volume up and upload it
           # after every run, then restore it over itself before the next one.
+
+      # corepack ships with Node and activates the exact pnpm named in package.json's
+      # packageManager field. pnpm/action-setup@v6 installed @pnpm/exe instead, a native binary
+      # that needs libatomic.so.1, which the runner image does not carry.
+      - name: Enable pnpm
+        run: corepack enable && corepack prepare --activate
 
       - name: Install dependencies
         run: pnpm install
