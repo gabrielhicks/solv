@@ -49,7 +49,7 @@ jobs:
 
       - name: create and publish versions
         id: changesets
-        uses: changesets/action@v2
+        uses: changesets/action@v1
         with:
           version: pnpm ci:version
           publish: pnpm ci:publish
