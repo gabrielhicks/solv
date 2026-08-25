@@ -1,6 +1,8 @@
 name: SolvCliRelease
 
 on:
+  # Run on demand. Useful for exercising the runner without pushing to main.
+  workflow_dispatch:
   push:
     branches: [main]
     paths:
