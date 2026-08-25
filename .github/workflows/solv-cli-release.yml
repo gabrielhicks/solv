@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    runs-on: self-hosted
+    runs-on: solv-runner
     strategy:
       matrix:
         node-version: [24]
