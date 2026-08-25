@@ -16,13 +16,15 @@ jobs:
 
     steps:
       - name: checkout code repository
-        uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
+        uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'pnpm'
+          # No `cache:` input on purpose. The pnpm store lives on a persistent PVC mounted at
+          # /cache on the runner, so GitHub's hosted cache would tar that volume up and upload it
+          # after every run, then restore it over itself before the next one.
 
       - name: Install dependencies
         run: pnpm install
@@ -40,7 +42,7 @@ jobs:
 
       - name: create and publish versions
         id: changesets
-        uses: changesets/action@v1
+        uses: changesets/action@v2
         with:
           version: pnpm ci:version
           publish: pnpm ci:publish
