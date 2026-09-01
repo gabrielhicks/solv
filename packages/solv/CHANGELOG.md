@@ -1,5 +1,11 @@
 # @gabrielhicks/solv
 
+## 5.8.41
+
+### Version Bump (upgrade)
+
+- 4.3.0-beta.3
+
 ## 5.8.40
 
 ### Version Bump (upgrade)
