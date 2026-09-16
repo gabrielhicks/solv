@@ -71,7 +71,7 @@ ${validatorArgs}
 --block-verification-method unified-scheduler \\
 --maximum-full-snapshots-to-retain 1 \\
 --maximum-incremental-snapshots-to-retain 2 \\
---expected-shred-version 1516 \\
+--expected-shred-version 4457 \\
 --wait-for-supermajority 415524281 \\
 --expected-bank-hash 14Ev1zNXpm95UHYYbACwao8Xt4W9ziQ2PVL64iusnGg1 \\
 --expected-genesis-hash 4uhcVJyU9pJkvQyS88uRDiswHXSCkY3zQawwpjk2NsNY \\

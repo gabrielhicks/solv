@@ -1,4 +1,4 @@
-import { JitoConfig } from "@/config/jitConfig"
+import { JitoConfig } from '@/config/jitConfig'
 
 const configToml = (isTest: boolean, jitoConfig: JitoConfig) => {
   const filePath = '/home/solv/firedancer/config.toml'
@@ -134,7 +134,7 @@ user = \"solv\"
     ]
     expected_genesis_hash = \"4uhcVJyU9pJkvQyS88uRDiswHXSCkY3zQawwpjk2NsNY\"
     expected_bank_hash = \"EJMzxv7JscF8WNZfDYqzsAyALCDCS52HuihabVgyz5mf\"
-    expected_shred_version = 9604
+    expected_shred_version = 4457
     wait_for_supermajority_at_slot = 374301609
     known_validators = [
         \"5D1fNXzvv5NjV1ysLjirC4WY92RNsVH18vjmcszZd8on\", 
@@ -173,7 +173,7 @@ user = \"solv\"
 [tiles.pack]
   schedule_strategy = \"balanced\"`
 
-    const body = isTest ? testnetBody : mainnetBody
+  const body = isTest ? testnetBody : mainnetBody
 
   return { filePath, body }
 }
