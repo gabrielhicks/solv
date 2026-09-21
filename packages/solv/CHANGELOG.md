@@ -1,5 +1,11 @@
 # @gabrielhicks/solv
 
+## 5.8.44
+
+### Version Bump (mainnet upgrade)
+
+- 4.3.0
+
 ## 5.8.43
 
 ### Version Bump (downgrade)
