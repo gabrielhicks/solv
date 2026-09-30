@@ -1,5 +1,9 @@
 # @gabrielhicks/solv
 
+## 5.8.45
+
+### Version Bump (testmet upgrade)
+
 ## 5.8.44
 
 ### Version Bump (mainnet upgrade)
