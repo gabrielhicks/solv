@@ -61,10 +61,10 @@ export const changeIdentityOutgoing = async (
   const step1 = `${agaveSolanaClient} wait-for-restart-window --min-idle-time 2 --skip-new-snapshot-check`
   const step2 = `${localSolanaClient} set-identity ${localSolanaClientConfig}${unstakedKeyPath}`
   const step3 = `ln -sf ${unstakedKeyPath} ${identityKeyPath}`
-  const step4 = `scp ${LEDGER_PATH}/tower-1_9-${pubkey}.bin ${user}@${ip}:${LEDGER_PATH}`
+  const step4 = `scp ${LEDGER_PATH}/vote_history-${pubkey}.bin ${user}@${ip}:${LEDGER_PATH}`
 
   // Commands to run on the destination validator (remote) - scpSSH
-  const step5 = `${remoteSolanaClient} set-identity ${remoteSolanaClientConfig}--require-tower ${validatorKeyPath}`
+  const step5 = `${remoteSolanaClient} set-identity ${remoteSolanaClientConfig}${validatorKeyPath}`
   const step6 = `ln -sf ${validatorKeyPath} ${IDENTITY_KEY_PATH}`
 
   if (safe) {
@@ -106,15 +106,15 @@ export const changeIdentityOutgoing = async (
     return
   }
 
-  // Upload the tower file to the new validator
+  // Upload the vote history file to the new validator
   console.log(
-    chalk.white('🟢 Uploading the tower file to the new validator...'),
+    chalk.white('🟢 Uploading the vote history file to the new validator...'),
   )
   const result4 = spawnSync(step4, { shell: true, stdio: 'inherit' })
   if (result4.status !== 0) {
     console.log(
       chalk.yellow(
-        `⚠️ Upload Tower File Failed. Please check your Validator\n\nFailed Cmd: ${step4}`,
+        `⚠️ Upload Vote History File Failed. Please check your Validator\n\nFailed Cmd: ${step4}`,
       ),
     )
     return

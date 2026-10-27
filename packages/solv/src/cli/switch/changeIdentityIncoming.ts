@@ -104,18 +104,18 @@ export const changeIdentityIncoming = async (
     return
   }
 
-  // Download the tower file to the new validator
+  // Download the vote history file to the new validator
   console.log(
-    chalk.white('🟢 Uploading the tower file to the new validator...'),
+    chalk.white('🟢 Uploading the vote history file to the new validator...'),
   )
   const result4 = spawnSync(
-    `scp ${user}@${ip}:${LEDGER_PATH}/tower-1_9-${pubkey}.bin ${LEDGER_PATH}`,
+    `scp ${user}@${ip}:${LEDGER_PATH}/vote_history-${pubkey}.bin ${LEDGER_PATH}`,
     { shell: true, stdio: 'inherit' },
   )
   if (result4.status !== 0) {
     console.log(
       chalk.yellow(
-        `⚠️ Upload Tower File Failed. Please check your tower file\n$ ssh ${user}@${ip}\n\nFailed Cmd: scp ${user}@${ip}:${LEDGER_PATH}/tower-1_9-${pubkey}.bin ${LEDGER_PATH}`,
+        `⚠️ Upload Vote History File Failed. Please check your vote history file\n$ ssh ${user}@${ip}\n\nFailed Cmd: scp ${user}@${ip}:${LEDGER_PATH}/vote_history-${pubkey}.bin ${LEDGER_PATH}`,
       ),
     )
     return
@@ -124,7 +124,7 @@ export const changeIdentityIncoming = async (
   // Set the identity on the local validator
   console.log(chalk.white('🟢 Setting identity on the local validator...'))
   const result5 = spawnSync(
-    `${localSolanaClient} set-identity ${localSolanaClientConfig}--require-tower ${validatorKeyPath}`,
+    `${localSolanaClient} set-identity ${localSolanaClientConfig}${validatorKeyPath}`,
     {
       shell: true,
       stdio: 'inherit',

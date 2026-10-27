@@ -1,5 +1,11 @@
 # @gabrielhicks/solv
 
+## 5.8.47
+
+### Change switch
+
+Bumped switch to AG, updated Node to 24.22.1, testnet to 4.3.2
+
 ## 5.8.46
 
 ### Version Bump (mainnet upgrade)
