@@ -8,7 +8,7 @@ import { startJitoRPCScript } from '@/template/startupScripts/startJitoRPCScript
 import { existsAsync } from '@skeet-framework/utils'
 import { writeFile } from 'fs/promises'
 import updateStartupScriptPermissions from '@/cli/setup/updateStartupScriptPermission'
-import { JITO_PATCH, VERSION_JITO_TESTNET } from '@/config/versionConfig'
+import { JITO_TESTNET_PATCH, VERSION_JITO_TESTNET } from '@/config/versionConfig'
 import { startRPCNodeScript } from '@/template/startupScripts/startRPCNodeScript'
 
 const setupRpcNode = async (config: DefaultConfigType) => {
@@ -22,8 +22,8 @@ const setupRpcNode = async (config: DefaultConfigType) => {
       break
     case RpcType.JITO:
       console.log('JITO RPC Node Setup')
-      const jitoPatch = JITO_PATCH
-      const jitoTagBase = `v${VERSION_JITO_TESTNET}-jito`
+      const jitoPatch = JITO_TESTNET_PATCH
+      const jitoTagBase = `v${VERSION_JITO_TESTNET}-jito${jitoPatch}`
       const jitoTag = `${jitoTagBase}`
       installJito(jitoTag)
       startupScript = startJitoRPCScript()

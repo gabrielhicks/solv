@@ -1,5 +1,11 @@
 # @gabrielhicks/solv
 
+## 5.8.48
+
+### Change version
+
+Jito v4.3.2-jito.0
+
 ## 5.8.47
 
 ### Change switch

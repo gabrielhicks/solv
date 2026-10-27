@@ -69,7 +69,7 @@ const setupMainnetValidator = async (
       console.log('JITO Validator Setup for Mainnet')
       const jitoConfig = await readOrCreateJitoConfig()
       const jitoPatch = JITO_PATCH
-      const jitoTagBase = `v${version}-jito`
+      const jitoTagBase = `v${version}-jito${jitoPatch}`
       const jitoModBase = `v${version}-mod`
       const jitoTag = mod ? `${jitoModBase}` : `${jitoTagBase}`
       installJito(jitoTag, mod, isMajorThree, xdpEnabled)
@@ -85,7 +85,7 @@ const setupMainnetValidator = async (
       console.log('JITO-BAM Validator Setup for Mainnet')
       const bamConfig = await readOrCreateJitoConfig()
       const bamPatch = BAM_PATCH
-      const bamTagBase = `v${version}-jito`
+      const bamTagBase = `v${version}-jito${bamPatch}`
       const bamModBase = `v${version}-mod`
       const bamTag = mod ? `${bamModBase}` : `${bamTagBase}`
       installBam(bamTag, mod, isMajorThree, xdpEnabled)
@@ -133,11 +133,11 @@ const setupTestnetValidator = async (
   const agaveTagBase = `v${version}`
   const agaveTag = `${agaveTagBase}`
   const jitoPatch = JITO_TESTNET_PATCH
-  const jitoTagBase = `v${version}-jito`
+  const jitoTagBase = `v${version}-jito${jitoPatch}`
   const jitoModBase = `v${version}-mod`
   const jitoTag = mod ? `${jitoModBase}` : `${jitoTagBase}`
   const bamPatch = BAM_TESTNET_PATCH
-  const bamTagBase = `v${version}-jito`
+  const bamTagBase = `v${version}-jito${bamPatch}`
   const bamModBase = `v${version}-mod`
   const bamTag = mod ? `${bamModBase}` : `${bamTagBase}`
   installDZ(VERSION_DZ_TESTNET, true)

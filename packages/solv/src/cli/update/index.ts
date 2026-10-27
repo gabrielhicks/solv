@@ -18,6 +18,7 @@ import {
 } from '@/config/enums'
 import {
   BAM_PATCH,
+  BAM_TESTNET_PATCH,
   DELINQUENT_STAKE_MAINNET,
   DELINQUENT_STAKE_TESTNET,
   JITO_PATCH,
@@ -370,7 +371,7 @@ export const updateCommands = (config: DefaultConfigType) => {
         updateDZ(dzVersion, isTestnet)
         if (isJito) {
           const jitoPatch = isTestnet ? JITO_TESTNET_PATCH : JITO_PATCH
-          const jitoTagBase = `v${version}-jito`
+          const jitoTagBase = `v${version}-jito${jitoPatch}`
           const jitoModBase = `v${version}-mod`
           const jitoTag =
             options.mod || isModded ? `${jitoModBase}` : `${jitoTagBase}`
@@ -384,8 +385,8 @@ export const updateCommands = (config: DefaultConfigType) => {
           return
         }
         if (isBam) {
-          const bamPatch = BAM_PATCH
-          const bamTagBase = `v${version}-jito`
+          const bamPatch = isTestnet ? BAM_TESTNET_PATCH : BAM_PATCH
+          const bamTagBase = `v${version}-jito${bamPatch}`
           const bamModBase = `v${version}-mod`
           const bamTag =
             options.mod || isModded ? `${bamModBase}` : `${bamTagBase}`
