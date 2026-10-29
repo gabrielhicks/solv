@@ -1,5 +1,11 @@
 # @gabrielhicks/solv
 
+## 5.8.49
+
+### Change version
+
+4.4.0
+
 ## 5.8.48
 
 ### Change version
