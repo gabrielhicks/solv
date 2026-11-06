@@ -9,13 +9,16 @@ import {
   JITO_PATCH,
   JITO_TESTNET_PATCH,
   VERSION_BAM_MAINNET,
+  VERSION_BAM_TESTNET,
   VERSION_FIREDANCER,
   VERSION_JITO_MAINNET,
+  VERSION_JITO_TESTNET,
   VERSION_MAINNET,
   VERSION_SOLANA_RPC,
   VERSION_TESTNET,
 } from '@/config/versionConfig'
 import { bamUpdate } from '../update/bamUpdate'
+import { buildJitoTag } from '@/lib/buildJitoTag'
 import { frankendancerUpdate } from '../update/frankendancerUpdate'
 
 export const installCommands = (config: DefaultConfigType) => {
@@ -44,7 +47,10 @@ export const installCommands = (config: DefaultConfigType) => {
       if (isJito) {
         const jitoVersion = options.version || VERSION_JITO_MAINNET
         const jitoPatch = isTestnet ? JITO_TESTNET_PATCH : JITO_PATCH
-        const jitoTagBase = `v${jitoVersion}-jito${jitoPatch}`
+        const jitoTagBase = buildJitoTag(jitoVersion, jitoPatch, [
+          isTestnet ? VERSION_JITO_TESTNET : VERSION_JITO_MAINNET,
+          version,
+        ])
         const jitoModBase = `v${jitoVersion}-mod`
         const jitoTag = isModified ? `${jitoModBase}` : `${jitoTagBase}`
         const isMajorThree = jitoVersion.startsWith('3') ? true : false
@@ -54,7 +60,10 @@ export const installCommands = (config: DefaultConfigType) => {
       if (isJitoBam) {
         const bamVersion = options.version || VERSION_BAM_MAINNET
         const bamPatch = isTestnet ? BAM_TESTNET_PATCH : BAM_PATCH
-        const bamTagBase = `v${bamVersion}-jito${bamPatch}`
+        const bamTagBase = buildJitoTag(bamVersion, bamPatch, [
+          isTestnet ? VERSION_BAM_TESTNET : VERSION_BAM_MAINNET,
+          version,
+        ])
         const bamModBase = `v${bamVersion}-mod`
         const bamTag = isModified ? `${bamModBase}` : `${bamTagBase}`
         const isMajorThree = bamVersion.startsWith('3') ? true : false

@@ -31,10 +31,17 @@ export const installJito = (
         stdio: 'inherit',
       },
     )
-    spawnSync(`git -C /tmp/${version} checkout ${version}`, {
+    const checkout = spawnSync(`git -C /tmp/${version} checkout ${version}`, {
       shell: true,
       stdio: 'inherit',
     })
+    if (checkout.status !== 0) {
+      console.error(
+        `Failed to checkout jito-solana tag ${version}. Check that the tag exists: https://github.com/jito-foundation/jito-solana/tags`,
+      )
+      spawnSync(`sudo rm -rf /tmp/${version}`, { shell: true, stdio: 'inherit' })
+      process.exit(1)
+    }
     spawnSync(`git -C /tmp/${version} submodule update --init --recursive`, {
       shell: true,
       stdio: 'inherit',
