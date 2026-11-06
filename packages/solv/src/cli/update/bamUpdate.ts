@@ -30,10 +30,17 @@ export const bamUpdate = (
         stdio: 'inherit',
       },
     )
-    spawnSync(`git -C /tmp/${tag} checkout ${tag}`, {
+    const checkout = spawnSync(`git -C /tmp/${tag} checkout ${tag}`, {
       shell: true,
       stdio: 'inherit',
     })
+    if (checkout.status !== 0) {
+      console.error(
+        `Failed to checkout jito-solana tag ${tag}. Check that the tag exists: https://github.com/jito-foundation/jito-solana/tags`,
+      )
+      spawnSync(`sudo rm -rf /tmp/${tag}`, { shell: true, stdio: 'inherit' })
+      process.exit(1)
+    }
     spawnSync(`git -C /tmp/${tag} submodule update --init --recursive`, {
       shell: true,
       stdio: 'inherit',

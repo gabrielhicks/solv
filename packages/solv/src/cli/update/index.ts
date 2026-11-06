@@ -40,6 +40,7 @@ import { readOrCreateDefaultConfig } from '@/lib/readOrCreateDefaultConfig'
 import { MAINNET_TYPES, NETWORK_TYPES, SOLV_TYPES } from '@/config/config'
 // import { getSnapshot } from '../get/snapshot'
 import { frankendancerUpdate } from './frankendancerUpdate'
+import { buildJitoTag } from '@/lib/buildJitoTag'
 import { bamUpdate } from './bamUpdate'
 import { STARTUP_SCRIPT } from '@/config/constants'
 import { startTestnetValidatorScript } from '@/template/startupScripts/startTestnetValidatorScript'
@@ -371,7 +372,10 @@ export const updateCommands = (config: DefaultConfigType) => {
         updateDZ(dzVersion, isTestnet)
         if (isJito) {
           const jitoPatch = isTestnet ? JITO_TESTNET_PATCH : JITO_PATCH
-          const jitoTagBase = `v${version}-jito${jitoPatch}`
+          const jitoTagBase = buildJitoTag(version, jitoPatch, [
+            isTestnet ? VERSION_JITO_TESTNET : VERSION_JITO_MAINNET,
+            isTestnet ? VERSION_TESTNET : VERSION_MAINNET,
+          ])
           const jitoModBase = `v${version}-mod`
           const jitoTag =
             options.mod || isModded ? `${jitoModBase}` : `${jitoTagBase}`
@@ -386,7 +390,10 @@ export const updateCommands = (config: DefaultConfigType) => {
         }
         if (isBam) {
           const bamPatch = isTestnet ? BAM_TESTNET_PATCH : BAM_PATCH
-          const bamTagBase = `v${version}-jito${bamPatch}`
+          const bamTagBase = buildJitoTag(version, bamPatch, [
+            isTestnet ? VERSION_BAM_TESTNET : VERSION_BAM_MAINNET,
+            isTestnet ? VERSION_TESTNET : VERSION_MAINNET,
+          ])
           const bamModBase = `v${version}-mod`
           const bamTag =
             options.mod || isModded ? `${bamModBase}` : `${bamTagBase}`
