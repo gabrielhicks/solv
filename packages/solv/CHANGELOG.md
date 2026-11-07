@@ -1,5 +1,11 @@
 # @gabrielhicks/solv
 
+## 5.9.1
+
+### Patch Changes
+
+- [#5](https://github.com/gabrielhicks/solv/pull/5) [`a8e2d63`](https://github.com/gabrielhicks/solv/commit/a8e2d6343e06c16a79a56169e963e7e8c90ecdf6) Thanks [@anselsol](https://github.com/anselsol)! - Only append the Jito patch suffix (e.g. `.0`) to the pinned default version, so `solv i -v <version>` no longer builds a non-existent `-jito.0` tag. Abort install if the jito-solana tag checkout fails instead of silently building `master`.
+
 ## 5.9.0
 
 ### Change version
