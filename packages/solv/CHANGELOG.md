@@ -1,5 +1,13 @@
 # @gabrielhicks/solv
 
+## 5.9.2
+
+### testnet upgrade
+
+Testnet v4.5.0-beta.0 (Agave), v4.5.0-beta.0-jito (Jito and BAM)
+
+- RPC setup now installs `VERSION_SOLANA_RPC` / `VERSION_JITO_RPC`. It used the testnet versions before, while the RPC startup scripts point at mainnet. Agave RPC setup also gets the missing `v` tag prefix, so it no longer builds `master`.
+
 ## 5.9.1
 
 ### Patch Changes

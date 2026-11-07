@@ -8,7 +8,14 @@ import { startJitoRPCScript } from '@/template/startupScripts/startJitoRPCScript
 import { existsAsync } from '@skeet-framework/utils'
 import { writeFile } from 'fs/promises'
 import updateStartupScriptPermissions from '@/cli/setup/updateStartupScriptPermission'
-import { JITO_TESTNET_PATCH, VERSION_JITO_TESTNET } from '@/config/versionConfig'
+import {
+  JITO_PATCH,
+  VERSION_JITO_MAINNET,
+  VERSION_JITO_RPC,
+  VERSION_MAINNET,
+  VERSION_SOLANA_RPC,
+} from '@/config/versionConfig'
+import { buildJitoTag } from '@/lib/buildJitoTag'
 import { startRPCNodeScript } from '@/template/startupScripts/startRPCNodeScript'
 
 const setupRpcNode = async (config: DefaultConfigType) => {
@@ -17,14 +24,15 @@ const setupRpcNode = async (config: DefaultConfigType) => {
   switch (rpcType) {
     case RpcType.AGAVE:
       console.log('Agave RPC Node Setup')
-      installAgave(config.TESTNET_SOLANA_VERSION)
+      installAgave(`v${VERSION_SOLANA_RPC}`)
       startupScript = startRPCNodeScript()
       break
     case RpcType.JITO:
       console.log('JITO RPC Node Setup')
-      const jitoPatch = JITO_TESTNET_PATCH
-      const jitoTagBase = `v${VERSION_JITO_TESTNET}-jito${jitoPatch}`
-      const jitoTag = `${jitoTagBase}`
+      const jitoTag = buildJitoTag(VERSION_JITO_RPC, JITO_PATCH, [
+        VERSION_JITO_MAINNET,
+        VERSION_MAINNET,
+      ])
       installJito(jitoTag)
       startupScript = startJitoRPCScript()
       break
